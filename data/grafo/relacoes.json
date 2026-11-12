@@ -1,13 +1,13 @@
 {
   "nodes": [
     {
-      "id": "RDC 935/2024",
-      "tipo": "RDC",
-      "numero": "935",
+      "id": "IN 296/2024",
+      "tipo": "IN",
+      "numero": "296",
       "ano": "2024",
       "situacao": "revogada",
-      "ementa": "Dispõe sobre a atualização da lista de Denominações Comuns Brasileiras (DCB).",
-      "arquivo": "data/normas/rdc/2024/rdc-935.md"
+      "ementa": "Dispõe sobre alteração nas monografias dos ingredientes ativos, da Relação de Ingredientes Ativos de agrotóxicos, saneantes desinfestantes e preservativos de madeira, publicada por meio da Instrução Normativa - IN nº 103, de 19 de outubro de 2021.",
+      "arquivo": "data/normas/in/2024/in-296.md"
     },
     {
       "id": "LEI 9782/1999",
@@ -15,7 +15,31 @@
       "situacao": "externa"
     },
     {
-      "id": "RDC 955/2024",
+      "id": "IN 103/2021",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "NDT 7052024/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RES 585/2021",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "IN 316/2024",
+      "tipo": "IN",
+      "numero": "316",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "Dispõe sobre a atualização da composição das vacinas Covid-19 a serem utilizadas no Brasil.",
+      "arquivo": "data/normas/in/2024/in-316.md"
+    },
+    {
+      "id": "IN 377/2025",
       "tipo": "NORMA_CORRELATA",
       "situacao": "desconhecida"
     },
@@ -25,18 +49,354 @@
       "situacao": "desconhecida"
     },
     {
-      "id": "RDC 469/2021",
+      "id": "RDC 905/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "IN 329/2024",
+      "tipo": "IN",
+      "numero": "329",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "Aprova a Lista de formas de administração e analitos a serem quantificados nos estudos de biodisponibilidade relativa/bioequivalência (BD/BE) e estudos farmacocinéticos para formas farmacêuticas de liberação imediata.",
+      "arquivo": "data/normas/in/2024/in-329.md"
+    },
+    {
+      "id": "IN 409/2025",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "IN 330/2024",
+      "tipo": "IN",
+      "numero": "330",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "Dispõe sobre a composição das vacinas influenza a serem utilizadas no Brasil.",
+      "arquivo": "data/normas/in/2024/in-330.md"
+    },
+    {
+      "id": "IN 359/2025",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "IN 261/2023",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "PORTARIA 78/1993",
+      "tipo": "PORTARIA",
+      "numero": "78",
+      "ano": "1993",
+      "situacao": "revogada",
+      "ementa": "",
+      "arquivo": "data/normas/portaria/1993/portaria-78.md"
+    },
+    {
+      "id": "RDC 454/2020",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "PORTARIA 81/1993",
+      "tipo": "PORTARIA",
+      "numero": "81",
+      "ano": "1993",
+      "situacao": "revogada",
+      "ementa": "",
+      "arquivo": "data/normas/portaria/1993/portaria-81.md"
+    },
+    {
+      "id": "PORTARIA 87/1993",
+      "tipo": "PORTARIA",
+      "numero": "87",
+      "ano": "1993",
+      "situacao": "revogada",
+      "ementa": "",
+      "arquivo": "data/normas/portaria/1993/portaria-87.md"
+    },
+    {
+      "id": "PORTARIA 453/1996",
+      "tipo": "PORTARIA",
+      "numero": "453",
+      "ano": "1996",
+      "situacao": "revogada",
+      "ementa": "",
+      "arquivo": "data/normas/portaria/1996/portaria-453.md"
+    },
+    {
+      "id": "PORTARIA 883/1998",
+      "tipo": "PORTARIA",
+      "numero": "883",
+      "ano": "1998",
+      "situacao": "revogada",
+      "ementa": "",
+      "arquivo": "data/normas/portaria/1998/portaria-883.md"
+    },
+    {
+      "id": "PORTARIA 10/1985",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "PORTARIA 885/1998",
+      "tipo": "PORTARIA",
+      "numero": "885",
+      "ano": "1998",
+      "situacao": "revogada",
+      "ementa": "",
+      "arquivo": "data/normas/portaria/1998/portaria-885.md"
+    },
+    {
+      "id": "PORTARIA 938/1998",
+      "tipo": "PORTARIA",
+      "numero": "938",
+      "ano": "1998",
+      "situacao": "revogada",
+      "ementa": "",
+      "arquivo": "data/normas/portaria/1998/portaria-938.md"
+    },
+    {
+      "id": "RDC 842/2024",
+      "tipo": "RDC",
+      "numero": "842",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "Dispõe sobre a atualização da lista de Denominações Comuns Brasileiras (DCB).",
+      "arquivo": "data/normas/rdc/2024/rdc-842.md"
+    },
+    {
+      "id": "RDC 955/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RES 469/2021",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 844/2024",
+      "tipo": "RDC",
+      "numero": "844",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "",
+      "arquivo": "data/normas/rdc/2024/rdc-844.md"
+    },
+    {
+      "id": "RES 298/2019",
       "tipo": "NORMA_CORRELATA",
       "situacao": "desconhecida"
     },
     {
       "id": "RDC 940/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 856/2024",
       "tipo": "RDC",
-      "numero": "940",
+      "numero": "856",
       "ano": "2024",
       "situacao": "revogada",
-      "ementa": "Dispõe sobre a aprovação da Farmacopeia Brasileira, 7ª edição.",
-      "arquivo": "data/normas/rdc/2024/rdc-940.md"
+      "ementa": "Altera a Resolução da Diretoria Colegiada - RDC nº 621, de 9 de março de 2022, que dispõe sobre as petições de solicitação de habilitação, renovação de habilitação, modificações pós-habilitação, terceirização de ensaio, suspensões e cancelamentos de Centros de Equivalência Farmacêutica.",
+      "arquivo": "data/normas/rdc/2024/rdc-856.md"
+    },
+    {
+      "id": "RDC 927/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 621/2022",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "IN 298/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 858/2024",
+      "tipo": "RDC",
+      "numero": "858",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "Altera a Resolução da Diretoria Colegiada nº 620 de 9 de março de 2022 que dispõe sobre a Certificação de Boas Práticas para a realização de estudos de Biodisponibilidade/Bioequivalência de medicamentos e define quais estudos de Biodisponibilidade/Bioequivalência de medicamentos devem ser realizados em centros de pesquisa certificados.",
+      "arquivo": "data/normas/rdc/2024/rdc-858.md"
+    },
+    {
+      "id": "RDC 620/2022",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 926/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 753/2022",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "IN 123/2022",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 859/2024",
+      "tipo": "RDC",
+      "numero": "859",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "Dispõe sobre a atualização da lista de Denominações Comuns Brasileiras (DCB).",
+      "arquivo": "data/normas/rdc/2024/rdc-859.md"
+    },
+    {
+      "id": "RDC 469/2021",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 866/2024",
+      "tipo": "RDC",
+      "numero": "866",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "Dispõe sobre as ações excepcionais e temporárias a serem adotadas pela Agência Nacional de Vigilância Sanitária - Anvisa para doação internacional de alimentos dispensados de registro, cosméticos, produtos de higiene e saneantes sujeitos à fiscalização sanitária, para o enfrentamento do estado de calamidade pública derivada de eventos climáticos no Estado do Rio Grande do Sul.",
+      "arquivo": "data/normas/rdc/2024/rdc-866.md"
+    },
+    {
+      "id": "RDC 897/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "DEC 3029/1999",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "DLG 36/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 874/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 890/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 878/2024",
+      "tipo": "RDC",
+      "numero": "878",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "Altera a Resolução da Diretoria Colegiada - RDC nº 492, de 15 de abril de 2021.",
+      "arquivo": "data/normas/rdc/2024/rdc-878.md"
+    },
+    {
+      "id": "RDC 492/2021",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 899/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 880/2024",
+      "tipo": "RDC",
+      "numero": "880",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "",
+      "arquivo": "data/normas/rdc/2024/rdc-880.md"
+    },
+    {
+      "id": "RDC 943/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 828/2023",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "DEC 57596/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 895/2024",
+      "tipo": "RDC",
+      "numero": "895",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "Dispõe sobre a atualização da lista de Denominações Comuns Brasileiras (DCB).",
+      "arquivo": "data/normas/rdc/2024/rdc-895.md"
+    },
+    {
+      "id": "RDC 928/2024",
+      "tipo": "RDC",
+      "numero": "928",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "Estabelece critérios, requisitos e procedimentos para o funcionamento, a habilitação na Reblas e o credenciamento de laboratórios analíticos que realizam análises em produtos sujeitos ao regime de vigilância sanitária e dá outras providências.",
+      "arquivo": "data/normas/rdc/2024/rdc-928.md"
+    },
+    {
+      "id": "LEI 6360/1976",
+      "tipo": "LEI_FEDERAL",
+      "situacao": "externa"
+    },
+    {
+      "id": "LEI 6437/1977",
+      "tipo": "LEI_FEDERAL",
+      "situacao": "externa"
+    },
+    {
+      "id": "RDC 1039/2026",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "DEL 986/1969",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 512/2021",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 390/2020",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 935/2024",
+      "tipo": "RDC",
+      "numero": "935",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "Dispõe sobre a atualização da lista de Denominações Comuns Brasileiras (DCB).",
+      "arquivo": "data/normas/rdc/2024/rdc-935.md"
     },
     {
       "id": "RDC 1026/2026",
@@ -69,26 +429,7 @@
       "situacao": "desconhecida"
     },
     {
-      "id": "RDC 844/2024",
-      "tipo": "NORMA_CORRELATA",
-      "situacao": "desconhecida"
-    },
-    {
-      "id": "RDC 943/2024",
-      "tipo": "RDC",
-      "numero": "943",
-      "ano": "2024",
-      "situacao": "revogada",
-      "ementa": "",
-      "arquivo": "data/normas/rdc/2024/rdc-943.md"
-    },
-    {
       "id": "RDC 953/2024",
-      "tipo": "NORMA_CORRELATA",
-      "situacao": "desconhecida"
-    },
-    {
-      "id": "RDC 880/2024",
       "tipo": "NORMA_CORRELATA",
       "situacao": "desconhecida"
     },
@@ -123,6 +464,536 @@
     }
   ],
   "edges": [
+    {
+      "source": "IN 296/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "IN 296/2024",
+      "target": "IN 103/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 296/2024",
+      "target": "NDT 7052024/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 296/2024",
+      "target": "RES 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 316/2024",
+      "target": "Instrução Normativa - IN nº 377, de 01/07/2025 A DIRETORIA COLEGIADA DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso das competências que lhe conferem os arts",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "IN 316/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "IN 316/2024",
+      "target": "IN 377/2025",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 316/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 316/2024",
+      "target": "RDC 905/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 329/2024",
+      "target": "Instrução Normativa Anvisa nº 409, de 26/11/2025 Aprova a Lista de formas de administração e analitos a serem quantificados nos estudos de biodisponibilidade relativa/bioequivalência (BD/BE) e estudos farmacocinéticos para formas farmacêuticas de liberação imediata",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "IN 329/2024",
+      "target": "IN 409/2025",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 330/2024",
+      "target": "Instrução Normativa - IN nº 359, de 17/04/2025 A DIRETORIA COLEGIADA DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso da atribuição que lhe confere o art",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "IN 330/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "IN 330/2024",
+      "target": "IN 359/2025",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 330/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 330/2024",
+      "target": "IN 261/2023",
+      "relacao": "cita"
+    },
+    {
+      "source": "PORTARIA 78/1993",
+      "target": "Resolução da Diretoria Colegiada - RDC nº 454, de 17/12/2020 O Diretor do Departamento Técnico-Normativo, Deten, da Secretaria de Vigilância Sanitária, do Ministério da Saúde, no uso de suas atribuições, resolve:1",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "PORTARIA 78/1993",
+      "target": "RDC 454/2020",
+      "relacao": "cita"
+    },
+    {
+      "source": "PORTARIA 81/1993",
+      "target": "Resolução da Diretoria Colegiada - RDC nº 454, de 17/12/2020 O Diretor do Departamento Técnico-Normativo-Deten, da Secretaria de Vigilância Sanitária, do Ministério da Saúde, no uso de suas atribuições, resolve:1",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "PORTARIA 81/1993",
+      "target": "RDC 454/2020",
+      "relacao": "cita"
+    },
+    {
+      "source": "PORTARIA 87/1993",
+      "target": "Resolução da Diretoria Colegiada - RDC nº 454, de 17/12/2020 O Diretor do Departamento Técnico-Normativo-Deten, da Secretaria de Vigilância Sanitária, do Ministério da Saúde no uso de suas atribuições, resolve:Autorizar a inclusão na \"Relação de Substâncias com Ação Tóxica sobre Animais ou Plantas, cujo registro pode ser autorizado no Brasil em Atividades Agropecuárias e Produtos Domissanitários\", constante da Portaria nº 10, de 8 de março de 1985, Anexo I, a substância E-19 ETHOFENPROX e, no Anexo II, a monografia técnica E-19 ETHOFENPROX, com a seguinte redação:E-19 ETHOFENPROXa) Nome técnico ou comum: ETHOFENPROXb) Sinonímia: MTT 500 ; TREBONc) Nome químico: 2-(4-etoxifenil)-2-metilpropil-3-fenoxibenzil éter d) Fórmula bruta: C25H28O3e) Fórmula estrutural:f) Classe: inseticidag) Classificação toxicológica: Formulação Classe Produto técnico IVh) Emprego agropecuário: autorizado conforme indicado",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "PORTARIA 87/1993",
+      "target": "RDC 454/2020",
+      "relacao": "cita"
+    },
+    {
+      "source": "PORTARIA 453/1996",
+      "target": "RESOLUÇÃO - RDC Nº 454, DE 17 DE DEZEMBRO DE 2020 O Diretor do Departamento Técnico-Normativo, da Secretaria de Vigilância Sanitária, do Ministério da Saúde, no uso de suas atribuições, resolve:1",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "PORTARIA 453/1996",
+      "target": "RDC 454/2020",
+      "relacao": "cita"
+    },
+    {
+      "source": "PORTARIA 883/1998",
+      "target": "RESOLUÇÃO - RDC Nº 454, DE 17 DE DEZEMBRO DE 2020 O Secretário de Vigilância Sanitária, do Ministério da Saúde, no uso de suas atribuições, resolve:1",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "PORTARIA 883/1998",
+      "target": "RDC 454/2020",
+      "relacao": "cita"
+    },
+    {
+      "source": "PORTARIA 883/1998",
+      "target": "PORTARIA 10/1985",
+      "relacao": "cita"
+    },
+    {
+      "source": "PORTARIA 885/1998",
+      "target": "RESOLUÇÃO - RDC Nº 454, DE 17 DE DEZEMBRO DE 2020 O Secretário de Vigilância Sanitária, do Ministério da Saúde, no uso de suas atribuições, resolve:1",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "PORTARIA 885/1998",
+      "target": "RDC 454/2020",
+      "relacao": "cita"
+    },
+    {
+      "source": "PORTARIA 938/1998",
+      "target": "RESOLUÇÃO - RDC Nº 454, DE 17 DE DEZEMBRO DE 2020 1",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "PORTARIA 938/1998",
+      "target": "RDC 454/2020",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 842/2024",
+      "target": "Resolução da Diretoria Colegiada - RDC nº 955, de 20/12/2024 A DIRETORIA COLEGIADA DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso da atribuição que lhe confere o art",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 842/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 842/2024",
+      "target": "RDC 955/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 842/2024",
+      "target": "RES 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 842/2024",
+      "target": "RES 469/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 844/2024",
+      "target": "Resolução da Diretoria Colegiada - RDC nº 940, de 14/11/2024 A DIRETORIA COLEGIADA DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso das atribuições que lhe confere o art",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 844/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 844/2024",
+      "target": "RES 298/2019",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 844/2024",
+      "target": "RDC 940/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 844/2024",
+      "target": "RES 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 856/2024",
+      "target": "Resolução da Diretoria Colegiada - RDC nº 927, de 20/09/2024 Altera a Resolução da Diretoria Colegiada - RDC nº 621, de 9 de março de 2022, que dispõe sobre as petições de solicitação de habilitação, renovação de habilitação, modificações pós-habilitação, terceirização de ensaio, suspensões e cancelamentos de Centros de Equivalência Farmacêutica",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 856/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 856/2024",
+      "target": "RDC 927/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 856/2024",
+      "target": "RDC 621/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 856/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 856/2024",
+      "target": "IN 298/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 858/2024",
+      "target": "Resolução da Diretoria Colegiada - RDC nº 926, de 20/09/2024 A DIRETORIA COLEGIADA DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso das atribuições que lhe confere o art",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 858/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 858/2024",
+      "target": "RDC 620/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 858/2024",
+      "target": "RDC 926/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 858/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 858/2024",
+      "target": "RDC 753/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 858/2024",
+      "target": "IN 123/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 859/2024",
+      "target": "Resolução da Diretoria Colegiada - RDC nº 955, de 20/12/2024 A DIRETORIA COLEGIADA DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso da atribuição que lhe confere o art",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 859/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 859/2024",
+      "target": "RDC 955/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 859/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 859/2024",
+      "target": "RDC 469/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 866/2024",
+      "target": "Resolução da Diretoria Colegiada - RDC nº 897, de 28/08/2024 O DIRETOR-PRESIDENTE DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso das atribuições que lhe conferem o art",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 866/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 866/2024",
+      "target": "RDC 897/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 866/2024",
+      "target": "DEC 3029/1999",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 866/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 866/2024",
+      "target": "DLG 36/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 866/2024",
+      "target": "RDC 874/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 866/2024",
+      "target": "RDC 890/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 874/2024",
+      "target": "Resolução da Diretoria Colegiada - RDC nº 897 de 28/08/2024 O DIRETOR-PRESIDENTE DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso das atribuições que lhe conferem o art",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 874/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 874/2024",
+      "target": "RDC 866/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 874/2024",
+      "target": "RDC 897/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 874/2024",
+      "target": "DEC 3029/1999",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 874/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 874/2024",
+      "target": "DLG 36/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 878/2024",
+      "target": "RESOLUÇÃO RDC Nº 899, DE 28 DE AGOSTO DE 2024 A DIRETORIA COLEGIADA DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso das atribuições que lhe confere o art",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 878/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 878/2024",
+      "target": "RDC 492/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 878/2024",
+      "target": "RDC 899/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 878/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 880/2024",
+      "target": "Resolução da Diretoria Colegiada - RDC nº 943, de 22/11/2024 A DIRETORIA COLEGIADA DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso das atribuições que lhe confere o art",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 880/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 880/2024",
+      "target": "RDC 943/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 880/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 880/2024",
+      "target": "RDC 828/2023",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 890/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 890/2024",
+      "target": "RDC 866/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 890/2024",
+      "target": "RDC 897/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 890/2024",
+      "target": "DEC 3029/1999",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 890/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 890/2024",
+      "target": "DEC 57596/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 890/2024",
+      "target": "DLG 36/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 895/2024",
+      "target": "Resolução da Diretoria Colegiada - RDC nº 955, de 20/12/2024 A DIRETORIA COLEGIADA DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso da atribuição que lhe confere o art",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 895/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 895/2024",
+      "target": "RDC 955/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 895/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 895/2024",
+      "target": "RDC 469/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 928/2024",
+      "target": "Resolução da Diretoria Colegiada Anvisa nº 1",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 928/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 928/2024",
+      "target": "LEI 6360/1976",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 928/2024",
+      "target": "LEI 6437/1977",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 928/2024",
+      "target": "RDC 1039/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 928/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 928/2024",
+      "target": "DEL 986/1969",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 928/2024",
+      "target": "RDC 512/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 928/2024",
+      "target": "RDC 621/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 928/2024",
+      "target": "RDC 390/2020",
+      "relacao": "cita"
+    },
     {
       "source": "RDC 935/2024",
       "target": "Resolução da Diretoria Colegiada - RDC nº 955, de 20/12/2024 A DIRETORIA COLEGIADA DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso das atribuições que lhe confere o art",

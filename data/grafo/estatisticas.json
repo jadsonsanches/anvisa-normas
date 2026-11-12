@@ -1,9 +1,11 @@
 {
-  "totalNormas": 5,
+  "totalNormas": 28,
   "vigentes": 0,
-  "revogadas": 5,
+  "revogadas": 28,
   "porTipo": {
-    "RDC": 5
+    "IN": 4,
+    "PORTARIA": 7,
+    "RDC": 17
   },
-  "totalRelacoes": 31
+  "totalRelacoes": 137
 }
