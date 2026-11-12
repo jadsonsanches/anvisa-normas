@@ -2,6 +2,7 @@
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Update Pipeline](https://img.shields.io/badge/pipeline-GitHub%20Actions-green.svg)](.github/workflows/atualiza.yml)
+[![Visualizador Online](https://img.shields.io/badge/visualizador-online-blueviolet.svg)](https://jadsonsanches.github.io/anvisa-normas/)
 [![AI-Ready](https://img.shields.io/badge/format-Markdown%20%2B%20YAML-orange.svg)](#formato-das-normas)
 [![Graph](https://img.shields.io/badge/grafo-relacoes.json-purple.svg)](data/grafo/relacoes.json)
 
@@ -23,6 +24,7 @@ Além disso, **agentes de Inteligência Artificial e sistemas de RAG precisam de
 * **Grafo de Relações (`relacoes.json`):** Relações de quem revoga, altera, regulamenta ou cita quem, extraídas deterministicamente a partir dos cabeçalhos e links oficiais (sem alucinação de IA).
 * **Hiperlinks Locais:** Se a *RDC 952/2024* cita a *RDC 463/2021*, o Markdown já inclui o link direto para o arquivo local correspondente.
 * **Atualização Automática (GitHub Actions):** Um job roda a cada 6 horas conferindo novas publicações nos canais oficiais e commitando no repositório.
+* **Visualizador Interativo Online:** Interface web com grafo de física em Canvas e busca instantânea de ementas disponível em [jadsonsanches.github.io/anvisa-normas](https://jadsonsanches.github.io/anvisa-normas/).
 
 ---
 
