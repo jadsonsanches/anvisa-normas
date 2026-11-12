@@ -1,0 +1,29 @@
+{
+  "name": "anvisa-normas",
+  "version": "1.0.0",
+  "description": "Acervo aberto de todas as normas da Anvisa em Markdown com grafo de relações determinístico e atualização automática",
+  "main": "scripts/pipeline.js",
+  "scripts": {
+    "test:explore": "node scripts/explorar_api.js",
+    "coletar": "node scripts/scraper.js",
+    "gerar:grafo": "node scripts/grafo.js",
+    "pipeline": "node scripts/pipeline.js"
+  },
+  "keywords": [
+    "anvisa",
+    "regulacao",
+    "rdc",
+    "normas",
+    "markdown",
+    "grafo",
+    "open-data",
+    "compliance",
+    "regulatory-affairs"
+  ],
+  "author": "Jadson Sanches",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "turndown": "^7.2.0"
+  }
+}

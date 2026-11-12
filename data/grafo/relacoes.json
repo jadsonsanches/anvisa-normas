@@ -1,0 +1,282 @@
+{
+  "nodes": [
+    {
+      "id": "RDC 935/2024",
+      "tipo": "RDC",
+      "numero": "935",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "Dispõe sobre a atualização da lista de Denominações Comuns Brasileiras (DCB).",
+      "arquivo": "data/normas/rdc/2024/rdc-935.md"
+    },
+    {
+      "id": "LEI 9782/1999",
+      "tipo": "LEI_FEDERAL",
+      "situacao": "externa"
+    },
+    {
+      "id": "RDC 955/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 585/2021",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 469/2021",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 940/2024",
+      "tipo": "RDC",
+      "numero": "940",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "Dispõe sobre a aprovação da Farmacopeia Brasileira, 7ª edição.",
+      "arquivo": "data/normas/rdc/2024/rdc-940.md"
+    },
+    {
+      "id": "RDC 1026/2026",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 298/2019",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 575/2021",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 609/2022",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 788/2023",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 832/2023",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 844/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 943/2024",
+      "tipo": "RDC",
+      "numero": "943",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "",
+      "arquivo": "data/normas/rdc/2024/rdc-943.md"
+    },
+    {
+      "id": "RDC 953/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 880/2024",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 952/2024",
+      "tipo": "RDC",
+      "numero": "952",
+      "ano": "2024",
+      "situacao": "revogada",
+      "ementa": "Aprova a Errata nº 2 do Formulário de Fitoterápicos da Farmacopeia Brasileira, 2ª edição, de que trata a Resolução da Diretoria Colegiada - RDC nº 463, de 27 de janeiro de 2021.",
+      "arquivo": "data/normas/rdc/2024/rdc-952.md"
+    },
+    {
+      "id": "RDC 1024/2026",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 463/2021",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 993/2025",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    },
+    {
+      "id": "RDC 980/2025",
+      "tipo": "NORMA_CORRELATA",
+      "situacao": "desconhecida"
+    }
+  ],
+  "edges": [
+    {
+      "source": "RDC 935/2024",
+      "target": "Resolução da Diretoria Colegiada - RDC nº 955, de 20/12/2024 A DIRETORIA COLEGIADA DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso das atribuições que lhe confere o art",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 935/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 935/2024",
+      "target": "RDC 955/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 935/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 935/2024",
+      "target": "RDC 469/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 940/2024",
+      "target": "Resolução da Diretoria Colegiada Anvisa nº 1",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 940/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 940/2024",
+      "target": "RDC 1026/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 940/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 940/2024",
+      "target": "RDC 298/2019",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 940/2024",
+      "target": "RDC 575/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 940/2024",
+      "target": "RDC 609/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 940/2024",
+      "target": "RDC 788/2023",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 940/2024",
+      "target": "RDC 832/2023",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 940/2024",
+      "target": "RDC 844/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 943/2024",
+      "target": "Resolução da Diretoria Colegiada - RDC nº 953 de 13/12/2024 A DIRETORIA COLEGIADA DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso das atribuições que lhe confere o art",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 943/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 943/2024",
+      "target": "RDC 953/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 943/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 943/2024",
+      "target": "RDC 880/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 952/2024",
+      "target": "Resolução da Diretoria Colegiada Anvisa nº 1",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 952/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 952/2024",
+      "target": "RDC 1024/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 952/2024",
+      "target": "RDC 463/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 952/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 953/2024",
+      "target": "Resolução da Diretoria Colegiada Anvisa - RDC nº 993, de 29/08/2025, retificada no DOU nº 165, de 01/09/2025 e no DOU nº 166, de 02/09/2025 A DIRETORIA COLEGIADA DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso das atribuições que lhe confere o art",
+      "relacao": "revogada_por"
+    },
+    {
+      "source": "RDC 953/2024",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 953/2024",
+      "target": "RDC 993/2025",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 953/2024",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 953/2024",
+      "target": "RDC 980/2025",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 953/2024",
+      "target": "RDC 943/2024",
+      "relacao": "cita"
+    }
+  ]
+}
