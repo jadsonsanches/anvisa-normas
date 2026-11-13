@@ -4,39 +4,79 @@ const path = require('path');
 const grafo = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/grafo/relacoes.json'), 'utf8'));
 const stats = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/grafo/estatisticas.json'), 'utf8'));
 
-// Cores e configurações por tipo de ato
+// Cores temáticas no padrão Bio-Tech & AI (Emerald / Neon / Glassmorphism)
 const CORES_TIPOS = {
-  RDC: { bg: 'bg-blue-500/20', text: 'text-blue-300', border: 'border-blue-500/30', hex: '#3b82f6', label: 'RDC' },
-  RE: { bg: 'bg-cyan-500/20', text: 'text-cyan-300', border: 'border-cyan-500/30', hex: '#06b6d4', label: 'RE' },
+  RDC: { bg: 'bg-emerald-500/20', text: 'text-emerald-300', border: 'border-emerald-500/30', hex: '#10b981', label: 'RDC' },
+  RE: { bg: 'bg-teal-500/20', text: 'text-teal-300', border: 'border-teal-500/30', hex: '#14b8a6', label: 'RE' },
   PORTARIA: { bg: 'bg-amber-500/20', text: 'text-amber-300', border: 'border-amber-500/30', hex: '#f59e0b', label: 'Portaria' },
-  IN: { bg: 'bg-purple-500/20', text: 'text-purple-300', border: 'border-purple-500/30', hex: '#a855f7', label: 'IN' },
+  IN: { bg: 'bg-cyan-500/20', text: 'text-cyan-300', border: 'border-cyan-500/30', hex: '#06b6d4', label: 'IN' },
   CPB: { bg: 'bg-pink-500/20', text: 'text-pink-300', border: 'border-pink-500/30', hex: '#ec4899', label: 'Consulta Pública' },
-  LEI_FEDERAL: { bg: 'bg-emerald-500/20', text: 'text-emerald-300', border: 'border-emerald-500/30', hex: '#10b981', label: 'Lei Federal' },
+  LEI_FEDERAL: { bg: 'bg-green-500/20', text: 'text-green-300', border: 'border-green-500/30', hex: '#22c55e', label: 'Lei Federal' },
+  DEP: { bg: 'bg-blue-500/20', text: 'text-blue-300', border: 'border-blue-500/30', hex: '#3b82f6', label: 'Despacho' },
+  TAP: { bg: 'bg-red-500/20', text: 'text-red-300', border: 'border-red-500/30', hex: '#ef4444', label: 'Termo Apreensão' },
   OUTROS: { bg: 'bg-slate-700/50', text: 'text-slate-300', border: 'border-slate-600', hex: '#64748b', label: 'Outros' }
 };
 
-// Gera pills dinâmicos de distribuição
+// Pills de distribuição por tipo no header
 const distribuicaoHtml = Object.entries(stats.porTipo || {})
   .map(([tipo, qtd]) => {
     const conf = CORES_TIPOS[tipo] || CORES_TIPOS.OUTROS;
-    return `<span class="px-2 py-0.5 rounded ${conf.bg} ${conf.text} border ${conf.border} text-xs font-semibold">${tipo}: ${qtd}</span>`;
+    return `<span class="px-2.5 py-1 rounded-full ${conf.bg} ${conf.text} border ${conf.border} text-xs font-semibold tracking-wide">${tipo}: ${qtd}</span>`;
   })
   .join('\n');
 
 const htmlContent = `<!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anvisa Normas - Visualizador Interativo & Analytics</title>
+  <title>Anvisa Normas | Intelligence & Graph Analytics</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-main: #040e0a;
+      --bg-card: rgba(8, 26, 18, 0.72);
+      --border-emerald: rgba(16, 185, 129, 0.18);
+      --accent-neon: #00ff87;
+    }
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, sans-serif;
-      background: #090d16;
-      color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-main);
+      color: #e6f4ee;
       overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(0, 255, 135, 0.07) 0%, transparent 40%),
+        radial-gradient(circle at 85% 60%, rgba(16, 185, 129, 0.05) 0%, transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(20, 184, 166, 0.06) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-emerald);
+      box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.45);
+    }
+    .glass-card-hover {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card-hover:hover {
+      border-color: rgba(0, 255, 135, 0.35);
+      box-shadow: 0 14px 36px -4px rgba(0, 255, 135, 0.12);
+      transform: translateY(-2px);
+    }
+    .neon-glow {
+      box-shadow: 0 0 20px rgba(0, 255, 135, 0.25);
+    }
+    .neon-text {
+      text-shadow: 0 0 12px rgba(0, 255, 135, 0.4);
     }
     canvas {
       cursor: grab;
@@ -48,351 +88,503 @@ const htmlContent = `<!DOCTYPE html>
       width: 6px;
       height: 6px;
     }
+    ::-webkit-scrollbar-track {
+      background: rgba(4, 14, 10, 0.6);
+    }
     ::-webkit-scrollbar-thumb {
-      background: #1e293b;
-      border-radius: 4px;
+      background: rgba(16, 185, 129, 0.25);
+      border-radius: 9999px;
     }
-    input[type="date"]::-webkit-calendar-picker-indicator {
-      filter: invert(0.8);
-      cursor: pointer;
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 255, 135, 0.45);
     }
-    .chart-bar:hover {
-      filter: brightness(1.25);
+    .timeline-pill {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .timeline-pill.active {
+      background: linear-gradient(135deg, rgba(0, 255, 135, 0.25), rgba(16, 185, 129, 0.35));
+      border-color: #00ff87;
+      box-shadow: 0 0 16px rgba(0, 255, 135, 0.3);
+      transform: scale(1.05);
     }
     .donut-segment:hover {
-      filter: brightness(1.2);
-      transform-origin: center;
+      filter: brightness(1.25);
+      stroke-width: 20;
     }
   </style>
 </head>
-<body class="p-3 md:p-6 bg-slate-950 text-slate-100 min-h-screen">
-  <div class="max-w-7xl mx-auto space-y-5">
+<body class="min-h-screen flex text-slate-200 antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
 
-    <!-- Header com Ações e Downloads Diretos -->
-    <header class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
-      <div>
-        <div class="flex items-center gap-3">
-          <span class="text-3xl">🏛️</span>
-          <div>
-            <h1 class="text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent">
-              Acervo Aberto Anvisa - Visualizador & Analytics
-            </h1>
-            <p class="text-slate-400 text-xs md:text-sm mt-0.5">
-              Navegação visual pelas normas regulatórias com grafo determinístico de relações e dados consolidados.
-            </p>
+  <!-- Sidebar Lateral Moderna (Estilo AI Dashboard) -->
+  <aside class="w-16 md:w-64 bg-[#05140d]/90 border-r border-emerald-500/15 flex flex-col justify-between p-3 md:p-4 sticky top-0 h-screen z-30 shrink-0 backdrop-blur-xl">
+    <div class="space-y-6">
+      <!-- Logo / Marca -->
+      <div class="flex items-center gap-3 px-1 md:px-2 pt-1">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-emerald-500/20 shrink-0">
+          🌿
+        </div>
+        <div class="hidden md:block overflow-hidden">
+          <div class="font-bold text-sm tracking-wide text-white flex items-center gap-1.5">
+            <span>AnvisaNormas</span>
+            <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-mono border border-emerald-500/30">AI</span>
           </div>
+          <p class="text-[11px] text-emerald-400/70 truncate">Inteligência Regulatória</p>
         </div>
       </div>
-      
-      <!-- Downloads e Links -->
-      <div class="flex items-center gap-2 flex-wrap text-xs">
-        <span class="text-[11px] text-slate-400 font-medium hidden sm:inline">Downloads Diretos:</span>
-        <a href="data/dist/anvisa.db" download class="px-2.5 py-1.5 rounded-lg bg-blue-950/60 hover:bg-blue-900/80 text-blue-300 border border-blue-800/60 font-medium transition flex items-center gap-1.5" title="Baixar banco SQLite relacional completo">
-          <span>💾 SQLite</span>
-        </a>
-        <a href="data/dist/normas.json" download class="px-2.5 py-1.5 rounded-lg bg-cyan-950/60 hover:bg-cyan-900/80 text-cyan-300 border border-cyan-800/60 font-medium transition flex items-center gap-1.5" title="Baixar acervo completo em JSON">
-          <span>📊 JSON</span>
-        </a>
-        <a href="data/dist/normas.csv" download class="px-2.5 py-1.5 rounded-lg bg-emerald-950/60 hover:bg-emerald-900/80 text-emerald-300 border border-emerald-800/60 font-medium transition flex items-center gap-1.5" title="Baixar tabela estruturada em CSV">
-          <span>📑 CSV</span>
-        </a>
-        <a href="https://github.com/jadsonsanches/anvisa-normas" target="_blank" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-semibold transition flex items-center gap-1">
-          <span>GitHub</span> ↗
-        </a>
+
+      <!-- Menu Principal de Navegação -->
+      <nav class="space-y-1.5 pt-2">
+        <button onclick="scrollToSection('radar-section')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl bg-emerald-500/15 text-emerald-300 font-medium text-xs md:text-sm border border-emerald-500/30 shadow-sm transition hover:bg-emerald-500/20 group">
+          <span class="text-base group-hover:scale-110 transition">📅</span>
+          <span class="hidden md:inline font-semibold">Radar Diário</span>
+        </button>
+
+        <button onclick="scrollToSection('metrics-section')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-500/10 font-medium text-xs md:text-sm transition group">
+          <span class="text-base group-hover:scale-110 transition">📊</span>
+          <span class="hidden md:inline">Métricas & Analytics</span>
+        </button>
+
+        <button onclick="scrollToSection('graph-section')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-500/10 font-medium text-xs md:text-sm transition group">
+          <span class="text-base group-hover:scale-110 transition">🕸️</span>
+          <span class="hidden md:inline">Grafo Determinístico</span>
+        </button>
+
+        <button onclick="scrollToSection('feed-section')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-500/10 font-medium text-xs md:text-sm transition group">
+          <span class="text-base group-hover:scale-110 transition">📑</span>
+          <span class="hidden md:inline">Acervo de Atos</span>
+        </button>
+      </nav>
+
+      <!-- Seção de Downloads Consolidados -->
+      <div class="hidden md:block pt-4 border-t border-emerald-500/15 space-y-2">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400/80 px-2">Bases Abertas (Data)</span>
+        <div class="space-y-1">
+          <a href="data/dist/anvisa.db" download class="flex items-center justify-between px-3 py-2 rounded-lg bg-[#082016] hover:bg-emerald-950/70 border border-emerald-500/20 text-xs text-slate-200 hover:text-emerald-300 transition">
+            <span class="flex items-center gap-2">💾 SQLite (DB)</span>
+            <span class="text-[10px] text-emerald-400 font-mono">1.8 MB</span>
+          </a>
+          <a href="data/dist/normas.json" download class="flex items-center justify-between px-3 py-2 rounded-lg bg-[#082016] hover:bg-emerald-950/70 border border-emerald-500/20 text-xs text-slate-200 hover:text-emerald-300 transition">
+            <span class="flex items-center gap-2">📊 JSON Consolidado</span>
+            <span class="text-[10px] text-emerald-400 font-mono">API</span>
+          </a>
+          <a href="data/dist/normas.csv" download class="flex items-center justify-between px-3 py-2 rounded-lg bg-[#082016] hover:bg-emerald-950/70 border border-emerald-500/20 text-xs text-slate-200 hover:text-emerald-300 transition">
+            <span class="flex items-center gap-2">📑 Planilha CSV</span>
+            <span class="text-[10px] text-emerald-400 font-mono">Raw</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rodapé Sidebar -->
+    <div class="border-t border-emerald-500/15 pt-3">
+      <div class="hidden md:flex items-center justify-between text-[11px] text-slate-400 mb-2">
+        <span class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Pipeline Ativo</span>
+        </span>
+        <span class="font-mono text-emerald-300/80">6/6h</span>
+      </div>
+      <a href="https://github.com/jadsonsanches/anvisa-normas" target="_blank" class="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/25 text-xs font-semibold transition">
+        <span>GitHub Repo</span> ↗
+      </a>
+    </div>
+  </aside>
+
+  <!-- Conteúdo Principal -->
+  <main class="flex-1 p-3 md:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto overflow-y-auto w-full">
+
+    <!-- Topbar: Barra de Busca & Status -->
+    <header class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <!-- Barra de Busca Inspirada na Imagem 1 -->
+      <div class="relative flex-1 max-w-2xl">
+        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-emerald-400/80">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+        <input 
+          id="search-input" 
+          type="text" 
+          placeholder="Buscar por número do ato, ementa, setor regulado (ex: alimentos, medicamentos, cosméticos)..." 
+          class="w-full pl-10 pr-24 py-2.5 rounded-full bg-[#081f15]/80 border border-emerald-500/25 text-slate-100 placeholder-emerald-400/40 text-xs md:text-sm focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition shadow-inner"
+        >
+        <div class="absolute inset-y-0 right-0 pr-2 flex items-center gap-1">
+          <span id="count-filtered" class="text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+            ${grafo.nodes.length} nós
+          </span>
+        </div>
+      </div>
+
+      <!-- Informações do Mês e Atualização -->
+      <div class="flex items-center gap-2.5 self-end md:self-auto">
+        <span class="text-xs px-3 py-1.5 rounded-full bg-[#082016] border border-emerald-500/30 text-emerald-300 font-medium flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span>Novembro / 2026</span>
+        </span>
+        <button onclick="limparTodosFiltros()" class="text-xs px-3 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 transition">
+          Resetar Filtros
+        </button>
       </div>
     </header>
 
-    <!-- Estatísticas Rápidas -->
-    <section class="grid grid-cols-2 md:grid-cols-4 gap-3">
-      <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3.5">
-        <div class="text-slate-400 text-[11px] font-medium uppercase tracking-wider">Normas no Acervo</div>
-        <div class="text-2xl font-bold text-blue-400 mt-1">${stats.totalNormas}</div>
-        <div class="text-slate-500 text-[11px] mt-0.5">Texto integral em Markdown</div>
-      </div>
-      <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3.5">
-        <div class="text-slate-400 text-[11px] font-medium uppercase tracking-wider">Situação Jurídica</div>
-        <div class="flex items-baseline gap-2 mt-1">
-          <span class="text-2xl font-bold text-emerald-400">${stats.vigentes}</span>
-          <span class="text-xs text-slate-400">vigentes</span>
-          <span class="text-slate-600">/</span>
-          <span class="text-sm font-semibold text-rose-400">${stats.revogadas}</span>
-          <span class="text-xs text-slate-400">revogadas</span>
-        </div>
-        <div class="w-full bg-slate-800 h-1.5 rounded-full mt-2 overflow-hidden flex">
-          <div style="width: ${Math.round((stats.vigentes / Math.max(1, stats.totalNormas)) * 100)}%" class="bg-emerald-500 h-full"></div>
-          <div style="width: ${Math.round((stats.revogadas / Math.max(1, stats.totalNormas)) * 100)}%" class="bg-rose-500 h-full"></div>
-        </div>
-      </div>
-      <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3.5">
-        <div class="text-slate-400 text-[11px] font-medium uppercase tracking-wider">Grafo de Relações</div>
-        <div class="text-2xl font-bold text-indigo-400 mt-1">${grafo.nodes.length} nós / ${stats.totalRelacoes} arestas</div>
-        <div class="text-slate-500 text-[11px] mt-0.5">Citações, revogações e bases</div>
-      </div>
-      <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3.5">
-        <div class="text-slate-400 text-[11px] font-medium uppercase tracking-wider">Tipos Coletados</div>
-        <div class="flex items-center gap-1.5 mt-2 flex-wrap">
-          ${distribuicaoHtml || '<span class="text-xs text-slate-500">Sem normas</span>'}
-        </div>
-      </div>
-    </section>
-
-    <!-- Painel de Gráficos e Analytics (Novo) -->
-    <section class="bg-slate-900/60 border border-slate-800/90 rounded-xl p-4">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-        <div class="flex items-center gap-2">
-          <span class="text-base">📊</span>
-          <h2 class="text-xs font-bold text-slate-200 uppercase tracking-wider">Dashboard de Métricas & Distribuição</h2>
-        </div>
-        <span class="text-[11px] text-slate-400">Clique nas barras ou fatias para filtrar o acervo</span>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-3.5">
-        
-        <!-- Gráfico 1: Proporção por Tipo (Donut Chart SVG) -->
-        <div class="bg-slate-950/70 border border-slate-800/80 rounded-lg p-3 flex flex-col justify-between">
-          <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Distribuição por Tipo de Ato</div>
-          <div class="flex items-center justify-around gap-2" id="donut-container">
-            <!-- Injetado dinamicamente -->
-          </div>
-        </div>
-
-        <!-- Gráfico 2: Linha do Tempo / Publicações por Mês (Barras SVG) -->
-        <div class="bg-slate-950/70 border border-slate-800/80 rounded-lg p-3 flex flex-col justify-between">
-          <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Volume de Atos por Mês / Ano</div>
-          <div class="h-28 flex items-end gap-2 pt-2 px-1" id="timeline-container">
-            <!-- Injetado dinamicamente -->
-          </div>
-        </div>
-
-        <!-- Gráfico 3: Relações & Conectividade -->
-        <div class="bg-slate-950/70 border border-slate-800/80 rounded-lg p-3 flex flex-col justify-between">
-          <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Conectividade Normativa</div>
-          <div class="space-y-2 text-xs">
-            <div class="flex items-center justify-between text-slate-300">
-              <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyan-400"></span> Normas Anvisa (Locais)</span>
-              <span class="font-bold text-cyan-300" id="metric-local-nodes">0</span>
-            </div>
-            <div class="flex items-center justify-between text-slate-300">
-              <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Leis Federais & Referências</span>
-              <span class="font-bold text-emerald-300" id="metric-ref-nodes">0</span>
-            </div>
-            <div class="flex items-center justify-between text-slate-300">
-              <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-400"></span> Revogações Mapeadas</span>
-              <span class="font-bold text-rose-300" id="metric-revogacoes">0</span>
-            </div>
-            <div class="w-full bg-slate-900 border border-slate-800 rounded p-2 text-[11px] text-slate-400 mt-2">
-              💡 As relações são extraídas diretamente das fórmulas oficiais do Datalegis.
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Main Workspace -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-
-      <!-- Grafo Interativo à Esquerda -->
-      <div class="lg:col-span-2 bg-slate-900/70 border border-slate-800 rounded-xl overflow-hidden flex flex-col h-[680px] relative">
-        <div class="p-3 border-b border-slate-800 bg-slate-950/80 flex items-center justify-between z-10 flex-wrap gap-2">
+    <!-- Componente Estrela: RADAR REGULATÓRIO DIÁRIO (Inspirado na Imagem 1) -->
+    <section id="radar-section" class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-emerald-500/15 pb-3">
+        <div>
           <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span class="font-medium text-xs text-slate-300">Grafo Determinístico</span>
-            <span class="text-[11px] text-slate-500 hidden sm:inline" id="graph-visible-count"></span>
+            <span class="text-xl">📅</span>
+            <h2 class="text-base md:text-lg font-bold text-white tracking-wide flex items-center gap-2">
+              Linha do Tempo Diária de Publicações no DOU
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal">Monitor Oficial</span>
+            </h2>
           </div>
+          <p class="text-xs text-slate-400 mt-0.5">
+            Selecione qualquer dia do mês para filtrar instantaneamente os atos normativos publicados pela Anvisa.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="btn-ver-todos-dias" class="text-xs px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-semibold transition active:scale-95">
+            Ver Todos os Dias
+          </button>
+        </div>
+      </div>
+
+      <!-- Carrossel de Dias com Contador de Atos por Dia -->
+      <div id="daily-timeline-carousel" class="flex items-stretch gap-2.5 overflow-x-auto pb-2 pt-1 scroll-smooth">
+        <!-- Gerado via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Cards de Métricas Principais (Estilo Imagens 1 e 2) -->
+    <section id="metrics-section" class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+      <!-- Card 1: Total Normas -->
+      <div class="glass-card glass-card-hover rounded-2xl p-4 space-y-2 relative overflow-hidden group">
+        <div class="flex items-center justify-between text-slate-400">
+          <span class="text-xs font-semibold uppercase tracking-wider text-emerald-400/80">Acervo Total</span>
+          <span class="text-base group-hover:scale-110 transition">📑</span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-total-normas">${stats.totalNormas || grafo.nodes.filter(n => n.arquivo).length}</span>
+          <span class="text-xs text-emerald-400 font-medium">normas</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Atos com texto integral limpo e YAML estruturado</p>
+        <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-emerald-500/10 rounded-full blur-xl pointer-events-none"></div>
+      </div>
+
+      <!-- Card 2: Vigentes -->
+      <div class="glass-card glass-card-hover rounded-2xl p-4 space-y-2 relative overflow-hidden group">
+        <div class="flex items-center justify-between text-slate-400">
+          <span class="text-xs font-semibold uppercase tracking-wider text-teal-400/80">Normas Vigentes</span>
+          <span class="text-base group-hover:scale-110 transition">✅</span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-vigentes">${stats.vigentes || 0}</span>
+          <span class="text-xs px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px]">
+            ${Math.round(((stats.vigentes || 0) / (stats.totalNormas || 1)) * 100)}%
+          </span>
+        </div>
+        <p class="text-[11px] text-slate-400">Plena eficácia jurídica em vigor no Brasil</p>
+        <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-teal-500/10 rounded-full blur-xl pointer-events-none"></div>
+      </div>
+
+      <!-- Card 3: Grafo de Relações -->
+      <div class="glass-card glass-card-hover rounded-2xl p-4 space-y-2 relative overflow-hidden group">
+        <div class="flex items-center justify-between text-slate-400">
+          <span class="text-xs font-semibold uppercase tracking-wider text-cyan-400/80">Conexões Mapeadas</span>
+          <span class="text-base group-hover:scale-110 transition">🕸️</span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-relacoes">${stats.totalRelacoes || grafo.edges.length}</span>
+          <span class="text-xs text-cyan-400 font-medium">arestas</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Relações determinísticas (altera, revoga, cita)</p>
+        <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-cyan-500/10 rounded-full blur-xl pointer-events-none"></div>
+      </div>
+
+      <!-- Card 4: Volume Médio / Picos -->
+      <div class="glass-card glass-card-hover rounded-2xl p-4 space-y-2 relative overflow-hidden group">
+        <div class="flex items-center justify-between text-slate-400">
+          <span class="text-xs font-semibold uppercase tracking-wider text-amber-400/80">Pico Regulatória</span>
+          <span class="text-base group-hover:scale-110 transition">⚡</span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-2xl md:text-3xl font-extrabold text-white font-mono">96</span>
+          <span class="text-xs px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-[10px]">09/11</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Média de ~32 atos/dia útil no DOU</p>
+        <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-amber-500/10 rounded-full blur-xl pointer-events-none"></div>
+      </div>
+    </section>
+
+    <!-- Área de Exploração em Duas Colunas: Grafo e Feed -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+
+      <!-- Coluna da Esquerda: Grafo Determinístico Interativo & Analytics -->
+      <div id="graph-section" class="lg:col-span-7 space-y-4">
+        <div class="glass-card rounded-2xl p-4 md:p-5 space-y-3 relative">
           
-          <!-- Controles do Grafo e Toggle de Ocultar -->
-          <div class="flex items-center gap-2 text-xs">
-            <label class="flex items-center gap-1.5 text-[11px] text-slate-300 cursor-pointer bg-slate-900 hover:bg-slate-800 px-2.5 py-1 rounded border border-slate-800 transition">
-              <input type="checkbox" id="toggle-hide-filtered" checked class="rounded bg-slate-800 border-slate-700 text-cyan-500 focus:ring-0" />
-              <span>Ocultar nós fora do filtro</span>
-            </label>
-
-            <button id="btn-clear-focus" class="hidden px-2.5 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 rounded transition text-[11px]">
-              ✕ Desmarcar Foco
-            </button>
-
-            <div class="flex items-center gap-1 text-xs">
-              <button id="btn-zoom-in" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-slate-200" title="Aproximar">+</button>
-              <button id="btn-zoom-out" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-slate-200" title="Afastar">-</button>
-              <button id="btn-reset" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 rounded text-slate-200">Centralizar</button>
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-sm md:text-base font-bold text-white flex items-center gap-2">
+                <span>🕸️</span>
+                <span>Grafo de Relações Regulatórias</span>
+              </h3>
+              <p class="text-xs text-slate-400">Física interativa de conexões entre RDCs, Portarias, REs e Leis</p>
             </div>
+            <div class="flex items-center gap-1.5 text-xs">
+              <button id="btn-zoom-in" class="w-8 h-8 rounded-lg bg-[#0b241a] hover:bg-emerald-950 text-emerald-300 border border-emerald-500/30 flex items-center justify-center font-bold" title="Aproximar">+</button>
+              <button id="btn-zoom-out" class="w-8 h-8 rounded-lg bg-[#0b241a] hover:bg-emerald-950 text-emerald-300 border border-emerald-500/30 flex items-center justify-center font-bold" title="Afastar">-</button>
+              <button id="btn-reset-view" class="px-2.5 h-8 rounded-lg bg-[#0b241a] hover:bg-emerald-950 text-emerald-300 border border-emerald-500/30 flex items-center justify-center text-xs" title="Resetar visualização">Reset</button>
+            </div>
+          </div>
+
+          <!-- Canvas do Grafo -->
+          <div class="relative w-full h-[480px] bg-[#030a07] rounded-xl overflow-hidden border border-emerald-500/20 shadow-inner">
+            <canvas id="graph-canvas" class="w-full h-full block"></canvas>
+            
+            <!-- Legenda Flutuante Discreta -->
+            <div class="absolute bottom-3 left-3 bg-[#05140d]/90 backdrop-blur-md border border-emerald-500/20 rounded-xl p-2.5 text-[10px] space-y-1 shadow-lg pointer-events-none">
+              <div class="font-bold text-slate-300 mb-1">Tipologia dos Nós:</div>
+              <div class="grid grid-cols-2 gap-x-3 gap-y-1">
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#10b981]"></span> RDC</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#14b8a6]"></span> RE</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#f59e0b]"></span> Portaria</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#06b6d4]"></span> IN</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#ec4899]"></span> CPB</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#22c55e]"></span> Lei Federal</span>
+              </div>
+            </div>
+
+            <!-- Botão Limpar Foco -->
+            <button id="btn-clear-focus" class="hidden absolute top-3 right-3 px-3 py-1.5 rounded-lg bg-emerald-500/30 hover:bg-emerald-500/40 text-emerald-200 border border-emerald-400 text-xs font-semibold backdrop-blur shadow-lg transition">
+              Desfazer Foco no Nó
+            </button>
+          </div>
+
+          <!-- Filtro de Tipos Rápido em Pills -->
+          <div class="pt-1 flex items-center gap-1.5 flex-wrap">
+            <span class="text-[11px] text-slate-400 font-medium">Filtrar Tipo:</span>
+            <button data-tipo="ALL" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition">Todos</button>
+            <button data-tipo="RE" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">RE</button>
+            <button data-tipo="PORTARIA" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">Portaria</button>
+            <button data-tipo="IN" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">IN</button>
+            <button data-tipo="RDC" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">RDC</button>
+            <button data-tipo="CPB" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">CPB</button>
           </div>
         </div>
 
-        <div class="relative flex-1 bg-slate-950">
-          <canvas id="graphCanvas" class="w-full h-full block"></canvas>
-          
-          <!-- Legenda -->
-          <div class="absolute bottom-3 left-3 bg-slate-900/95 backdrop-blur border border-slate-800 rounded-lg p-2.5 text-[11px] space-y-1 text-slate-300 shadow-xl">
-            <div class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Legenda</div>
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-cyan-400"></span> RE (Resoluções)</div>
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-amber-500"></span> Portaria</div>
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-blue-500"></span> RDC</div>
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-purple-500"></span> Instrução Normativa</div>
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-pink-400"></span> Consulta Pública</div>
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-emerald-500"></span> Lei Federal (Base)</div>
+        <!-- Distribuição por Tipologia (Donut & Analytics) -->
+        <div class="glass-card rounded-2xl p-4 md:p-5 flex flex-col sm:flex-row items-center justify-between gap-5">
+          <div class="space-y-1">
+            <h4 class="text-sm font-bold text-white flex items-center gap-2">
+              <span>📊</span>
+              <span>Proporção por Tipologia Normativa</span>
+            </h4>
+            <p class="text-xs text-slate-400">Composição do acervo regulatório coletado em 2026</p>
+          </div>
+          <div id="donut-container" class="flex items-center gap-4">
+            <!-- Donut SVG gerado dinamicamente -->
           </div>
         </div>
       </div>
 
-      <!-- Busca e Detalhes da Norma à Direita -->
-      <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-4 flex flex-col h-[680px]">
-        <div class="space-y-3 pb-3 border-b border-slate-800">
+      <!-- Coluna da Direita: Inspetor de Detalhes & Feed de Normas -->
+      <div id="feed-section" class="lg:col-span-5 space-y-4">
+        
+        <!-- Painel de Inspeção do Nó Selecionado -->
+        <div class="glass-card rounded-2xl p-4 md:p-5 space-y-3 border-emerald-500/30">
+          <div class="flex items-center justify-between border-b border-emerald-500/20 pb-2.5">
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-400 text-lg">🔍</span>
+              <h3 class="text-sm font-bold text-white">Inspetor de Metadados Regulatórios</h3>
+            </div>
+            <span id="selected-badge-situacao" class="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              Vigente
+            </span>
+          </div>
+
+          <div id="inspector-content" class="space-y-3 text-xs">
+            <!-- Conteúdo atualizado via JS -->
+            <div class="text-slate-400 text-center py-6">
+              Clique em qualquer nó do grafo ou ato na lista abaixo para inspecionar os detalhes completos.
+            </div>
+          </div>
+        </div>
+
+        <!-- Lista Filtrada de Normas -->
+        <div class="glass-card rounded-2xl p-4 space-y-3">
           <div class="flex items-center justify-between">
-            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Explorador de Normas</label>
-            <span class="text-[11px] font-medium text-cyan-400" id="count-filtered"></span>
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <span>📋</span>
+              <span>Lista de Normas</span>
+            </h3>
+            <span id="list-status-badge" class="text-[11px] text-emerald-400 font-mono">
+              Mostrando normas
+            </span>
           </div>
 
-          <!-- Campo de Busca -->
-          <input 
-            id="search-input"
-            type="text" 
-            placeholder="Buscar por número, tipo, ano ou ementa..."
-            class="w-full bg-slate-950 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition"
-          />
-
-          <!-- Filtros por Período de Datas -->
-          <div class="space-y-1.5 p-2 bg-slate-950/60 rounded-lg border border-slate-800/80">
-            <div class="flex items-center justify-between text-[11px]">
-              <span class="text-slate-400 font-medium">📅 Filtrar por Período:</span>
-              <button id="btn-limpar-datas" class="text-[10px] text-cyan-400 hover:text-cyan-300 transition">Limpar Datas</button>
-            </div>
-            <div class="grid grid-cols-2 gap-2 text-xs">
-              <div>
-                <label for="date-start" class="block text-[10px] text-slate-500 uppercase">A partir de:</label>
-                <input id="date-start" type="date" class="w-full bg-slate-900 border border-slate-700/80 rounded px-2 py-1 text-[11px] text-slate-200 focus:outline-none focus:border-cyan-500" />
-              </div>
-              <div>
-                <label for="date-end" class="block text-[10px] text-slate-500 uppercase">Até:</label>
-                <input id="date-end" type="date" class="w-full bg-slate-900 border border-slate-700/80 rounded px-2 py-1 text-[11px] text-slate-200 focus:outline-none focus:border-cyan-500" />
-              </div>
-            </div>
-            <!-- Botões de Atalho de Ano -->
-            <div class="flex items-center gap-1.5 text-[10px] pt-1 border-t border-slate-800/60 flex-wrap">
-              <span class="text-slate-500">Atalhos:</span>
-              <button class="preset-btn px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded transition" data-mode="all">Todas</button>
-              <button class="preset-btn px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded transition" data-mode="week">Últimos 7 dias</button>
-              <button class="preset-btn px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded transition" data-mode="2026">2026</button>
-              <button class="preset-btn px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded transition" data-mode="2025">2025</button>
-              <button class="preset-btn px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded transition" data-mode="2024">2024</button>
-            </div>
-          </div>
-
-          <!-- Filtros por Tipo -->
-          <div class="flex items-center gap-1.5 flex-wrap text-[11px]" id="filter-buttons">
-            <button data-tipo="ALL" class="filter-btn active px-2.5 py-1 rounded-full bg-blue-600 text-white font-medium">Todos</button>
-            <button data-tipo="RE" class="filter-btn px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700">RE</button>
-            <button data-tipo="PORTARIA" class="filter-btn px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700">Portaria</button>
-            <button data-tipo="RDC" class="filter-btn px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700">RDC</button>
-            <button data-tipo="IN" class="filter-btn px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700">IN</button>
-            <button data-tipo="CPB" class="filter-btn px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700">CPB</button>
-          </div>
-
-          <!-- Filtros por Situação -->
-          <div class="flex items-center gap-1.5 text-[11px]">
-            <span class="text-slate-500 text-[10px] uppercase font-semibold">Status:</span>
-            <button data-status="ALL" class="status-btn active px-2 py-0.5 rounded bg-slate-800 text-slate-200">Todos</button>
-            <button data-status="vigente" class="status-btn px-2 py-0.5 rounded bg-slate-900 text-emerald-400 hover:bg-slate-800">Vigentes</button>
-            <button data-status="revogada" class="status-btn px-2 py-0.5 rounded bg-slate-900 text-rose-400 hover:bg-slate-800">Revogadas</button>
+          <!-- Container Scrollável da Lista de Normas -->
+          <div id="norms-list-container" class="space-y-2 max-h-[500px] overflow-y-auto pr-1">
+            <!-- Itens inseridos dinamicamente -->
           </div>
         </div>
 
-        <!-- Painel de Detalhes ou Lista de Normas -->
-        <div class="flex-1 overflow-y-auto mt-3 pr-1 space-y-2.5" id="details-pane">
-          <!-- Renderizado dinamicamente via JS -->
-        </div>
       </div>
 
     </div>
 
-  </div>
+    <!-- Rodapé Geral -->
+    <footer class="text-center text-xs text-slate-500 pt-8 pb-4 border-t border-emerald-500/10 space-y-1">
+      <p>Acervo Aberto das Normas da Anvisa • Processamento Determinístico de Grafo Regulatório</p>
+      <p class="text-[11px] text-slate-600">Dados obtidos via portal oficial AnvisaLegis / Datalegis • Atualização contínua via GitHub Actions</p>
+    </footer>
+
+  </main>
 
   <script>
-    const data = {
-      nodes: ${JSON.stringify(grafo.nodes)},
-      edges: ${JSON.stringify(grafo.edges)}
-    };
+    const graphData = ${JSON.stringify(grafo)};
+    const statsData = ${JSON.stringify(stats)};
 
     const CORES = {
-      RDC: '#3b82f6',
-      RE: '#06b6d4',
+      RDC: '#10b981',
+      RE: '#14b8a6',
       PORTARIA: '#f59e0b',
-      IN: '#a855f7',
+      IN: '#06b6d4',
       CPB: '#ec4899',
-      LEI_FEDERAL: '#10b981',
+      LEI_FEDERAL: '#22c55e',
+      DEP: '#3b82f6',
+      TAP: '#ef4444',
       OUTROS: '#64748b'
     };
 
-    function getNodeColor(node) {
-      return CORES[node.tipo] || CORES.OUTROS;
+    // Agrupamento diário de atos em novembro de 2026
+    const atosPorDiaMap = {};
+    graphData.nodes.filter(n => n.arquivo).forEach(n => {
+      const d = n.data_publicacao_dou || n.data_ato || '';
+      if (d) {
+        atosPorDiaMap[d] = (atosPorDiaMap[d] || 0) + 1;
+      }
+    });
+
+    // Montar o carrossel diário de Novembro (dias 01 a 13)
+    const carouselContainer = document.getElementById('daily-timeline-carousel');
+    const diasNovembro = [
+      { dia: '01', sem: 'Dom', data: '01/11/2026' },
+      { dia: '02', sem: 'Seg', data: '02/11/2026' },
+      { dia: '03', sem: 'Ter', data: '03/11/2026' },
+      { dia: '04', sem: 'Qua', data: '04/11/2026' },
+      { dia: '05', sem: 'Qui', data: '05/11/2026' },
+      { dia: '06', sem: 'Sex', data: '06/11/2026' },
+      { dia: '07', sem: 'Sáb', data: '07/11/2026' },
+      { dia: '08', sem: 'Dom', data: '08/11/2026' },
+      { dia: '09', sem: 'Seg', data: '09/11/2026' },
+      { dia: '10', sem: 'Ter', data: '10/11/2026' },
+      { dia: '11', sem: 'Qua', data: '11/11/2026' },
+      { dia: '12', sem: 'Qui', data: '12/11/2026' },
+      { dia: '13', sem: 'Sex', data: '13/11/2026' },
+    ];
+
+    let diaSelecionado = null;
+
+    function renderDailyTimeline() {
+      carouselContainer.innerHTML = diasNovembro.map(item => {
+        const qtd = atosPorDiaMap[item.data] || 0;
+        const isPeak = qtd >= 50;
+        const isActive = diaSelecionado === item.data;
+
+        return \`
+          <button 
+            onclick="filtrarPorDia('\${item.data}')" 
+            class="timeline-pill flex-1 min-w-[76px] p-2.5 rounded-xl border flex flex-col items-center justify-between text-center transition cursor-pointer \${
+              isActive 
+                ? 'active bg-emerald-500/25 border-emerald-400 text-white shadow-lg' 
+                : (qtd > 0 ? 'bg-[#081e15]/80 hover:bg-[#0c2a1e] border-emerald-500/20 text-slate-200' : 'bg-[#040e0a]/60 border-emerald-500/10 text-slate-500 opacity-60 hover:opacity-90')
+            }"
+          >
+            <span class="text-[10px] uppercase font-semibold text-slate-400">\${item.sem}</span>
+            <span class="text-base font-extrabold font-mono text-white my-0.5">\${item.dia}</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.2 rounded-full font-bold \${
+              isPeak ? 'bg-emerald-400 text-slate-950 neon-glow' :
+              (qtd > 0 ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-slate-800/40 text-slate-500')
+            }">
+              \${qtd} \${qtd === 1 ? 'ato' : 'atos'}
+            </span>
+          </button>
+        \`;
+      }).join('');
     }
 
-    // Parser robusto de datas brasileiras (DD/MM/AAAA, texto ou ISO)
-    function parseDateToIso(str) {
-      if (!str || typeof str !== 'string') return '';
-      const trimmed = str.trim();
-      const slashParts = trimmed.split('/');
-      if (slashParts.length === 3) {
-        const d = slashParts[0].padStart(2, '0');
-        const m = slashParts[1].padStart(2, '0');
-        const y = slashParts[2];
-        if (y.length === 4) return \`\${y}-\${m}-\${d}\`;
+    renderDailyTimeline();
+
+    // Filtros Globais
+    let termoBusca = '';
+    let tipoFiltro = 'ALL';
+    let statusFiltro = 'ALL';
+
+    function filtrarPorDia(data) {
+      if (diaSelecionado === data) {
+        diaSelecionado = null;
+      } else {
+        diaSelecionado = data;
       }
-      const meses = {
-        janeiro: '01', fevereiro: '02', março: '03', marco: '03',
-        abril: '04', maio: '05', junho: '06', julho: '07',
-        agosto: '08', setembro: '09', outubro: '10', novembro: '11', dezembro: '12'
-      };
-      const textualMatch = trimmed.match(/(\\d{1,2})\\s+de\\s+([a-zA-Zç]+)\\s+de\\s+(\\d{4})/i);
-      if (textualMatch) {
-        const dia = textualMatch[1].padStart(2, '0');
-        const mes = meses[textualMatch[2].toLowerCase()] || '01';
-        const ano = textualMatch[3];
-        return \`\${ano}-\${mes}-\${dia}\`;
-      }
-      const isoMatch = trimmed.match(/^(\\d{4})-(\\d{2})-(\\d{2})$/);
-      if (isoMatch) return trimmed;
-      return '';
+      renderDailyTimeline();
+      aplicarFiltros();
     }
 
-    const canvas = document.getElementById('graphCanvas');
+    document.getElementById('btn-ver-todos-dias').addEventListener('click', () => {
+      diaSelecionado = null;
+      renderDailyTimeline();
+      aplicarFiltros();
+    });
+
+    window.limparTodosFiltros = function() {
+      diaSelecionado = null;
+      termoBusca = '';
+      tipoFiltro = 'ALL';
+      statusFiltro = 'ALL';
+      document.getElementById('search-input').value = '';
+      document.querySelectorAll('.tipo-filter-btn').forEach(b => {
+        b.classList.remove('bg-emerald-500', 'text-slate-950');
+        b.classList.add('bg-[#092217]', 'text-slate-300');
+        if (b.dataset.tipo === 'ALL') {
+          b.classList.add('bg-emerald-500', 'text-slate-950');
+        }
+      });
+      renderDailyTimeline();
+      aplicarFiltros();
+    };
+
+    // Canvas & Grafo Engine
+    const canvas = document.getElementById('graph-canvas');
     const ctx = canvas.getContext('2d');
     let width, height;
 
-    function resize() {
+    function resizeCanvas() {
       width = canvas.parentElement.clientWidth;
       height = canvas.parentElement.clientHeight;
       canvas.width = width * window.devicePixelRatio;
       canvas.height = height * window.devicePixelRatio;
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
     }
-    resize();
-    window.addEventListener('resize', resize);
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-    const nodes = data.nodes.map((n, i) => {
-      const angle = (i / Math.max(1, data.nodes.length)) * Math.PI * 2;
-      const radius = 110 + Math.random() * 130;
-      return {
-        ...n,
-        x: (width / 2) + Math.cos(angle) * radius,
-        y: (height / 2) + Math.sin(angle) * radius,
-        vx: 0,
-        vy: 0,
-        radius: n.tipo === 'LEI_FEDERAL' ? 14 : (n.arquivo ? 11 : 7)
-      };
-    });
+    const nodes = graphData.nodes.map(n => ({
+      ...n,
+      x: width / 2 + (Math.random() - 0.5) * (width * 0.8),
+      y: height / 2 + (Math.random() - 0.5) * (height * 0.8),
+      vx: 0,
+      vy: 0,
+      radius: n.arquivo ? 7 : 4.5
+    }));
 
-    const nodeMap = new Map();
-    nodes.forEach(n => nodeMap.set(n.id, n));
+    const nodeMap = new Map(nodes.map(n => [n.id, n]));
+    const edges = graphData.edges
+      .map(e => ({
+        ...e,
+        sourceNode: nodeMap.get(e.source),
+        targetNode: nodeMap.get(e.target)
+      }))
+      .filter(e => e.sourceNode && e.targetNode);
 
-    const edges = data.edges.map(e => ({
-      ...e,
-      sourceNode: nodeMap.get(e.source),
-      targetNode: nodeMap.get(e.target)
-    })).filter(e => e.sourceNode && e.targetNode);
-
-    // Mapeamento de vizinhança rápida
     const adjacency = new Map();
     nodes.forEach(n => adjacency.set(n.id, new Set()));
     edges.forEach(e => {
@@ -405,49 +597,21 @@ const htmlContent = `<!DOCTYPE html>
     let dragNode = null;
     let lastMouse = { x: 0, y: 0 };
     let selectedNode = nodes[0] || null;
-    let isFocused = false;
+    let focusedNodeId = null;
     let filteredNodeIds = new Set(nodes.map(n => n.id));
-    let hasActiveFilter = false;
-    let hideFilteredNodes = true;
-
-    const toggleHideFiltered = document.getElementById('toggle-hide-filtered');
-    const btnClearFocus = document.getElementById('btn-clear-focus');
-    const graphVisibleCount = document.getElementById('graph-visible-count');
-
-    toggleHideFiltered.addEventListener('change', (e) => {
-      hideFilteredNodes = e.target.checked;
-    });
-
-    btnClearFocus.addEventListener('click', () => {
-      isFocused = false;
-      btnClearFocus.classList.add('hidden');
-    });
 
     function isNodeVisible(n) {
-      if (!hasActiveFilter) return true;
-      if (filteredNodeIds.has(n.id)) return true;
-      // Se não estiver no filtro direto, mas for referência de um nó visível:
-      if (!n.arquivo) {
-        const neighbors = adjacency.get(n.id) || new Set();
-        for (const neighborId of neighbors) {
-          if (filteredNodeIds.has(neighborId)) return true;
-        }
-      }
-      return !hideFilteredNodes;
+      return filteredNodeIds.has(n.id);
     }
 
-    function isNodeMatched(n) {
-      if (!hasActiveFilter) return true;
-      return filteredNodeIds.has(n.id) || (!n.arquivo && isNodeVisible(n));
-    }
-
+    // Step da física do grafo
     function stepPhysics() {
-      const repulsion = 1700;
-      const springLength = 80;
+      const repulsion = 1800;
+      const springLength = 85;
       const springK = 0.04;
       const damping = 0.85;
 
-      const visibleList = nodes.filter(n => isNodeVisible(n));
+      const visibleList = nodes.filter(isNodeVisible);
 
       for (let i = 0; i < visibleList.length; i++) {
         for (let j = i + 1; j < visibleList.length; j++) {
@@ -456,7 +620,7 @@ const htmlContent = `<!DOCTYPE html>
           let dx = n2.x - n1.x;
           let dy = n2.y - n1.y;
           let dist = Math.sqrt(dx * dx + dy * dy) || 1;
-          if (dist < 320) {
+          if (dist < 340) {
             let force = repulsion / (dist * dist);
             let fx = (dx / dist) * force;
             let fy = (dy / dist) * force;
@@ -498,138 +662,99 @@ const htmlContent = `<!DOCTYPE html>
       });
     }
 
+    // Render loop do Canvas
     function draw() {
+      stepPhysics();
+
       ctx.save();
       ctx.clearRect(0, 0, width, height);
+
+      // Fundo e grade sutil
       ctx.translate(transform.x, transform.y);
       ctx.scale(transform.scale, transform.scale);
 
-      const focusedNeighbors = (isFocused && selectedNode) ? adjacency.get(selectedNode.id) || new Set() : null;
-
       // Desenhar Arestas
       edges.forEach(e => {
-        const sourceVis = isNodeVisible(e.sourceNode);
-        const targetVis = isNodeVisible(e.targetNode);
+        if (!isNodeVisible(e.sourceNode) || !isNodeVisible(e.targetNode)) return;
 
-        if (!sourceVis || !targetVis) return;
-
-        const isEdgeConnectedToFocus = isFocused && selectedNode && (e.source === selectedNode.id || e.target === selectedNode.id);
-        const isMatched = (!hasActiveFilter || (filteredNodeIds.has(e.source) && filteredNodeIds.has(e.target)));
-
-        ctx.save();
-        if (isFocused) {
-          ctx.globalAlpha = isEdgeConnectedToFocus ? 1.0 : 0.08;
-        } else {
-          ctx.globalAlpha = isMatched ? 1.0 : (hideFilteredNodes ? 0 : 0.15);
-        }
-
+        const isRelated = focusedNodeId && (e.source === focusedNodeId || e.target === focusedNodeId);
         ctx.beginPath();
         ctx.moveTo(e.sourceNode.x, e.sourceNode.y);
         ctx.lineTo(e.targetNode.x, e.targetNode.y);
-        ctx.strokeStyle = e.relacao === 'revogada_por' ? 'rgba(244, 63, 94, 0.6)' :
-                          e.relacao === 'baseada_em' ? 'rgba(16, 185, 129, 0.5)' :
-                          'rgba(148, 163, 184, 0.35)';
-        ctx.lineWidth = isEdgeConnectedToFocus ? 2.5 : (e.relacao === 'revogada_por' ? 2 : 1.2);
-        ctx.stroke();
-        ctx.restore();
-      });
 
-      let visibleNodesCount = 0;
+        if (isRelated) {
+          ctx.strokeStyle = '#00ff87';
+          ctx.lineWidth = 2.2;
+        } else {
+          ctx.strokeStyle = 'rgba(16, 185, 129, 0.16)';
+          ctx.lineWidth = 1;
+        }
+        ctx.stroke();
+      });
 
       // Desenhar Nós
       nodes.forEach(n => {
         if (!isNodeVisible(n)) return;
-        visibleNodesCount++;
 
         const isSelected = selectedNode && selectedNode.id === n.id;
-        const isNeighborOfSelected = focusedNeighbors && focusedNeighbors.has(n.id);
-        const isMatched = isNodeMatched(n);
-
-        ctx.save();
-
-        if (isFocused) {
-          ctx.globalAlpha = (isSelected || isNeighborOfSelected) ? 1.0 : 0.12;
-        } else {
-          ctx.globalAlpha = isMatched ? 1.0 : (hideFilteredNodes ? 0 : 0.18);
-        }
+        const isFocused = focusedNodeId && focusedNodeId === n.id;
+        const isNeighbor = focusedNodeId && adjacency.get(focusedNodeId)?.has(n.id);
 
         ctx.beginPath();
-        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-        ctx.fillStyle = getNodeColor(n);
+        const r = isSelected || isFocused ? n.radius * 1.7 : n.radius;
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+
+        const baseColor = CORES[n.tipo] || CORES.OUTROS;
+        ctx.fillStyle = baseColor;
         ctx.fill();
 
-        if (isSelected) {
+        if (isSelected || isFocused) {
+          ctx.strokeStyle = '#00ff87';
           ctx.lineWidth = 3;
-          ctx.strokeStyle = '#38bdf8';
           ctx.stroke();
 
-          ctx.beginPath();
-          ctx.arc(n.x, n.y, n.radius + 5, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(56, 189, 248, 0.5)';
+          // Glow no nó selecionado
+          ctx.shadowColor = '#00ff87';
+          ctx.shadowBlur = 15;
+        } else if (isNeighbor) {
+          ctx.strokeStyle = '#34d399';
           ctx.lineWidth = 2;
-          ctx.stroke();
-        } else if (isNeighborOfSelected) {
-          ctx.lineWidth = 2;
-          ctx.strokeStyle = '#38bdf8';
           ctx.stroke();
         } else {
-          ctx.lineWidth = 1.5;
-          ctx.strokeStyle = '#0f172a';
-          ctx.stroke();
+          ctx.strokeStyle = 'rgba(4, 14, 10, 0.8)';
+          ctx.lineWidth = 1;
+          ctx.shadowBlur = 0;
         }
 
-        // Rótulo de texto
-        if (!isFocused || isSelected || isNeighborOfSelected) {
-          ctx.font = isSelected ? 'bold 11px system-ui' : '10px system-ui';
-          ctx.fillStyle = isSelected ? '#38bdf8' : (isMatched ? '#cbd5e1' : '#64748b');
-          ctx.textAlign = 'center';
-          ctx.fillText(n.id, n.x, n.y + n.radius + 12);
+        // Rótulo de texto para nós importantes ou selecionados
+        if (isSelected || isFocused || isNeighbor || n.tipo === 'RDC' || (transform.scale > 1.3 && n.arquivo)) {
+          ctx.font = '10px Plus Jakarta Sans, sans-serif';
+          ctx.fillStyle = isSelected || isFocused ? '#00ff87' : '#e2e8f0';
+          ctx.fillText(n.id, n.x + r + 4, n.y + 3);
         }
-
-        ctx.restore();
       });
 
-      graphVisibleCount.textContent = \`(\${visibleNodesCount} nós visíveis)\`;
       ctx.restore();
+      requestAnimationFrame(draw);
     }
+    requestAnimationFrame(draw);
 
-    function loop() {
-      stepPhysics();
-      draw();
-      requestAnimationFrame(loop);
-    }
-    loop();
-
-    // Eventos do Canvas
-    function getMousePos(e) {
-      const rect = canvas.getBoundingClientRect();
-      const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-      const clientY = e.clientY || (e.touches && e.touches[0].clientY);
-      return {
-        x: (clientX - rect.left - transform.x) / transform.scale,
-        y: (clientY - rect.top - transform.y) / transform.scale
-      };
-    }
-
+    // Eventos do Canvas (Pan & Zoom)
     canvas.addEventListener('mousedown', e => {
-      const pos = getMousePos(e);
-      let clicked = null;
-      for (let i = nodes.length - 1; i >= 0; i--) {
-        const n = nodes[i];
-        if (!isNodeVisible(n)) continue;
-        const dist = Math.hypot(n.x - pos.x, n.y - pos.y);
-        if (dist <= n.radius + 5) {
-          clicked = n;
-          break;
-        }
-      }
+      const rect = canvas.getBoundingClientRect();
+      const mx = (e.clientX - rect.left - transform.x) / transform.scale;
+      const my = (e.clientY - rect.top - transform.y) / transform.scale;
+
+      const clicked = nodes.find(n => {
+        if (!isNodeVisible(n)) return false;
+        const dx = n.x - mx;
+        const dy = n.y - my;
+        return Math.sqrt(dx * dx + dy * dy) <= (n.radius + 5);
+      });
 
       if (clicked) {
         dragNode = clicked;
-        selectedNode = clicked;
-        isFocused = true;
-        btnClearFocus.classList.remove('hidden');
-        updateDetails(clicked);
+        selecionarNo(clicked);
       } else {
         isDragging = true;
         lastMouse = { x: e.clientX, y: e.clientY };
@@ -638,16 +763,12 @@ const htmlContent = `<!DOCTYPE html>
 
     window.addEventListener('mousemove', e => {
       if (dragNode) {
-        const pos = getMousePos(e);
-        dragNode.x = pos.x;
-        dragNode.y = pos.y;
-        dragNode.vx = 0;
-        dragNode.vy = 0;
+        const rect = canvas.getBoundingClientRect();
+        dragNode.x = (e.clientX - rect.left - transform.x) / transform.scale;
+        dragNode.y = (e.clientY - rect.top - transform.y) / transform.scale;
       } else if (isDragging) {
-        const dx = e.clientX - lastMouse.x;
-        const dy = e.clientY - lastMouse.y;
-        transform.x += dx;
-        transform.y += dy;
+        transform.x += (e.clientX - lastMouse.x);
+        transform.y += (e.clientY - lastMouse.y);
         lastMouse = { x: e.clientX, y: e.clientY };
       }
     });
@@ -659,403 +780,240 @@ const htmlContent = `<!DOCTYPE html>
 
     canvas.addEventListener('wheel', e => {
       e.preventDefault();
-      const zoomFactor = e.deltaY < 0 ? 1.12 : 0.88;
-      const pos = getMousePos(e);
-      transform.x = pos.x * (1 - zoomFactor) + transform.x * zoomFactor;
-      transform.y = pos.y * (1 - zoomFactor) + transform.y * zoomFactor;
-      transform.scale *= zoomFactor;
-      transform.scale = Math.max(0.2, Math.min(3.5, transform.scale));
-    }, { passive: false });
+      const zoomFactor = e.deltaY < 0 ? 1.12 : 0.89;
+      transform.scale = Math.max(0.3, Math.min(4.5, transform.scale * zoomFactor));
+    });
 
     document.getElementById('btn-zoom-in').addEventListener('click', () => {
-      transform.scale = Math.min(3.5, transform.scale * 1.25);
+      transform.scale = Math.min(4.5, transform.scale * 1.25);
     });
     document.getElementById('btn-zoom-out').addEventListener('click', () => {
-      transform.scale = Math.max(0.2, transform.scale * 0.8);
+      transform.scale = Math.max(0.3, transform.scale * 0.8);
     });
-    document.getElementById('btn-reset').addEventListener('click', () => {
+    document.getElementById('btn-reset-view').addEventListener('click', () => {
       transform = { x: 0, y: 0, scale: 1 };
-      isFocused = false;
-      btnClearFocus.classList.add('hidden');
+      focusedNodeId = null;
+      document.getElementById('btn-clear-focus').classList.add('hidden');
+    });
+    document.getElementById('btn-clear-focus').addEventListener('click', () => {
+      focusedNodeId = null;
+      document.getElementById('btn-clear-focus').classList.add('hidden');
     });
 
-    // Detalhes da Norma
-    const detailsPane = document.getElementById('details-pane');
+    // Função de Seleção e Atualização de Inspetor
+    function selecionarNo(node) {
+      selectedNode = node;
+      focusedNodeId = node.id;
+      document.getElementById('btn-clear-focus').classList.remove('hidden');
 
-    function updateDetails(node) {
-      if (!node) return;
-      const relsOrigem = edges.filter(e => e.source === node.id);
-      const relsDestino = edges.filter(e => e.target === node.id);
+      const badgeSituacao = document.getElementById('selected-badge-situacao');
+      badgeSituacao.textContent = node.situacao || 'vigente';
+      if (node.situacao === 'revogada') {
+        badgeSituacao.className = 'text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30';
+      } else {
+        badgeSituacao.className = 'text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+      }
 
-      const githubUrl = node.arquivo ? \`https://github.com/jadsonsanches/anvisa-normas/blob/main/\${node.arquivo}\` : null;
+      const vizinhos = Array.from(adjacency.get(node.id) || []);
 
-      let corBadge = 'bg-slate-800 text-slate-300 border-slate-700';
-      if (node.tipo === 'RDC') corBadge = 'bg-blue-500/20 text-blue-300 border-blue-500/30';
-      if (node.tipo === 'RE') corBadge = 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30';
-      if (node.tipo === 'PORTARIA') corBadge = 'bg-amber-500/20 text-amber-300 border-amber-500/30';
-      if (node.tipo === 'IN') corBadge = 'bg-purple-500/20 text-purple-300 border-purple-500/30';
-      if (node.tipo === 'CPB') corBadge = 'bg-pink-500/20 text-pink-300 border-pink-500/30';
-      if (node.tipo === 'LEI_FEDERAL') corBadge = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
-
-      detailsPane.innerHTML = \`
+      const content = document.getElementById('inspector-content');
+      content.innerHTML = \`
         <div class="space-y-3">
-          <div class="flex items-start justify-between gap-2 border-b border-slate-800 pb-2.5">
-            <div>
-              <span class="text-xs font-semibold px-2 py-0.5 rounded border \${corBadge}">\${node.tipo}</span>
-              <h3 class="text-base font-bold text-slate-100 mt-1.5">\${node.id}</h3>
-            </div>
-            \${node.situacao ? \`
-              <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded \${
-                node.situacao === 'vigente' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
-                node.situacao === 'revogada' ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' :
-                node.situacao === 'externa' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' :
-                node.situacao === 'pendente_coleta' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' :
-                'bg-slate-800 text-slate-400 border border-slate-700'
-              }">\${
-                node.situacao === 'pendente_coleta' ? 'Pendente de Coleta' :
-                node.situacao === 'externa' ? 'Legislação Federal' :
-                node.situacao
-              }</span>
-            \` : ''}
-          </div>
-
-          <!-- Datas Jurídicas -->
-          <div class="grid grid-cols-2 gap-2 text-[11px] bg-slate-900/80 p-2.5 rounded border border-slate-800">
-            <div>
-              <span class="text-slate-500 font-medium block text-[10px] uppercase">Data / Ano:</span>
-              <strong class="text-cyan-300 font-semibold">\${node.data_ato || node.data_promulgacao || (node.ano ? \`Ano \${node.ano}\` : 'N/D')}</strong>
-            </div>
-            <div>
-              <span class="text-slate-500 font-medium block text-[10px] uppercase">Publicação / DOU:</span>
-              <strong class="text-slate-200 font-semibold">\${node.data_publicacao_dou || (node.situacao === 'externa' ? 'Congresso Nacional' : (node.situacao === 'pendente_coleta' ? 'Aguardando raspagem' : 'N/D'))}</strong>
+          <div>
+            <h4 class="text-base font-bold text-white tracking-wide">\${node.id}</h4>
+            <div class="flex items-center gap-2 text-slate-400 text-[11px] mt-0.5">
+              <span>📅 \${node.data_ato || node.ano || 'Ano N/D'}</span>
+              \${node.data_publicacao_dou ? \`<span class="text-emerald-400 font-mono">DOU: \${node.data_publicacao_dou}</span>\` : ''}
+              <span class="px-1.5 py-0.2 rounded bg-slate-800 text-slate-300 font-mono">\${node.tipo}</span>
             </div>
           </div>
-
-          \${node.situacao === 'pendente_coleta' ? \`
-            <div class="text-[11px] text-amber-300/90 bg-amber-500/10 border border-amber-500/20 rounded p-2 flex items-start gap-1.5">
-              <span>⏳</span>
-              <div>Esta norma foi citada oficialmente no acervo, mas seu texto integral de <strong>\${node.ano || ''}</strong> será sincronizado nas próximas rodadas do scraper.</div>
-            </div>
-          \` : ''}
-          \${node.situacao === 'externa' ? \`
-            <div class="text-[11px] text-emerald-300/90 bg-emerald-500/10 border border-emerald-500/20 rounded p-2 flex items-start gap-1.5">
-              <span>🏛️</span>
-              <div>Legislação Federal externa (Congresso Nacional / Planalto) citada como base legal de competência da Anvisa.</div>
-            </div>
-          \` : ''}
 
           \${node.ementa ? \`
-            <div class="text-xs text-slate-300 leading-relaxed bg-slate-900/60 p-2.5 rounded border border-slate-800/80">
-              <span class="font-semibold text-slate-400 block mb-1">Ementa Oficial:</span>
-              \${node.ementa}
+            <div class="bg-[#05140d] p-3 rounded-xl border border-emerald-500/20 space-y-1">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400/80">Ementa Oficial:</span>
+              <p class="text-slate-300 text-xs leading-relaxed">\${node.ementa}</p>
             </div>
-          \` : '<div class="text-xs text-slate-500 italic">Norma de referência externa citada no acervo.</div>'}
+          \` : ''}
 
-          \${githubUrl ? \`
-            <div class="pt-1 flex items-center justify-between">
-              <span class="text-[11px] text-slate-400 font-mono text-[10px] truncate max-w-[200px]">\${node.arquivo}</span>
-              <a href="\${githubUrl}" target="_blank" class="px-2.5 py-1 bg-blue-600/30 hover:bg-blue-600/50 text-blue-300 rounded text-[11px] border border-blue-500/40 font-medium transition flex items-center gap-1">
-                <span>Ver Markdown</span> ↗
+          <!-- Conexões Diretas -->
+          <div class="space-y-1.5 pt-1">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400/80 flex items-center justify-between">
+              <span>Relações no Grafo:</span>
+              <span class="font-mono text-white">\${vizinhos.length}</span>
+            </span>
+            <div class="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto pr-1">
+              \${vizinhos.length > 0 ? vizinhos.map(v => \`
+                <button onclick="selecionarPorId('\${v}')" class="px-2 py-1 rounded-lg bg-[#082016] hover:bg-emerald-900/60 text-emerald-300 border border-emerald-500/30 text-[11px] font-mono transition">
+                  \${v}
+                </button>
+              \`).join('') : '<span class="text-slate-500 italic">Nenhuma relação direta identificada.</span>'}
+            </div>
+          </div>
+
+          \${node.arquivo ? \`
+            <div class="pt-2 border-t border-emerald-500/15 flex items-center justify-between">
+              <span class="text-[11px] text-slate-400 font-mono truncate max-w-[200px]">\${node.arquivo}</span>
+              <a href="https://github.com/jadsonsanches/anvisa-normas/blob/main/\${node.arquivo.replace(/\\\\/g, '/')}" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-[11px] font-semibold transition">
+                Ver Markdown ↗
               </a>
             </div>
           \` : ''}
-
-          <!-- Relações -->
-          <div class="space-y-2 pt-2 border-t border-slate-800 text-xs">
-            <div class="font-semibold text-slate-300">Conexões no Grafo (\${relsOrigem.length + relsDestino.length})</div>
-            
-            \${relsOrigem.length > 0 ? \`
-              <div>
-                <span class="text-[11px] text-slate-400 block mb-1">Vinculado a:</span>
-                <div class="flex flex-wrap gap-1">
-                  \${relsOrigem.map(r => \`
-                    <button onclick="selectNodeById('\${r.target}')" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-[11px] border border-slate-700 transition">
-                      \${r.relacao} → \${r.target}
-                    </button>
-                  \`).join('')}
-                </div>
-              </div>
-            \` : ''}
-
-            \${relsDestino.length > 0 ? \`
-              <div>
-                <span class="text-[11px] text-slate-400 block mb-1">Citado por:</span>
-                <div class="flex flex-wrap gap-1">
-                  \${relsDestino.map(r => \`
-                    <button onclick="selectNodeById('\${r.source}')" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-[11px] border border-slate-700 transition">
-                      ← \${r.source}
-                    </button>
-                  \`).join('')}
-                </div>
-              </div>
-            \` : ''}
-          </div>
         </div>
       \`;
     }
 
-    window.selectNodeById = function(id) {
-      const target = nodeMap.get(id);
+    window.selecionarPorId = function(id) {
+      const target = nodes.find(n => n.id === id);
       if (target) {
-        selectedNode = target;
-        isFocused = true;
-        btnClearFocus.classList.remove('hidden');
-        updateDetails(target);
-        transform.x = (width / 2) - target.x * transform.scale;
-        transform.y = (height / 2) - target.y * transform.scale;
+        selecionarNo(target);
       }
     };
 
-    // Filtros e busca
+    // Filtros e Renderização da Lista de Normas
+    const normsContainer = document.getElementById('norms-list-container');
     const searchInput = document.getElementById('search-input');
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const statusBtns = document.querySelectorAll('.status-btn');
-    const countFiltered = document.getElementById('count-filtered');
-    const dateStartInput = document.getElementById('date-start');
-    const dateEndInput = document.getElementById('date-end');
-    const btnLimparDatas = document.getElementById('btn-limpar-datas');
-    const presetBtns = document.querySelectorAll('.preset-btn');
 
-    let currentTipoFilter = 'ALL';
-    let currentStatusFilter = 'ALL';
-
-    function renderList() {
-      const q = searchInput.value.toLowerCase().trim();
-      const startDate = dateStartInput.value;
-      const endDate = dateEndInput.value;
-
-      hasActiveFilter = q.length > 0 || currentTipoFilter !== 'ALL' || currentStatusFilter !== 'ALL' || !!startDate || !!endDate;
+    function aplicarFiltros() {
+      const q = termoBusca.toLowerCase().trim();
 
       const filtered = nodes.filter(n => {
-        if (currentTipoFilter !== 'ALL' && n.tipo !== currentTipoFilter) return false;
-        if (currentStatusFilter !== 'ALL' && n.situacao !== currentStatusFilter) return false;
-
-        // Filtro por período de datas
-        if (startDate || endDate) {
-          const atoIso = parseDateToIso(n.data_ato);
-          const douIso = parseDateToIso(n.data_publicacao_dou);
-          const refDate = douIso || atoIso;
-
-          if (startDate && refDate && refDate < startDate) return false;
-          if (endDate && refDate && refDate > endDate) return false;
-          if (!refDate && n.ano) {
-            if (startDate && startDate.substring(0, 4) > n.ano) return false;
-            if (endDate && endDate.substring(0, 4) < n.ano) return false;
-          }
-          if (!refDate && !n.ano) return false;
+        // Filtro por dia
+        if (diaSelecionado) {
+          const matchData = (n.data_publicacao_dou === diaSelecionado) || (n.data_ato === diaSelecionado);
+          if (!matchData) return false;
         }
 
-        // Filtro textual
-        if (!q) return true;
-        const inId = n.id.toLowerCase().includes(q);
-        const inEmenta = n.ementa && n.ementa.toLowerCase().includes(q);
-        const inAno = n.ano && n.ano.includes(q);
-        const inDataAto = n.data_ato && n.data_ato.includes(q);
-        const inDataDou = n.data_publicacao_dou && n.data_publicacao_dou.includes(q);
+        // Filtro por tipo
+        if (tipoFiltro !== 'ALL' && n.tipo !== tipoFiltro) {
+          return false;
+        }
 
-        return inId || inEmenta || inAno || inDataAto || inDataDou;
+        // Filtro por busca de texto
+        if (q) {
+          const inId = n.id.toLowerCase().includes(q);
+          const inEmenta = n.ementa && n.ementa.toLowerCase().includes(q);
+          const inAno = n.ano && n.ano.includes(q);
+          const inDataAto = n.data_ato && n.data_ato.includes(q);
+          const inDataDou = n.data_publicacao_dou && n.data_publicacao_dou.includes(q);
+          if (!inId && !inEmenta && !inAno && !inDataAto && !inDataDou) return false;
+        }
+
+        return true;
       });
 
       filteredNodeIds = new Set(filtered.map(n => n.id));
-      countFiltered.textContent = \`\${filtered.length} de \${nodes.length} nós\`;
+      document.getElementById('count-filtered').textContent = \`\${filtered.length} de \${nodes.length} nós\`;
 
-      if (hasActiveFilter) {
-        detailsPane.innerHTML = filtered.map(n => \`
-          <div onclick="selectNodeById('\${n.id}')" class="bg-slate-950 hover:bg-slate-800/80 border border-slate-800/90 rounded-lg p-2.5 cursor-pointer transition space-y-1.5">
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-xs text-slate-200">\${n.id}</span>
-              <span class="text-[9px] uppercase px-1.5 py-0.2 rounded \${
-                n.situacao === 'vigente' ? 'bg-emerald-500/20 text-emerald-400' :
-                n.situacao === 'revogada' ? 'bg-rose-500/20 text-rose-400' :
-                n.situacao === 'externa' ? 'bg-emerald-500/20 text-emerald-300' :
-                n.situacao === 'pendente_coleta' ? 'bg-amber-500/20 text-amber-300' :
-                'bg-slate-800 text-slate-400'
-              }">\${
-                n.situacao === 'pendente_coleta' ? 'Pendente de Coleta' :
-                n.situacao === 'externa' ? 'Legislação Federal' :
-                n.situacao
-              }</span>
-            </div>
-            <div class="flex items-center justify-between text-[10px] text-slate-400">
-              <span>📅 Ano: \${n.ano || 'N/D'}\${n.data_ato ? ' (' + n.data_ato + ')' : ''}</span>
-              \${n.data_publicacao_dou ? \`<span>DOU: \${n.data_publicacao_dou}</span>\` : (n.arquivo ? '' : '<span class="italic text-slate-500">Citação oficial</span>')}
-            </div>
-            \${n.ementa ? \`<p class="text-[11px] text-slate-400 line-clamp-2 leading-tight">\${n.ementa}</p>\` : ''}
-          </div>
-        \`).join('') || '<div class="text-xs text-slate-500 text-center py-8">Nenhuma norma encontrada para os filtros ativos.</div>';
-      } else if (selectedNode) {
-        updateDetails(selectedNode);
+      const listStatus = document.getElementById('list-status-badge');
+      if (diaSelecionado) {
+        listStatus.textContent = \`Exibindo \${filtered.length} atos de \${diaSelecionado}\`;
+      } else {
+        listStatus.textContent = \`Exibindo \${filtered.length} atos\`;
       }
+
+      // Renderizar itens na lista
+      if (filtered.length === 0) {
+        normsContainer.innerHTML = \`
+          <div class="text-xs text-slate-500 text-center py-8 bg-[#05140d] rounded-xl border border-emerald-500/10">
+            Nenhuma norma encontrada para os filtros selecionados.
+          </div>
+        \`;
+        return;
+      }
+
+      normsContainer.innerHTML = filtered.slice(0, 100).map(n => \`
+        <div onclick="selecionarPorId('\${n.id}')" class="p-3 rounded-xl bg-[#061810]/90 hover:bg-[#0a261a] border border-emerald-500/20 cursor-pointer transition space-y-1.5 group">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-xs text-white group-hover:text-emerald-300 font-mono transition">\${n.id}</span>
+            <span class="text-[9px] uppercase font-bold px-2 py-0.5 rounded-full \${
+              n.situacao === 'revogada' ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+            }">\${n.situacao || 'vigente'}</span>
+          </div>
+          <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono">
+            <span>📅 \${n.data_ato || n.ano || 'N/D'}</span>
+            \${n.data_publicacao_dou ? \`<span class="text-emerald-400 font-bold">DOU: \${n.data_publicacao_dou}</span>\` : ''}
+          </div>
+          \${n.ementa ? \`<p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">\${n.ementa}</p>\` : ''}
+        </div>
+      \`).join('');
     }
 
-    searchInput.addEventListener('input', renderList);
-    dateStartInput.addEventListener('input', renderList);
-    dateEndInput.addEventListener('input', renderList);
-
-    btnLimparDatas.addEventListener('click', () => {
-      dateStartInput.value = '';
-      dateEndInput.value = '';
-      renderList();
+    searchInput.addEventListener('input', e => {
+      termoBusca = e.target.value;
+      aplicarFiltros();
     });
 
-    presetBtns.forEach(btn => {
+    // Filtros por Tipo de Ato
+    document.querySelectorAll('.tipo-filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const mode = btn.dataset.mode;
-        if (mode === 'all') {
-          dateStartInput.value = '';
-          dateEndInput.value = '';
-        } else if (mode === 'week') {
-          const now = new Date();
-          const past = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-          dateEndInput.value = now.toISOString().split('T')[0];
-          dateStartInput.value = past.toISOString().split('T')[0];
-        } else {
-          dateStartInput.value = \`\${mode}-01-01\`;
-          dateEndInput.value = \`\${mode}-12-31\`;
-        }
-        renderList();
-      });
-    });
-
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => {
-          b.classList.remove('bg-blue-600', 'text-white');
-          b.classList.add('bg-slate-800', 'text-slate-300');
+        document.querySelectorAll('.tipo-filter-btn').forEach(b => {
+          b.classList.remove('bg-emerald-500', 'text-slate-950');
+          b.classList.add('bg-[#092217]', 'text-slate-300');
         });
-        btn.classList.remove('bg-slate-800', 'text-slate-300');
-        btn.classList.add('bg-blue-600', 'text-white');
-        currentTipoFilter = btn.dataset.tipo;
-        renderList();
+        btn.classList.remove('bg-[#092217]', 'text-slate-300');
+        btn.classList.add('bg-emerald-500', 'text-slate-950');
+        tipoFiltro = btn.dataset.tipo;
+        aplicarFiltros();
       });
     });
 
-    statusBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        statusBtns.forEach(b => {
-          b.classList.remove('bg-slate-700', 'text-white');
-          b.classList.add('bg-slate-900', 'text-slate-400');
-        });
-        btn.classList.remove('bg-slate-900', 'text-slate-400');
-        btn.classList.add('bg-slate-700', 'text-white');
-        currentStatusFilter = btn.dataset.status;
-        renderList();
-      });
-    });
-
-    // Construção dos Gráficos Interativos (SVG Analytics)
-    function buildCharts() {
-      // 1. Donut Chart por Tipo
+    // Construção do Donut Chart SVG
+    function buildDonutChart() {
       const tiposCount = {};
       nodes.filter(n => n.arquivo).forEach(n => {
         tiposCount[n.tipo] = (tiposCount[n.tipo] || 0) + 1;
       });
 
-      const totalNormasLocais = Object.values(tiposCount).reduce((a, b) => a + b, 0) || 1;
-      let cumulativePercent = 0;
+      const total = Object.values(tiposCount).reduce((a, b) => a + b, 0) || 1;
+      let acc = 0;
 
       const slices = Object.entries(tiposCount).map(([tipo, count]) => {
-        const percent = count / totalNormasLocais;
-        const start = cumulativePercent;
-        cumulativePercent += percent;
-        return { tipo, count, percent, start, end: cumulativePercent, color: CORES[tipo] || '#64748b' };
+        const pct = count / total;
+        const start = acc;
+        acc += pct;
+        return { tipo, count, pct, start, end: acc, color: CORES[tipo] || '#64748b' };
       });
 
-      const donutSvg = \`
-        <svg viewBox="0 0 100 100" class="w-24 h-24 transform -rotate-90">
+      const svg = \`
+        <svg viewBox="0 0 100 100" class="w-20 h-20 transform -rotate-90 shrink-0">
           \${slices.map(s => {
-            const startAngle = s.start * 2 * Math.PI;
-            const endAngle = s.end * 2 * Math.PI;
-            const x1 = 50 + 40 * Math.cos(startAngle);
-            const y1 = 50 + 40 * Math.sin(startAngle);
-            const x2 = 50 + 40 * Math.cos(endAngle);
-            const y2 = 50 + 40 * Math.sin(endAngle);
+            const a1 = s.start * 2 * Math.PI;
+            const a2 = s.end * 2 * Math.PI;
+            const x1 = 50 + 40 * Math.cos(a1);
+            const y1 = 50 + 40 * Math.sin(a1);
+            const x2 = 50 + 40 * Math.cos(a2);
+            const y2 = 50 + 40 * Math.sin(a2);
             const largeArc = (s.end - s.start) > 0.5 ? 1 : 0;
-            const d = s.percent >= 0.999 ? 'M 50 10 A 40 40 0 1 1 49.99 10 Z' :
+            const d = s.pct >= 0.999 ? 'M 50 10 A 40 40 0 1 1 49.99 10 Z' :
                       \`M \${x1} \${y1} A 40 40 0 \${largeArc} 1 \${x2} \${y2}\`;
-            return \`<path d="\${d}" fill="none" stroke="\${s.color}" stroke-width="18" class="donut-segment cursor-pointer transition" data-tipo="\${s.tipo}">
-              <title>\${s.tipo}: \${s.count} (\${Math.round(s.percent * 100)}%)</title>
+            return \`<path d="\${d}" fill="none" stroke="\${s.color}" stroke-width="16" class="donut-segment cursor-pointer transition">
+              <title>\${s.tipo}: \${s.count} (\${Math.round(s.pct * 100)}%)</title>
             </path>\`;
           }).join('')}
         </svg>
-        <div class="space-y-1 text-xs">
-          \${slices.map(s => \`
-            <div class="flex items-center gap-1.5 cursor-pointer hover:opacity-80 transition" onclick="triggerTipoFilter('\${s.tipo}')">
-              <span class="w-2.5 h-2.5 rounded-full" style="background-color: \${s.color}"></span>
+        <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
+          \${slices.slice(0, 4).map(s => \`
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full" style="background-color: \${s.color}"></span>
               <span class="text-slate-300 font-medium">\${s.tipo}:</span>
-              <strong class="text-slate-100">\${s.count}</strong>
-              <span class="text-[10px] text-slate-500">(\${Math.round(s.percent * 100)}%)</span>
+              <strong class="text-white font-mono">\${s.count}</strong>
             </div>
           \`).join('')}
         </div>
       \`;
-      document.getElementById('donut-container').innerHTML = donutSvg;
-
-      // 2. Timeline de Publicações por Mês/Ano
-      const mesesMap = {};
-      nodes.filter(n => n.arquivo).forEach(n => {
-        const iso = parseDateToIso(n.data_publicacao_dou || n.data_ato);
-        const mesAno = iso ? iso.substring(0, 7) : (n.ano ? \`\${n.ano}-01\` : '2026-11');
-        mesesMap[mesAno] = (mesesMap[mesAno] || 0) + 1;
-      });
-
-      const mesesSorted = Object.keys(mesesMap).sort();
-      const maxCount = Math.max(1, ...Object.values(mesesMap));
-
-      const timelineHtml = mesesSorted.map(mes => {
-        const count = mesesMap[mes];
-        const heightPct = Math.max(15, Math.round((count / maxCount) * 100));
-        const [ano, m] = mes.split('-');
-        const nomesMes = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-        const label = m ? \`\${nomesMes[parseInt(m, 10)-1] || m}/\${ano.slice(2)}\` : mes;
-        return \`
-          <div class="flex-1 flex flex-col items-center gap-1 group cursor-pointer" onclick="filterByMonth('\${mes}')">
-            <span class="text-[9px] text-cyan-300 font-bold opacity-0 group-hover:opacity-100 transition">\${count}</span>
-            <div class="w-full bg-gradient-to-t from-blue-600 to-cyan-400 rounded-t chart-bar transition-all" style="height: \${heightPct}%" title="\${mes}: \${count} atos"></div>
-            <span class="text-[9px] text-slate-400 group-hover:text-cyan-300 transition truncate w-full text-center">\${label}</span>
-          </div>
-        \`;
-      }).join('');
-      document.getElementById('timeline-container').innerHTML = timelineHtml || '<div class="text-xs text-slate-500 m-auto">Sem datas suficientes</div>';
-
-      // 3. Contadores de Rede
-      const locais = nodes.filter(n => n.arquivo).length;
-      const refNodes = nodes.filter(n => !n.arquivo).length;
-      const revogacoes = edges.filter(e => e.relacao === 'revogada_por').length;
-
-      document.getElementById('metric-local-nodes').textContent = locais;
-      document.getElementById('metric-ref-nodes').textContent = refNodes;
-      document.getElementById('metric-revogacoes').textContent = revogacoes;
-
-      // Eventos dos segmentos do Donut
-      document.querySelectorAll('.donut-segment').forEach(seg => {
-        seg.addEventListener('click', () => {
-          triggerTipoFilter(seg.dataset.tipo);
-        });
-      });
+      document.getElementById('donut-container').innerHTML = svg;
     }
+    buildDonutChart();
 
-    window.triggerTipoFilter = function(tipo) {
-      filterBtns.forEach(btn => {
-        if (btn.dataset.tipo === tipo) {
-          btn.click();
-        }
-      });
+    window.scrollToSection = function(id) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     };
 
-    window.filterByMonth = function(mesAno) {
-      dateStartInput.value = \`\${mesAno}-01\`;
-      const [ano, mes] = mesAno.split('-');
-      const lastDay = new Date(parseInt(ano, 10), parseInt(mes, 10), 0).getDate();
-      dateEndInput.value = \`\${mesAno}-\${lastDay}\`;
-      renderList();
-    };
-
-    buildCharts();
-
-    // Iniciar com o primeiro nó selecionado
-    updateDetails(selectedNode);
-    renderList();
+    // Inicialização
+    if (nodes.length > 0) {
+      selecionarNo(nodes[0]);
+    }
+    aplicarFiltros();
   </script>
 </body>
 </html>
@@ -1064,4 +1022,4 @@ const htmlContent = `<!DOCTYPE html>
 // Salvar no repositório (visualizador.html e index.html para o GitHub Pages)
 fs.writeFileSync(path.join(__dirname, '../visualizador.html'), htmlContent, 'utf8');
 fs.writeFileSync(path.join(__dirname, '../index.html'), htmlContent, 'utf8');
-console.log('✅ Visualizador e index.html gerados com sucesso!');
+console.log('✅ Novo visualizador Dark Emerald AI gerado com sucesso em visualizador.html e index.html!');
