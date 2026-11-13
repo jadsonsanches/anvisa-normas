@@ -1,0 +1,72 @@
+# ==============================================================================
+# GitHub CODEOWNERS - anvisa-normas
+# ==============================================================================
+# Este arquivo define os responsáveis (code owners) pelo repositório e por
+# caminhos específicos dentro do projeto.
+#
+# COMO FUNCIONA:
+# 1. Quando um Pull Request altera arquivos monitorados por um padrão abaixo,
+#    os responsáveis listados são automaticamente adicionados como revisores.
+# 2. Quando a proteção de branch (Branch Protection / Rulesets) exige
+#    "Require review from Code Owners", o merge do PR é bloqueado até que
+#    pelo menos um proprietário aprove a alteração.
+# 3. A sintaxe segue o formato padrão do gitignore: padrões correspondentes
+#    mais abaixo no arquivo têm precedência sobre os anteriores.
+#
+# INSTRUÇÕES PARA NOVOS MANTENEDORES E EXPANSÃO FUTURA:
+# - Para adicionar um novo mantenedor global, adicione o @username do GitHub
+#   ao final da regra global '*' ou das pastas específicas.
+# - Para equipes vinculadas a uma organização GitHub, utilize a notação:
+#   '@nome-da-organizacao/nome-da-equipe'.
+# - Para que a atribuição automática funcione, os usuários listados DEVEM possuir
+#   permissão explícita de escrita (Write) ou administração (Admin) no repositório.
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Regra Global (Proprietário Padrão de Todo o Repositório)
+# ------------------------------------------------------------------------------
+# Qualquer arquivo ou pasta que não tenha regra mais específica abaixo
+# terá revisão obrigatória de @jadsonsanches.
+* @jadsonsanches
+
+# ------------------------------------------------------------------------------
+# 2. Infraestrutura de CI/CD, Ações do GitHub e Automação
+# ------------------------------------------------------------------------------
+# Alterações em workflows do GitHub Actions, automações de coleta periódica e templates
+/.github/ @jadsonsanches
+/.github/workflows/ @jadsonsanches
+
+# ------------------------------------------------------------------------------
+# 3. Scripts de Coleta, Parser, Grafo, Exportação e Testes
+# ------------------------------------------------------------------------------
+# Motor de scraping (AnvisaLegis), higienização de Markdown, montagem do grafo,
+# compilação dos bancos SQLite, JSON, CSV e suíte de testes automatizados
+/scripts/ @jadsonsanches
+/test/ @jadsonsanches
+/package.json @jadsonsanches
+/package-lock.json @jadsonsanches
+
+# ------------------------------------------------------------------------------
+# 4. Dados Normativos, Bancos Consolidados e Grafo
+# ------------------------------------------------------------------------------
+# Acervo de normas coletadas, banco de dados relacional SQLite e relações
+/data/ @jadsonsanches
+/data/dist/ @jadsonsanches
+/data/normas/ @jadsonsanches
+/data/grafo/ @jadsonsanches
+
+# ------------------------------------------------------------------------------
+# 5. Interface Web e Visualizador Interativo
+# ------------------------------------------------------------------------------
+# Aplicação web estática (Canvas física, busca e filtros)
+/index.html @jadsonsanches
+/visualizador.html @jadsonsanches
+
+# ------------------------------------------------------------------------------
+# 6. Documentação e Governança do Repositório
+# ------------------------------------------------------------------------------
+/README.md @jadsonsanches
+/CONTRIBUTING.md @jadsonsanches
+/SECURITY.md @jadsonsanches
+/LICENSE @jadsonsanches
+/docs/ @jadsonsanches

@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  validacao-scripts:
+    name: Validação e Testes de Integridade
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js (v20)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Instalar Dependências do Projeto
+        run: npm ci
+
+      - name: Validar Sintaxe dos Scripts (node --check)
+        run: npm run test:syntax
+
+      - name: Executar Testes Automatizados de Integridade
+        run: npm test
+
+      - name: Testar Execução dos Scripts Locais do Pipeline
+        run: npm run test:integrity
+
+      - name: Checar Estado da Área de Trabalho do Git
+        run: |
+          echo "=== Verificando arquivos modificados ou corrompidos ==="
+          git status --porcelain

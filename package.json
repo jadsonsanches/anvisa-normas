@@ -4,6 +4,9 @@
   "description": "Acervo aberto de todas as normas da Anvisa em Markdown com grafo de relações determinístico e atualização automática",
   "main": "scripts/pipeline.js",
   "scripts": {
+    "test": "node --test test/",
+    "test:syntax": "node -e \"const fs=require('fs'),cp=require('child_process');fs.readdirSync('scripts').filter(f=>f.endsWith('.js')).forEach(f=>{console.log('Validando sintaxe:',f);cp.execFileSync(process.execPath,['--check','scripts/'+f],{stdio:'inherit'});});console.log('Sintaxe validada com sucesso em todos os scripts!');\"",
+    "test:integrity": "node scripts/grafo.js && node scripts/gerar-visualizador.js && node scripts/exportar-bancos.js",
     "coletar": "node scripts/scraper.js",
     "gerar:grafo": "node scripts/grafo.js",
     "gerar:visualizador": "node scripts/gerar-visualizador.js",
