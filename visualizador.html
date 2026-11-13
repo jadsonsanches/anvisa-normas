@@ -108,23 +108,8 @@
       <!-- Menu Principal de Navegação -->
       <nav class="space-y-1.5 pt-2">
         <button onclick="scrollToSection('radar-section')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl bg-emerald-500/15 text-emerald-300 font-medium text-xs md:text-sm border border-emerald-500/30 shadow-sm transition hover:bg-emerald-500/20 group">
-          <span class="text-base group-hover:scale-110 transition">📅</span>
-          <span class="hidden md:inline font-semibold">Radar Diário</span>
-        </button>
-
-        <button onclick="scrollToSection('metrics-section')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-500/10 font-medium text-xs md:text-sm transition group">
           <span class="text-base group-hover:scale-110 transition">📊</span>
-          <span class="hidden md:inline">Métricas & Analytics</span>
-        </button>
-
-        <button onclick="scrollToSection('graph-section')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-500/10 font-medium text-xs md:text-sm transition group">
-          <span class="text-base group-hover:scale-110 transition">🕸️</span>
-          <span class="hidden md:inline">Grafo Determinístico</span>
-        </button>
-
-        <button onclick="scrollToSection('feed-section')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-500/10 font-medium text-xs md:text-sm transition group">
-          <span class="text-base group-hover:scale-110 transition">📑</span>
-          <span class="hidden md:inline">Acervo de Atos</span>
+          <span class="hidden md:inline font-semibold">Dashboard</span>
         </button>
       </nav>
 
@@ -320,19 +305,19 @@
           </div>
 
           <!-- Canvas do Grafo -->
-          <div class="relative w-full h-[480px] bg-[#030a07] rounded-xl overflow-hidden border border-emerald-500/20 shadow-inner">
+          <div class="relative w-full h-[480px] bg-[#030a07] rounded-xl overflow-hidden border border-emerald-500/20 shadow-[inset_0_4px_24px_rgba(0,0,0,0.65)]" style="background-image: radial-gradient(rgba(16, 185, 129, 0.12) 1px, transparent 1px); background-size: 22px 22px;">
             <canvas id="graph-canvas" class="w-full h-full block"></canvas>
             
             <!-- Legenda Flutuante Discreta -->
-            <div class="absolute bottom-3 left-3 bg-[#05140d]/90 backdrop-blur-md border border-emerald-500/20 rounded-xl p-2.5 text-[10px] space-y-1 shadow-lg pointer-events-none">
+            <div class="absolute bottom-3 left-3 bg-[#05140d]/90 backdrop-blur-md border border-emerald-500/20 rounded-xl p-2.5 text-[10px] space-y-1 shadow-[0_12px_32px_rgba(0,0,0,0.55)] pointer-events-none">
               <div class="font-bold text-slate-300 mb-1">Tipologia dos Nós:</div>
               <div class="grid grid-cols-2 gap-x-3 gap-y-1">
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#10b981]"></span> RDC</span>
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#14b8a6]"></span> RE</span>
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#f59e0b]"></span> Portaria</span>
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#06b6d4]"></span> IN</span>
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#ec4899]"></span> CPB</span>
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#22c55e]"></span> Lei Federal</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_#10b981]"></span> RDC</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#14b8a6] shadow-[0_0_8px_#14b8a6]"></span> RE</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#f59e0b] shadow-[0_0_8px_#f59e0b]"></span> Portaria</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#06b6d4] shadow-[0_0_8px_#06b6d4]"></span> IN</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#ec4899] shadow-[0_0_8px_#ec4899]"></span> CPB</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#22c55e] shadow-[0_0_8px_#22c55e]"></span> Lei Federal</span>
               </div>
             </div>
 
@@ -668,6 +653,7 @@
     let transform = { x: 0, y: 0, scale: 1 };
     let isDragging = false;
     let dragNode = null;
+    let hoveredNode = null;
     let lastMouse = { x: 0, y: 0 };
     let selectedNode = nodes[0] || null;
     let focusedNodeId = null;
@@ -676,6 +662,15 @@
 
     function isNodeVisible(n) {
       return filteredNodeIds.has(n.id);
+    }
+
+    // Raio visual com compensação de zoom (Semantic Zoom) para não ficar gigante ao aproximar
+    function getNodeRenderRadius(n, isHighlighted, isHovered) {
+      const zoomCompensation = Math.pow(transform.scale, 0.72);
+      const baseR = n.radius / zoomCompensation;
+      if (isHighlighted) return baseR * 1.45;
+      if (isHovered) return baseR * 1.25;
+      return baseR;
     }
 
     // Física estável e amortecida com resfriamento térmico (alpha decay)
@@ -760,6 +755,8 @@
       ctx.translate(transform.x, transform.y);
       ctx.scale(transform.scale, transform.scale);
 
+      const invScale = 1 / transform.scale;
+
       // Desenhar Arestas
       edges.forEach(e => {
         if (!isNodeVisible(e.sourceNode) || !isNodeVisible(e.targetNode)) return;
@@ -770,55 +767,135 @@
         ctx.lineTo(e.targetNode.x, e.targetNode.y);
 
         if (isRelated) {
+          ctx.shadowColor = 'rgba(0, 255, 135, 0.45)';
+          ctx.shadowBlur = 8;
           ctx.strokeStyle = '#00ff87';
-          ctx.lineWidth = 2.2;
+          ctx.lineWidth = 1.8 * invScale;
         } else {
-          ctx.strokeStyle = 'rgba(16, 185, 129, 0.16)';
-          ctx.lineWidth = 1;
+          ctx.shadowBlur = 0;
+          ctx.strokeStyle = focusedNodeId ? 'rgba(16, 185, 129, 0.08)' : 'rgba(16, 185, 129, 0.18)';
+          ctx.lineWidth = 1 * invScale;
         }
         ctx.stroke();
       });
+      ctx.shadowBlur = 0;
 
-      // Desenhar Nós
+      // Desenhar Nós (Estilo Glass Orb + Drop Shadow & Glow igual aos cards)
       nodes.forEach(n => {
         if (!isNodeVisible(n)) return;
 
         const isSelected = selectedNode && selectedNode.id === n.id;
         const isFocused = focusedNodeId && focusedNodeId === n.id;
+        const isHovered = hoveredNode && hoveredNode.id === n.id;
+        const isHighlighted = isSelected || isFocused;
         const isNeighbor = focusedNodeId && adjacency.get(focusedNodeId)?.has(n.id);
+        const isDimmed = focusedNodeId && !isHighlighted && !isNeighbor;
+
+        const r = getNodeRenderRadius(n, isHighlighted, isHovered);
+        const baseColor = CORES[n.tipo] || CORES.OUTROS;
+
+        ctx.save();
+        if (isDimmed) {
+          ctx.globalAlpha = 0.35;
+        }
+
+        // Halo externo translúcido para nós selecionados, vizinhos ou em hover
+        if (isHighlighted || isHovered || isNeighbor) {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, r * (isHighlighted ? 1.65 : 1.4), 0, Math.PI * 2);
+          ctx.fillStyle = isHighlighted ? 'rgba(0, 255, 135, 0.16)' : (baseColor + '24');
+          ctx.fill();
+        }
+
+        // Shadow antes do fill (mesma assinatura visual dos .glass-card e .neon-glow)
+        if (isHighlighted) {
+          ctx.shadowColor = '#00ff87';
+          ctx.shadowBlur = 18;
+          ctx.shadowOffsetY = 0;
+        } else if (isHovered || isNeighbor) {
+          ctx.shadowColor = baseColor;
+          ctx.shadowBlur = 14;
+          ctx.shadowOffsetY = 2;
+        } else {
+          ctx.shadowColor = baseColor;
+          ctx.shadowBlur = 9;
+          ctx.shadowOffsetY = 3;
+        }
+
+        // Esfera com gradiente radial sutil (efeito 3D/Glass)
+        const grad = ctx.createRadialGradient(
+          n.x - r * 0.3,
+          n.y - r * 0.3,
+          r * 0.1,
+          n.x,
+          n.y,
+          r
+        );
+        grad.addColorStop(0, '#ffffff');
+        grad.addColorStop(0.28, baseColor);
+        grad.addColorStop(1, baseColor);
 
         ctx.beginPath();
-        const r = isSelected || isFocused ? n.radius * 1.7 : n.radius;
         ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-
-        const baseColor = CORES[n.tipo] || CORES.OUTROS;
-        ctx.fillStyle = baseColor;
+        ctx.fillStyle = grad;
         ctx.fill();
 
-        if (isSelected || isFocused) {
-          ctx.strokeStyle = '#00ff87';
-          ctx.lineWidth = 3;
-          ctx.stroke();
+        // Resetar shadow para desenhar a borda nítida
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetY = 0;
 
-          // Glow no nó selecionado
-          ctx.shadowColor = '#00ff87';
-          ctx.shadowBlur = 15;
-        } else if (isNeighbor) {
-          ctx.strokeStyle = '#34d399';
-          ctx.lineWidth = 2;
+        if (isHighlighted) {
+          ctx.strokeStyle = '#00ff87';
+          ctx.lineWidth = 2.2 * invScale;
+          ctx.stroke();
+        } else if (isNeighbor || isHovered) {
+          ctx.strokeStyle = '#e2f8ee';
+          ctx.lineWidth = 1.5 * invScale;
           ctx.stroke();
         } else {
-          ctx.strokeStyle = 'rgba(4, 14, 10, 0.8)';
-          ctx.lineWidth = 1;
-          ctx.shadowBlur = 0;
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.28)';
+          ctx.lineWidth = 0.9 * invScale;
+          ctx.stroke();
         }
 
-        // Rótulo de texto para nós importantes ou selecionados
-        if (isSelected || isFocused || isNeighbor || n.tipo === 'RDC' || (transform.scale > 1.3 && n.arquivo)) {
-          ctx.font = '10px Plus Jakarta Sans, sans-serif';
-          ctx.fillStyle = isSelected || isFocused ? '#00ff87' : '#e2e8f0';
-          ctx.fillText(n.id, n.x + r + 4, n.y + 3);
+        // Rótulo de texto com pill glassmórfico e tamanho proporcional na tela
+        if (isHighlighted || isHovered || isNeighbor || n.tipo === 'RDC' || (transform.scale > 1.35 && n.arquivo)) {
+          const fontSize = (isHighlighted ? 11 : 10) * invScale;
+          ctx.font = (isHighlighted ? '600 ' : '500 ') + fontSize + 'px "Plus Jakarta Sans", sans-serif';
+          const textWidth = ctx.measureText(n.id).width;
+          const padX = 5 * invScale;
+          const padY = 2.5 * invScale;
+          const labelX = n.x + r + 5 * invScale;
+          const labelY = n.y - fontSize / 2 - padY + 1 * invScale;
+          const pillW = textWidth + padX * 2;
+          const pillH = fontSize + padY * 2;
+          const pillRadius = 4 * invScale;
+
+          ctx.shadowColor = 'rgba(0, 0, 0, 0.55)';
+          ctx.shadowBlur = 8;
+          ctx.shadowOffsetY = 2;
+
+          ctx.beginPath();
+          if (ctx.roundRect) {
+            ctx.roundRect(labelX, labelY, pillW, pillH, pillRadius);
+          } else {
+            ctx.rect(labelX, labelY, pillW, pillH);
+          }
+          ctx.fillStyle = isHighlighted ? 'rgba(6, 28, 19, 0.92)' : 'rgba(5, 20, 13, 0.82)';
+          ctx.fill();
+
+          ctx.shadowBlur = 0;
+          ctx.shadowOffsetY = 0;
+          ctx.strokeStyle = isHighlighted ? 'rgba(0, 255, 135, 0.5)' : 'rgba(16, 185, 129, 0.22)';
+          ctx.lineWidth = 0.8 * invScale;
+          ctx.stroke();
+
+          ctx.fillStyle = isHighlighted ? '#00ff87' : '#e6f4ee';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(n.id, labelX + padX, n.y + 0.5 * invScale);
         }
+
+        ctx.restore();
       });
 
       ctx.restore();
@@ -826,18 +903,38 @@
     }
     requestAnimationFrame(draw);
 
+    // Busca de nó sob o cursor respeitando o raio compensado pelo zoom
+    function findNodeAt(mx, my) {
+      const hitPadding = 4 / transform.scale;
+      for (let i = nodes.length - 1; i >= 0; i--) {
+        const n = nodes[i];
+        if (!isNodeVisible(n)) continue;
+        const isHighlighted = (selectedNode && selectedNode.id === n.id) || (focusedNodeId && focusedNodeId === n.id);
+        const r = getNodeRenderRadius(n, isHighlighted, false);
+        const dx = n.x - mx;
+        const dy = n.y - my;
+        if (Math.sqrt(dx * dx + dy * dy) <= r + hitPadding) {
+          return n;
+        }
+      }
+      return null;
+    }
+
+    function applyZoomAt(factor, pivotX, pivotY) {
+      const newScale = Math.max(0.35, Math.min(4.5, transform.scale * factor));
+      const ratio = newScale / transform.scale;
+      transform.x = pivotX - (pivotX - transform.x) * ratio;
+      transform.y = pivotY - (pivotY - transform.y) * ratio;
+      transform.scale = newScale;
+    }
+
     // Eventos do Canvas (Pan & Zoom)
     canvas.addEventListener('mousedown', e => {
       const rect = canvas.getBoundingClientRect();
       const mx = (e.clientX - rect.left - transform.x) / transform.scale;
       const my = (e.clientY - rect.top - transform.y) / transform.scale;
 
-      const clicked = nodes.find(n => {
-        if (!isNodeVisible(n)) return false;
-        const dx = n.x - mx;
-        const dy = n.y - my;
-        return Math.sqrt(dx * dx + dy * dy) <= (n.radius + 5);
-      });
+      const clicked = findNodeAt(mx, my);
 
       if (clicked) {
         dragNode = clicked;
@@ -849,8 +946,8 @@
     });
 
     window.addEventListener('mousemove', e => {
+      const rect = canvas.getBoundingClientRect();
       if (dragNode) {
-        const rect = canvas.getBoundingClientRect();
         dragNode.x = (e.clientX - rect.left - transform.x) / transform.scale;
         dragNode.y = (e.clientY - rect.top - transform.y) / transform.scale;
         dragNode.vx = 0;
@@ -860,6 +957,11 @@
         transform.x += (e.clientX - lastMouse.x);
         transform.y += (e.clientY - lastMouse.y);
         lastMouse = { x: e.clientX, y: e.clientY };
+      } else if (e.target === canvas) {
+        const mx = (e.clientX - rect.left - transform.x) / transform.scale;
+        const my = (e.clientY - rect.top - transform.y) / transform.scale;
+        hoveredNode = findNodeAt(mx, my);
+        canvas.style.cursor = hoveredNode ? 'pointer' : 'grab';
       }
     });
 
@@ -870,15 +972,18 @@
 
     canvas.addEventListener('wheel', e => {
       e.preventDefault();
-      const zoomFactor = e.deltaY < 0 ? 1.12 : 0.89;
-      transform.scale = Math.max(0.3, Math.min(4.5, transform.scale * zoomFactor));
+      const rect = canvas.getBoundingClientRect();
+      const pivotX = e.clientX - rect.left;
+      const pivotY = e.clientY - rect.top;
+      const zoomFactor = e.deltaY < 0 ? 1.14 : 0.88;
+      applyZoomAt(zoomFactor, pivotX, pivotY);
     });
 
     document.getElementById('btn-zoom-in').addEventListener('click', () => {
-      transform.scale = Math.min(4.5, transform.scale * 1.25);
+      applyZoomAt(1.25, width / 2, height / 2);
     });
     document.getElementById('btn-zoom-out').addEventListener('click', () => {
-      transform.scale = Math.max(0.3, transform.scale * 0.8);
+      applyZoomAt(0.8, width / 2, height / 2);
     });
     document.getElementById('btn-reset-view').addEventListener('click', () => {
       transform = { x: 0, y: 0, scale: 1 };
