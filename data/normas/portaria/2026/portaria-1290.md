@@ -2,7 +2,8 @@
 tipo: "PORTARIA"
 numero: "1290"
 ano: "2026"
-data_promulgacao: "12/11/2026"
+data_ato: "11/11/2026"
+data_promulgacao: "11/11/2026"
 data_publicacao_dou: "12/11/2026"
 situacao: "vigente"
 ementa: "Exonera servidor da Agência Nacional de Vigilância Sanitária - Anvisa, do cargo de Assessor, da Gerência de Laboratórios de Saúde Pública."
@@ -11,7 +12,7 @@ relacionadas: []
 fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=POR&numeroAto=00001290&seqAto=000&valorAno=2026&orgao=ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
 ---
 
-# PORTARIA nº 1290, de 12/11/2026
+# PORTARIA nº 1290, de 11/11/2026
 
 MINISTÉRIO DA SAÚDE
 

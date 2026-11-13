@@ -14,6 +14,7 @@ async function executarPipeline() {
   const args = process.argv.slice(2);
   const dataHoje = formatarDataBrasil();
   const anoAtual = new Date().getFullYear();
+  const force = args.includes('--force');
 
   console.log('==================================================');
   console.log('   PIPELINE ANVISA-NORMAS - ACERVO REGULATÓRIO    ');
@@ -22,20 +23,20 @@ async function executarPipeline() {
   if (args.includes('--full')) {
     console.log(`Modo Completo: Coletando resenha histórica (1999 a ${anoAtual})...`);
     for (let ano = anoAtual; ano >= 1999; ano--) {
-      await coletarPorAno(ano);
+      await coletarPorAno(ano, 0, force);
     }
   } else if (args.includes('--ano')) {
     const idx = args.indexOf('--ano');
     const ano = parseInt(args[idx + 1], 10) || anoAtual;
-    await coletarPorAno(ano);
+    await coletarPorAno(ano, 0, force);
   } else if (args.includes('--data')) {
     const idx = args.indexOf('--data');
     const dataAlvo = args[idx + 1] || dataHoje;
-    await coletarPorData(dataAlvo);
+    await coletarPorData(dataAlvo, force);
   } else {
     // Modo padrão diário: consulta a data de hoje
     console.log(`Modo Diário: Verificando atos publicados na data de hoje (${dataHoje})...`);
-    await coletarPorData(dataHoje);
+    await coletarPorData(dataHoje, force);
   }
 
   console.log('\n--- 1. Atualizando Grafo de Relações e Estatísticas ---');

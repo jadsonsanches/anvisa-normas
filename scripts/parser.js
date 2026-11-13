@@ -102,19 +102,33 @@ function parseNormaHtml(html, urlOrigem = '', metaBusca = {}) {
     });
   }
 
-  // Datas
-  let dataPromulgacao = metaBusca.dataPromulgacao || '';
+  // Datas: distinguir data do ato (assinatura) e data de publicação no DOU
+  const meses = {
+    janeiro: '01', fevereiro: '02', marco: '03', 'março': '03', abril: '04',
+    maio: '05', junho: '06', julho: '07', agosto: '08', setembro: '09',
+    outubro: '10', novembro: '11', dezembro: '12'
+  };
+
+  let dataAto = metaBusca.dataAto || metaBusca.dataPromulgacao || '';
+  if (!dataAto) {
+    const matchDataAto = container.text().match(/DE\s+(\d{1,2})\s+DE\s+([A-ZÇ]+)\s+DE\s+(\d{4})/i);
+    if (matchDataAto) {
+      const dia = matchDataAto[1].padStart(2, '0');
+      const mesNome = matchDataAto[2].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const mes = meses[mesNome] || '01';
+      dataAto = `${dia}/${mes}/${matchDataAto[3]}`;
+    }
+  }
+
   let dataPublicacaoDou = '';
   const matchDou = container.text().match(/PUB\s+D\.O\.U\.?\s*,?\s*(\d{2}\/\d{2}\/\d{4})/i);
   if (matchDou) {
     dataPublicacaoDou = matchDou[1];
-    if (!dataPromulgacao) dataPromulgacao = matchDou[1];
+  } else if (metaBusca.dataPublicacaoDou) {
+    dataPublicacaoDou = metaBusca.dataPublicacaoDou;
   }
 
-  const matchDataAto = container.text().match(/DE\s+(\d{1,2})\s+DE\s+([A-ZÇ]+)\s+DE\s+(\d{4})/i);
-  if (matchDataAto && !dataPromulgacao) {
-    dataPromulgacao = `${matchDataAto[1]} de ${matchDataAto[2].toLowerCase()} de ${matchDataAto[3]}`;
-  }
+  const dataReferencia = dataAto || dataPublicacaoDou || ano;
 
   // Relações
   const refsUnicas = [...new Map(citacoes.map(item => [item.referencia, item])).values()];
@@ -140,7 +154,8 @@ function parseNormaHtml(html, urlOrigem = '', metaBusca = {}) {
     `tipo: "${tipo}"`,
     `numero: "${numero}"`,
     `ano: "${ano}"`,
-    `data_promulgacao: "${dataPromulgacao}"`,
+    `data_ato: "${dataAto}"`,
+    `data_promulgacao: "${dataReferencia}"`,
     `data_publicacao_dou: "${dataPublicacaoDou}"`,
     `situacao: "${situacao}"`,
     `ementa: "${ementa.replace(/"/g, '\\"')}"`,
@@ -149,7 +164,7 @@ function parseNormaHtml(html, urlOrigem = '', metaBusca = {}) {
     `fonte: "${urlOrigem}"`,
     '---',
     '',
-    `# ${tipo} nº ${numero}, de ${dataPromulgacao || ano}`,
+    `# ${tipo} nº ${numero}, de ${dataReferencia}`,
     '',
     markdownCorpo
   ];
@@ -160,7 +175,8 @@ function parseNormaHtml(html, urlOrigem = '', metaBusca = {}) {
     ano,
     situacao,
     ementa,
-    dataPromulgacao,
+    dataAto,
+    dataPromulgacao: dataReferencia,
     dataPublicacaoDou,
     leisBase,
     relacionadas: outrasNormas,

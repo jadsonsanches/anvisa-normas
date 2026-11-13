@@ -157,6 +157,13 @@ async function pesquisarAtos(criterios = {}) {
       const numero = parseInt(rawNum, 10).toString();
       const anoAto = urlParams.get('valorAno') || ano || new Date().getFullYear().toString();
 
+      // Extração da data exata do ato (ex: "Portaria n° 1.294, de 11/11/2026")
+      let dataAto = '';
+      const matchDataAto = text.match(/de\s+(\d{2}\/\d{2}\/\d{4})/i);
+      if (matchDataAto) {
+        dataAto = matchDataAto[1];
+      }
+
       // Extração de ementa do texto do link (geralmente vem após a data)
       let ementa = '';
       const matchEmenta = text.match(/\d{4}(.*)$/);
@@ -170,6 +177,8 @@ async function pesquisarAtos(criterios = {}) {
         numero,
         ano: anoAto,
         situacao,
+        dataAto,
+        dataPublicacaoDou: dataInicio || dataFim || '',
         ementa,
         textoCompleto: text
       });

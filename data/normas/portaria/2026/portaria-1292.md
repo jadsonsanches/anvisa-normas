@@ -2,7 +2,8 @@
 tipo: "PORTARIA"
 numero: "1292"
 ano: "2026"
-data_promulgacao: "12/11/2026"
+data_ato: "11/11/2026"
+data_promulgacao: "11/11/2026"
 data_publicacao_dou: "12/11/2026"
 situacao: "vigente"
 ementa: "Dispensa, servidor da Agência Nacional de Vigilância Sanitária - Anvisa, do encargo de substituto de Coordenador, da Coordenação de Processo Administrativo Sanitário."
@@ -11,7 +12,7 @@ relacionadas: []
 fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=POR&numeroAto=00001292&seqAto=000&valorAno=2026&orgao=ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
 ---
 
-# PORTARIA nº 1292, de 12/11/2026
+# PORTARIA nº 1292, de 11/11/2026
 
 MINISTÉRIO DA SAÚDE
 

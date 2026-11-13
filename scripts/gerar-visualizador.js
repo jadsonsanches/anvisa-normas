@@ -464,6 +464,18 @@ const htmlContent = `<!DOCTYPE html>
             \` : ''}
           </div>
 
+          <!-- Datas Jurídicas -->
+          <div class="grid grid-cols-2 gap-2 text-[11px] bg-slate-900/80 p-2.5 rounded border border-slate-800">
+            <div>
+              <span class="text-slate-500 font-medium block text-[10px] uppercase">Data do Ato:</span>
+              <strong class="text-cyan-300 font-semibold">\${node.data_ato || node.data_promulgacao || 'N/D'}</strong>
+            </div>
+            <div>
+              <span class="text-slate-500 font-medium block text-[10px] uppercase">Publicação no DOU:</span>
+              <strong class="text-slate-200 font-semibold">\${node.data_publicacao_dou || 'N/D'}</strong>
+            </div>
+          </div>
+
           \${node.ementa ? \`
             <div class="text-xs text-slate-300 leading-relaxed bg-slate-900/60 p-2.5 rounded border border-slate-800/80">
               <span class="font-semibold text-slate-400 block mb-1">Ementa Oficial:</span>
@@ -547,12 +559,16 @@ const htmlContent = `<!DOCTYPE html>
 
       if (q.length > 0 || currentTipoFilter !== 'ALL' || currentStatusFilter !== 'ALL') {
         detailsPane.innerHTML = filtered.map(n => \`
-          <div onclick="selectNodeById('\${n.id}')" class="bg-slate-950 hover:bg-slate-800/80 border border-slate-800/90 rounded-lg p-2.5 cursor-pointer transition space-y-1">
+          <div onclick="selectNodeById('\${n.id}')" class="bg-slate-950 hover:bg-slate-800/80 border border-slate-800/90 rounded-lg p-2.5 cursor-pointer transition space-y-1.5">
             <div class="flex items-center justify-between">
               <span class="font-bold text-xs text-slate-200">\${n.id}</span>
               <span class="text-[9px] uppercase px-1.5 py-0.2 rounded \${
                 n.situacao === 'vigente' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'
               }">\${n.situacao}</span>
+            </div>
+            <div class="flex items-center justify-between text-[10px] text-slate-400">
+              <span>📅 Ato: \${n.data_ato || n.data_promulgacao || ''}</span>
+              \${n.data_publicacao_dou ? \`<span>DOU: \${n.data_publicacao_dou}</span>\` : ''}
             </div>
             \${n.ementa ? \`<p class="text-[11px] text-slate-400 line-clamp-2 leading-tight">\${n.ementa}</p>\` : ''}
           </div>

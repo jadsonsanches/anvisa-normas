@@ -82,6 +82,9 @@ function construirGrafo() {
         tipo: meta.tipo,
         numero: meta.numero,
         ano: meta.ano,
+        data_ato: meta.data_ato || meta.data_promulgacao || '',
+        data_promulgacao: meta.data_promulgacao || '',
+        data_publicacao_dou: meta.data_publicacao_dou || '',
         situacao: meta.situacao,
         ementa: meta.ementa || '',
         arquivo: path.relative(path.join(__dirname, '..'), arq).replace(/\\/g, '/')
