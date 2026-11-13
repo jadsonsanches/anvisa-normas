@@ -1,6 +1,18 @@
 {
   "nodes": [
     {
+      "id": "CPB 1436/2026",
+      "tipo": "CPB",
+      "numero": "1436",
+      "ano": "2026",
+      "data_ato": "19 de outubro de 2021",
+      "data_promulgacao": "19 de outubro de 2021",
+      "data_publicacao_dou": "",
+      "situacao": "vigente",
+      "ementa": "Proposta de Instrução Normativa que atualiza as informações técnicas da monografia P66 - Pseudomonas Chlororaphis e inclui o item P66.1 - Extrato metabólito de Pseudomonas chlororaphis, na Relação dos Ingredientes Ativos de Agrotóxicos, Saneantes Desinfestantes e Preservativos de Madeira, publicada por meio da Instrução Normativa - IN nº 103, de 19 de outubro de 2021.",
+      "arquivo": "data/normas/cpb/2026/cpb-1436.md"
+    },
+    {
       "id": "PORTARIA 1290/2026",
       "tipo": "PORTARIA",
       "numero": "1290",
@@ -71,6 +83,42 @@
       "situacao": "vigente",
       "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para participação em evento internacional.",
       "arquivo": "data/normas/portaria/2026/portaria-1295.md"
+    },
+    {
+      "id": "RE 3806/2024",
+      "tipo": "RE",
+      "numero": "3806",
+      "ano": "2024",
+      "data_ato": "13/11/2026",
+      "data_promulgacao": "13/11/2026",
+      "data_publicacao_dou": "13/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2024/re-3806.md"
+    },
+    {
+      "id": "RE 1823/2025",
+      "tipo": "RE",
+      "numero": "1823",
+      "ano": "2025",
+      "data_ato": "13/11/2026",
+      "data_promulgacao": "13/11/2026",
+      "data_publicacao_dou": "13/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2025/re-1823.md"
+    },
+    {
+      "id": "RE 3357/2026",
+      "tipo": "RE",
+      "numero": "3357",
+      "ano": "2026",
+      "data_ato": "13/11/2026",
+      "data_promulgacao": "13/11/2026",
+      "data_publicacao_dou": "13/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-3357.md"
     },
     {
       "id": "RE 4404/2026",
@@ -218,9 +266,122 @@
       "situacao": "vigente",
       "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
       "arquivo": "data/normas/re/2026/re-4423.md"
+    },
+    {
+      "id": "RE 4424/2026",
+      "tipo": "RE",
+      "numero": "4424",
+      "ano": "2026",
+      "data_ato": "13/11/2026",
+      "data_promulgacao": "13/11/2026",
+      "data_publicacao_dou": "13/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições referentes a pós-registro de produto de terapia avançada, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4424.md"
+    },
+    {
+      "id": "RE 4425/2026",
+      "tipo": "RE",
+      "numero": "4425",
+      "ano": "2026",
+      "data_ato": "13/11/2026",
+      "data_promulgacao": "13/11/2026",
+      "data_publicacao_dou": "13/11/2026",
+      "situacao": "vigente",
+      "ementa": "Revoga a Resolução - RE nº 4.039, de 14 de outubro de 2025.",
+      "arquivo": "data/normas/re/2026/re-4425.md"
+    },
+    {
+      "id": "RE 4426/2026",
+      "tipo": "RE",
+      "numero": "4426",
+      "ano": "2026",
+      "data_ato": "13/11/2026",
+      "data_promulgacao": "13/11/2026",
+      "data_publicacao_dou": "13/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4426.md"
+    },
+    {
+      "id": "RE 4427/2026",
+      "tipo": "RE",
+      "numero": "4427",
+      "ano": "2026",
+      "data_ato": "13/11/2026",
+      "data_promulgacao": "13/11/2026",
+      "data_publicacao_dou": "13/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4427.md"
+    },
+    {
+      "id": "RE 4437/2026",
+      "tipo": "RE",
+      "numero": "4437",
+      "ano": "2026",
+      "data_ato": "13/11/2026",
+      "data_promulgacao": "13/11/2026",
+      "data_publicacao_dou": "13/11/2026",
+      "situacao": "vigente",
+      "ementa": "Revoga a Medida Preventiva nº 4 do Anexo da Resolução - RE nº 1.193, de 26 de março de 2026.",
+      "arquivo": "data/normas/re/2026/re-4437.md"
+    },
+    {
+      "id": "RE 4441/2026",
+      "tipo": "RE",
+      "numero": "4441",
+      "ano": "2026",
+      "data_ato": "13/11/2026",
+      "data_promulgacao": "13/11/2026",
+      "data_publicacao_dou": "13/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere a petição referente à pesquisa clínica com produto de terapia avançada, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4441.md"
+    },
+    {
+      "id": "RE 4451/2026",
+      "tipo": "RE",
+      "numero": "4451",
+      "ano": "2026",
+      "data_ato": "13/11/2026",
+      "data_promulgacao": "13/11/2026",
+      "data_publicacao_dou": "13/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4451.md"
+    },
+    {
+      "id": "RE 4452/2026",
+      "tipo": "RE",
+      "numero": "4452",
+      "ano": "2026",
+      "data_ato": "13/11/2026",
+      "data_promulgacao": "13/11/2026",
+      "data_publicacao_dou": "13/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4452.md"
+    },
+    {
+      "id": "RE 4453/2026",
+      "tipo": "RE",
+      "numero": "4453",
+      "ano": "2026",
+      "data_ato": "13/11/2026",
+      "data_promulgacao": "13/11/2026",
+      "data_publicacao_dou": "13/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela a Autorização de Funcionamento a empresas dos setores de comércio de alimentos, cosméticos, perfumes, produtos de higiene e saúde, e dispensação de medicamentos, conforme especificações no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4453.md"
     }
   ],
   "edges": [
+    {
+      "source": "CPB 1436/2026",
+      "target": "CPB 1436/2026",
+      "relacao": "cita"
+    },
     {
       "source": "RE 4416/2026",
       "target": "LEI 9782/1999",
