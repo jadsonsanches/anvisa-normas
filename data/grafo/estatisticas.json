@@ -1,11 +1,20 @@
 {
-  "totalNormas": 30,
-  "vigentes": 30,
-  "revogadas": 0,
+  "totalNormas": 292,
+  "vigentes": 291,
+  "revogadas": 1,
   "porTipo": {
-    "CPB": 1,
-    "PORTARIA": 6,
-    "RE": 23
+    "ACM": 1,
+    "CPB": 4,
+    "DEP": 6,
+    "EDT": 1,
+    "ETA": 2,
+    "EXC": 1,
+    "IN": 5,
+    "PORTARIA": 49,
+    "PRG": 2,
+    "RDC": 2,
+    "RE": 216,
+    "TAP": 3
   },
-  "totalRelacoes": 4
+  "totalRelacoes": 119
 }

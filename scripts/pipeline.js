@@ -1,4 +1,4 @@
-const { coletarPorData, coletarPorAno } = require('./scraper');
+const { coletarPorData, coletarPorAno, coletarPorPeriodo, coletarPorMes } = require('./scraper');
 const { construirGrafo } = require('./grafo');
 const { exportarBancos } = require('./exportar-bancos');
 const { execSync } = require('child_process');
@@ -26,6 +26,24 @@ async function executarPipeline() {
     for (let ano = anoAtual; ano >= 1999; ano--) {
       await coletarPorAno(ano, 0, force);
     }
+  } else if (args.includes('--mes')) {
+    const idx = args.indexOf('--mes');
+    const valor = args[idx + 1] || '11/2026';
+    let mes, ano;
+    if (valor.includes('/')) {
+      [mes, ano] = valor.split('/');
+    } else if (valor.includes('-')) {
+      [ano, mes] = valor.split('-');
+    } else {
+      mes = valor;
+      ano = anoAtual;
+    }
+    await coletarPorMes(mes, ano, force);
+  } else if (args.includes('--periodo')) {
+    const idx = args.indexOf('--periodo');
+    const dataInicio = args[idx + 1];
+    const dataFim = args[idx + 2] || dataHoje;
+    await coletarPorPeriodo(dataInicio, dataFim, force);
   } else if (args.includes('--ano')) {
     const idx = args.indexOf('--ano');
     const ano = parseInt(args[idx + 1], 10) || anoAtual;

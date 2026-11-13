@@ -187,10 +187,10 @@ async function pesquisarAtos(criterios = {}) {
     if (itensPagina.length === 0) break;
 
     listaAtos.push(...itensPagina);
-    totalEncontrados = parseInt(data.total_pagina_final, 10) || listaAtos.length;
 
-    // Se já coletamos tudo até o total final, encerra paginação
-    if (listaAtos.length >= totalEncontrados || itensPagina.length < 10) {
+    // O Datalegis pagina de 50 em 50 registros por página.
+    // Se a página retornou menos de 50 registros, chegamos ao final dos resultados.
+    if (itensPagina.length < 50) {
       break;
     }
 
@@ -316,9 +316,85 @@ async function coletarPorAno(ano, limite = 0, force = false) {
   return { salvos, pulados, erros, total: alvos.length };
 }
 
+
+/**
+ * Coleta todas as normas em um intervalo de datas (DD/MM/AAAA até DD/MM/AAAA)
+ */
+async function coletarPorPeriodo(dataInicioStr, dataFimStr, force = false) {
+  const parseData = (str) => {
+    const [d, m, y] = str.split('/').map(Number);
+    return new Date(y, m - 1, d);
+  };
+  const formatData = (date) => {
+    const d = String(date.getDate()).padStart(2, '0');
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const y = date.getFullYear();
+    return `${d}/${m}/${y}`;
+  };
+
+  const inicio = parseData(dataInicioStr);
+  const fim = parseData(dataFimStr);
+
+  console.log(`\n==================================================`);
+  console.log(` Coleta por Período: ${dataInicioStr} a ${dataFimStr}`);
+  console.log(`==================================================`);
+
+  let totais = { salvos: 0, pulados: 0, erros: 0, total: 0 };
+  const atual = new Date(inicio);
+
+  while (atual <= fim) {
+    const diaFormatado = formatData(atual);
+    const resultadoDia = await coletarPorData(diaFormatado, force);
+    totais.salvos += resultadoDia.salvos;
+    totais.pulados += resultadoDia.pulados;
+    totais.erros += resultadoDia.erros;
+    totais.total += resultadoDia.total;
+
+    atual.setDate(atual.getDate() + 1);
+  }
+
+  console.log(`\n==================================================`);
+  console.log(` Resumo Final do Período (${dataInicioStr} a ${dataFimStr}):`);
+  console.log(` Total de atos: ${totais.total} | Salvos: ${totais.salvos} | Pulados: ${totais.pulados} | Erros: ${totais.erros}`);
+  console.log(`==================================================`);
+
+  return totais;
+}
+
+/**
+ * Coleta todas as normas de um mês específico
+ * @param {number|string} mes 1 a 12
+ * @param {number|string} ano AAAA
+ */
+async function coletarPorMes(mes, ano = new Date().getFullYear(), force = false) {
+  const mesNum = parseInt(mes, 10);
+  const anoNum = parseInt(ano, 10);
+  const mesFormatado = String(mesNum).padStart(2, '0');
+
+  const hoje = new Date();
+  const hojeAno = hoje.getFullYear();
+  const hojeMes = hoje.getMonth() + 1;
+  const hojeDia = hoje.getDate();
+
+  const ultimoDiaMes = new Date(anoNum, mesNum, 0).getDate();
+  let diaFinal = ultimoDiaMes;
+
+  // Se for o mês e ano corrente, limita até o dia de hoje
+  if (anoNum === hojeAno && mesNum === hojeMes && diaFinal > hojeDia) {
+    diaFinal = hojeDia;
+  }
+
+  const dataInicioStr = `01/${mesFormatado}/${anoNum}`;
+  const dataFimStr = `${String(diaFinal).padStart(2, '0')}/${mesFormatado}/${anoNum}`;
+
+  return await coletarPorPeriodo(dataInicioStr, dataFimStr, force);
+}
+
 module.exports = {
   coletarPorData,
   coletarPorAno,
+  coletarPorPeriodo,
+  coletarPorMes,
   pesquisarAtos,
   processarAto
 };

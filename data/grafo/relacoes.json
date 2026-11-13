@@ -1,6 +1,86 @@
 {
   "nodes": [
     {
+      "id": "ACM 8/2026",
+      "tipo": "ACM",
+      "numero": "8",
+      "ano": "2026",
+      "data_ato": "04/11/2026",
+      "data_promulgacao": "04/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "Torna público o presente Edital de Chamamento, para convidar detentores de DIFA de insumos farmacêuticos ativos (IFAs) fabricados em território nacional a apresentar manifestação de interesse para obtenção de CADIFA de forma não associada a petições de registro ou pós-registro de medicamentos.",
+      "arquivo": "data/normas/acm/2026/acm-8.md"
+    },
+    {
+      "id": "RDC 585/2021",
+      "tipo": "RDC",
+      "numero": "585",
+      "ano": "2021",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2021."
+    },
+    {
+      "id": "RDC 359/2020",
+      "tipo": "RDC",
+      "numero": "359",
+      "ano": "2020",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2020."
+    },
+    {
+      "id": "CPB 1433/2026",
+      "tipo": "CPB",
+      "numero": "1433",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "Proposta de Instrução Normativa que altera as indicações de uso agronômico (itens 2.2 e 2.3) na monografia P62 - Peptídeos Derivados da Proteína Harpin, na Relação dos Ingredientes Ativos de Agrotóxicos, Saneantes Desinfestantes e Preservativos de Madeira, publicada por meio da Instrução Normativa - IN n° 103, de 19 de outubro de 2021.",
+      "arquivo": "data/normas/cpb/2026/cpb-1433.md"
+    },
+    {
+      "id": "TAP 119/2021",
+      "tipo": "TAP",
+      "numero": "119",
+      "ano": "2021",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2021."
+    },
+    {
+      "id": "CPB 1434/2026",
+      "tipo": "CPB",
+      "numero": "1434",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "05/11/2026",
+      "situacao": "vigente",
+      "ementa": "Proposta de Instrução Normativa que atualiza 25 Monografias de Ingredientes Ativos de Agrotóxicos, Saneantes Desinfestantes e Preservativos de Madeira, publicada por meio da Instrução Normativa - IN n° 103, de 19 de outubro de 2021 - A29 - Acetamiprido e outros.",
+      "arquivo": "data/normas/cpb/2026/cpb-1434.md"
+    },
+    {
+      "id": "CPB 1435/2026",
+      "tipo": "CPB",
+      "numero": "1435",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "05/11/2026",
+      "situacao": "vigente",
+      "ementa": "Proposta de Instrução Normativa para revisão da Instrução Normativa - IN nº 298, de 3 de maio de 2024, que estabelece o Roteiro de Inspeção em Centros de Equivalência Farmacêutica.",
+      "arquivo": "data/normas/cpb/2026/cpb-1435.md"
+    },
+    {
+      "id": "TAP 61/2026",
+      "tipo": "TAP",
+      "numero": "61",
+      "ano": "2026",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2026."
+    },
+    {
       "id": "CPB 1436/2026",
       "tipo": "CPB",
       "numero": "1436",
@@ -11,6 +91,782 @@
       "situacao": "vigente",
       "ementa": "Proposta de Instrução Normativa que atualiza as informações técnicas da monografia P66 - Pseudomonas Chlororaphis e inclui o item P66.1 - Extrato metabólito de Pseudomonas chlororaphis, na Relação dos Ingredientes Ativos de Agrotóxicos, Saneantes Desinfestantes e Preservativos de Madeira, publicada por meio da Instrução Normativa - IN nº 103, de 19 de outubro de 2021.",
       "arquivo": "data/normas/cpb/2026/cpb-1436.md"
+    },
+    {
+      "id": "DEP 132/2026",
+      "tipo": "DEP",
+      "numero": "132",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Aprova a abertura do Processo Administrativo de Regulação, em Anexo, com dispensa de Análise de Impacto Regulatório (AIR) e de Consulta Pública (CP) previstas, conforme deliberado em reunião.",
+      "arquivo": "data/normas/dep/2026/dep-132.md"
+    },
+    {
+      "id": "DEP 133/2026",
+      "tipo": "DEP",
+      "numero": "133",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Torna pública as Decisões Administrativas referentes aos processos relacionados.",
+      "arquivo": "data/normas/dep/2026/dep-133.md"
+    },
+    {
+      "id": "DEP 134/2026",
+      "tipo": "DEP",
+      "numero": "134",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "05/11/2026",
+      "situacao": "vigente",
+      "ementa": "Aprova a abertura do Processo Administrativo de Regulação, em Anexo, com dispensa de Análise de Impacto Regulatório (AIR) prevista, conforme deliberado em reunião.",
+      "arquivo": "data/normas/dep/2026/dep-134.md"
+    },
+    {
+      "id": "DEP 135/2026",
+      "tipo": "DEP",
+      "numero": "135",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "Aprova a abertura do Processo Administrativo de Regulação, em Anexo, com dispensa de Análise de Impacto Regulatório (AIR) e de Consulta Pública (CP) previstas, conforme deliberado em reunião.",
+      "arquivo": "data/normas/dep/2026/dep-135.md"
+    },
+    {
+      "id": "DEP 136/2026",
+      "tipo": "DEP",
+      "numero": "136",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Retira o efeito suspensivo do recurso a seguir especificado, mantendo os termos da decisão recorrida até a deliberação recursal.",
+      "arquivo": "data/normas/dep/2026/dep-136.md"
+    },
+    {
+      "id": "DEP 137/2026",
+      "tipo": "DEP",
+      "numero": "137",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Torna pública as Decisões Administrativas referentes aos processos relacionados.",
+      "arquivo": "data/normas/dep/2026/dep-137.md"
+    },
+    {
+      "id": "EDT 18/2026",
+      "tipo": "EDT",
+      "numero": "18",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Notifica, pelo presente Edital, a empresa descriminada, para que tome ciência, no prazo de 05 (cinco) dias contados a partir da publicação deste Edital, do Auto de Infração Sanitária - AIS lavrado pela Agência Nacional de Vigilância Sanitária - Anvisa.",
+      "arquivo": "data/normas/edt/2026/edt-18.md"
+    },
+    {
+      "id": "ETA 1/2026",
+      "tipo": "ETA",
+      "numero": "1",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Prorroga o prazo de vigência do contrato nº 3/2024, celebrado entre a Agência Nacional de Vigilância Sanitária e a empresa Agência Brasileira de Desenvolvimento Industrial - ABDI.",
+      "arquivo": "data/normas/eta/2026/eta-1.md"
+    },
+    {
+      "id": "ETA 2/2026",
+      "tipo": "ETA",
+      "numero": "2",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Prorroga o prazo de vigência do contrato nº 25/2024, celebrado entre a Agência Nacional de Vigilância Sanitária e a empresa Open Soluções Tributárias Ltda.",
+      "arquivo": "data/normas/eta/2026/eta-2.md"
+    },
+    {
+      "id": "LEI 14133/2021",
+      "tipo": "LEI_FEDERAL",
+      "numero": "14133",
+      "ano": "2021",
+      "situacao": "externa",
+      "ementa": "Legislação Federal citada como fundamento e base legal de competência."
+    },
+    {
+      "id": "EXC 25/2024",
+      "tipo": "EXC",
+      "numero": "25",
+      "ano": "2024",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2024."
+    },
+    {
+      "id": "EDL 12/2024",
+      "tipo": "EDL",
+      "numero": "12",
+      "ano": "2024",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2024."
+    },
+    {
+      "id": "EXC 25/2026",
+      "tipo": "EXC",
+      "numero": "25",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Extrato do Contrato nº 20/2026, celebrado entre a Agência Nacional de Vigilância Sanitária e a Gpbr Participações Ltda",
+      "arquivo": "data/normas/exc/2026/exc-25.md"
+    },
+    {
+      "id": "IN 197/2022",
+      "tipo": "IN",
+      "numero": "197",
+      "ano": "2022",
+      "data_ato": "08/12/2022",
+      "data_promulgacao": "08/12/2022",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/in/2022/in-197.md"
+    },
+    {
+      "id": "IN 419/2025",
+      "tipo": "IN",
+      "numero": "419",
+      "ano": "2025",
+      "data_ato": "18/12/2025",
+      "data_promulgacao": "18/12/2025",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/in/2025/in-419.md"
+    },
+    {
+      "id": "IN 159/2022",
+      "tipo": "IN",
+      "numero": "159",
+      "ano": "2022",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2022."
+    },
+    {
+      "id": "IN 475/2026",
+      "tipo": "IN",
+      "numero": "475",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Dispõe sobre a composição das vacinas influenza sazonais a serem utilizadas no Brasil.",
+      "arquivo": "data/normas/in/2026/in-475.md"
+    },
+    {
+      "id": "LEI 9782/1999",
+      "tipo": "LEI_FEDERAL",
+      "numero": "9782",
+      "ano": "1999",
+      "situacao": "externa",
+      "ementa": "Legislação Federal citada como fundamento e base legal de competência."
+    },
+    {
+      "id": "RDC 616/2022",
+      "tipo": "RDC",
+      "numero": "616",
+      "ano": "2022",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2022."
+    },
+    {
+      "id": "IN 440/2026",
+      "tipo": "IN",
+      "numero": "440",
+      "ano": "2026",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2026."
+    },
+    {
+      "id": "IN 476/2026",
+      "tipo": "IN",
+      "numero": "476",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Altera a Instrução Normativa - IN nº 211, de 1º de março de 2023, que estabelece as funções tecnológicas, os limites máximos e as condições de uso para os aditivos alimentares e os coadjuvantes de tecnologia autorizados para uso em alimentos.",
+      "arquivo": "data/normas/in/2026/in-476.md"
+    },
+    {
+      "id": "IN 211/2023",
+      "tipo": "IN",
+      "numero": "211",
+      "ano": "2023",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2023."
+    },
+    {
+      "id": "IN 477/2026",
+      "tipo": "IN",
+      "numero": "477",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Altera a Instrução Normativa - IN nº 87, de 15 de março de 2021, que estabelece a lista de espécies vegetais autorizadas, as designações, a composição de ácidos graxos e os valores máximos de acidez e de índice de peróxidos para óleos e gorduras vegetais.",
+      "arquivo": "data/normas/in/2026/in-477.md"
+    },
+    {
+      "id": "IN 87/2021",
+      "tipo": "IN",
+      "numero": "87",
+      "ano": "2021",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2021."
+    },
+    {
+      "id": "PORTARIA 1182/2026",
+      "tipo": "PORTARIA",
+      "numero": "1182",
+      "ano": "2026",
+      "data_ato": "15/10/2026",
+      "data_promulgacao": "15/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Fica instituído Grupo de Trabalho (GT) com a finalidade de promover discussão específica e qualificada sobre os serviços de estética realizados pelas categorias profissionais regulamentadas pela Lei n.º 13.643/2018 - Esteticista e Cosmetólogo, e de Técnico em Estética.",
+      "arquivo": "data/normas/portaria/2026/portaria-1182.md"
+    },
+    {
+      "id": "LEI 13643/2018",
+      "tipo": "LEI_FEDERAL",
+      "numero": "13643",
+      "ano": "2018",
+      "situacao": "externa",
+      "ementa": "Legislação Federal citada como fundamento e base legal de competência."
+    },
+    {
+      "id": "PORTARIA 1183/2026",
+      "tipo": "PORTARIA",
+      "numero": "1183",
+      "ano": "2026",
+      "data_ato": "15/10/2026",
+      "data_promulgacao": "15/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Institui Grupo de Trabalho para discussão técnica sobre serviços de estética no âmbito da vigilância sanitária.",
+      "arquivo": "data/normas/portaria/2026/portaria-1183.md"
+    },
+    {
+      "id": "PORTARIA 1248/2026",
+      "tipo": "PORTARIA",
+      "numero": "1248",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Nomeia servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para ocupar o cargo de Assessor, da Gerência-Geral de Inspeção e Fiscalização Sanitária.",
+      "arquivo": "data/normas/portaria/2026/portaria-1248.md"
+    },
+    {
+      "id": "PORTARIA 1249/2026",
+      "tipo": "PORTARIA",
+      "numero": "1249",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1249.md"
+    },
+    {
+      "id": "PORTARIA 1250/2026",
+      "tipo": "PORTARIA",
+      "numero": "1250",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1250.md"
+    },
+    {
+      "id": "PORTARIA 1251/2026",
+      "tipo": "PORTARIA",
+      "numero": "1251",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1251.md"
+    },
+    {
+      "id": "PORTARIA 1252/2026",
+      "tipo": "PORTARIA",
+      "numero": "1252",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para participação em evento internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1252.md"
+    },
+    {
+      "id": "PORTARIA 1253/2026",
+      "tipo": "PORTARIA",
+      "numero": "1253",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para participação em evento internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1253.md"
+    },
+    {
+      "id": "PORTARIA 1254/2026",
+      "tipo": "PORTARIA",
+      "numero": "1254",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1254.md"
+    },
+    {
+      "id": "PORTARIA 1255/2026",
+      "tipo": "PORTARIA",
+      "numero": "1255",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para participação em evento internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1255.md"
+    },
+    {
+      "id": "PORTARIA 1256/2026",
+      "tipo": "PORTARIA",
+      "numero": "1256",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para participação em reunião internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1256.md"
+    },
+    {
+      "id": "PORTARIA 1257/2026",
+      "tipo": "PORTARIA",
+      "numero": "1257",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Institui Grupo de Trabalho Interinstitucional para estudo, discussão e elaboração de proposta de modelo regulatório aplicável aos produtos sujeitos à vigilância sanitária considerados de uso tradicional para a saúde.",
+      "arquivo": "data/normas/portaria/2026/portaria-1257.md"
+    },
+    {
+      "id": "PORTARIA 1258/2026",
+      "tipo": "PORTARIA",
+      "numero": "1258",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "Designa, servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para exercer o encargo de substituto de Gerente-Geral, da Gerência-Geral de Medicamentos.",
+      "arquivo": "data/normas/portaria/2026/portaria-1258.md"
+    },
+    {
+      "id": "PORTARIA 1259/2026",
+      "tipo": "PORTARIA",
+      "numero": "1259",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1259.md"
+    },
+    {
+      "id": "PORTARIA 1260/2026",
+      "tipo": "PORTARIA",
+      "numero": "1260",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1260.md"
+    },
+    {
+      "id": "PORTARIA 1261/2026",
+      "tipo": "PORTARIA",
+      "numero": "1261",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para participação em evento internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1261.md"
+    },
+    {
+      "id": "PORTARIA 1262/2026",
+      "tipo": "PORTARIA",
+      "numero": "1262",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1262.md"
+    },
+    {
+      "id": "PORTARIA 1263/2026",
+      "tipo": "PORTARIA",
+      "numero": "1263",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1263.md"
+    },
+    {
+      "id": "PORTARIA 1264/2026",
+      "tipo": "PORTARIA",
+      "numero": "1264",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Nomeia servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para ocupar o cargo de Coordenador, da Coordenação de Processo Administrativo Sanitário, da Gerência-Geral de Inspeção e Fiscalização Sanitária.",
+      "arquivo": "data/normas/portaria/2026/portaria-1264.md"
+    },
+    {
+      "id": "PORTARIA 1265/2026",
+      "tipo": "PORTARIA",
+      "numero": "1265",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Designa, servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para exercer o encargo de substituto de Gerente, da Gerência de Desenvolvimento de Pessoas, da Gerência-Geral de Gestão de Pessoas.",
+      "arquivo": "data/normas/portaria/2026/portaria-1265.md"
+    },
+    {
+      "id": "PORTARIA 1266/2026",
+      "tipo": "PORTARIA",
+      "numero": "1266",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para participação em evento internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1266.md"
+    },
+    {
+      "id": "PORTARIA 1267/2026",
+      "tipo": "PORTARIA",
+      "numero": "1267",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1267.md"
+    },
+    {
+      "id": "PORTARIA 1268/2026",
+      "tipo": "PORTARIA",
+      "numero": "1268",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1268.md"
+    },
+    {
+      "id": "PORTARIA 1269/2026",
+      "tipo": "PORTARIA",
+      "numero": "1269",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1269.md"
+    },
+    {
+      "id": "PORTARIA 1270/2026",
+      "tipo": "PORTARIA",
+      "numero": "1270",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1270.md"
+    },
+    {
+      "id": "PORTARIA 1271/2026",
+      "tipo": "PORTARIA",
+      "numero": "1271",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1271.md"
+    },
+    {
+      "id": "PORTARIA 1272/2026",
+      "tipo": "PORTARIA",
+      "numero": "1272",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1272.md"
+    },
+    {
+      "id": "PORTARIA 1273/2026",
+      "tipo": "PORTARIA",
+      "numero": "1273",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para participação em evento internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1273.md"
+    },
+    {
+      "id": "PORTARIA 1274/2026",
+      "tipo": "PORTARIA",
+      "numero": "1274",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para participação em evento internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1274.md"
+    },
+    {
+      "id": "PORTARIA 1276/2026",
+      "tipo": "PORTARIA",
+      "numero": "1276",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1276.md"
+    },
+    {
+      "id": "PORTARIA 1277/2026",
+      "tipo": "PORTARIA",
+      "numero": "1277",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1277.md"
+    },
+    {
+      "id": "PORTARIA 1278/2026",
+      "tipo": "PORTARIA",
+      "numero": "1278",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1278.md"
+    },
+    {
+      "id": "PORTARIA 1279/2026",
+      "tipo": "PORTARIA",
+      "numero": "1279",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1279.md"
+    },
+    {
+      "id": "PORTARIA 1280/2026",
+      "tipo": "PORTARIA",
+      "numero": "1280",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1280.md"
+    },
+    {
+      "id": "PORTARIA 1281/2026",
+      "tipo": "PORTARIA",
+      "numero": "1281",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1281.md"
+    },
+    {
+      "id": "PORTARIA 1282/2026",
+      "tipo": "PORTARIA",
+      "numero": "1282",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1282.md"
+    },
+    {
+      "id": "PORTARIA 1283/2026",
+      "tipo": "PORTARIA",
+      "numero": "1283",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1283.md"
+    },
+    {
+      "id": "PORTARIA 1284/2026",
+      "tipo": "PORTARIA",
+      "numero": "1284",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1284.md"
+    },
+    {
+      "id": "PORTARIA 1285/2026",
+      "tipo": "PORTARIA",
+      "numero": "1285",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1285.md"
+    },
+    {
+      "id": "PORTARIA 1286/2026",
+      "tipo": "PORTARIA",
+      "numero": "1286",
+      "ano": "2026",
+      "data_ato": "10/11/2026",
+      "data_promulgacao": "10/11/2026",
+      "data_publicacao_dou": "11/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para participação em evento internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1286.md"
+    },
+    {
+      "id": "PORTARIA 1287/2026",
+      "tipo": "PORTARIA",
+      "numero": "1287",
+      "ano": "2026",
+      "data_ato": "10/11/2026",
+      "data_promulgacao": "10/11/2026",
+      "data_publicacao_dou": "11/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1287.md"
+    },
+    {
+      "id": "PORTARIA 1288/2026",
+      "tipo": "PORTARIA",
+      "numero": "1288",
+      "ano": "2026",
+      "data_ato": "10/11/2026",
+      "data_promulgacao": "10/11/2026",
+      "data_publicacao_dou": "11/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1288.md"
+    },
+    {
+      "id": "PORTARIA 1289/2026",
+      "tipo": "PORTARIA",
+      "numero": "1289",
+      "ano": "2026",
+      "data_ato": "10/11/2026",
+      "data_promulgacao": "10/11/2026",
+      "data_publicacao_dou": "11/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para participação em evento internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1289.md"
     },
     {
       "id": "PORTARIA 1290/2026",
@@ -85,6 +941,110 @@
       "arquivo": "data/normas/portaria/2026/portaria-1295.md"
     },
     {
+      "id": "PRG 102/2026",
+      "tipo": "PRG",
+      "numero": "102",
+      "ano": "2026",
+      "data_ato": "11/11/2026",
+      "data_promulgacao": "11/11/2026",
+      "data_publicacao_dou": "11/11/2026",
+      "situacao": "vigente",
+      "ementa": ", que tem por objeto a contratação de serviços contínuos limpeza, asseio e conservação da unidade da Anvisa (MT).",
+      "arquivo": "data/normas/prg/2026/prg-102.md"
+    },
+    {
+      "id": "PRG 29/2026",
+      "tipo": "PRG",
+      "numero": "29",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": ", que tem por objeto a contratação de locação de veículos para o transporte terrestre de servidores e pequenas cargas, para atender às necessidades da Agência Nacional de Vigilância Sanitária - Anvisa nas regionais Goiás e Norte.",
+      "arquivo": "data/normas/prg/2026/prg-29.md"
+    },
+    {
+      "id": "RDC 1046/2026",
+      "tipo": "RDC",
+      "numero": "1046",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Altera a Resolução de Diretoria Colegiada nº 1.000, de 11 de dezembro de 2025, que dispõe sobre os requisitos de controle para Notificações de Receita, Receitas de Controle Especial e Receitas sujeitas à retenção emitidas em meio eletrônico.",
+      "arquivo": "data/normas/rdc/2026/rdc-1046.md"
+    },
+    {
+      "id": "RDC 1000/2025",
+      "tipo": "RDC",
+      "numero": "1000",
+      "ano": "2025",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2025."
+    },
+    {
+      "id": "PORTARIA 344/1998",
+      "tipo": "PORTARIA",
+      "numero": "344",
+      "ano": "1998",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 1998."
+    },
+    {
+      "id": "RDC 471/2021",
+      "tipo": "RDC",
+      "numero": "471",
+      "ano": "2021",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2021."
+    },
+    {
+      "id": "RDC 1047/2026",
+      "tipo": "RDC",
+      "numero": "1047",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "revogada",
+      "ementa": "Revoga a Resolução da Diretoria Colegiada - RDC nº 184, de 17 de outubro de 2017, e estabelece regras de transição.",
+      "arquivo": "data/normas/rdc/2026/rdc-1047.md"
+    },
+    {
+      "id": "RDC 184/2017",
+      "tipo": "RDC",
+      "numero": "184",
+      "ano": "2017",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2017."
+    },
+    {
+      "id": "RE 3293/2011",
+      "tipo": "RE",
+      "numero": "3293",
+      "ano": "2011",
+      "data_ato": "29/07/2011",
+      "data_promulgacao": "29/07/2011",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": ", de 29 de julho de 2011.",
+      "arquivo": "data/normas/re/2011/re-3293.md"
+    },
+    {
+      "id": "RE 3625/2024",
+      "tipo": "RE",
+      "numero": "3625",
+      "ano": "2024",
+      "data_ato": "01/10/2024",
+      "data_promulgacao": "01/10/2024",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2024/re-3625.md"
+    },
+    {
       "id": "RE 3806/2024",
       "tipo": "RE",
       "numero": "3806",
@@ -109,6 +1069,126 @@
       "arquivo": "data/normas/re/2025/re-1823.md"
     },
     {
+      "id": "RE 2291/2025",
+      "tipo": "RE",
+      "numero": "2291",
+      "ano": "2025",
+      "data_ato": "17/06/2025",
+      "data_promulgacao": "17/06/2025",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2025/re-2291.md"
+    },
+    {
+      "id": "RE 2388/2025",
+      "tipo": "RE",
+      "numero": "2388",
+      "ano": "2025",
+      "data_ato": "26/06/2025",
+      "data_promulgacao": "26/06/2025",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2025/re-2388.md"
+    },
+    {
+      "id": "RE 3771/2025",
+      "tipo": "RE",
+      "numero": "3771",
+      "ano": "2025",
+      "data_ato": "25/09/2025",
+      "data_promulgacao": "25/09/2025",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2025/re-3771.md"
+    },
+    {
+      "id": "RE 2113/2026",
+      "tipo": "RE",
+      "numero": "2113",
+      "ano": "2026",
+      "data_ato": "22/05/2026",
+      "data_promulgacao": "22/05/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-2113.md"
+    },
+    {
+      "id": "RE 2631/2026",
+      "tipo": "RE",
+      "numero": "2631",
+      "ano": "2026",
+      "data_ato": "02/07/2026",
+      "data_promulgacao": "02/07/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-2631.md"
+    },
+    {
+      "id": "RE 2732/2026",
+      "tipo": "RE",
+      "numero": "2732",
+      "ano": "2026",
+      "data_ato": "09/07/2026",
+      "data_promulgacao": "09/07/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-2732.md"
+    },
+    {
+      "id": "RE 2836/2026",
+      "tipo": "RE",
+      "numero": "2836",
+      "ano": "2026",
+      "data_ato": "17/07/2026",
+      "data_promulgacao": "17/07/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-2836.md"
+    },
+    {
+      "id": "RE 2948/2026",
+      "tipo": "RE",
+      "numero": "2948",
+      "ano": "2026",
+      "data_ato": "29/07/2026",
+      "data_promulgacao": "29/07/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-2948.md"
+    },
+    {
+      "id": "RE 3024/2026",
+      "tipo": "RE",
+      "numero": "3024",
+      "ano": "2026",
+      "data_ato": "31/07/2026",
+      "data_promulgacao": "31/07/2026",
+      "data_publicacao_dou": "11/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-3024.md"
+    },
+    {
+      "id": "RE 3206/2026",
+      "tipo": "RE",
+      "numero": "3206",
+      "ano": "2026",
+      "data_ato": "13/08/2026",
+      "data_promulgacao": "13/08/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-3206.md"
+    },
+    {
       "id": "RE 3357/2026",
       "tipo": "RE",
       "numero": "3357",
@@ -121,6 +1201,2302 @@
       "arquivo": "data/normas/re/2026/re-3357.md"
     },
     {
+      "id": "RE 3416/2026",
+      "tipo": "RE",
+      "numero": "3416",
+      "ano": "2026",
+      "data_ato": "28/08/2026",
+      "data_promulgacao": "28/08/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-3416.md"
+    },
+    {
+      "id": "RE 3480/2026",
+      "tipo": "RE",
+      "numero": "3480",
+      "ano": "2026",
+      "data_ato": "03/09/2026",
+      "data_promulgacao": "03/09/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-3480.md"
+    },
+    {
+      "id": "RE 3511/2026",
+      "tipo": "RE",
+      "numero": "3511",
+      "ano": "2026",
+      "data_ato": "04/09/2026",
+      "data_promulgacao": "04/09/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-3511.md"
+    },
+    {
+      "id": "RE 3645/2026",
+      "tipo": "RE",
+      "numero": "3645",
+      "ano": "2026",
+      "data_ato": "17/09/2026",
+      "data_promulgacao": "17/09/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-3645.md"
+    },
+    {
+      "id": "RE 3712/2026",
+      "tipo": "RE",
+      "numero": "3712",
+      "ano": "2026",
+      "data_ato": "18/09/2026",
+      "data_promulgacao": "18/09/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-3712.md"
+    },
+    {
+      "id": "DEL 986/1969",
+      "tipo": "DEL",
+      "numero": "986",
+      "ano": "1969",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 1969."
+    },
+    {
+      "id": "RE 10/1984",
+      "tipo": "RE",
+      "numero": "10",
+      "ano": "1984",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 1984."
+    },
+    {
+      "id": "RDC 243/2018",
+      "tipo": "RDC",
+      "numero": "243",
+      "ano": "2018",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2018."
+    },
+    {
+      "id": "RDC 275/2002",
+      "tipo": "RDC",
+      "numero": "275",
+      "ano": "2002",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2002."
+    },
+    {
+      "id": "RDC 843/2024",
+      "tipo": "RDC",
+      "numero": "843",
+      "ano": "2024",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2024."
+    },
+    {
+      "id": "IN 281/2024",
+      "tipo": "IN",
+      "numero": "281",
+      "ano": "2024",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2024."
+    },
+    {
+      "id": "RDC 655/2022",
+      "tipo": "RDC",
+      "numero": "655",
+      "ano": "2022",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2022."
+    },
+    {
+      "id": "RE 3739/2026",
+      "tipo": "RE",
+      "numero": "3739",
+      "ano": "2026",
+      "data_ato": "22/09/2026",
+      "data_promulgacao": "22/09/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-3739.md"
+    },
+    {
+      "id": "RE 3825/2026",
+      "tipo": "RE",
+      "numero": "3825",
+      "ano": "2026",
+      "data_ato": "25/09/2026",
+      "data_promulgacao": "25/09/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-3825.md"
+    },
+    {
+      "id": "RE 3851/2026",
+      "tipo": "RE",
+      "numero": "3851",
+      "ano": "2026",
+      "data_ato": "29/09/2026",
+      "data_promulgacao": "29/09/2026",
+      "data_publicacao_dou": "30/09/2026",
+      "situacao": "vigente",
+      "ementa": "(*)Defere petições relacionadas à Gerência-Geral de Medicamentos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-3851.md"
+    },
+    {
+      "id": "RE 4144/2026",
+      "tipo": "RE",
+      "numero": "4144",
+      "ano": "2026",
+      "data_ato": "20/10/2026",
+      "data_promulgacao": "20/10/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-4144.md"
+    },
+    {
+      "id": "RE 4160/2026",
+      "tipo": "RE",
+      "numero": "4160",
+      "ano": "2026",
+      "data_ato": "22/10/2026",
+      "data_promulgacao": "22/10/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-4160.md"
+    },
+    {
+      "id": "IN 28/2018",
+      "tipo": "IN",
+      "numero": "28",
+      "ano": "2018",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2018."
+    },
+    {
+      "id": "RDC 839/2023",
+      "tipo": "RDC",
+      "numero": "839",
+      "ano": "2023",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2023."
+    },
+    {
+      "id": "RDC 727/2022",
+      "tipo": "RDC",
+      "numero": "727",
+      "ano": "2022",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2022."
+    },
+    {
+      "id": "RE 4201/2026",
+      "tipo": "RE",
+      "numero": "4201",
+      "ano": "2026",
+      "data_ato": "22/10/2026",
+      "data_promulgacao": "22/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Altera a Autorização de Funcionamento, Autorização Especial ou Cadastramento de filial das Empresas prestadoras de serviços em Portos, Aeroportos, Fronteiras e Recintos Alfandegados conforme anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4201.md"
+    },
+    {
+      "id": "RE 4202/2026",
+      "tipo": "RE",
+      "numero": "4202",
+      "ano": "2026",
+      "data_ato": "22/10/2026",
+      "data_promulgacao": "22/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede Autorização de Funcionamento para as Empresas prestadoras de serviços em Portos, Aeroportos, Fronteiras e Recintos Alfandegados conforme anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4202.md"
+    },
+    {
+      "id": "RE 4203/2026",
+      "tipo": "RE",
+      "numero": "4203",
+      "ano": "2026",
+      "data_ato": "22/10/2026",
+      "data_promulgacao": "22/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela a Autorização de Funcionamento ou Autorização Especial ou Cadastramento de Filial das Empresas prestadoras de serviços em Portos, Aeroportos, Fronteiras e Recintos Alfandegados conforme anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4203.md"
+    },
+    {
+      "id": "RE 4218/2026",
+      "tipo": "RE",
+      "numero": "4218",
+      "ano": "2026",
+      "data_ato": "23/10/2026",
+      "data_promulgacao": "23/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova a Certificação de Boas Práticas de Fabricação de Medicamentos das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4218.md"
+    },
+    {
+      "id": "RE 4219/2026",
+      "tipo": "RE",
+      "numero": "4219",
+      "ano": "2026",
+      "data_ato": "23/10/2026",
+      "data_promulgacao": "23/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova a Certificação de Boas Práticas de Fabricação de Medicamentos das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4219.md"
+    },
+    {
+      "id": "RE 4220/2026",
+      "tipo": "RE",
+      "numero": "4220",
+      "ano": "2026",
+      "data_ato": "23/10/2026",
+      "data_promulgacao": "23/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Altera a empresa solicitante nas certificações de boas práticas de fabricação de Medicamentos e Insumos Farmacêuticos Ativos, vigentes à data de 26 de outubro de 2026, cuja solicitante é a empresa Takeda Pharma Ltda, de Takeda Pharma Ltda, para Takeda Farmaceutica Brasil Ltda.",
+      "arquivo": "data/normas/re/2026/re-4220.md"
+    },
+    {
+      "id": "RDC 102/2016",
+      "tipo": "RDC",
+      "numero": "102",
+      "ano": "2016",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2016."
+    },
+    {
+      "id": "RE 4221/2026",
+      "tipo": "RE",
+      "numero": "4221",
+      "ano": "2026",
+      "data_ato": "23/10/2026",
+      "data_promulgacao": "23/10/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-4221.md"
+    },
+    {
+      "id": "RE 4244/2026",
+      "tipo": "RE",
+      "numero": "4244",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "29/10/2026",
+      "situacao": "vigente",
+      "ementa": "(*)Defere petições relacionadas à Gerência-Geral de Medicamentos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4244.md"
+    },
+    {
+      "id": "RE 4246/2026",
+      "tipo": "RE",
+      "numero": "4246",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4246.md"
+    },
+    {
+      "id": "RE 4248/2026",
+      "tipo": "RE",
+      "numero": "4248",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Publica a desistência a pedido das petições relacionadas à Gerência-Geral de Produtos Biológicos, Radiofármacos, Sangue, Tecidos, Células, Órgãos e Produtos de Terapias Avançadas sob os números de expedientes constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4248.md"
+    },
+    {
+      "id": "RE 4249/2026",
+      "tipo": "RE",
+      "numero": "4249",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições relacionadas à Gerência-Geral de Produtos Biológicos, Radiofármacos, Sangue, Tecidos, Células, Órgãos e Produtos de Terapias Avançadas, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4249.md"
+    },
+    {
+      "id": "RE 4251/2026",
+      "tipo": "RE",
+      "numero": "4251",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Publica o cancelamento de registro a pedido dos medicamentos similares, genéricos e novos, sob o nº de expedientes constantes do anexo.",
+      "arquivo": "data/normas/re/2026/re-4251.md"
+    },
+    {
+      "id": "RE 4252/2026",
+      "tipo": "RE",
+      "numero": "4252",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Publica a aprovação condicional das petições secundárias de medicamentos similares, genéricos e novos, sob os números de expediente constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4252.md"
+    },
+    {
+      "id": "RE 4253/2026",
+      "tipo": "RE",
+      "numero": "4253",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Publica a aprovação condicional das petições secundárias de medicamentos similares, genéricos e novos, sob os números de expediente constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4253.md"
+    },
+    {
+      "id": "RE 4254/2026",
+      "tipo": "RE",
+      "numero": "4254",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Prorroga os prazos para publicação de decisão referente a processos prioritários e ordinários listados no anexo, conforme as categorias especificadas, em conformidade com a legislação aplicável.",
+      "arquivo": "data/normas/re/2026/re-4254.md"
+    },
+    {
+      "id": "RE 4255/2026",
+      "tipo": "RE",
+      "numero": "4255",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere petições relacionadas à Gerência-Geral de Medicamentos, conforme anexo",
+      "arquivo": "data/normas/re/2026/re-4255.md"
+    },
+    {
+      "id": "RE 4256/2026",
+      "tipo": "RE",
+      "numero": "4256",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4256.md"
+    },
+    {
+      "id": "RE 4257/2026",
+      "tipo": "RE",
+      "numero": "4257",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições relacionadas à Gerência-Geral de Medicamentos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4257.md"
+    },
+    {
+      "id": "RE 4258/2026",
+      "tipo": "RE",
+      "numero": "4258",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela o registro sanitário de medicamentos e insumos farmacêuticos, ou de apresentações, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4258.md"
+    },
+    {
+      "id": "RE 4259/2026",
+      "tipo": "RE",
+      "numero": "4259",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere petições relacionadas à Gerência-Geral de Medicamentos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4259.md"
+    },
+    {
+      "id": "RE 4260/2026",
+      "tipo": "RE",
+      "numero": "4260",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Publica a desistência a pedido dos expedientes relacionadas à Gerência-Geral de Medicamentos, sob o nº. de expedientes constantes do anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4260.md"
+    },
+    {
+      "id": "RE 4261/2026",
+      "tipo": "RE",
+      "numero": "4261",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Publica o cancelamento de registro da apresentação a pedido dos medicamentos similares, genéricos e novos, sob o nº de expedientes constantes do anexo.",
+      "arquivo": "data/normas/re/2026/re-4261.md"
+    },
+    {
+      "id": "RE 4262/2026",
+      "tipo": "RE",
+      "numero": "4262",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4262.md"
+    },
+    {
+      "id": "RE 4263/2026",
+      "tipo": "RE",
+      "numero": "4263",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere as petições relacionadas à Gerência-Geral de Tecnologia de Produtos para Saúde, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4263.md"
+    },
+    {
+      "id": "RE 4264/2026",
+      "tipo": "RE",
+      "numero": "4264",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere as petições de alteração de implementação imediata relacionadas à Gerência-Geral de Tecnologia de Produtos para Saúde, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4264.md"
+    },
+    {
+      "id": "RE 4265/2026",
+      "tipo": "RE",
+      "numero": "4265",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere as petições relacionadas à Gerência-Geral de Tecnologia de Produtos para Saúde, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4265.md"
+    },
+    {
+      "id": "RE 4266/2026",
+      "tipo": "RE",
+      "numero": "4266",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere as petições relacionadas à Gerência-Geral de Tecnologia de Produtos para Saúde, conforme anexo..",
+      "arquivo": "data/normas/re/2026/re-4266.md"
+    },
+    {
+      "id": "RE 4267/2026",
+      "tipo": "RE",
+      "numero": "4267",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere as petições relacionadas à Gerência-Geral de Tecnologia de Produtos para Saúde, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4267.md"
+    },
+    {
+      "id": "RE 4268/2026",
+      "tipo": "RE",
+      "numero": "4268",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Aprova os atos de avaliação toxicológica de produtos agrotóxicos, componentes e afins, identificados no anexo.",
+      "arquivo": "data/normas/re/2026/re-4268.md"
+    },
+    {
+      "id": "RE 4269/2026",
+      "tipo": "RE",
+      "numero": "4269",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Aprova os atos de avaliação toxicológica de produtos agrotóxicos, componentes e afins, identificados no anexo.",
+      "arquivo": "data/normas/re/2026/re-4269.md"
+    },
+    {
+      "id": "RE 4270/2026",
+      "tipo": "RE",
+      "numero": "4270",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Aprova os atos de avaliação toxicológica para fins de registro de produtos agrotóxicos, componentes e afins, identificados no anexo.",
+      "arquivo": "data/normas/re/2026/re-4270.md"
+    },
+    {
+      "id": "RE 4271/2026",
+      "tipo": "RE",
+      "numero": "4271",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Aprova os atos de avaliação toxicológica para fins de pós-registro de produtos agrotóxicos, componentes e afins, identificados no anexo.",
+      "arquivo": "data/normas/re/2026/re-4271.md"
+    },
+    {
+      "id": "RE 4272/2026",
+      "tipo": "RE",
+      "numero": "4272",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Aprova os atos de avaliação toxicológica para fins de alteração de formulação e reclassificação de produtos agrotóxicos, componentes e afins, identificados no anexo.",
+      "arquivo": "data/normas/re/2026/re-4272.md"
+    },
+    {
+      "id": "RE 4273/2026",
+      "tipo": "RE",
+      "numero": "4273",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Reprova os atos de avaliação toxicológica para fins de alteração de formulação e reclassificação de produtos agrotóxicos, componentes e afins, identificados no anexo.",
+      "arquivo": "data/normas/re/2026/re-4273.md"
+    },
+    {
+      "id": "RE 4277/2026",
+      "tipo": "RE",
+      "numero": "4277",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições relacionadas à Gerência-Geral de Medicamentos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4277.md"
+    },
+    {
+      "id": "RE 4278/2026",
+      "tipo": "RE",
+      "numero": "4278",
+      "ano": "2026",
+      "data_ato": "28/10/2026",
+      "data_promulgacao": "28/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere petições relacionadas à Gerência-Geral de Medicamentos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4278.md"
+    },
+    {
+      "id": "RE 4279/2026",
+      "tipo": "RE",
+      "numero": "4279",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova a Certificação de Boas Práticas de Fabricação de Insumos Farmacêuticos Ativos das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4279.md"
+    },
+    {
+      "id": "RE 4280/2026",
+      "tipo": "RE",
+      "numero": "4280",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova a Certificação de Boas Práticas de Fabricação de Insumos Farmacêuticos Ativos das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4280.md"
+    },
+    {
+      "id": "RE 4281/2026",
+      "tipo": "RE",
+      "numero": "4281",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede às empresas constantes no anexo, a Certificação de Boas Práticas de Fabricação de Insumos Farmacêuticos Ativos.",
+      "arquivo": "data/normas/re/2026/re-4281.md"
+    },
+    {
+      "id": "RE 4282/2026",
+      "tipo": "RE",
+      "numero": "4282",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4282.md"
+    },
+    {
+      "id": "RE 4283/2026",
+      "tipo": "RE",
+      "numero": "4283",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere os Pedidos de Certificação de Boas Práticas de Distribuição e/ou Armazenamento de Medicamentos das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4283.md"
+    },
+    {
+      "id": "RE 4284/2026",
+      "tipo": "RE",
+      "numero": "4284",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere os Pedidos de Certificação de Boas Práticas de Fabricação de Medicamentos das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4284.md"
+    },
+    {
+      "id": "RE 4285/2026",
+      "tipo": "RE",
+      "numero": "4285",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere os Pedidos de Certificação de Boas Práticas de Fabricação de Insumos Farmacêuticos das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4285.md"
+    },
+    {
+      "id": "RE 4286/2026",
+      "tipo": "RE",
+      "numero": "4286",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere as petições relacionadas à Gerência-Geral de Alimentos, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4286.md"
+    },
+    {
+      "id": "RE 4287/2026",
+      "tipo": "RE",
+      "numero": "4287",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Declara o cancelamento das notificações relacionadas à Gerência-Geral de Alimentos, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4287.md"
+    },
+    {
+      "id": "RE 4288/2026",
+      "tipo": "RE",
+      "numero": "4288",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere as petições de avaliação relacionadas à Gerência-Geral de Alimentos, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4288.md"
+    },
+    {
+      "id": "RE 4289/2026",
+      "tipo": "RE",
+      "numero": "4289",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere as petições de avaliação relacionadas à Gerência-Geral de Alimentos, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4289.md"
+    },
+    {
+      "id": "RE 4290/2026",
+      "tipo": "RE",
+      "numero": "4290",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4290.md"
+    },
+    {
+      "id": "RE 4291/2026",
+      "tipo": "RE",
+      "numero": "4291",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela a Autorização de Funcionamento a empresas dos setores de comércio de alimentos, cosméticos, perfumes, produtos de higiene e saúde, e dispensação de medicamentos, conforme especificações no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4291.md"
+    },
+    {
+      "id": "RE 4292/2026",
+      "tipo": "RE",
+      "numero": "4292",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova a Certificação de Boas Práticas de Fabricação de Medicamentos das empresas constantes no anexo, por meio de sua renovação automática.",
+      "arquivo": "data/normas/re/2026/re-4292.md"
+    },
+    {
+      "id": "RE 4293/2026",
+      "tipo": "RE",
+      "numero": "4293",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova a Certificação de Boas Práticas de Fabricação de Medicamentos das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4293.md"
+    },
+    {
+      "id": "RE 4294/2026",
+      "tipo": "RE",
+      "numero": "4294",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede às Empresas constantes no anexo, a Certificação de Boas Práticas de Fabricação de Medicamentos.",
+      "arquivo": "data/normas/re/2026/re-4294.md"
+    },
+    {
+      "id": "RE 4295/2026",
+      "tipo": "RE",
+      "numero": "4295",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede às empresas constantes no anexo, a Certificação de Boas Práticas de Distribuição e/ou Armazenagem de Medicamentos.",
+      "arquivo": "data/normas/re/2026/re-4295.md"
+    },
+    {
+      "id": "RE 4296/2026",
+      "tipo": "RE",
+      "numero": "4296",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Altera a razão social das empresas relacionadas, em todas as certificações vigentes à data de 3 de novembro de 2026.",
+      "arquivo": "data/normas/re/2026/re-4296.md"
+    },
+    {
+      "id": "RE 4297/2026",
+      "tipo": "RE",
+      "numero": "4297",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela o Registro de Produtos Fumígenos Derivados do Tabaco das marcas, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4297.md"
+    },
+    {
+      "id": "RE 4298/2026",
+      "tipo": "RE",
+      "numero": "4298",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela por caducidade o Registro de Produtos Fumígenos Derivados do Tabaco das marcas, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4298.md"
+    },
+    {
+      "id": "RE 4325/2026",
+      "tipo": "RE",
+      "numero": "4325",
+      "ano": "2026",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2026."
+    },
+    {
+      "id": "RE 4299/2026",
+      "tipo": "RE",
+      "numero": "4299",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere as petições relativas a produtos fumígenos derivados do tabaco, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4299.md"
+    },
+    {
+      "id": "RE 4300/2026",
+      "tipo": "RE",
+      "numero": "4300",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere a petição relativa a produto fumígeno derivado do tabaco, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4300.md"
+    },
+    {
+      "id": "RE 4301/2026",
+      "tipo": "RE",
+      "numero": "4301",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova automaticamente a Certificação de Boas Práticas de Fabricação de Produtos para Saúde, das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4301.md"
+    },
+    {
+      "id": "RE 4302/2026",
+      "tipo": "RE",
+      "numero": "4302",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere o Pedido de Certificação de Boas Práticas de Fabricação de Produtos para Saúde das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4302.md"
+    },
+    {
+      "id": "RE 4303/2026",
+      "tipo": "RE",
+      "numero": "4303",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova a Certificação de Boas Práticas de Fabricação de Produtos para Saúde às empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4303.md"
+    },
+    {
+      "id": "RE 4304/2026",
+      "tipo": "RE",
+      "numero": "4304",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova às empresas constantes no anexo a Certificação de Boas Práticas de Fabricação de Produtos para Saúde.",
+      "arquivo": "data/normas/re/2026/re-4304.md"
+    },
+    {
+      "id": "RE 4305/2026",
+      "tipo": "RE",
+      "numero": "4305",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede às empresas constantes no anexo a Certificação de Boas Práticas de Fabricação de Produtos para Saúde.",
+      "arquivo": "data/normas/re/2026/re-4305.md"
+    },
+    {
+      "id": "RE 4306/2026",
+      "tipo": "RE",
+      "numero": "4306",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere o pedido de habilitação na Rede Brasileira de Laboratórios Analíticos em Saúde (REBLAS), dos laboratórios constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4306.md"
+    },
+    {
+      "id": "RE 4307/2026",
+      "tipo": "RE",
+      "numero": "4307",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Altera na Rede Brasileira de Laboratórios Analíticos em Saúde (REBLAS), o escopo dos laboratórios constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4307.md"
+    },
+    {
+      "id": "RE 4308/2026",
+      "tipo": "RE",
+      "numero": "4308",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Publica a desistência de solicitação de habilitação inicial dos laboratórios constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4308.md"
+    },
+    {
+      "id": "RE 4309/2026",
+      "tipo": "RE",
+      "numero": "4309",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere o pedido de alteração na Rede Brasileira de Laboratórios Analíticos em Saúde (REBLAS), de escopo dos laboratórios constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4309.md"
+    },
+    {
+      "id": "RE 4310/2026",
+      "tipo": "RE",
+      "numero": "4310",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere o pedido de renovação de habilitação na Rede Brasileira de Laboratórios Analíticos em Saúde (REBLAS), dos laboratórios constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4310.md"
+    },
+    {
+      "id": "RE 4311/2026",
+      "tipo": "RE",
+      "numero": "4311",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere os registros e as petições dos produtos de higiene pessoal, cosméticos e perfumes, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4311.md"
+    },
+    {
+      "id": "RE 4312/2026",
+      "tipo": "RE",
+      "numero": "4312",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere os registros e as petições dos produtos de higiene pessoal, cosméticos e perfumes, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4312.md"
+    },
+    {
+      "id": "RE 4313/2026",
+      "tipo": "RE",
+      "numero": "4313",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela os processos dos produtos de higiene pessoal, cosméticos e perfumes, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4313.md"
+    },
+    {
+      "id": "RE 4314/2026",
+      "tipo": "RE",
+      "numero": "4314",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere as petições de Cancelamento de Notificação de Produto Saneante de Risco 1 por ato de ofício, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4314.md"
+    },
+    {
+      "id": "RE 4315/2026",
+      "tipo": "RE",
+      "numero": "4315",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere os registros e as petições dos produtos saneantes, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4315.md"
+    },
+    {
+      "id": "RE 4316/2026",
+      "tipo": "RE",
+      "numero": "4316",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere os registros e as petições dos produtos saneantes, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4316.md"
+    },
+    {
+      "id": "RE 4317/2026",
+      "tipo": "RE",
+      "numero": "4317",
+      "ano": "2026",
+      "data_ato": "29/10/2026",
+      "data_promulgacao": "29/10/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições relacionadas à Gerência-Geral de Medicamentos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4317.md"
+    },
+    {
+      "id": "RE 4318/2026",
+      "tipo": "RE",
+      "numero": "4318",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4318.md"
+    },
+    {
+      "id": "RE 4319/2026",
+      "tipo": "RE",
+      "numero": "4319",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede a Certificação de Boas Práticas de Fabricação de Saneantes à empresa relacionada.",
+      "arquivo": "data/normas/re/2026/re-4319.md"
+    },
+    {
+      "id": "RE 4320/2026",
+      "tipo": "RE",
+      "numero": "4320",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Torna insubsistente, única e exclusivamente, a publicação de concessão de Autorização Especial para a empresa citada, publicada pela Resolução nº 9 de 2 de janeiro de 2025.",
+      "arquivo": "data/normas/re/2026/re-4320.md"
+    },
+    {
+      "id": "RE 9/2025",
+      "tipo": "RE",
+      "numero": "9",
+      "ano": "2025",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2025."
+    },
+    {
+      "id": "RE 4321/2026",
+      "tipo": "RE",
+      "numero": "4321",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Torna insubsistente, única e exclusivamente, a publicação de alteração de Autorização de Funcionamento para a empresa citada, publicada pela Resolução - RE nº 3.150 de 19 de agosto de 2025",
+      "arquivo": "data/normas/re/2026/re-4321.md"
+    },
+    {
+      "id": "RE 3150/2025",
+      "tipo": "RE",
+      "numero": "3150",
+      "ano": "2025",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2025."
+    },
+    {
+      "id": "RE 4322/2026",
+      "tipo": "RE",
+      "numero": "4322",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4322.md"
+    },
+    {
+      "id": "RE 4323/2026",
+      "tipo": "RE",
+      "numero": "4323",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4323.md"
+    },
+    {
+      "id": "RE 4324/2026",
+      "tipo": "RE",
+      "numero": "4324",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela a Autorização de Funcionamento a empresas dos setores de comércio de alimentos, cosméticos, perfumes, produtos de higiene e saúde, e dispensação de medicamentos, conforme especificações no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4324.md"
+    },
+    {
+      "id": "RE 4326/2026",
+      "tipo": "RE",
+      "numero": "4326",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "04/11/2026",
+      "situacao": "vigente",
+      "ementa": "Torna insubsistente, única e exclusivamente, a publicação de concessão de Autorização de Funcionamento para a empresa citada, publicada pela Resolução - RE nº 2.962 de 6 de agosto de 2025.",
+      "arquivo": "data/normas/re/2026/re-4326.md"
+    },
+    {
+      "id": "RE 2962/2025",
+      "tipo": "RE",
+      "numero": "2962",
+      "ano": "2025",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2025."
+    },
+    {
+      "id": "RE 4327/2026",
+      "tipo": "RE",
+      "numero": "4327",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "05/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede Cadastramento de filial vinculado à matriz para as Empresas prestadoras de serviços em Portos, Aeroportos, Fronteiras e Recintos Alfandegados conforme anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4327.md"
+    },
+    {
+      "id": "RE 4328/2026",
+      "tipo": "RE",
+      "numero": "4328",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "05/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede Autorização de Funcionamento para as Empresas prestadoras de serviços em Portos, Aeroportos, Fronteiras e Recintos Alfandegados conforme anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4328.md"
+    },
+    {
+      "id": "RE 4329/2026",
+      "tipo": "RE",
+      "numero": "4329",
+      "ano": "2026",
+      "data_ato": "04/11/2026",
+      "data_promulgacao": "04/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4329.md"
+    },
+    {
+      "id": "RE 4330/2026",
+      "tipo": "RE",
+      "numero": "4330",
+      "ano": "2026",
+      "data_ato": "04/11/2026",
+      "data_promulgacao": "04/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "Revoga a Resolução - RE nº 386, de 31 de janeiro de 2024.",
+      "arquivo": "data/normas/re/2026/re-4330.md"
+    },
+    {
+      "id": "RE 386/2024",
+      "tipo": "RE",
+      "numero": "386",
+      "ano": "2024",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2024."
+    },
+    {
+      "id": "RE 4331/2026",
+      "tipo": "RE",
+      "numero": "4331",
+      "ano": "2026",
+      "data_ato": "04/11/2026",
+      "data_promulgacao": "04/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4331.md"
+    },
+    {
+      "id": "RE 4332/2026",
+      "tipo": "RE",
+      "numero": "4332",
+      "ano": "2026",
+      "data_ato": "04/11/2026",
+      "data_promulgacao": "04/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4332.md"
+    },
+    {
+      "id": "RE 4333/2026",
+      "tipo": "RE",
+      "numero": "4333",
+      "ano": "2026",
+      "data_ato": "04/11/2026",
+      "data_promulgacao": "04/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4333.md"
+    },
+    {
+      "id": "RE 4334/2026",
+      "tipo": "RE",
+      "numero": "4334",
+      "ano": "2026",
+      "data_ato": "04/11/2026",
+      "data_promulgacao": "04/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4334.md"
+    },
+    {
+      "id": "RE 4335/2026",
+      "tipo": "RE",
+      "numero": "4335",
+      "ano": "2026",
+      "data_ato": "04/11/2026",
+      "data_promulgacao": "04/11/2026",
+      "data_publicacao_dou": "05/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições relacionadas à Coordenação de Pesquisa Clínica em Medicamentos e Produtos Biológicos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4335.md"
+    },
+    {
+      "id": "RE 4336/2026",
+      "tipo": "RE",
+      "numero": "4336",
+      "ano": "2026",
+      "data_ato": "04/11/2026",
+      "data_promulgacao": "04/11/2026",
+      "data_publicacao_dou": "05/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza a implementação das petições relacionadas à Coordenação de Pesquisa Clínica em Medicamentos e Produtos Biológicos, por decurso de prazo, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4336.md"
+    },
+    {
+      "id": "RE 4337/2026",
+      "tipo": "RE",
+      "numero": "4337",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Publica a desistência a pedido dos expedientes de agrotóxicos e afins, sob o nº de expedientes constantes do anexo.",
+      "arquivo": "data/normas/re/2026/re-4337.md"
+    },
+    {
+      "id": "RE 4338/2026",
+      "tipo": "RE",
+      "numero": "4338",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Aprova os atos de avaliação toxicológica para fins de registro de produtos agrotóxicos, componentes e afins, identificados no anexo, com o respectivo resultado da análise.",
+      "arquivo": "data/normas/re/2026/re-4338.md"
+    },
+    {
+      "id": "RE 4339/2026",
+      "tipo": "RE",
+      "numero": "4339",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Reprova os atos de avaliação toxicológica para fins de registro de produtos agrotóxicos, componentes e afins, identificados no anexo, com o respectivo resultado da análise.",
+      "arquivo": "data/normas/re/2026/re-4339.md"
+    },
+    {
+      "id": "RE 4340/2026",
+      "tipo": "RE",
+      "numero": "4340",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere as petições relacionadas à Gerência-Geral de Alimentos, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4340.md"
+    },
+    {
+      "id": "RE 4341/2026",
+      "tipo": "RE",
+      "numero": "4341",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Declara o cancelamento das notificações relacionadas à Gerência-Geral de Alimentos, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4341.md"
+    },
+    {
+      "id": "RE 4342/2026",
+      "tipo": "RE",
+      "numero": "4342",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4342.md"
+    },
+    {
+      "id": "RE 4343/2026",
+      "tipo": "RE",
+      "numero": "4343",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4343.md"
+    },
+    {
+      "id": "RE 4344/2026",
+      "tipo": "RE",
+      "numero": "4344",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4344.md"
+    },
+    {
+      "id": "RE 4345/2026",
+      "tipo": "RE",
+      "numero": "4345",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela a Autorização de Funcionamento a empresas dos setores de comércio de alimentos, cosméticos, perfumes, produtos de higiene e saúde, e dispensação de medicamentos, conforme especificações no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4345.md"
+    },
+    {
+      "id": "RE 4346/2026",
+      "tipo": "RE",
+      "numero": "4346",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova a Certificação de Boas Práticas de Fabricação de Insumos Farmacêuticos Ativos, das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4346.md"
+    },
+    {
+      "id": "RE 4347/2026",
+      "tipo": "RE",
+      "numero": "4347",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Torna insubsistente as Resoluções - RE, referente as empresas relacionadas.",
+      "arquivo": "data/normas/re/2026/re-4347.md"
+    },
+    {
+      "id": "RE 3885/2026",
+      "tipo": "RE",
+      "numero": "3885",
+      "ano": "2026",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2026."
+    },
+    {
+      "id": "RE 3977/2026",
+      "tipo": "RE",
+      "numero": "3977",
+      "ano": "2026",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2026."
+    },
+    {
+      "id": "RE 3978/2026",
+      "tipo": "RE",
+      "numero": "3978",
+      "ano": "2026",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2026."
+    },
+    {
+      "id": "RE 4086/2026",
+      "tipo": "RE",
+      "numero": "4086",
+      "ano": "2026",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2026."
+    },
+    {
+      "id": "RE 4348/2026",
+      "tipo": "RE",
+      "numero": "4348",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Declara o cancelamento de registro ou notificação de produtos para saúde a pedido da empresa sob os números de registro/notificação constantes do anexo.",
+      "arquivo": "data/normas/re/2026/re-4348.md"
+    },
+    {
+      "id": "RE 4349/2026",
+      "tipo": "RE",
+      "numero": "4349",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova a Certificação de Boas Práticas de Fabricação de Medicamentos das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4349.md"
+    },
+    {
+      "id": "RE 4350/2026",
+      "tipo": "RE",
+      "numero": "4350",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere as petições relacionadas à Gerência-Geral de Tecnologia de Produtos para Saúde, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4350.md"
+    },
+    {
+      "id": "RE 4351/2026",
+      "tipo": "RE",
+      "numero": "4351",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere as petições de alteração de implementação imediata relacionadas à Gerência-Geral de Tecnologia de Produtos para Saúde, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4351.md"
+    },
+    {
+      "id": "RE 4352/2026",
+      "tipo": "RE",
+      "numero": "4352",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere as petições relacionadas à Gerência-Geral de Tecnologia de Produtos para Saúde, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4352.md"
+    },
+    {
+      "id": "RE 4353/2026",
+      "tipo": "RE",
+      "numero": "4353",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere as petições relacionadas à Gerência-Geral de Tecnologia de Produtos para Saúde, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4353.md"
+    },
+    {
+      "id": "RE 4354/2026",
+      "tipo": "RE",
+      "numero": "4354",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere as petições relacionadas à Gerência-Geral de Tecnologia de Produtos para Saúde, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4354.md"
+    },
+    {
+      "id": "RE 4355/2026",
+      "tipo": "RE",
+      "numero": "4355",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4355.md"
+    },
+    {
+      "id": "RE 4356/2026",
+      "tipo": "RE",
+      "numero": "4356",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere os Pedidos de Certificação de Boas Práticas de Fabricação de Medicamentos das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4356.md"
+    },
+    {
+      "id": "RE 4357/2026",
+      "tipo": "RE",
+      "numero": "4357",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere os Pedidos de Certificação de Boas Práticas de Fabricação de Insumos Farmacêuticos das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4357.md"
+    },
+    {
+      "id": "RE 4358/2026",
+      "tipo": "RE",
+      "numero": "4358",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela a Certificação de Boas Práticas de Fabricação de Medicamentos da empresa MJM Produtos Farmaceuticos e de Radioproteção S.A., publicada pela Resolução - RE nº 360, de 29 de janeiro de 2026.",
+      "arquivo": "data/normas/re/2026/re-4358.md"
+    },
+    {
+      "id": "RE 360/2026",
+      "tipo": "RE",
+      "numero": "360",
+      "ano": "2026",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2026."
+    },
+    {
+      "id": "RDC 497/2021",
+      "tipo": "RDC",
+      "numero": "497",
+      "ano": "2021",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2021."
+    },
+    {
+      "id": "IN 35/2019",
+      "tipo": "IN",
+      "numero": "35",
+      "ano": "2019",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2019."
+    },
+    {
+      "id": "RDC 430/2020",
+      "tipo": "RDC",
+      "numero": "430",
+      "ano": "2020",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2020."
+    },
+    {
+      "id": "IN 128/2022",
+      "tipo": "IN",
+      "numero": "128",
+      "ano": "2022",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2022."
+    },
+    {
+      "id": "IN 134/2022",
+      "tipo": "IN",
+      "numero": "134",
+      "ano": "2022",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2022."
+    },
+    {
+      "id": "IN 138/2022",
+      "tipo": "IN",
+      "numero": "138",
+      "ano": "2022",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2022."
+    },
+    {
+      "id": "RDC 658/2022",
+      "tipo": "RDC",
+      "numero": "658",
+      "ano": "2022",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2022."
+    },
+    {
+      "id": "RE 4359/2026",
+      "tipo": "RE",
+      "numero": "4359",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova a Certificação de Boas Práticas de Fabricação de Insumos Farmacêuticos Ativos das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4359.md"
+    },
+    {
+      "id": "RE 4360/2026",
+      "tipo": "RE",
+      "numero": "4360",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova a Certificação de Boas Práticas de Fabricação de Insumos Farmacêuticos Ativos das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4360.md"
+    },
+    {
+      "id": "RE 4361/2026",
+      "tipo": "RE",
+      "numero": "4361",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede às empresas constantes no anexo, a Certificação de Boas Práticas de Fabricação de Insumos Farmacêuticos Ativos.",
+      "arquivo": "data/normas/re/2026/re-4361.md"
+    },
+    {
+      "id": "RE 4362/2026",
+      "tipo": "RE",
+      "numero": "4362",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Prorroga os prazos para publicação de decisão referente às petições prioritárias e ordinárias listadas no anexo, conforme as categorias especificadas, em conformidade com a legislação aplicável.",
+      "arquivo": "data/normas/re/2026/re-4362.md"
+    },
+    {
+      "id": "RE 4363/2026",
+      "tipo": "RE",
+      "numero": "4363",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Prorroga os prazos para publicação de decisão referente às petições prioritárias e ordinárias listadas no anexo, conforme as categorias especificadas, em conformidade com a legislação aplicável.",
+      "arquivo": "data/normas/re/2026/re-4363.md"
+    },
+    {
+      "id": "RE 4364/2026",
+      "tipo": "RE",
+      "numero": "4364",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Publica a aprovação condicional das petições secundárias de medicamentos biológicos, sob os números de expediente constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4364.md"
+    },
+    {
+      "id": "RE 4365/2026",
+      "tipo": "RE",
+      "numero": "4365",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere petições relacionadas à Gerência-Geral de Produtos Biológicos, Radiofármacos, Sangue, Tecidos, Células, Órgãos e Produtos de Terapias Avançadas, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4365.md"
+    },
+    {
+      "id": "RE 4366/2026",
+      "tipo": "RE",
+      "numero": "4366",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições relacionadas à Gerência-Geral de Produtos Biológicos, Radiofármacos, Sangue, Tecidos, Células, Órgãos e Produtos de Terapias Avançadas, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4366.md"
+    },
+    {
+      "id": "RE 4367/2026",
+      "tipo": "RE",
+      "numero": "4367",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova a Certificação de Boas Práticas de Fabricação de Medicamentos das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4367.md"
+    },
+    {
+      "id": "RE 4368/2026",
+      "tipo": "RE",
+      "numero": "4368",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede às Empresas constantes no anexo, a Certificação de Boas Práticas de Fabricação de Medicamentos.",
+      "arquivo": "data/normas/re/2026/re-4368.md"
+    },
+    {
+      "id": "RE 4369/2026",
+      "tipo": "RE",
+      "numero": "4369",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede às empresas constantes no anexo, a Certificação de Boas Práticas de Distribuição e/ou Armazenagem de Gases Medicinais.",
+      "arquivo": "data/normas/re/2026/re-4369.md"
+    },
+    {
+      "id": "RE 4370/2026",
+      "tipo": "RE",
+      "numero": "4370",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Inclui forma farmacêutica na certificação da empresa Dr. Reddy's Laboratories Limited, solicitada pela empresa Dr. Reddys Farmacêutica do Brasil Ltda, publicada pela Resolução - RE nº 2.269, de 2 de junho de 2026.",
+      "arquivo": "data/normas/re/2026/re-4370.md"
+    },
+    {
+      "id": "RE 2269/2026",
+      "tipo": "RE",
+      "numero": "2269",
+      "ano": "2026",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2026."
+    },
+    {
+      "id": "RE 4371/2026",
+      "tipo": "RE",
+      "numero": "4371",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Altera a razão social das empresas relacionadas, em todas as certificações vigentes à data de 9 de novembro de 2026.",
+      "arquivo": "data/normas/re/2026/re-4371.md"
+    },
+    {
+      "id": "RE 4372/2026",
+      "tipo": "RE",
+      "numero": "4372",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede a Certificação de Boas Práticas de Fabricação de Produtos para Saúde às empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4372.md"
+    },
+    {
+      "id": "RE 4373/2026",
+      "tipo": "RE",
+      "numero": "4373",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova a Certificação de Boas Práticas de Fabricação de Produtos para Saúde às empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4373.md"
+    },
+    {
+      "id": "RE 4374/2026",
+      "tipo": "RE",
+      "numero": "4374",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Renova a Certificação de Boas Práticas de Distribuição e/ou Armazenagem de Produtos para Saúde às empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4374.md"
+    },
+    {
+      "id": "RE 4375/2026",
+      "tipo": "RE",
+      "numero": "4375",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere o Pedido de Certificação de Boas Práticas de Fabricação de Produtos para Saúde das empresas constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4375.md"
+    },
+    {
+      "id": "RE 4376/2026",
+      "tipo": "RE",
+      "numero": "4376",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Torna insubsistente a Certificação de Boas Práticas de Fabricação de Produtos para Saúde da empresa Artrotek Tibbi Malzeme San. Ve Tic. Ltd. Sti., publicada pela Resolução - RE n. 3.585, de 10 de setembro de 2026.",
+      "arquivo": "data/normas/re/2026/re-4376.md"
+    },
+    {
+      "id": "LEI 9784/1999",
+      "tipo": "LEI_FEDERAL",
+      "numero": "9784",
+      "ano": "1999",
+      "situacao": "externa",
+      "ementa": "Legislação Federal citada como fundamento e base legal de competência."
+    },
+    {
+      "id": "RE 3585/2026",
+      "tipo": "RE",
+      "numero": "3585",
+      "ano": "2026",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2026."
+    },
+    {
+      "id": "RE 4377/2026",
+      "tipo": "RE",
+      "numero": "4377",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere a renovação do registro de produto fumígeno derivado do tabaco, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4377.md"
+    },
+    {
+      "id": "RE 4378/2026",
+      "tipo": "RE",
+      "numero": "4378",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere a petição relativa a produto fumígeno derivado do tabaco, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4378.md"
+    },
+    {
+      "id": "RE 4379/2026",
+      "tipo": "RE",
+      "numero": "4379",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere os registros e as petições dos produtos de higiene pessoal, cosméticos e perfumes, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4379.md"
+    },
+    {
+      "id": "RE 4380/2026",
+      "tipo": "RE",
+      "numero": "4380",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere os registros e as petições dos produtos de higiene pessoal, cosméticos e perfumes, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4380.md"
+    },
+    {
+      "id": "RE 4381/2026",
+      "tipo": "RE",
+      "numero": "4381",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela os processos dos produtos de higiene pessoal, cosméticos e perfumes, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4381.md"
+    },
+    {
+      "id": "RE 4382/2026",
+      "tipo": "RE",
+      "numero": "4382",
+      "ano": "2026",
+      "data_ato": "05/11/2026",
+      "data_promulgacao": "05/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede Autorização de Funcionamento para as Empresas prestadoras de serviços em Portos, Aeroportos, Fronteiras e Recintos Alfandegados conforme anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4382.md"
+    },
+    {
+      "id": "RE 4383/2026",
+      "tipo": "RE",
+      "numero": "4383",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Declara a caducidade de registro de produtos cuja revalidação não foi solicitada no prazo referido, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4383.md"
+    },
+    {
+      "id": "RE 4384/2026",
+      "tipo": "RE",
+      "numero": "4384",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere os registros e as petições dos produtos saneantes, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4384.md"
+    },
+    {
+      "id": "RE 4385/2026",
+      "tipo": "RE",
+      "numero": "4385",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede a revalidação automática do registro dos saneantes sob os números de processos constantes do anexo.",
+      "arquivo": "data/normas/re/2026/re-4385.md"
+    },
+    {
+      "id": "RE 4386/2026",
+      "tipo": "RE",
+      "numero": "4386",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere os registros e as petições dos produtos saneantes, conforme relação anexa.",
+      "arquivo": "data/normas/re/2026/re-4386.md"
+    },
+    {
+      "id": "RE 4387/2026",
+      "tipo": "RE",
+      "numero": "4387",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4387.md"
+    },
+    {
+      "id": "RE 4388/2026",
+      "tipo": "RE",
+      "numero": "4388",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Revoga a Medida Preventiva nº 3 do Anexo da Resolução-RE nº 3.242, de 14 de agosto de 2026.",
+      "arquivo": "data/normas/re/2026/re-4388.md"
+    },
+    {
+      "id": "RE 3242/2026",
+      "tipo": "RE",
+      "numero": "3242",
+      "ano": "2026",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2026."
+    },
+    {
+      "id": "RE 4389/2026",
+      "tipo": "RE",
+      "numero": "4389",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere petições relacionadas à Gerência-Geral de Medicamentos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4389.md"
+    },
+    {
+      "id": "RE 4390/2026",
+      "tipo": "RE",
+      "numero": "4390",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições relacionadas à Gerência-Geral de Medicamentos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4390.md"
+    },
+    {
+      "id": "RE 4391/2026",
+      "tipo": "RE",
+      "numero": "4391",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela o registro sanitário de medicamentos e insumos farmacêuticos, ou de apresentações, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4391.md"
+    },
+    {
+      "id": "RE 4392/2026",
+      "tipo": "RE",
+      "numero": "4392",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela o registro sanitário de medicamentos ou de apresentações, conforme anexo. Nota: Essa Resolução entra em vigor 90 (noventa) dias a partir da data de sua publicação.",
+      "arquivo": "data/normas/re/2026/re-4392.md"
+    },
+    {
+      "id": "RE 4393/2026",
+      "tipo": "RE",
+      "numero": "4393",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições relacionadas à Gerência-Geral de Medicamentos, conforme anexo. Nota: Essa Resolução entra em vigor 90 (noventa) dias a partir da data de sua publicação.",
+      "arquivo": "data/normas/re/2026/re-4393.md"
+    },
+    {
+      "id": "RE 4394/2026",
+      "tipo": "RE",
+      "numero": "4394",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Publica a aprovação condicional das petições secundárias de medicamentos similares, genéricos e novos, sob os números de expediente constantes no anexo.",
+      "arquivo": "data/normas/re/2026/re-4394.md"
+    },
+    {
+      "id": "RE 4395/2026",
+      "tipo": "RE",
+      "numero": "4395",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela os registros por declaração de caducidade dos insumos farmacêuticos ativos sob os números de processos constantes do anexo.",
+      "arquivo": "data/normas/re/2026/re-4395.md"
+    },
+    {
+      "id": "RE 4396/2026",
+      "tipo": "RE",
+      "numero": "4396",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições relacionadas à Gerência-Geral de Medicamentos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4396.md"
+    },
+    {
+      "id": "RE 4397/2026",
+      "tipo": "RE",
+      "numero": "4397",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela os registros dos medicamentos sob os números de processos constantes do anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4397.md"
+    },
+    {
+      "id": "RE 4398/2026",
+      "tipo": "RE",
+      "numero": "4398",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere petições relacionadas à Gerência-Geral de Medicamentos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4398.md"
+    },
+    {
+      "id": "RE 4399/2026",
+      "tipo": "RE",
+      "numero": "4399",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições referentes a pesquisa clínica com produto de terapia avançada, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4399.md"
+    },
+    {
+      "id": "RE 4400/2026",
+      "tipo": "RE",
+      "numero": "4400",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4400.md"
+    },
+    {
+      "id": "RE 4401/2026",
+      "tipo": "RE",
+      "numero": "4401",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4401.md"
+    },
+    {
+      "id": "RE 4402/2026",
+      "tipo": "RE",
+      "numero": "4402",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela a Autorização de Funcionamento a empresas dos setores de comércio de alimentos, cosméticos, perfumes, produtos de higiene e saúde, e dispensação de medicamentos, conforme especificações no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4402.md"
+    },
+    {
+      "id": "RE 4403/2026",
+      "tipo": "RE",
+      "numero": "4403",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede a Certificação de Boas Práticas de Fabricação de Saneantes à empresa constante no anexo.",
+      "arquivo": "data/normas/re/2026/re-4403.md"
+    },
+    {
       "id": "RE 4404/2026",
       "tipo": "RE",
       "numero": "4404",
@@ -131,6 +3507,114 @@
       "situacao": "vigente",
       "ementa": "Renova a Certificação de Boas Práticas de Fabricação de Insumos Farmacêuticos Ativos das empresas constantes no anexo.",
       "arquivo": "data/normas/re/2026/re-4404.md"
+    },
+    {
+      "id": "RE 4405/2026",
+      "tipo": "RE",
+      "numero": "4405",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "09/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede a Certificação de Boas Práticas de Fabricação de Cosméticos, Perfumes e Produtos de Higiene, por meio de sua renovação automática, à empresa constante no anexo.",
+      "arquivo": "data/normas/re/2026/re-4405.md"
+    },
+    {
+      "id": "RE 4406/2026",
+      "tipo": "RE",
+      "numero": "4406",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4406.md"
+    },
+    {
+      "id": "RE 4407/2026",
+      "tipo": "RE",
+      "numero": "4407",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4407.md"
+    },
+    {
+      "id": "RE 4408/2026",
+      "tipo": "RE",
+      "numero": "4408",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4408.md"
+    },
+    {
+      "id": "RE 4409/2026",
+      "tipo": "RE",
+      "numero": "4409",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4409.md"
+    },
+    {
+      "id": "RE 4410/2026",
+      "tipo": "RE",
+      "numero": "4410",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela a Autorização de Funcionamento a empresas dos setores de comércio de alimentos, cosméticos, perfumes, produtos de higiene e saúde, e dispensação de medicamentos, conforme especificações no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4410.md"
+    },
+    {
+      "id": "RE 4411/2026",
+      "tipo": "RE",
+      "numero": "4411",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições relacionadas à Gerência-Geral de Medicamentos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4411.md"
+    },
+    {
+      "id": "RE 4412/2026",
+      "tipo": "RE",
+      "numero": "4412",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza a implementação das petições relacionadas à Coordenação de Pesquisa Clínica em Medicamentos e Produtos Biológicos, por decurso de prazo, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4412.md"
+    },
+    {
+      "id": "RE 4413/2026",
+      "tipo": "RE",
+      "numero": "4413",
+      "ano": "2026",
+      "data_ato": "09/11/2026",
+      "data_promulgacao": "09/11/2026",
+      "data_publicacao_dou": "10/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições relacionadas à Coordenação de Pesquisa Clínica em Medicamentos e Produtos Biológicos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4413.md"
     },
     {
       "id": "RE 4414/2026",
@@ -167,22 +3651,6 @@
       "situacao": "vigente",
       "ementa": "Revoga o item 1 da Resolução - RE nº 3.855, de 30 de setembro de 2026.",
       "arquivo": "data/normas/re/2026/re-4416.md"
-    },
-    {
-      "id": "LEI 9782/1999",
-      "tipo": "LEI_FEDERAL",
-      "numero": "9782",
-      "ano": "1999",
-      "situacao": "externa",
-      "ementa": "Legislação Federal citada como fundamento e base legal de competência."
-    },
-    {
-      "id": "RDC 585/2021",
-      "tipo": "RDC",
-      "numero": "585",
-      "ano": "2021",
-      "situacao": "pendente_coleta",
-      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2021."
     },
     {
       "id": "RE 3855/2026",
@@ -383,12 +3851,596 @@
       "situacao": "vigente",
       "ementa": "Cancela a Autorização de Funcionamento a empresas dos setores de comércio de alimentos, cosméticos, perfumes, produtos de higiene e saúde, e dispensação de medicamentos, conforme especificações no anexo desta Resolução.",
       "arquivo": "data/normas/re/2026/re-4453.md"
+    },
+    {
+      "id": "RE 4742/2026",
+      "tipo": "RE",
+      "numero": "4742",
+      "ano": "2026",
+      "data_ato": "19/12/2024",
+      "data_promulgacao": "19/12/2024",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "",
+      "arquivo": "data/normas/re/2026/re-4742.md"
+    },
+    {
+      "id": "RE 4742/2024",
+      "tipo": "RE",
+      "numero": "4742",
+      "ano": "2024",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2024."
+    },
+    {
+      "id": "TAP 60/2026",
+      "tipo": "TAP",
+      "numero": "60",
+      "ano": "2026",
+      "data_ato": "03/11/2026",
+      "data_promulgacao": "03/11/2026",
+      "data_publicacao_dou": "03/11/2026",
+      "situacao": "vigente",
+      "ementa": "Abertura de Processo Administrativo de Regulação para alterar a RDC nº 1.000, de 11 de dezembro de 2025, que dispõe sobre os requisitos de controle para Notificações de Receita, Receitas de Controle Especial e Receitas sujeitas à retenção emitidas em meio eletrônico.",
+      "arquivo": "data/normas/tap/2026/tap-60.md"
+    },
+    {
+      "id": "TAP 62/2026",
+      "tipo": "TAP",
+      "numero": "62",
+      "ano": "2026",
+      "data_ato": "06/11/2026",
+      "data_promulgacao": "06/11/2026",
+      "data_publicacao_dou": "06/11/2026",
+      "situacao": "vigente",
+      "ementa": "Abertura de Processo Administrativo de Regulação para revogar a Resolução da Diretoria Colegiada - RDC nº 184, de 17 de outubro de 2017, que dispõe sobre o procedimento simplificado para a avaliação toxicológica para o registro e alterações pós-registro de produtos técnicos, pré-misturas, agrotóxicos, afins e preservativos de madeira, e dá outras providências.",
+      "arquivo": "data/normas/tap/2026/tap-62.md"
     }
   ],
   "edges": [
     {
+      "source": "ACM 8/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "ACM 8/2026",
+      "target": "RDC 359/2020",
+      "relacao": "cita"
+    },
+    {
+      "source": "CPB 1433/2026",
+      "target": "CPB 1433/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "CPB 1433/2026",
+      "target": "TAP 119/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "CPB 1434/2026",
+      "target": "CPB 1434/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "CPB 1434/2026",
+      "target": "TAP 119/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "CPB 1435/2026",
+      "target": "CPB 1435/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "CPB 1435/2026",
+      "target": "TAP 61/2026",
+      "relacao": "cita"
+    },
+    {
       "source": "CPB 1436/2026",
       "target": "CPB 1436/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "ETA 2/2026",
+      "target": "LEI 14133/2021",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "ETA 2/2026",
+      "target": "EXC 25/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "ETA 2/2026",
+      "target": "EDL 12/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 197/2022",
+      "target": "IN 197/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 419/2025",
+      "target": "IN 419/2025",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 419/2025",
+      "target": "IN 159/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 475/2026",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "IN 475/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 475/2026",
+      "target": "RDC 616/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 475/2026",
+      "target": "IN 440/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 476/2026",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "IN 476/2026",
+      "target": "IN 211/2023",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 476/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 477/2026",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "IN 477/2026",
+      "target": "IN 87/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "IN 477/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "PORTARIA 1182/2026",
+      "target": "LEI 13643/2018",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "PORTARIA 1182/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 1046/2026",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 1046/2026",
+      "target": "RDC 1000/2025",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 1046/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 1046/2026",
+      "target": "PORTARIA 344/1998",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 1046/2026",
+      "target": "RDC 471/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 1047/2026",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RDC 1047/2026",
+      "target": "RDC 184/2017",
+      "relacao": "cita"
+    },
+    {
+      "source": "RDC 1047/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3293/2011",
+      "target": "RE 3293/2011",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3625/2024",
+      "target": "RE 3625/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 2291/2025",
+      "target": "RE 2291/2025",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 2388/2025",
+      "target": "RE 2388/2025",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3771/2025",
+      "target": "RE 3771/2025",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 2113/2026",
+      "target": "RE 2113/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 2631/2026",
+      "target": "RE 2631/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 2732/2026",
+      "target": "RE 2732/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 2836/2026",
+      "target": "RE 2836/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 2948/2026",
+      "target": "RE 2948/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3024/2026",
+      "target": "RE 3024/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3206/2026",
+      "target": "RE 3206/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3416/2026",
+      "target": "RE 3416/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3480/2026",
+      "target": "RE 3480/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3511/2026",
+      "target": "RE 3511/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3645/2026",
+      "target": "RE 3645/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3712/2026",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RE 3712/2026",
+      "target": "RE 3712/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3712/2026",
+      "target": "DEL 986/1969",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3712/2026",
+      "target": "RE 10/1984",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3712/2026",
+      "target": "RDC 243/2018",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3712/2026",
+      "target": "RDC 275/2002",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3712/2026",
+      "target": "RDC 843/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3712/2026",
+      "target": "IN 281/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3712/2026",
+      "target": "RDC 655/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3739/2026",
+      "target": "RE 3739/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 3825/2026",
+      "target": "RE 3825/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4144/2026",
+      "target": "RE 4144/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4160/2026",
+      "target": "LEI 9782/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RE 4160/2026",
+      "target": "RE 4160/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4160/2026",
+      "target": "DEL 986/1969",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4160/2026",
+      "target": "RDC 243/2018",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4160/2026",
+      "target": "IN 28/2018",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4160/2026",
+      "target": "RDC 839/2023",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4160/2026",
+      "target": "RDC 727/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4160/2026",
+      "target": "RDC 655/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4220/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4220/2026",
+      "target": "RDC 102/2016",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4221/2026",
+      "target": "RE 4221/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4298/2026",
+      "target": "RE 4325/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4320/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4320/2026",
+      "target": "RE 9/2025",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4321/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4321/2026",
+      "target": "RE 3150/2025",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4325/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4325/2026",
+      "target": "RE 4298/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4326/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4326/2026",
+      "target": "RE 2962/2025",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4330/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4330/2026",
+      "target": "RE 386/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4347/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4347/2026",
+      "target": "RE 3885/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4347/2026",
+      "target": "RE 3977/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4347/2026",
+      "target": "RE 3978/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4347/2026",
+      "target": "RE 4086/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4358/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4358/2026",
+      "target": "RE 360/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4358/2026",
+      "target": "RDC 497/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4358/2026",
+      "target": "IN 35/2019",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4358/2026",
+      "target": "RDC 430/2020",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4358/2026",
+      "target": "IN 128/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4358/2026",
+      "target": "IN 134/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4358/2026",
+      "target": "IN 138/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4358/2026",
+      "target": "RDC 658/2022",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4370/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4370/2026",
+      "target": "RDC 497/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4370/2026",
+      "target": "RE 2269/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4376/2026",
+      "target": "LEI 9784/1999",
+      "relacao": "baseada_em"
+    },
+    {
+      "source": "RE 4376/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4376/2026",
+      "target": "RE 3585/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4388/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4388/2026",
+      "target": "RE 3242/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4392/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4393/2026",
+      "target": "RDC 585/2021",
       "relacao": "cita"
     },
     {
@@ -404,6 +4456,41 @@
     {
       "source": "RE 4416/2026",
       "target": "RE 3855/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4742/2026",
+      "target": "RE 4742/2024",
+      "relacao": "cita"
+    },
+    {
+      "source": "TAP 60/2026",
+      "target": "DEP 132/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "TAP 60/2026",
+      "target": "RDC 1046/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "TAP 61/2026",
+      "target": "DEP 134/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "TAP 61/2026",
+      "target": "CPB 1435/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "TAP 62/2026",
+      "target": "DEP 135/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "TAP 62/2026",
+      "target": "RDC 1047/2026",
       "relacao": "cita"
     }
   ]
