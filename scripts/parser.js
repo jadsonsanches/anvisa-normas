@@ -7,84 +7,58 @@ const turndown = new TurndownService({
   emDelimiter: '*'
 });
 
-turndown.addRule('removeJsLinks', {
+// Remove links vazios ou de javascript
+turndown.addRule('cleanupJsLinks', {
   filter: function (node) {
-    return node.nodeName === 'A' && (!node.getAttribute('href') || node.getAttribute('href').startsWith('javascript:mudaFonte') || node.innerText === 'PDF' || node.innerText === 'CRIAR TAGS');
+    if (node.nodeName !== 'A') return false;
+    const href = node.getAttribute('href') || '';
+    return href.startsWith('javascript:') || href === '#' || !href;
   },
   replacement: function (content) {
-    return content;
+    return content.trim();
   }
 });
 
-function parseNormaHtml(html, urlOrigem = '', hints = {}) {
+function normalizarTipo(tipoRaw = '') {
+  const t = tipoRaw.trim().toUpperCase();
+  if (t === 'POR' || t === 'PORTARIA') return 'PORTARIA';
+  if (t === 'INM' || t === 'IN') return 'IN';
+  if (t === 'RDC') return 'RDC';
+  if (t === 'RES' || t === 'RE') return 'RE';
+  return t;
+}
+
+function parseNormaHtml(html, urlOrigem = '', metaBusca = {}) {
   const $ = cheerio.load(html);
 
-  const rawTitle = $('title').text().trim();
-
-  let situacao = 'vigente';
-  const textoGeral = $('body').text();
-  if (/REVOGAD[OA]/i.test(textoGeral) || /Revogada pela/i.test(textoGeral)) {
-    situacao = 'revogada';
+  // 1. Extração do contêiner legislativo oficial
+  let container = $('.ato');
+  if (container.length === 0) {
+    container = $('#conteudo, #corpo, .conteudo').first();
+  }
+  if (container.length === 0) {
+    container = $('body');
   }
 
-  // Tipo, número e ano a partir dos hints ou do texto
-  let tipo = (hints.tipo || '').toUpperCase();
-  let numero = hints.numero || '';
-  let ano = hints.ano || '';
-  let dataPromulgacao = '';
+  // 2. Limpeza de artefatos de interface dentro do conteúdo
+  container.find('script, style, nav, header, footer').remove();
+  container.find('.noprint, #loading, .btn, .navbar, .menu').remove();
+  container.find('p:contains("Este texto não substitui a Publicação Oficial")').remove();
+  container.find('p:contains("Este texto nao substitui a Publicacao Oficial")').remove();
+  container.find('a:contains("Voltar"), a:contains("IMPRIMIR"), a:contains("COPIAR LINK"), a:contains("CRIAR TAGS")').remove();
+  container.find('a:contains("VER NOTAS"), a:contains("FECHAR NOTAS"), a:contains("PDF")').remove();
 
-  if (!tipo || !numero) {
-    const matchRDC = rawTitle.match(/RDC[^\d]*(\d+)/i) || rawTitle.match(/Resolu[cç][aã]o[^\d]*(\d+)/i);
-    const matchIN = rawTitle.match(/IN[^\d]*(\d+)/i) || rawTitle.match(/Instru[cç][aã]o[^\d]*(\d+)/i);
-    const matchPortaria = rawTitle.match(/Portaria[^\d]*(\d+)/i);
-
-    if (matchRDC) {
-      if (!tipo) tipo = 'RDC';
-      if (!numero) numero = matchRDC[1];
-    } else if (matchIN) {
-      if (!tipo) tipo = 'IN';
-      if (!numero) numero = matchIN[1];
-    } else if (matchPortaria) {
-      if (!tipo) tipo = 'PORTARIA';
-      if (!numero) numero = matchPortaria[1];
-    }
-  }
-
-  const matchData = rawTitle.match(/(\d{2}\/\d{2}\/(\d{4}))/i) || textoGeral.match(/(\d{2}\/\d{2}\/(\d{4}))/i);
-  if (matchData) {
-    dataPromulgacao = matchData[1];
-    if (!ano) ano = matchData[2];
-  }
-
-  if (!ano) {
-    const anoMatch = textoGeral.match(/DE\s+\d{1,2}\s+DE\s+[A-ZÇ]+\s+DE\s+(\d{4})/i);
-    if (anoMatch) ano = anoMatch[1];
-  }
-
-  // Ementa
-  let ementa = '';
-  $('p, div').each((_, el) => {
-    const txt = $(el).text().trim();
-    if (!ementa && /^(Aprova|Dispõe|Estabelece|Institui|Altera|Proíbe|Determina|Define|Regulamenta)/i.test(txt)) {
-      if (txt.length > 20 && txt.length < 800) {
-        ementa = txt.replace(/\s+/g, ' ');
-      }
-    }
-  });
-
-  // Relações via links estruturados LinkTexto
+  // 3. Normalização de links para outras normas (LinkTexto)
   const citacoes = [];
   const linkTextoRegex = /LinkTexto\s*\(\s*'([^']+)'\s*,\s*'([^']+)'\s*,\s*'([^']+)'\s*,\s*'([^']+)'/g;
   let lt;
-  while ((lt = linkTextoRegex.exec(html)) !== null) {
+  const rawHtmlContainer = container.html() || '';
+  while ((lt = linkTextoRegex.exec(rawHtmlContainer)) !== null) {
     const rawTipo = lt[1].trim();
     const rawNum = parseInt(lt[2], 10).toString();
     const anoCitado = lt[4].trim();
 
-    let cleanTipo = rawTipo;
-    if (cleanTipo === 'INM') cleanTipo = 'IN';
-    if (cleanTipo === 'POR') cleanTipo = 'PORTARIA';
-
+    const cleanTipo = normalizarTipo(rawTipo);
     citacoes.push({
       tipo: cleanTipo,
       numero: rawNum,
@@ -93,19 +67,59 @@ function parseNormaHtml(html, urlOrigem = '', hints = {}) {
     });
   }
 
-  const refsUnicas = [...new Map(citacoes.map(item => [item.referencia, item])).values()];
+  // Converter chamadas LinkTexto em links relativos locais ou planalto
+  container.find('a[href*="LinkTexto"]').each((_, a) => {
+    const href = $(a).attr('href') || '';
+    const m = href.match(/LinkTexto\s*\(\s*'([^']+)'\s*,\s*'([^']+)'\s*,\s*'([^']+)'\s*,\s*'([^']+)'/);
+    if (m) {
+      const tipoDestino = normalizarTipo(m[1]).toLowerCase();
+      const numDestino = parseInt(m[2], 10).toString();
+      const anoDestino = m[4];
+      if (tipoDestino === 'lei') {
+        $(a).attr('href', 'https://www.planalto.gov.br');
+      } else {
+        $(a).attr('href', `../${tipoDestino}/${anoDestino}/${tipoDestino}-${numDestino}.md`);
+      }
+    }
+  });
 
-  const revogadaPor = [];
-  const revoga = [];
-  const altera = [];
-  const alteradaPor = [];
+  // 4. Metadados
+  const tipo = normalizarTipo(metaBusca.tipo || '');
+  const numero = metaBusca.numero ? metaBusca.numero.toString() : '';
+  const ano = metaBusca.ano ? metaBusca.ano.toString() : '';
+  const situacao = (metaBusca.situacao || 'vigente').toLowerCase();
+  let ementa = metaBusca.ementa || '';
+
+  // Se ementa não veio nos metadados, tentar extrair do primeiro parágrafo relevante
+  if (!ementa) {
+    container.find('p').each((_, p) => {
+      const txt = $(p).text().trim().replace(/\s+/g, ' ');
+      if (!ementa && /^(Aprova|Dispõe|Estabelece|Institui|Altera|Proíbe|Determina|Define|Regulamenta|Autoriza|Exonera|Nomeia|Designa|Revoga|Concede|Defere|Indefere|Adota|Renova)/i.test(txt)) {
+        if (txt.length > 20 && txt.length < 800) {
+          ementa = txt;
+        }
+      }
+    });
+  }
+
+  // Datas
+  let dataPromulgacao = metaBusca.dataPromulgacao || '';
+  let dataPublicacaoDou = '';
+  const matchDou = container.text().match(/PUB\s+D\.O\.U\.?\s*,?\s*(\d{2}\/\d{2}\/\d{4})/i);
+  if (matchDou) {
+    dataPublicacaoDou = matchDou[1];
+    if (!dataPromulgacao) dataPromulgacao = matchDou[1];
+  }
+
+  const matchDataAto = container.text().match(/DE\s+(\d{1,2})\s+DE\s+([A-ZÇ]+)\s+DE\s+(\d{4})/i);
+  if (matchDataAto && !dataPromulgacao) {
+    dataPromulgacao = `${matchDataAto[1]} de ${matchDataAto[2].toLowerCase()} de ${matchDataAto[3]}`;
+  }
+
+  // Relações
+  const refsUnicas = [...new Map(citacoes.map(item => [item.referencia, item])).values()];
   const leisBase = [];
   const outrasNormas = [];
-
-  const revogadaPorMatch = textoGeral.match(/Revogada pela\s+([^.\n]+)/i);
-  if (revogadaPorMatch) {
-    revogadaPor.push(revogadaPorMatch[1].trim().replace(/\s+/g, ' '));
-  }
 
   refsUnicas.forEach(ref => {
     if (ref.tipo === 'LEI') {
@@ -115,46 +129,21 @@ function parseNormaHtml(html, urlOrigem = '', hints = {}) {
     }
   });
 
-  // Limpeza
-  $('nav, header, footer, script, style, .btn, .navbar, .menu, #loading, .hiddenStructure').remove();
-  $('a[href*="facebook.com"], a[href*="twitter.com"], a[href*="linkedin.com"], a[href*="whatsapp"]').remove();
-  $('a:contains("Voltar"), a:contains("IMPRIMIR"), a:contains("COPIAR LINK"), a:contains("CRIAR TAGS"), a:contains("VER NOTAS")').remove();
-
-  $('a[href*="LinkTexto"]').each((_, a) => {
-    const href = $(a).attr('href');
-    const m = href.match(/LinkTexto\s*\(\s*'([^']+)'\s*,\s*'([^']+)'\s*,\s*'([^']+)'\s*,\s*'([^']+)'/);
-    if (m) {
-      let t = m[1].toLowerCase();
-      if (t === 'inm') t = 'in';
-      if (t === 'por') t = 'portaria';
-      const n = parseInt(m[2], 10);
-      const aAno = m[4];
-      if (t === 'lei') {
-        $(a).attr('href', `https://www.planalto.gov.br`);
-      } else {
-        $(a).attr('href', `../${t}/${aAno}/${t}-${n}.md`);
-      }
-    }
-  });
-
-  const container = $('.container, #corpo, .conteudo, body').first();
-  const rawHtmlCorpo = container.html() || '';
-  const markdownCorpo = turndown.turndown(rawHtmlCorpo)
+  // 5. Conversão HTML -> Markdown
+  const markdownCorpo = turndown.turndown(container.html() || '')
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 
-  const yaml = [
+  // 6. Montagem do YAML Frontmatter + Markdown
+  const yamlLines = [
     '---',
     `tipo: "${tipo}"`,
     `numero: "${numero}"`,
     `ano: "${ano}"`,
     `data_promulgacao: "${dataPromulgacao}"`,
+    `data_publicacao_dou: "${dataPublicacaoDou}"`,
     `situacao: "${situacao}"`,
     `ementa: "${ementa.replace(/"/g, '\\"')}"`,
-    `revogada_por: ${JSON.stringify(revogadaPor)}`,
-    `revoga: ${JSON.stringify(revoga)}`,
-    `altera: ${JSON.stringify(altera)}`,
-    `alterada_por: ${JSON.stringify(alteradaPor)}`,
     `leis_base: ${JSON.stringify(leisBase)}`,
     `relacionadas: ${JSON.stringify(outrasNormas)}`,
     `fonte: "${urlOrigem}"`,
@@ -163,7 +152,7 @@ function parseNormaHtml(html, urlOrigem = '', hints = {}) {
     `# ${tipo} nº ${numero}, de ${dataPromulgacao || ano}`,
     '',
     markdownCorpo
-  ].join('\n');
+  ];
 
   return {
     tipo,
@@ -171,14 +160,12 @@ function parseNormaHtml(html, urlOrigem = '', hints = {}) {
     ano,
     situacao,
     ementa,
-    revogadaPor,
-    revoga,
-    altera,
-    alteradaPor,
+    dataPromulgacao,
+    dataPublicacaoDou,
     leisBase,
     relacionadas: outrasNormas,
-    markdown: yaml
+    markdown: yamlLines.join('\n')
   };
 }
 
-module.exports = { parseNormaHtml };
+module.exports = { parseNormaHtml, normalizarTipo };

@@ -519,11 +519,8 @@ const htmlContent = `<!DOCTYPE html>
 </html>
 `;
 
-// 1. Salvar no repositório
+// 1. Salvar no repositório (visualizador.html e index.html para o GitHub Pages)
 fs.writeFileSync(path.join(__dirname, '../visualizador.html'), htmlContent, 'utf8');
+fs.writeFileSync(path.join(__dirname, '../index.html'), htmlContent, 'utf8');
 
-// 2. Salvar no diretório de artifacts do Antigravity
-const artifactDir = 'C:\\\\Users\\\\jadson.sanches\\\\.gemini\\\\antigravity\\\\brain\\\\1851ab74-9135-4706-9b2a-9fc406732ec3';
-fs.writeFileSync(path.join(artifactDir, 'visualizador.html'), htmlContent, 'utf8');
-
-console.log('Visualizador gerado com sucesso em ambos os locais!');
+console.log('Visualizador gerado com sucesso em visualizador.html e index.html!');

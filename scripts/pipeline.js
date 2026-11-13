@@ -1,8 +1,18 @@
-const { coletarAno } = require('./scraper');
+const { coletarPorData, coletarPorAno } = require('./scraper');
 const { construirGrafo } = require('./grafo');
+const { execSync } = require('child_process');
+const path = require('path');
+
+function formatarDataBrasil(date = new Date()) {
+  const dia = String(date.getDate()).padStart(2, '0');
+  const mes = String(date.getMonth() + 1).padStart(2, '0');
+  const ano = date.getFullYear();
+  return `${dia}/${mes}/${ano}`;
+}
 
 async function executarPipeline() {
   const args = process.argv.slice(2);
+  const dataHoje = formatarDataBrasil();
   const anoAtual = new Date().getFullYear();
 
   console.log('==================================================');
@@ -10,24 +20,34 @@ async function executarPipeline() {
   console.log('==================================================');
 
   if (args.includes('--full')) {
-    // Coleta histórica de todos os anos relevantes
-    console.log('Modo Completo: Coletando resenha histórica (1999 a ' + anoAtual + ')...');
+    console.log(`Modo Completo: Coletando resenha histórica (1999 a ${anoAtual})...`);
     for (let ano = anoAtual; ano >= 1999; ano--) {
-      await coletarAno(ano);
+      await coletarPorAno(ano);
     }
   } else if (args.includes('--ano')) {
     const idx = args.indexOf('--ano');
     const ano = parseInt(args[idx + 1], 10) || anoAtual;
-    await coletarAno(ano);
+    await coletarPorAno(ano);
+  } else if (args.includes('--data')) {
+    const idx = args.indexOf('--data');
+    const dataAlvo = args[idx + 1] || dataHoje;
+    await coletarPorData(dataAlvo);
   } else {
-    // Modo padrão diário (GitHub Actions): confere o ano corrente e o anterior
-    console.log(`Modo Diário: Verificando novidades em ${anoAtual} e ${anoAtual - 1}...`);
-    await coletarAno(anoAtual);
-    await coletarAno(anoAtual - 1);
+    // Modo padrão diário: consulta a data de hoje
+    console.log(`Modo Diário: Verificando atos publicados na data de hoje (${dataHoje})...`);
+    await coletarPorData(dataHoje);
   }
 
-  console.log('\n--- Atualizando Grafo de Relações e Estatísticas ---');
+  console.log('\n--- 1. Atualizando Grafo de Relações e Estatísticas ---');
   construirGrafo();
+
+  console.log('\n--- 2. Regenerando Visualizador Web Interativo ---');
+  try {
+    require('./gerar-visualizador');
+  } catch (e) {
+    console.warn('[Aviso] Falha ao invocar gerar-visualizador diretamente, tentando via processo:', e.message);
+    execSync(`node "${path.join(__dirname, 'gerar-visualizador.js')}"`, { stdio: 'inherit' });
+  }
 
   console.log('\n==================================================');
   console.log('   PIPELINE CONCLUÍDO COM SUCESSO!                ');
@@ -35,6 +55,6 @@ async function executarPipeline() {
 }
 
 executarPipeline().catch(err => {
-  console.error('Falha no pipeline:', err);
+  console.error('Falha crítica no pipeline:', err);
   process.exit(1);
 });
