@@ -186,34 +186,44 @@
         </div>
       </div>
 
-      <!-- Informações do Mês e Atualização -->
-      <div class="flex items-center gap-2.5 self-end md:self-auto">
-        <span class="text-xs px-3 py-1.5 rounded-full bg-[#082016] border border-emerald-500/30 text-emerald-300 font-medium flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span>Novembro / 2026</span>
-        </span>
+      <!-- Seletor de Período / Mês e Reset -->
+      <div class="flex items-center gap-2.5 self-end md:self-auto flex-wrap">
+        <div class="flex items-center gap-2 bg-[#082016] border border-emerald-500/30 rounded-full px-3 py-1.5 text-xs text-emerald-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="font-medium text-slate-400 text-[11px]">Mês:</span>
+          <select id="select-mes-topbar" onchange="selecionarMes(this.value)" class="bg-transparent text-emerald-300 font-semibold focus:outline-none cursor-pointer pr-1">
+            <option value="ALL" class="bg-[#05140d] text-slate-200">Acervo Completo (Todos)</option>
+            <option value="11/2026" class="bg-[#05140d] text-slate-200">Novembro / 2026</option>
+            <option value="10/2026" class="bg-[#05140d] text-slate-200">Outubro / 2026</option>
+          </select>
+        </div>
         <button onclick="limparTodosFiltros()" class="text-xs px-3 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 transition">
           Resetar Filtros
         </button>
       </div>
     </header>
 
-    <!-- Componente Estrela: RADAR REGULATÓRIO DIÁRIO (Inspirado na Imagem 1) -->
+    <!-- Componente Estrela: RADAR REGULATÓRIO DIÁRIO -->
     <section id="radar-section" class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-emerald-500/15 pb-3">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 border-b border-emerald-500/15 pb-3">
         <div>
           <div class="flex items-center gap-2">
             <span class="text-xl">📅</span>
             <h2 class="text-base md:text-lg font-bold text-white tracking-wide flex items-center gap-2">
               Linha do Tempo Diária de Publicações no DOU
-              <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal">Monitor Oficial</span>
+              <span id="radar-badge-periodo" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal">Acervo Completo</span>
             </h2>
           </div>
           <p class="text-xs text-slate-400 mt-0.5">
-            Selecione qualquer dia do mês para filtrar instantaneamente os atos normativos publicados pela Anvisa.
+            Selecione o mês desejado e clique em qualquer dia para filtrar instantaneamente os atos publicados no DOU.
           </p>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 flex-wrap">
+          <div id="radar-mes-pills" class="flex items-center gap-1 bg-[#061810] p-1 rounded-xl border border-emerald-500/20">
+            <button onclick="selecionarMes('ALL')" data-mes="ALL" class="mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition">Todos</button>
+            <button onclick="selecionarMes('11/2026')" data-mes="11/2026" class="mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Nov/26</button>
+            <button onclick="selecionarMes('10/2026')" data-mes="10/2026" class="mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Out/26</button>
+          </div>
           <button id="btn-ver-todos-dias" class="text-xs px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-semibold transition active:scale-95">
             Ver Todos os Dias
           </button>
@@ -250,7 +260,7 @@
         </div>
         <div class="flex items-baseline gap-2">
           <span class="text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-vigentes">928</span>
-          <span class="text-xs px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px]">
+          <span class="text-xs px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px]" id="stat-vigentes-pct">
             100%
           </span>
         </div>
@@ -275,14 +285,14 @@
       <!-- Card 4: Volume Médio / Picos -->
       <div class="glass-card glass-card-hover rounded-2xl p-4 space-y-2 relative overflow-hidden group">
         <div class="flex items-center justify-between text-slate-400">
-          <span class="text-xs font-semibold uppercase tracking-wider text-amber-400/80">Pico Regulatória</span>
+          <span class="text-xs font-semibold uppercase tracking-wider text-amber-400/80">Pico Regulatório</span>
           <span class="text-base group-hover:scale-110 transition">⚡</span>
         </div>
         <div class="flex items-baseline gap-2">
-          <span class="text-2xl md:text-3xl font-extrabold text-white font-mono">96</span>
-          <span class="text-xs px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-[10px]">09/11</span>
+          <span class="text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-pico-valor">121</span>
+          <span class="text-xs px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-[10px]" id="stat-pico-data">19/10</span>
         </div>
-        <p class="text-[11px] text-slate-400">Média de ~32 atos/dia útil no DOU</p>
+        <p class="text-[11px] text-slate-400" id="stat-pico-sub">Maior volume diário no período</p>
         <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-amber-500/10 rounded-full blur-xl pointer-events-none"></div>
       </div>
     </section>
@@ -428,7 +438,7 @@
       OUTROS: '#64748b'
     };
 
-    // Agrupamento diário de atos em novembro de 2026
+    // Agrupamento diário de atos
     const atosPorDiaMap = {};
     graphData.nodes.filter(n => n.arquivo).forEach(n => {
       const d = n.data_publicacao_dou || n.data_ato || '';
@@ -437,31 +447,70 @@
       }
     });
 
-    // Montar o carrossel diário de Novembro (dias 01 a 13)
     const carouselContainer = document.getElementById('daily-timeline-carousel');
-    const diasNovembro = [
-      { dia: '01', sem: 'Dom', data: '01/11/2026' },
-      { dia: '02', sem: 'Seg', data: '02/11/2026' },
-      { dia: '03', sem: 'Ter', data: '03/11/2026' },
-      { dia: '04', sem: 'Qua', data: '04/11/2026' },
-      { dia: '05', sem: 'Qui', data: '05/11/2026' },
-      { dia: '06', sem: 'Sex', data: '06/11/2026' },
-      { dia: '07', sem: 'Sáb', data: '07/11/2026' },
-      { dia: '08', sem: 'Dom', data: '08/11/2026' },
-      { dia: '09', sem: 'Seg', data: '09/11/2026' },
-      { dia: '10', sem: 'Ter', data: '10/11/2026' },
-      { dia: '11', sem: 'Qua', data: '11/11/2026' },
-      { dia: '12', sem: 'Qui', data: '12/11/2026' },
-      { dia: '13', sem: 'Sex', data: '13/11/2026' },
-    ];
+    const DIAS_SEMANA = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 
+    // Gerador dinâmico de dias para o mês selecionado
+    function gerarDiasDoMes(mesStr) {
+      const [mm, aaaa] = mesStr.split('/').map(Number);
+      const totalDias = new Date(aaaa, mm, 0).getDate();
+      const dias = [];
+      for (let d = 1; d <= totalDias; d++) {
+        const diaFormatado = String(d).padStart(2, '0');
+        const dataStr = `${diaFormatado}/${String(mm).padStart(2, '0')}/${aaaa}`;
+        const dt = new Date(aaaa, mm - 1, d);
+        const sem = DIAS_SEMANA[dt.getDay()];
+        dias.push({ dia: diaFormatado, sem, data: dataStr, mesStr });
+      }
+      return dias;
+    }
+
+    // Gerador de datas ativas para visão do acervo completo
+    function gerarDiasAcervo() {
+      const datasSet = new Set();
+      graphData.nodes.filter(n => n.arquivo).forEach(n => {
+        const d = n.data_publicacao_dou || n.data_ato || '';
+        if (d && d.length === 10 && d.includes('/2026')) {
+          datasSet.add(d);
+        }
+      });
+      const ordenadas = Array.from(datasSet).sort((a, b) => {
+        const [d1, m1, y1] = a.split('/').map(Number);
+        const [d2, m2, y2] = b.split('/').map(Number);
+        return new Date(y1, m1 - 1, d1) - new Date(y2, m2 - 1, d2);
+      });
+      return ordenadas.map(dataStr => {
+        const [d, m, y] = dataStr.split('/').map(Number);
+        const dt = new Date(y, m - 1, d);
+        return {
+          dia: String(d).padStart(2, '0'),
+          sem: DIAS_SEMANA[dt.getDay()],
+          data: dataStr,
+          mesStr: `${String(m).padStart(2, '0')}/${y}`
+        };
+      });
+    }
+
+    let mesSelecionado = 'ALL';
     let diaSelecionado = null;
 
     function renderDailyTimeline() {
-      carouselContainer.innerHTML = diasNovembro.map(item => {
+      const diasList = mesSelecionado === 'ALL' ? gerarDiasAcervo() : gerarDiasDoMes(mesSelecionado);
+      
+      let maxQtd = 0;
+      diasList.forEach(item => {
+        const q = atosPorDiaMap[item.data] || 0;
+        if (q > maxQtd) maxQtd = q;
+      });
+      const peakThreshold = Math.max(20, Math.floor(maxQtd * 0.7));
+
+      carouselContainer.innerHTML = diasList.map(item => {
         const qtd = atosPorDiaMap[item.data] || 0;
-        const isPeak = qtd >= 50;
+        const isPeak = qtd >= peakThreshold && qtd > 0;
         const isActive = diaSelecionado === item.data;
+        const rotuloSemana = mesSelecionado === 'ALL' 
+          ? `${item.sem} • ${item.mesStr === '10/2026' ? 'Out' : (item.mesStr === '11/2026' ? 'Nov' : '')}`
+          : item.sem;
 
         return `
           <button 
@@ -472,7 +521,7 @@
                 : (qtd > 0 ? 'bg-[#081e15]/80 hover:bg-[#0c2a1e] border-emerald-500/20 text-slate-200' : 'bg-[#040e0a]/60 border-emerald-500/10 text-slate-500 opacity-60 hover:opacity-90')
             }"
           >
-            <span class="text-[10px] uppercase font-semibold text-slate-400">${item.sem}</span>
+            <span class="text-[10px] uppercase font-semibold text-slate-400 whitespace-nowrap">${rotuloSemana}</span>
             <span class="text-base font-extrabold font-mono text-white my-0.5">${item.dia}</span>
             <span class="text-[10px] font-mono px-1.5 py-0.2 rounded-full font-bold ${
               isPeak ? 'bg-emerald-400 text-slate-950 neon-glow' :
@@ -490,7 +539,33 @@
     // Filtros Globais
     let termoBusca = '';
     let tipoFiltro = 'ALL';
-    let statusFiltro = 'ALL';
+
+    window.selecionarMes = function(mes) {
+      mesSelecionado = mes;
+      diaSelecionado = null;
+      
+      const sel = document.getElementById('select-mes-topbar');
+      if (sel) sel.value = mes;
+      
+      document.querySelectorAll('.mes-pill-btn').forEach(b => {
+        if (b.dataset.mes === mes) {
+          b.className = 'mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition';
+        } else {
+          b.className = 'mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition';
+        }
+      });
+
+      const radarBadge = document.getElementById('radar-badge-periodo');
+      if (radarBadge) {
+        if (mes === 'ALL') radarBadge.textContent = 'Acervo Completo';
+        else if (mes === '10/2026') radarBadge.textContent = 'Outubro / 2026';
+        else if (mes === '11/2026') radarBadge.textContent = 'Novembro / 2026';
+        else radarBadge.textContent = mes;
+      }
+      
+      renderDailyTimeline();
+      aplicarFiltros();
+    };
 
     function filtrarPorDia(data) {
       if (diaSelecionado === data) {
@@ -509,11 +584,26 @@
     });
 
     window.limparTodosFiltros = function() {
+      mesSelecionado = 'ALL';
       diaSelecionado = null;
       termoBusca = '';
       tipoFiltro = 'ALL';
-      statusFiltro = 'ALL';
       document.getElementById('search-input').value = '';
+      
+      const sel = document.getElementById('select-mes-topbar');
+      if (sel) sel.value = 'ALL';
+      
+      document.querySelectorAll('.mes-pill-btn').forEach(b => {
+        if (b.dataset.mes === 'ALL') {
+          b.className = 'mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition';
+        } else {
+          b.className = 'mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition';
+        }
+      });
+
+      const radarBadge = document.getElementById('radar-badge-periodo');
+      if (radarBadge) radarBadge.textContent = 'Acervo Completo';
+
       document.querySelectorAll('.tipo-filter-btn').forEach(b => {
         b.classList.remove('bg-emerald-500', 'text-slate-950');
         b.classList.add('bg-[#092217]', 'text-slate-300');
@@ -846,14 +936,106 @@
     const normsContainer = document.getElementById('norms-list-container');
     const searchInput = document.getElementById('search-input');
 
+    function atualizarMetricas(filtered) {
+      const internal = filtered.filter(n => n.arquivo);
+      const total = internal.length;
+      const vigentes = internal.filter(n => (n.situacao || 'vigente') === 'vigente').length;
+      const pct = total > 0 ? Math.round((vigentes / total) * 100) : 100;
+
+      const fSet = new Set(filtered.map(n => n.id));
+      const edgesCount = graphData.edges.filter(e => fSet.has(e.source) && fSet.has(e.target)).length;
+
+      // Calcular pico diário
+      const contagemDias = {};
+      internal.forEach(n => {
+        const d = n.data_publicacao_dou || n.data_ato;
+        if (d) contagemDias[d] = (contagemDias[d] || 0) + 1;
+      });
+      let picoQtd = 0;
+      let picoData = '-';
+      Object.entries(contagemDias).forEach(([d, q]) => {
+        if (q > picoQtd) {
+          picoQtd = q;
+          picoData = d;
+        }
+      });
+
+      const elTotal = document.getElementById('stat-total-normas');
+      const elVigentes = document.getElementById('stat-vigentes');
+      const elVigentesPct = document.getElementById('stat-vigentes-pct');
+      const elRelacoes = document.getElementById('stat-relacoes');
+      const elPicoValor = document.getElementById('stat-pico-valor');
+      const elPicoData = document.getElementById('stat-pico-data');
+      const elPicoSub = document.getElementById('stat-pico-sub');
+
+      if (elTotal) elTotal.textContent = total;
+      if (elVigentes) elVigentes.textContent = vigentes;
+      if (elVigentesPct) elVigentesPct.textContent = `${pct}%`;
+      if (elRelacoes) elRelacoes.textContent = edgesCount;
+      if (elPicoValor) elPicoValor.textContent = picoQtd;
+      if (elPicoData) elPicoData.textContent = picoData !== '-' ? picoData.slice(0, 5) : '-';
+      if (elPicoSub) {
+        elPicoSub.textContent = picoData !== '-' ? `Pico registrado em ${picoData}` : 'Sem dados para o filtro';
+      }
+    }
+
     function aplicarFiltros() {
       const q = termoBusca.toLowerCase().trim();
 
+      // Mapear nós internos do mês selecionado
+      const internalInMonth = new Set();
+      nodes.forEach(n => {
+        if (!n.arquivo) return;
+        if (mesSelecionado === 'ALL') {
+          internalInMonth.add(n.id);
+          return;
+        }
+        const maDou = n.data_publicacao_dou ? n.data_publicacao_dou.slice(3) : '';
+        const maAto = n.data_ato ? n.data_ato.slice(3) : '';
+        if (maDou === mesSelecionado || maAto === mesSelecionado) {
+          internalInMonth.add(n.id);
+        }
+      });
+
       const filtered = nodes.filter(n => {
+        // Filtro por Mês
+        if (mesSelecionado !== 'ALL') {
+          if (n.arquivo) {
+            if (!internalInMonth.has(n.id)) return false;
+          } else {
+            const viz = adjacency.get(n.id);
+            let hasConn = false;
+            if (viz) {
+              for (const v of viz) {
+                if (internalInMonth.has(v)) {
+                  hasConn = true;
+                  break;
+                }
+              }
+            }
+            if (!hasConn) return false;
+          }
+        }
+
         // Filtro por dia
         if (diaSelecionado) {
-          const matchData = (n.data_publicacao_dou === diaSelecionado) || (n.data_ato === diaSelecionado);
-          if (!matchData) return false;
+          if (n.arquivo) {
+            const matchData = (n.data_publicacao_dou === diaSelecionado) || (n.data_ato === diaSelecionado);
+            if (!matchData) return false;
+          } else {
+            const viz = adjacency.get(n.id);
+            let hasConn = false;
+            if (viz) {
+              for (const v of viz) {
+                const vn = nodes.find(x => x.id === v);
+                if (vn && vn.arquivo && ((vn.data_publicacao_dou === diaSelecionado) || (vn.data_ato === diaSelecionado))) {
+                  hasConn = true;
+                  break;
+                }
+              }
+            }
+            if (!hasConn) return false;
+          }
         }
 
         // Filtro por tipo
@@ -878,14 +1060,22 @@
       document.getElementById('count-filtered').textContent = `${filtered.length} de ${nodes.length} nós`;
 
       const listStatus = document.getElementById('list-status-badge');
+      const internalCount = filtered.filter(n => n.arquivo).length;
       if (diaSelecionado) {
-        listStatus.textContent = `Exibindo ${filtered.length} atos de ${diaSelecionado}`;
+        listStatus.textContent = `Exibindo ${internalCount} atos de ${diaSelecionado}`;
+      } else if (mesSelecionado !== 'ALL') {
+        const nomeMes = mesSelecionado === '10/2026' ? 'Outubro / 2026' : (mesSelecionado === '11/2026' ? 'Novembro / 2026' : mesSelecionado);
+        listStatus.textContent = `Exibindo ${internalCount} atos de ${nomeMes}`;
       } else {
-        listStatus.textContent = `Exibindo ${filtered.length} atos`;
+        listStatus.textContent = `Exibindo ${internalCount} atos (acervo)`;
       }
 
-      // Renderizar itens na lista
-      if (filtered.length === 0) {
+      atualizarMetricas(filtered);
+      buildDonutChart(filtered);
+
+      // Renderizar itens na lista (apenas normas com arquivo)
+      const listItems = filtered.filter(n => n.arquivo);
+      if (listItems.length === 0) {
         normsContainer.innerHTML = `
           <div class="text-xs text-slate-500 text-center py-8 bg-[#05140d] rounded-xl border border-emerald-500/10">
             Nenhuma norma encontrada para os filtros selecionados.
@@ -894,7 +1084,7 @@
         return;
       }
 
-      normsContainer.innerHTML = filtered.slice(0, 100).map(n => `
+      normsContainer.innerHTML = listItems.slice(0, 100).map(n => `
         <div onclick="selecionarPorId('${n.id}')" class="p-3 rounded-xl bg-[#061810]/90 hover:bg-[#0a261a] border border-emerald-500/20 cursor-pointer transition space-y-1.5 group">
           <div class="flex items-center justify-between">
             <span class="font-bold text-xs text-white group-hover:text-emerald-300 font-mono transition">${n.id}</span>
@@ -930,22 +1120,30 @@
       });
     });
 
-    // Construção do Donut Chart SVG
-    function buildDonutChart() {
+    // Construção do Donut Chart SVG dinâmico
+    function buildDonutChart(filtered) {
+      const targetNodes = filtered ? filtered.filter(n => n.arquivo) : nodes.filter(n => n.arquivo);
       const tiposCount = {};
-      nodes.filter(n => n.arquivo).forEach(n => {
+      targetNodes.forEach(n => {
         tiposCount[n.tipo] = (tiposCount[n.tipo] || 0) + 1;
       });
 
       const total = Object.values(tiposCount).reduce((a, b) => a + b, 0) || 1;
       let acc = 0;
 
-      const slices = Object.entries(tiposCount).map(([tipo, count]) => {
-        const pct = count / total;
-        const start = acc;
-        acc += pct;
-        return { tipo, count, pct, start, end: acc, color: CORES[tipo] || '#64748b' };
-      });
+      const slices = Object.entries(tiposCount)
+        .sort((a, b) => b[1] - a[1])
+        .map(([tipo, count]) => {
+          const pct = count / total;
+          const start = acc;
+          acc += pct;
+          return { tipo, count, pct, start, end: acc, color: CORES[tipo] || '#64748b' };
+        });
+
+      if (slices.length === 0) {
+        document.getElementById('donut-container').innerHTML = '<div class="text-xs text-slate-500 py-4">Sem dados.</div>';
+        return;
+      }
 
       const svg = `
         <svg viewBox="0 0 100 100" class="w-20 h-20 transform -rotate-90 shrink-0">
