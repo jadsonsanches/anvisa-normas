@@ -171,17 +171,26 @@
     {
       "id": "LEI 9782/1999",
       "tipo": "LEI_FEDERAL",
-      "situacao": "externa"
+      "numero": "9782",
+      "ano": "1999",
+      "situacao": "externa",
+      "ementa": "Legislação Federal citada como fundamento e base legal de competência."
     },
     {
       "id": "RDC 585/2021",
-      "tipo": "NORMA_CORRELATA",
-      "situacao": "desconhecida"
+      "tipo": "RDC",
+      "numero": "585",
+      "ano": "2021",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2021."
     },
     {
       "id": "RE 3855/2026",
-      "tipo": "NORMA_CORRELATA",
-      "situacao": "desconhecida"
+      "tipo": "RE",
+      "numero": "3855",
+      "ano": "2026",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2026."
     },
     {
       "id": "RE 4417/2026",

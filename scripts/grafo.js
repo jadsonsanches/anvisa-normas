@@ -99,6 +99,20 @@ function construirGrafo() {
           target: rev,
           relacao: 'revogada_por'
         });
+        if (!nodesMap.has(rev)) {
+          const match = rev.match(/^(?:([A-Z_]+)\s+)?(\d+)\/(\d{4})/i);
+          const tipo = match && match[1] ? match[1].toUpperCase() : 'NORMA_CORRELATA';
+          const numero = match ? match[2] : '';
+          const ano = match ? match[3] : '';
+          nodesMap.set(rev, {
+            id: rev,
+            tipo: tipo,
+            numero: numero,
+            ano: ano,
+            situacao: 'pendente_coleta',
+            ementa: `Norma citada como revogadora de ${idNorma}. Texto integral será integrado em coletas complementares do ano ${ano}.`
+          });
+        }
       });
     }
 
@@ -111,7 +125,17 @@ function construirGrafo() {
           relacao: 'baseada_em'
         });
         if (!nodesMap.has(lei)) {
-          nodesMap.set(lei, { id: lei, tipo: 'LEI_FEDERAL', situacao: 'externa' });
+          const match = lei.match(/(\d+)\/(\d{4})/);
+          const numero = match ? match[1] : '';
+          const ano = match ? match[2] : '';
+          nodesMap.set(lei, {
+            id: lei,
+            tipo: 'LEI_FEDERAL',
+            numero: numero,
+            ano: ano,
+            situacao: 'externa',
+            ementa: 'Legislação Federal citada como fundamento e base legal de competência.'
+          });
         }
       });
     }
@@ -125,7 +149,18 @@ function construirGrafo() {
           relacao: 'cita'
         });
         if (!nodesMap.has(rel)) {
-          nodesMap.set(rel, { id: rel, tipo: 'NORMA_CORRELATA', situacao: 'desconhecida' });
+          const match = rel.match(/^(?:([A-Z_]+)\s+)?(\d+)\/(\d{4})/i);
+          const tipo = match && match[1] ? match[1].toUpperCase() : 'NORMA_CORRELATA';
+          const numero = match ? match[2] : '';
+          const ano = match ? match[3] : '';
+          nodesMap.set(rel, {
+            id: rel,
+            tipo: tipo,
+            numero: numero,
+            ano: ano,
+            situacao: 'pendente_coleta',
+            ementa: `Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano ${ano}.`
+          });
         }
       });
     }

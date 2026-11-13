@@ -708,22 +708,41 @@ const htmlContent = `<!DOCTYPE html>
               <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded \${
                 node.situacao === 'vigente' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
                 node.situacao === 'revogada' ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' :
+                node.situacao === 'externa' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' :
+                node.situacao === 'pendente_coleta' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' :
                 'bg-slate-800 text-slate-400 border border-slate-700'
-              }">\${node.situacao}</span>
+              }">\${
+                node.situacao === 'pendente_coleta' ? 'Pendente de Coleta' :
+                node.situacao === 'externa' ? 'Legislação Federal' :
+                node.situacao
+              }</span>
             \` : ''}
           </div>
 
           <!-- Datas Jurídicas -->
           <div class="grid grid-cols-2 gap-2 text-[11px] bg-slate-900/80 p-2.5 rounded border border-slate-800">
             <div>
-              <span class="text-slate-500 font-medium block text-[10px] uppercase">Data do Ato:</span>
-              <strong class="text-cyan-300 font-semibold">\${node.data_ato || node.data_promulgacao || 'N/D'}</strong>
+              <span class="text-slate-500 font-medium block text-[10px] uppercase">Data / Ano:</span>
+              <strong class="text-cyan-300 font-semibold">\${node.data_ato || node.data_promulgacao || (node.ano ? \`Ano \${node.ano}\` : 'N/D')}</strong>
             </div>
             <div>
-              <span class="text-slate-500 font-medium block text-[10px] uppercase">Publicação no DOU:</span>
-              <strong class="text-slate-200 font-semibold">\${node.data_publicacao_dou || 'N/D'}</strong>
+              <span class="text-slate-500 font-medium block text-[10px] uppercase">Publicação / DOU:</span>
+              <strong class="text-slate-200 font-semibold">\${node.data_publicacao_dou || (node.situacao === 'externa' ? 'Congresso Nacional' : (node.situacao === 'pendente_coleta' ? 'Aguardando raspagem' : 'N/D'))}</strong>
             </div>
           </div>
+
+          \${node.situacao === 'pendente_coleta' ? \`
+            <div class="text-[11px] text-amber-300/90 bg-amber-500/10 border border-amber-500/20 rounded p-2 flex items-start gap-1.5">
+              <span>⏳</span>
+              <div>Esta norma foi citada oficialmente no acervo, mas seu texto integral de <strong>\${node.ano || ''}</strong> será sincronizado nas próximas rodadas do scraper.</div>
+            </div>
+          \` : ''}
+          \${node.situacao === 'externa' ? \`
+            <div class="text-[11px] text-emerald-300/90 bg-emerald-500/10 border border-emerald-500/20 rounded p-2 flex items-start gap-1.5">
+              <span>🏛️</span>
+              <div>Legislação Federal externa (Congresso Nacional / Planalto) citada como base legal de competência da Anvisa.</div>
+            </div>
+          \` : ''}
 
           \${node.ementa ? \`
             <div class="text-xs text-slate-300 leading-relaxed bg-slate-900/60 p-2.5 rounded border border-slate-800/80">
@@ -808,7 +827,6 @@ const htmlContent = `<!DOCTYPE html>
       hasActiveFilter = q.length > 0 || currentTipoFilter !== 'ALL' || currentStatusFilter !== 'ALL' || !!startDate || !!endDate;
 
       const filtered = nodes.filter(n => {
-        if (!n.arquivo) return false;
         if (currentTipoFilter !== 'ALL' && n.tipo !== currentTipoFilter) return false;
         if (currentStatusFilter !== 'ALL' && n.situacao !== currentStatusFilter) return false;
 
@@ -824,6 +842,7 @@ const htmlContent = `<!DOCTYPE html>
             if (startDate && startDate.substring(0, 4) > n.ano) return false;
             if (endDate && endDate.substring(0, 4) < n.ano) return false;
           }
+          if (!refDate && !n.ano) return false;
         }
 
         // Filtro textual
@@ -838,7 +857,7 @@ const htmlContent = `<!DOCTYPE html>
       });
 
       filteredNodeIds = new Set(filtered.map(n => n.id));
-      countFiltered.textContent = \`\${filtered.length} de \${nodes.filter(n => n.arquivo).length} normas\`;
+      countFiltered.textContent = \`\${filtered.length} de \${nodes.length} nós\`;
 
       if (hasActiveFilter) {
         detailsPane.innerHTML = filtered.map(n => \`
@@ -846,12 +865,20 @@ const htmlContent = `<!DOCTYPE html>
             <div class="flex items-center justify-between">
               <span class="font-bold text-xs text-slate-200">\${n.id}</span>
               <span class="text-[9px] uppercase px-1.5 py-0.2 rounded \${
-                n.situacao === 'vigente' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'
-              }">\${n.situacao}</span>
+                n.situacao === 'vigente' ? 'bg-emerald-500/20 text-emerald-400' :
+                n.situacao === 'revogada' ? 'bg-rose-500/20 text-rose-400' :
+                n.situacao === 'externa' ? 'bg-emerald-500/20 text-emerald-300' :
+                n.situacao === 'pendente_coleta' ? 'bg-amber-500/20 text-amber-300' :
+                'bg-slate-800 text-slate-400'
+              }">\${
+                n.situacao === 'pendente_coleta' ? 'Pendente de Coleta' :
+                n.situacao === 'externa' ? 'Legislação Federal' :
+                n.situacao
+              }</span>
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-400">
-              <span>📅 Ato: \${n.data_ato || n.data_promulgacao || ''}</span>
-              \${n.data_publicacao_dou ? \`<span>DOU: \${n.data_publicacao_dou}</span>\` : ''}
+              <span>📅 Ano: \${n.ano || 'N/D'}\${n.data_ato ? ' (' + n.data_ato + ')' : ''}</span>
+              \${n.data_publicacao_dou ? \`<span>DOU: \${n.data_publicacao_dou}</span>\` : (n.arquivo ? '' : '<span class="italic text-slate-500">Citação oficial</span>')}
             </div>
             \${n.ementa ? \`<p class="text-[11px] text-slate-400 line-clamp-2 leading-tight">\${n.ementa}</p>\` : ''}
           </div>
