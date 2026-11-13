@@ -54,6 +54,16 @@ function construirGrafo() {
 
   const nodesMap = new Map();
   const edges = [];
+  const arestasVistas = new Set();
+
+  function adicionarAresta(source, target, relacao) {
+    const chave = `${source}->${target}:${relacao}`;
+    if (!arestasVistas.has(chave)) {
+      arestasVistas.add(chave);
+      edges.push({ source, target, relacao });
+    }
+  }
+
   const stats = {
     totalNormas: arquivos.length,
     vigentes: 0,
@@ -75,30 +85,26 @@ function construirGrafo() {
 
     stats.porTipo[meta.tipo] = (stats.porTipo[meta.tipo] || 0) + 1;
 
-    // Registrar nó de origem
-    if (!nodesMap.has(idNorma)) {
-      nodesMap.set(idNorma, {
-        id: idNorma,
-        tipo: meta.tipo,
-        numero: meta.numero,
-        ano: meta.ano,
-        data_ato: meta.data_ato || meta.data_promulgacao || '',
-        data_promulgacao: meta.data_promulgacao || '',
-        data_publicacao_dou: meta.data_publicacao_dou || '',
-        situacao: meta.situacao,
-        ementa: meta.ementa || '',
-        arquivo: path.relative(path.join(__dirname, '..'), arq).replace(/\\/g, '/')
-      });
-    }
+    // Registrar nó de origem ou atualizar metadados completos da norma física existente
+    const noExistente = nodesMap.get(idNorma);
+    nodesMap.set(idNorma, {
+      ...noExistente,
+      id: idNorma,
+      tipo: meta.tipo,
+      numero: meta.numero,
+      ano: meta.ano,
+      data_ato: meta.data_ato || meta.data_promulgacao || '',
+      data_promulgacao: meta.data_promulgacao || '',
+      data_publicacao_dou: meta.data_publicacao_dou || '',
+      situacao: meta.situacao,
+      ementa: meta.ementa || '',
+      arquivo: path.relative(path.join(__dirname, '..'), arq).replace(/\\/g, '/')
+    });
 
     // Arestas de revogação
     if (Array.isArray(meta.revogada_por)) {
       meta.revogada_por.forEach(rev => {
-        edges.push({
-          source: idNorma,
-          target: rev,
-          relacao: 'revogada_por'
-        });
+        adicionarAresta(idNorma, rev, 'revogada_por');
         if (!nodesMap.has(rev)) {
           const match = rev.match(/^(?:([A-Z_]+)\s+)?(\d+)\/(\d{4})/i);
           const tipo = match && match[1] ? match[1].toUpperCase() : 'NORMA_CORRELATA';
@@ -119,11 +125,7 @@ function construirGrafo() {
     // Arestas de leis de base
     if (Array.isArray(meta.leis_base)) {
       meta.leis_base.forEach(lei => {
-        edges.push({
-          source: idNorma,
-          target: lei,
-          relacao: 'baseada_em'
-        });
+        adicionarAresta(idNorma, lei, 'baseada_em');
         if (!nodesMap.has(lei)) {
           const match = lei.match(/(\d+)\/(\d{4})/);
           const numero = match ? match[1] : '';
@@ -143,11 +145,7 @@ function construirGrafo() {
     // Arestas de normas relacionadas (citações)
     if (Array.isArray(meta.relacionadas)) {
       meta.relacionadas.forEach(rel => {
-        edges.push({
-          source: idNorma,
-          target: rel,
-          relacao: 'cita'
-        });
+        adicionarAresta(idNorma, rel, 'cita');
         if (!nodesMap.has(rel)) {
           const match = rel.match(/^(?:([A-Z_]+)\s+)?(\d+)\/(\d{4})/i);
           const tipo = match && match[1] ? match[1].toUpperCase() : 'NORMA_CORRELATA';

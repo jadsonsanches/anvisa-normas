@@ -1,20 +1,24 @@
 {
-  "totalNormas": 292,
-  "vigentes": 291,
+  "totalNormas": 929,
+  "vigentes": 928,
   "revogadas": 1,
   "porTipo": {
     "ACM": 1,
-    "CPB": 4,
-    "DEP": 6,
+    "ARO": 8,
+    "CNC": 1,
+    "CPB": 13,
+    "DEP": 13,
     "EDT": 1,
-    "ETA": 2,
-    "EXC": 1,
-    "IN": 5,
-    "PORTARIA": 49,
-    "PRG": 2,
-    "RDC": 2,
-    "RE": 216,
-    "TAP": 3
+    "ETA": 4,
+    "EXC": 3,
+    "IN": 7,
+    "NOF": 5,
+    "PORTARIA": 185,
+    "PRG": 5,
+    "RDC": 5,
+    "RE": 664,
+    "TAP": 11,
+    "TCM": 3
   },
-  "totalRelacoes": 119
+  "totalRelacoes": 750
 }
