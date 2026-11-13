@@ -1,10 +1,11 @@
 {
-  "totalNormas": 17,
-  "vigentes": 17,
+  "totalNormas": 30,
+  "vigentes": 30,
   "revogadas": 0,
   "porTipo": {
+    "CPB": 1,
     "PORTARIA": 6,
-    "RE": 11
+    "RE": 23
   },
-  "totalRelacoes": 3
+  "totalRelacoes": 4
 }
