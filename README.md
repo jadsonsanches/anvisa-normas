@@ -9,7 +9,7 @@
 
 > **Todo o acervo normativo da Agência Nacional de Vigilância Sanitária (Anvisa) convertido em texto simples (Markdown), metadados estruturados (YAML Frontmatter), grafo determinístico de relações e bancos consolidados em SQLite, JSON e CSV com atualização automática contínua.**
 
-Inspirado pelo trabalho do [ctresb/leis](https://github.com/ctresb/leis) (Legislação Federal) e do [Bruno Moniz](https://github.com/BrunoMoniz) (Banco Central e CVM).
+Inspirado pelo trabalho do [ctresb/leis](https://github.com/ctresb/leis) (Legislação Federal) e do [Bruno Moniz](https://github.com/BrunooMoniz/normas-bcb) (normas do Banco Central e CVM).
 
 ---
 
