@@ -570,6 +570,7 @@ const htmlContent = `<!DOCTYPE html>
     window.selecionarMes = function(mes) {
       mesSelecionado = mes;
       diaSelecionado = null;
+      alpha = 0.8;
       
       const sel = document.getElementById('select-mes-topbar');
       if (sel) sel.value = mes;
@@ -595,6 +596,7 @@ const htmlContent = `<!DOCTYPE html>
     };
 
     function filtrarPorDia(data) {
+      alpha = 0.8;
       if (diaSelecionado === data) {
         diaSelecionado = null;
       } else {
@@ -606,6 +608,7 @@ const htmlContent = `<!DOCTYPE html>
 
     document.getElementById('btn-ver-todos-dias').addEventListener('click', () => {
       diaSelecionado = null;
+      alpha = 0.8;
       renderDailyTimeline();
       aplicarFiltros();
     });
@@ -615,6 +618,7 @@ const htmlContent = `<!DOCTYPE html>
       diaSelecionado = null;
       termoBusca = '';
       tipoFiltro = 'ALL';
+      alpha = 0.8;
       document.getElementById('search-input').value = '';
       
       const sel = document.getElementById('select-mes-topbar');
@@ -648,23 +652,29 @@ const htmlContent = `<!DOCTYPE html>
     let width, height;
 
     function resizeCanvas() {
-      width = canvas.parentElement.clientWidth;
-      height = canvas.parentElement.clientHeight;
-      canvas.width = width * window.devicePixelRatio;
-      canvas.height = height * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      width = canvas.parentElement.clientWidth || 700;
+      height = canvas.parentElement.clientHeight || 480;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    const nodes = graphData.nodes.map(n => ({
-      ...n,
-      x: width / 2 + (Math.random() - 0.5) * (width * 0.8),
-      y: height / 2 + (Math.random() - 0.5) * (height * 0.8),
-      vx: 0,
-      vy: 0,
-      radius: n.arquivo ? 7 : 4.5
-    }));
+    // Distribuição inicial em Espiral Áurea concêntrica e estável
+    const nodes = graphData.nodes.map((n, i) => {
+      const angle = i * 2.39996;
+      const r = Math.sqrt(i) * 11;
+      return {
+        ...n,
+        x: (width || 700) / 2 + Math.cos(angle) * r,
+        y: (height || 480) / 2 + Math.sin(angle) * r,
+        vx: 0,
+        vy: 0,
+        radius: n.arquivo ? 6.5 : 4
+      };
+    });
 
     const nodeMap = new Map(nodes.map(n => [n.id, n]));
     const edges = graphData.edges
@@ -689,29 +699,35 @@ const htmlContent = `<!DOCTYPE html>
     let selectedNode = nodes[0] || null;
     let focusedNodeId = null;
     let filteredNodeIds = new Set(nodes.map(n => n.id));
+    let alpha = 1.0;
 
     function isNodeVisible(n) {
       return filteredNodeIds.has(n.id);
     }
 
-    // Step da física do grafo
+    // Física estável e amortecida com resfriamento térmico (alpha decay)
     function stepPhysics() {
-      const repulsion = 1800;
-      const springLength = 85;
-      const springK = 0.04;
-      const damping = 0.85;
+      if (alpha < 0.005 && !dragNode) return;
+
+      const repulsion = 450;
+      const springLength = 45;
+      const springK = 0.05;
+      const damping = 0.82;
 
       const visibleList = nodes.filter(isNodeVisible);
 
+      // Repulsão local suave com distância mínima protegida
       for (let i = 0; i < visibleList.length; i++) {
+        const n1 = visibleList[i];
         for (let j = i + 1; j < visibleList.length; j++) {
-          const n1 = visibleList[i];
           const n2 = visibleList[j];
           let dx = n2.x - n1.x;
           let dy = n2.y - n1.y;
-          let dist = Math.sqrt(dx * dx + dy * dy) || 1;
-          if (dist < 340) {
-            let force = repulsion / (dist * dist);
+          let distSq = dx * dx + dy * dy + 49;
+          if (distSq < 16900) {
+            let dist = Math.sqrt(distSq);
+            let force = (repulsion / distSq) * alpha;
+            force = Math.min(force, 8);
             let fx = (dx / dist) * force;
             let fy = (dy / dist) * force;
             n1.vx -= fx;
@@ -722,12 +738,14 @@ const htmlContent = `<!DOCTYPE html>
         }
       }
 
+      // Molas das arestas com tensão balanceada
       edges.forEach(e => {
         if (!isNodeVisible(e.sourceNode) || !isNodeVisible(e.targetNode)) return;
         let dx = e.targetNode.x - e.sourceNode.x;
         let dy = e.targetNode.y - e.sourceNode.y;
         let dist = Math.sqrt(dx * dx + dy * dy) || 1;
-        let force = (dist - springLength) * springK;
+        let force = (dist - springLength) * springK * alpha;
+        force = Math.max(-10, Math.min(10, force));
         let fx = (dx / dist) * force;
         let fy = (dy / dist) * force;
         e.sourceNode.vx += fx;
@@ -736,30 +754,36 @@ const htmlContent = `<!DOCTYPE html>
         e.targetNode.vy -= fy;
       });
 
+      // Gravidade central e amortecimento
+      const centerX = width / 2;
+      const centerY = height / 2;
       visibleList.forEach(n => {
-        let dx = (width / 2) - n.x;
-        let dy = (height / 2) - n.y;
-        n.vx += dx * 0.003;
-        n.vy += dy * 0.003;
+        let dx = centerX - n.x;
+        let dy = centerY - n.y;
+        n.vx += dx * 0.02 * alpha;
+        n.vy += dy * 0.02 * alpha;
 
-        n.vx *= damping;
-        n.vy *= damping;
+        n.vx = Math.max(-10, Math.min(10, n.vx * damping));
+        n.vy = Math.max(-10, Math.min(10, n.vy * damping));
 
         if (n !== dragNode) {
           n.x += n.vx;
           n.y += n.vy;
         }
       });
+
+      alpha *= 0.96;
     }
 
-    // Render loop do Canvas
+    // Render loop do Canvas de alta performance
     function draw() {
       stepPhysics();
 
-      ctx.save();
+      const dpr = window.devicePixelRatio || 1;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
 
-      // Fundo e grade sutil
+      ctx.save();
       ctx.translate(transform.x, transform.y);
       ctx.scale(transform.scale, transform.scale);
 
@@ -856,6 +880,9 @@ const htmlContent = `<!DOCTYPE html>
         const rect = canvas.getBoundingClientRect();
         dragNode.x = (e.clientX - rect.left - transform.x) / transform.scale;
         dragNode.y = (e.clientY - rect.top - transform.y) / transform.scale;
+        dragNode.vx = 0;
+        dragNode.vy = 0;
+        alpha = Math.max(alpha, 0.3);
       } else if (isDragging) {
         transform.x += (e.clientX - lastMouse.x);
         transform.y += (e.clientY - lastMouse.y);
@@ -884,6 +911,7 @@ const htmlContent = `<!DOCTYPE html>
       transform = { x: 0, y: 0, scale: 1 };
       focusedNodeId = null;
       document.getElementById('btn-clear-focus').classList.add('hidden');
+      alpha = 0.8;
     });
     document.getElementById('btn-clear-focus').addEventListener('click', () => {
       focusedNodeId = null;
@@ -1130,6 +1158,7 @@ const htmlContent = `<!DOCTYPE html>
 
     searchInput.addEventListener('input', e => {
       termoBusca = e.target.value;
+      alpha = 0.8;
       aplicarFiltros();
     });
 
@@ -1143,6 +1172,7 @@ const htmlContent = `<!DOCTYPE html>
         btn.classList.remove('bg-[#092217]', 'text-slate-300');
         btn.classList.add('bg-emerald-500', 'text-slate-950');
         tipoFiltro = btn.dataset.tipo;
+        alpha = 0.8;
         aplicarFiltros();
       });
     });
