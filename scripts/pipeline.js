@@ -1,5 +1,6 @@
 const { coletarPorData, coletarPorAno } = require('./scraper');
 const { construirGrafo } = require('./grafo');
+const { exportarBancos } = require('./exportar-bancos');
 const { execSync } = require('child_process');
 const path = require('path');
 
@@ -49,6 +50,9 @@ async function executarPipeline() {
     console.warn('[Aviso] Falha ao invocar gerar-visualizador diretamente, tentando via processo:', e.message);
     execSync(`node "${path.join(__dirname, 'gerar-visualizador.js')}"`, { stdio: 'inherit' });
   }
+
+  console.log('\n--- 3. Exportando Bancos Consolidados (SQLite, JSON, CSV) ---');
+  await exportarBancos();
 
   console.log('\n==================================================');
   console.log('   PIPELINE CONCLUÍDO COM SUCESSO!                ');
