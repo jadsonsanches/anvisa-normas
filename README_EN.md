@@ -36,15 +36,11 @@ Inspired by Brazilian public legal open-data initiatives like [ctresb/leis](http
 The project includes an interactive client-side web application running completely in the browser, enabling visual exploration of legal connections between norms.
 
 <p align="center">
-  <img src="docs/assets/grafo-relacoes.jpg" alt="Interactive Regulatory Knowledge Graph" width="100%" />
-  <br>
-  <em>Interactive physics-based graph: deterministic connections between RDCs, Portarias, REs, INs, and Federal Laws.</em>
+  <img src="docs/assets/grafo-relacoes.jpg" alt="Interactive Regulatory Knowledge Graph" width="49%" />
+  <img src="docs/assets/inspetor-metadados.png" alt="Regulatory Metadata Inspector" width="49%" />
 </p>
-
 <p align="center">
-  <img src="docs/assets/inspetor-metadados.png" alt="Regulatory Metadata Inspector" width="100%" />
-  <br>
-  <em>Metadata Inspector: regulatory status (active/revoked), official dates (enactment vs. Official Gazette publication), complete summary, and connected graph nodes.</em>
+  <em>Interactive Web Viewer: Physics-based regulatory graph (left) and Detailed Metadata Inspector (right).</em>
 </p>
 
 ---

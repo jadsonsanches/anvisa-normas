@@ -36,15 +36,11 @@ Inspirado nas iniciativas de transparência pública do [ctresb/leis](https://gi
 O projeto conta com um visualizador interativo cliente-side que roda diretamente no navegador, permitindo navegar visualmente pelas conexões jurídicas entre normas.
 
 <p align="center">
-  <img src="docs/assets/grafo-relacoes.jpg" alt="Grafo Interativo de Relações Regulatórias" width="100%" />
-  <br>
-  <em>Grafo de física interativa: conexões determinísticas entre RDCs, Portarias, REs, INs e Leis Federais.</em>
+  <img src="docs/assets/grafo-relacoes.jpg" alt="Grafo Interativo de Relações Regulatórias" width="49%" />
+  <img src="docs/assets/inspetor-metadados.png" alt="Inspetor de Metadados Regulatórios" width="49%" />
 </p>
-
 <p align="center">
-  <img src="docs/assets/inspetor-metadados.png" alt="Inspetor de Metadados Regulatórios" width="100%" />
-  <br>
-  <em>Inspetor de Metadados: status de vigência, datas oficiais (Ato vs DOU), ementa completa e nós conectados no grafo.</em>
+  <em>Visualizador Interativo: Grafo de relações com física interativa (esquerda) e Inspetor de metadados regulatórios (direita).</em>
 </p>
 
 ---

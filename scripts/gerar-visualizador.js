@@ -123,37 +123,54 @@ const htmlContent = `<!DOCTYPE html>
 </head>
 <body class="min-h-screen flex text-slate-200 antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
 
-  <!-- Sidebar Lateral Moderna (Estilo AI Dashboard) -->
-  <aside class="w-16 md:w-64 bg-[#05140d]/90 border-r border-emerald-500/15 flex flex-col justify-between p-3 md:p-4 sticky top-0 h-screen z-30 shrink-0 backdrop-blur-xl">
+  <!-- Backdrop escuro para fechar menu no mobile -->
+  <div id="sidebar-backdrop" onclick="toggleSidebar(false)" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden md:hidden transition-opacity"></div>
+
+  <!-- Sidebar Lateral Moderna Retrátil (Estilo AI Dashboard) -->
+  <aside id="app-sidebar" class="w-64 bg-[#05140d]/95 border-r border-emerald-500/15 flex flex-col justify-between p-4 sticky top-0 h-screen z-50 shrink-0 backdrop-blur-2xl transition-all duration-300 ease-in-out fixed md:sticky inset-y-0 left-0 -translate-x-full md:translate-x-0 shadow-2xl md:shadow-none overflow-y-auto">
     <div class="space-y-6">
-      <!-- Logo / Marca -->
-      <div class="flex items-center gap-3 px-1 md:px-2 pt-1">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-emerald-500/20 shrink-0">
-          🌿
-        </div>
-        <div class="hidden md:block overflow-hidden">
-          <div class="font-bold text-sm tracking-wide text-white flex items-center gap-1.5">
-            <span>AnvisaNormas</span>
-            <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-mono border border-emerald-500/30">AI</span>
+      <!-- Logo / Marca com Botão de Ocultar Sidebar -->
+      <div class="flex items-center justify-between gap-3 px-1 pt-1 border-b border-emerald-500/15 pb-3">
+        <div class="flex items-center gap-3 overflow-hidden">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-emerald-500/20 shrink-0">
+            🌿
           </div>
-          <p class="text-[11px] text-emerald-400/70 truncate">Inteligência Regulatória</p>
-          <div class="mt-1 flex items-center gap-1.5 text-[10px] text-emerald-300 font-mono bg-emerald-500/15 px-2 py-0.5 rounded-md border border-emerald-500/25 w-fit">
-            <span>📅</span>
-            <span>Desde 01/01/2025</span>
+          <div class="overflow-hidden">
+            <div class="font-bold text-sm tracking-wide text-white flex items-center gap-1.5">
+              <span>AnvisaNormas</span>
+              <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-mono border border-emerald-500/30">AI</span>
+            </div>
+            <p class="text-[11px] text-emerald-400/70 truncate">Inteligência Regulatória</p>
+            <div class="mt-1 flex items-center gap-1.5 text-[10px] text-emerald-300 font-mono bg-emerald-500/15 px-2 py-0.5 rounded-md border border-emerald-500/25 w-fit">
+              <span>📅</span>
+              <span>Desde 01/01/2025</span>
+            </div>
           </div>
         </div>
+        <!-- Botão Fechar Sidebar -->
+        <button 
+          type="button"
+          onclick="toggleSidebar(false)" 
+          class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-emerald-500/20 border border-emerald-500/20 transition cursor-pointer"
+          title="Ocultar menu lateral"
+          aria-label="Ocultar menu lateral"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
       </div>
 
       <!-- Menu Principal de Navegação -->
-      <nav class="space-y-1.5 pt-2">
-        <button onclick="scrollToSection('radar-section')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl bg-emerald-500/15 text-emerald-300 font-medium text-xs md:text-sm border border-emerald-500/30 shadow-sm transition hover:bg-emerald-500/20 group">
+      <nav class="space-y-1.5 pt-1">
+        <button onclick="scrollToSection('radar-section'); if(window.innerWidth < 768) toggleSidebar(false);" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl bg-emerald-500/15 text-emerald-300 font-medium text-xs md:text-sm border border-emerald-500/30 shadow-sm transition hover:bg-emerald-500/20 group">
           <span class="text-base group-hover:scale-110 transition">📊</span>
-          <span class="hidden md:inline font-semibold">Dashboard</span>
+          <span class="font-semibold">Dashboard</span>
         </button>
       </nav>
 
       <!-- Seção de Downloads Consolidados -->
-      <div class="hidden md:block pt-4 border-t border-emerald-500/15 space-y-2">
+      <div class="pt-4 border-t border-emerald-500/15 space-y-2">
         <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400/80 px-2">Bases Abertas (Data)</span>
         <div class="space-y-1">
           <a href="data/dist/anvisa.db" download class="flex items-center justify-between px-3 py-2 rounded-lg bg-[#082016] hover:bg-emerald-950/70 border border-emerald-500/20 text-xs text-slate-200 hover:text-emerald-300 transition">
@@ -173,8 +190,8 @@ const htmlContent = `<!DOCTYPE html>
     </div>
 
     <!-- Rodapé Sidebar -->
-    <div class="border-t border-emerald-500/15 pt-3">
-      <div class="hidden md:flex items-center justify-between text-[11px] text-slate-400 mb-2">
+    <div class="border-t border-emerald-500/15 pt-3 mt-4">
+      <div class="flex items-center justify-between text-[11px] text-slate-400 mb-2">
         <span class="flex items-center gap-1.5">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span>Pipeline Ativo</span>
@@ -188,25 +205,41 @@ const htmlContent = `<!DOCTYPE html>
   </aside>
 
   <!-- Conteúdo Principal -->
-  <main class="flex-1 p-3 md:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto overflow-y-auto w-full">
+  <main class="flex-1 p-3 md:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto overflow-y-auto w-full transition-all duration-300">
 
-    <!-- Topbar: Barra de Busca & Filtros Rápidos / Calendário (Retângulo Azul) -->
+    <!-- Topbar: Botão Hamburger + Barra de Busca & Filtros Rápidos / Calendário -->
     <header class="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5">
-      <!-- Barra de Busca Inspirada na Imagem 1 -->
-      <div class="relative flex-1 max-w-xl">
-        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-emerald-400/80">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-        </div>
-        <input 
-          id="search-input" 
-          type="text" 
-          placeholder="Buscar por número do ato, ementa, setor regulado (ex: alimentos, medicamentos, cosméticos)..." 
-          class="w-full pl-10 pr-24 py-2.5 rounded-full bg-[#081f15]/80 border border-emerald-500/25 text-slate-100 placeholder-emerald-400/40 text-xs md:text-sm focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition shadow-inner"
+      <div class="flex items-center gap-2.5 flex-1 max-w-xl">
+        <!-- Botão Hamburger para alternar Menu Lateral -->
+        <button 
+          id="btn-toggle-sidebar" 
+          type="button"
+          onclick="toggleSidebar()" 
+          class="p-2.5 rounded-xl bg-[#082016] hover:bg-emerald-950/80 border border-emerald-500/25 text-emerald-300 hover:text-white transition shadow-sm flex items-center justify-center shrink-0 cursor-pointer group" 
+          title="Alternar Menu Lateral"
+          aria-label="Alternar Menu Lateral"
         >
-        <div class="absolute inset-y-0 right-0 pr-2 flex items-center gap-1">
-          <span id="count-filtered" class="text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-            ${grafo.nodes.length} nós
-          </span>
+          <svg class="w-5 h-5 group-hover:scale-110 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+
+        <!-- Barra de Busca -->
+        <div class="relative flex-1">
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-emerald-400/80">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          <input 
+            id="search-input" 
+            type="text" 
+            placeholder="Buscar por número do ato, ementa, setor regulado (ex: alimentos, medicamentos, cosméticos)..." 
+            class="w-full pl-10 pr-24 py-2.5 rounded-full bg-[#081f15]/80 border border-emerald-500/25 text-slate-100 placeholder-emerald-400/40 text-xs md:text-sm focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition shadow-inner"
+          >
+          <div class="absolute inset-y-0 right-0 pr-2 flex items-center gap-1">
+            <span id="count-filtered" class="text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              ${grafo.nodes.length} nós
+            </span>
+          </div>
         </div>
       </div>
 
@@ -412,21 +445,60 @@ const htmlContent = `<!DOCTYPE html>
           <div class="relative w-full h-[480px] bg-[#030a07] rounded-xl overflow-hidden border border-emerald-500/20 shadow-[inset_0_4px_24px_rgba(0,0,0,0.65)]" style="background-image: radial-gradient(rgba(16, 185, 129, 0.12) 1px, transparent 1px); background-size: 22px 22px;">
             <canvas id="graph-canvas" class="w-full h-full block"></canvas>
             
-            <!-- Legenda Flutuante Discreta -->
-            <div class="absolute bottom-3 left-3 bg-[#05140d]/90 backdrop-blur-md border border-emerald-500/20 rounded-xl p-2.5 text-[10px] space-y-1 shadow-[0_12px_32px_rgba(0,0,0,0.55)] pointer-events-none">
-              <div class="font-bold text-slate-300 mb-1">Tipologia dos Nós:</div>
-              <div class="grid grid-cols-2 gap-x-3 gap-y-1">
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_#10b981]"></span> RDC</span>
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#14b8a6] shadow-[0_0_8px_#14b8a6]"></span> RE</span>
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#f59e0b] shadow-[0_0_8px_#f59e0b]"></span> Portaria</span>
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#06b6d4] shadow-[0_0_8px_#06b6d4]"></span> IN</span>
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#ec4899] shadow-[0_0_8px_#ec4899]"></span> CPB</span>
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#22c55e] shadow-[0_0_8px_#22c55e]"></span> Lei Federal</span>
+            <!-- Legenda Flutuante Completa e Interativa com Botão Minimizar -->
+            <div id="grafo-legenda-card" class="absolute bottom-3 left-3 bg-[#04130c]/95 backdrop-blur-md border border-emerald-500/30 rounded-xl p-2.5 text-[10px] md:text-[11px] shadow-[0_12px_36px_rgba(0,0,0,0.7)] z-20 transition-all duration-200 max-w-[270px] pointer-events-auto">
+              <div class="flex items-center justify-between gap-2 border-b border-emerald-500/20 pb-1.5 mb-1.5 cursor-pointer select-none" onclick="toggleLegendaGrafo()" title="Minimizar ou expandir legenda">
+                <div class="font-bold text-slate-200 flex items-center gap-1.5">
+                  <span class="text-emerald-400">🏷️</span>
+                  <span>Legenda de Tipologias</span>
+                </div>
+                <button id="legenda-toggle-btn" type="button" class="w-5 h-5 flex items-center justify-center rounded hover:bg-emerald-500/20 text-slate-400 hover:text-emerald-300 text-xs transition" aria-label="Alternar legenda">▼</button>
+              </div>
+              <div id="grafo-legenda-body" class="space-y-1.5">
+                <div class="grid grid-cols-2 gap-x-2.5 gap-y-1">
+                  <button type="button" onclick="filtrarPorTipo('RDC')" class="flex items-center gap-1.5 text-slate-300 hover:text-emerald-300 text-left transition cursor-pointer" title="Filtrar RDC">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#10b981] shadow-[0_0_8px_#10b981] shrink-0"></span> RDC
+                  </button>
+                  <button type="button" onclick="filtrarPorTipo('RE')" class="flex items-center gap-1.5 text-slate-300 hover:text-teal-300 text-left transition cursor-pointer" title="Filtrar RE">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#14b8a6] shadow-[0_0_8px_#14b8a6] shrink-0"></span> RE
+                  </button>
+                  <button type="button" onclick="filtrarPorTipo('PORTARIA')" class="flex items-center gap-1.5 text-slate-300 hover:text-amber-300 text-left transition cursor-pointer" title="Filtrar Portaria">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#f59e0b] shadow-[0_0_8px_#f59e0b] shrink-0"></span> Portaria
+                  </button>
+                  <button type="button" onclick="filtrarPorTipo('IN')" class="flex items-center gap-1.5 text-slate-300 hover:text-cyan-300 text-left transition cursor-pointer" title="Filtrar IN">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#06b6d4] shadow-[0_0_8px_#06b6d4] shrink-0"></span> IN
+                  </button>
+                  <button type="button" onclick="filtrarPorTipo('CPB')" class="flex items-center gap-1.5 text-slate-300 hover:text-pink-300 text-left transition cursor-pointer" title="Filtrar CPB">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#ec4899] shadow-[0_0_8px_#ec4899] shrink-0"></span> CPB
+                  </button>
+                  <button type="button" onclick="filtrarPorTipo('LEI_FEDERAL')" class="flex items-center gap-1.5 text-slate-300 hover:text-green-300 text-left transition cursor-pointer" title="Filtrar Lei Federal">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#22c55e] shadow-[0_0_8px_#22c55e] shrink-0"></span> Lei Federal
+                  </button>
+                  <button type="button" onclick="filtrarPorTipo('DEP')" class="flex items-center gap-1.5 text-slate-300 hover:text-blue-300 text-left transition cursor-pointer" title="Filtrar Despacho">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#3b82f6] shadow-[0_0_8px_#3b82f6] shrink-0"></span> Despacho
+                  </button>
+                  <button type="button" onclick="filtrarPorTipo('TAP')" class="flex items-center gap-1.5 text-slate-300 hover:text-red-300 text-left transition cursor-pointer" title="Filtrar Termo de Apreensão">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#ef4444] shadow-[0_0_8px_#ef4444] shrink-0"></span> Apreensão
+                  </button>
+                  <button type="button" onclick="filtrarPorTipo('ALL')" class="col-span-2 flex items-center gap-1.5 text-slate-400 hover:text-slate-200 text-left transition cursor-pointer pt-0.5" title="Outros atos regulatórios">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#64748b] shadow-[0_0_6px_#64748b] shrink-0"></span> Outros Atos
+                  </button>
+                </div>
+                <div class="border-t border-emerald-500/15 pt-1.5 mt-1 space-y-1 text-[10px] text-slate-400">
+                  <div class="flex items-center gap-2">
+                    <span class="w-4 h-[2px] bg-emerald-500/50 shrink-0"></span>
+                    <span>Citação / Relação</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="w-4 h-[2px] bg-[#00ff87] shadow-[0_0_6px_#00ff87] shrink-0"></span>
+                    <span>Vínculo Ativo (Foco)</span>
+                  </div>
+                </div>
               </div>
             </div>
 
             <!-- Botão Limpar Foco -->
-            <button id="btn-clear-focus" class="hidden absolute top-3 right-3 px-3 py-1.5 rounded-lg bg-emerald-500/30 hover:bg-emerald-500/40 text-emerald-200 border border-emerald-400 text-xs font-semibold backdrop-blur shadow-lg transition">
+            <button id="btn-clear-focus" class="hidden absolute top-3 right-3 px-3 py-1.5 rounded-lg bg-emerald-500/30 hover:bg-emerald-500/40 text-emerald-200 border border-emerald-400 text-xs font-semibold backdrop-blur shadow-lg transition z-20">
               Desfazer Foco no Nó
             </button>
           </div>
@@ -440,6 +512,8 @@ const htmlContent = `<!DOCTYPE html>
             <button data-tipo="IN" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">IN</button>
             <button data-tipo="RDC" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">RDC</button>
             <button data-tipo="CPB" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">CPB</button>
+            <button data-tipo="DEP" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">Despacho</button>
+            <button data-tipo="TAP" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">Apreensão</button>
           </div>
         </div>
 
@@ -546,6 +620,30 @@ const htmlContent = `<!DOCTYPE html>
     const carouselContainer = document.getElementById('daily-timeline-carousel');
     const DIAS_SEMANA = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 
+    // Gerador de sequência contínua de dias em um intervalo [dtIni, dtFim]
+    function gerarDiasIntervalo(dtIni, dtFim) {
+      const dias = [];
+      const cur = new Date(dtIni.getFullYear(), dtIni.getMonth(), dtIni.getDate());
+      const fim = new Date(dtFim.getFullYear(), dtFim.getMonth(), dtFim.getDate());
+      while (cur <= fim) {
+        const d = cur.getDate();
+        const m = cur.getMonth() + 1;
+        const y = cur.getFullYear();
+        const diaFormatado = String(d).padStart(2, '0');
+        const mesFormatado = String(m).padStart(2, '0');
+        const dataStr = \`\${diaFormatado}/\${mesFormatado}/\${y}\`;
+        const sem = DIAS_SEMANA[cur.getDay()];
+        dias.push({
+          dia: diaFormatado,
+          sem,
+          data: dataStr,
+          mesStr: \`\${mesFormatado}/\${y}\`
+        });
+        cur.setDate(cur.getDate() + 1);
+      }
+      return dias;
+    }
+
     // Gerador dinâmico de dias para o mês selecionado
     function gerarDiasDoMes(mesStr) {
       const [mm, aaaa] = mesStr.split('/').map(Number);
@@ -561,30 +659,12 @@ const htmlContent = `<!DOCTYPE html>
       return dias;
     }
 
-    // Gerador de datas ativas para visão do acervo completo
+    // Gerador de datas ativas para visão do acervo completo (fallback)
     function gerarDiasAcervo() {
-      const datasSet = new Set();
-      graphData.nodes.filter(n => n.arquivo).forEach(n => {
-        const d = n.data_publicacao_dou || n.data_ato || '';
-        if (d && d.length === 10 && d.includes('/2026')) {
-          datasSet.add(d);
-        }
-      });
-      const ordenadas = Array.from(datasSet).sort((a, b) => {
-        const [d1, m1, y1] = a.split('/').map(Number);
-        const [d2, m2, y2] = b.split('/').map(Number);
-        return new Date(y1, m1 - 1, d1) - new Date(y2, m2 - 1, d2);
-      });
-      return ordenadas.map(dataStr => {
-        const [d, m, y] = dataStr.split('/').map(Number);
-        const dt = new Date(y, m - 1, d);
-        return {
-          dia: String(d).padStart(2, '0'),
-          sem: DIAS_SEMANA[dt.getDay()],
-          data: dataStr,
-          mesStr: \`\${String(m).padStart(2, '0')}/\${y}\`
-        };
-      });
+      const fimAcervo = getLatestAcervoDate();
+      const iniAcervo = new Date(fimAcervo);
+      iniAcervo.setDate(iniAcervo.getDate() - 13);
+      return gerarDiasIntervalo(iniAcervo, fimAcervo);
     }
 
     function parseBrDate(str) {
@@ -641,6 +721,8 @@ const htmlContent = `<!DOCTYPE html>
 
     let dataInicioFiltro = '';
     let dataFimFiltro = '';
+    let timelineBaseIni = '';
+    let timelineBaseFim = '';
     let filtroRapidoAtivo = '7_DIAS';
     let mesSelecionado = 'ALL';
     let diaSelecionado = null;
@@ -670,32 +752,17 @@ const htmlContent = `<!DOCTYPE html>
 
     function renderDailyTimeline() {
       let diasList = [];
-      const dtIni = dataInicioFiltro ? parseIsoDate(dataInicioFiltro) : null;
-      const dtFim = dataFimFiltro ? parseIsoDate(dataFimFiltro) : null;
-      const isSingleDay = dataInicioFiltro && dataFimFiltro && dataInicioFiltro === dataFimFiltro;
+      const baseIni = timelineBaseIni || dataInicioFiltro;
+      const baseFim = timelineBaseFim || dataFimFiltro;
+      const dtIni = baseIni ? parseIsoDate(baseIni) : null;
+      const dtFim = baseFim ? parseIsoDate(baseFim) : null;
 
-      if (mesSelecionado !== 'ALL') {
+      if (dtIni && dtFim) {
+        diasList = gerarDiasIntervalo(dtIni, dtFim);
+      } else if (mesSelecionado !== 'ALL') {
         diasList = gerarDiasDoMes(mesSelecionado);
-        if (!isSingleDay && (dtIni || dtFim)) {
-          diasList = diasList.filter(item => {
-            const dt = parseBrDate(item.data);
-            if (!dt) return true;
-            if (dtIni && dt < dtIni) return false;
-            if (dtFim && dt > dtFim) return false;
-            return true;
-          });
-        }
       } else {
         diasList = gerarDiasAcervo();
-        if (!isSingleDay && (dtIni || dtFim)) {
-          diasList = diasList.filter(item => {
-            const dt = parseBrDate(item.data);
-            if (!dt) return true;
-            if (dtIni && dt < dtIni) return false;
-            if (dtFim && dt > dtFim) return false;
-            return true;
-          });
-        }
       }
 
       if (diasList.length === 0) {
@@ -712,7 +779,7 @@ const htmlContent = `<!DOCTYPE html>
         const q = atosPorDiaMap[item.data] || 0;
         if (q > maxQtd) maxQtd = q;
       });
-      const peakThreshold = Math.max(20, Math.floor(maxQtd * 0.7));
+      const peakThreshold = Math.max(15, Math.floor(maxQtd * 0.7));
 
       const MES_ABREV = {
         '01': 'Jan', '02': 'Fev', '03': 'Mar', '04': 'Abr',
@@ -723,15 +790,7 @@ const htmlContent = `<!DOCTYPE html>
       carouselContainer.innerHTML = diasList.map(item => {
         const qtd = atosPorDiaMap[item.data] || 0;
         const isPeak = qtd >= peakThreshold && qtd > 0;
-        const dtItem = parseBrDate(item.data);
-        
-        const isExactDay = isSingleDay && item.data === diaSelecionado;
-        let isInRange = false;
-        if (!isSingleDay && (dtIni || dtFim) && dtItem) {
-          const aboveIni = !dtIni || dtItem >= dtIni;
-          const belowFim = !dtFim || dtItem <= dtFim;
-          isInRange = aboveIni && belowFim;
-        }
+        const isSelectedDay = diaSelecionado && item.data === diaSelecionado;
 
         const mesPart = item.mesStr ? item.mesStr.split('/')[0] : '';
         const abrev = MES_ABREV[mesPart] || '';
@@ -739,29 +798,29 @@ const htmlContent = `<!DOCTYPE html>
           ? (abrev ? \`\${item.sem} • \${abrev}\` : item.sem)
           : item.sem;
 
-        let cardStyle = 'bg-[#040e0a]/60 border-emerald-500/10 text-slate-500 opacity-60 hover:opacity-90';
-        if (isExactDay) {
-          cardStyle = 'active bg-emerald-500/30 border-emerald-400 text-white shadow-lg ring-2 ring-emerald-400/40';
-        } else if (isInRange) {
-          cardStyle = 'bg-emerald-500/15 border-emerald-500/40 text-emerald-100 shadow-sm';
+        let cardStyle = 'bg-[#040e0a]/50 border-emerald-500/10 text-slate-500 opacity-60 hover:opacity-100 hover:border-emerald-500/30';
+        if (isSelectedDay) {
+          cardStyle = 'active bg-emerald-500/30 border-emerald-400 text-white shadow-lg ring-2 ring-emerald-400/50 scale-[1.03] z-10';
+        } else if (diaSelecionado) {
+          cardStyle = qtd > 0 ? 'bg-[#061810]/70 border-emerald-500/15 text-slate-400 hover:text-white' : 'bg-[#040e0a]/30 border-emerald-500/5 text-slate-600 opacity-40';
         } else if (qtd > 0) {
-          cardStyle = 'bg-[#081e15]/80 hover:bg-[#0c2a1e] border-emerald-500/20 text-slate-200';
+          cardStyle = 'bg-[#081e15]/80 hover:bg-[#0c2a1e] border-emerald-500/25 text-slate-200 hover:border-emerald-400/50 shadow-sm';
         }
+
+        const badgeHtml = qtd > 0
+          ? \`<span class="text-[10px] font-mono px-1.5 py-0.2 rounded-full font-bold \${isPeak ? 'bg-emerald-400 text-slate-950 neon-glow' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'}">\${qtd} \${qtd === 1 ? 'ato' : 'atos'}</span>\`
+          : \`<span class="text-[10px] font-mono px-1.5 py-0.2 rounded-full text-slate-600">0 atos</span>\`;
 
         return \`
           <button 
+            type="button"
             onclick="filtrarPorDia('\${item.data}')" 
-            class="timeline-pill flex-1 min-w-[76px] p-2.5 rounded-xl border flex flex-col items-center justify-between text-center transition cursor-pointer \${cardStyle}"
-            title="\${item.data}: \${qtd} \${qtd === 1 ? 'ato' : 'atos'}"
+            class="timeline-pill flex-1 min-w-[76px] p-2.5 rounded-xl border flex flex-col items-center justify-between text-center transition cursor-pointer select-none \${cardStyle}"
+            title="\${item.data} (\${rotuloSemana}): \${qtd} \${qtd === 1 ? 'ato' : 'atos'}\${qtd === 0 ? ' (sem publicações)' : ''}"
           >
             <span class="text-[10px] uppercase font-semibold text-slate-400 whitespace-nowrap">\${rotuloSemana}</span>
             <span class="text-base font-extrabold font-mono text-white my-0.5">\${item.dia}</span>
-            <span class="text-[10px] font-mono px-1.5 py-0.2 rounded-full font-bold \${
-              isPeak ? 'bg-emerald-400 text-slate-950 neon-glow' :
-              (qtd > 0 ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-slate-800/40 text-slate-500')
-            }">
-              \${qtd} \${qtd === 1 ? 'ato' : 'atos'}
-            </span>
+            \${badgeHtml}
           </button>
         \`;
       }).join('');
@@ -1054,13 +1113,84 @@ const htmlContent = `<!DOCTYPE html>
     let termoBusca = '';
     let tipoFiltro = 'ALL';
 
+    // Controle do Menu Lateral Retrátil (Hamburger)
+    window.toggleSidebar = function(forcado) {
+      const sidebar = document.getElementById('app-sidebar');
+      const backdrop = document.getElementById('sidebar-backdrop');
+      if (!sidebar) return;
+
+      const isMobile = window.innerWidth < 768;
+
+      if (isMobile) {
+        const isOpen = !sidebar.classList.contains('-translate-x-full');
+        const shouldOpen = forcado !== undefined ? forcado : !isOpen;
+        if (shouldOpen) {
+          sidebar.classList.remove('-translate-x-full');
+          sidebar.classList.add('translate-x-0');
+          backdrop?.classList.remove('hidden');
+        } else {
+          sidebar.classList.add('-translate-x-full');
+          sidebar.classList.remove('translate-x-0');
+          backdrop?.classList.add('hidden');
+        }
+      } else {
+        const isCollapsed = sidebar.classList.contains('md:w-0');
+        const shouldCollapse = forcado !== undefined ? !forcado : !isCollapsed;
+        if (shouldCollapse) {
+          sidebar.classList.remove('md:w-64', 'md:p-4', 'md:border-r');
+          sidebar.classList.add('md:w-0', 'md:p-0', 'md:border-0', 'md:opacity-0', 'overflow-hidden');
+          try { localStorage.setItem('sidebar_visivel', 'false'); } catch (e) {}
+        } else {
+          sidebar.classList.remove('md:w-0', 'md:p-0', 'md:border-0', 'md:opacity-0', 'overflow-hidden');
+          sidebar.classList.add('md:w-64', 'md:p-4', 'md:border-r');
+          try { localStorage.setItem('sidebar_visivel', 'true'); } catch (e) {}
+        }
+        setTimeout(() => {
+          if (typeof resizeCanvas === 'function') resizeCanvas();
+          if (typeof wakeRender === 'function') wakeRender();
+        }, 310);
+      }
+    };
+
+    // Alternar visibilidade da legenda do grafo (minimizar/expandir)
+    window.toggleLegendaGrafo = function() {
+      const body = document.getElementById('grafo-legenda-body');
+      const btn = document.getElementById('legenda-toggle-btn');
+      if (!body || !btn) return;
+      if (body.classList.contains('hidden')) {
+        body.classList.remove('hidden');
+        btn.textContent = '▼';
+        btn.title = 'Minimizar legenda';
+      } else {
+        body.classList.add('hidden');
+        btn.textContent = '▲';
+        btn.title = 'Expandir legenda';
+      }
+    };
+
+    // Filtrar por tipo (usado nos botões e na legenda do grafo)
+    window.filtrarPorTipo = function(tipo) {
+      tipoFiltro = tipo;
+      document.querySelectorAll('.tipo-filter-btn').forEach(b => {
+        if (b.dataset.tipo === tipo) {
+          b.classList.remove('bg-[#092217]', 'text-slate-300');
+          b.classList.add('bg-emerald-500', 'text-slate-950');
+        } else {
+          b.classList.remove('bg-emerald-500', 'text-slate-950');
+          b.classList.add('bg-[#092217]', 'text-slate-300');
+        }
+      });
+      alpha = 0.8;
+      aplicarFiltros();
+      wakeRender();
+    };
+
     function atualizarRadarBadge() {
       const radarBadge = document.getElementById('radar-badge-periodo');
       if (!radarBadge) return;
 
-      if (dataInicioFiltro && dataFimFiltro && dataInicioFiltro === dataFimFiltro) {
-        const [y, m, d] = dataInicioFiltro.split('-');
-        radarBadge.textContent = \`📅 Dia: \${d}/\${m}/\${y}\`;
+      if (diaSelecionado) {
+        radarBadge.textContent = \`📅 Dia focado: \${diaSelecionado}\`;
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-400 text-slate-950 font-bold shadow-sm';
       } else if (filtroRapidoAtivo === '7_DIAS') {
         radarBadge.textContent = 'Últimos 7 dias';
@@ -1114,6 +1244,9 @@ const htmlContent = `<!DOCTYPE html>
         mesSelecionado = 'ALL';
       }
 
+      timelineBaseIni = dataInicioFiltro;
+      timelineBaseFim = dataFimFiltro;
+
       if (inputInicio) inputInicio.value = dataInicioFiltro;
       if (inputFim) inputFim.value = dataFimFiltro;
       calTempStart = dataInicioFiltro;
@@ -1142,6 +1275,9 @@ const htmlContent = `<!DOCTYPE html>
       diaSelecionado = null;
 
       validarETruncarPeriodoMaximo();
+
+      timelineBaseIni = dataInicioFiltro;
+      timelineBaseFim = dataFimFiltro;
 
       const iniMatch = dataInicioFiltro.match(/^(\d{4})-(\d{2})/);
       const fimMatch = dataFimFiltro.match(/^(\d{4})-(\d{2})/);
@@ -1177,31 +1313,18 @@ const htmlContent = `<!DOCTYPE html>
     window.filtrarPorDia = function(data) {
       alpha = 0.8;
       if (diaSelecionado === data) {
+        // Toggle: Se já estava filtrando por esse dia, desseleciona e volta para o período completo
         diaSelecionado = null;
-        const fim = getLatestAcervoDate();
-        const ini = new Date(fim);
-        if (filtroRapidoAtivo === '7_DIAS') {
-          ini.setDate(ini.getDate() - 6);
-        } else if (filtroRapidoAtivo === '14_DIAS') {
-          ini.setDate(ini.getDate() - 13);
-        } else if (filtroRapidoAtivo === '30_DIAS') {
-          ini.setDate(ini.getDate() - 29);
-        } else {
-          ini.setDate(ini.getDate() - 59);
-        }
-        dataInicioFiltro = formatIsoDate(ini);
-        dataFimFiltro = formatIsoDate(fim);
-        mesSelecionado = 'ALL';
+        dataInicioFiltro = timelineBaseIni;
+        dataFimFiltro = timelineBaseFim;
       } else {
+        // Filtra pelo dia clicado, mantendo a visualização dos 14 dias com a pílula ativa
         diaSelecionado = data;
         if (data && data.length === 10) {
           const [dd, mm, yyyy] = data.split('/');
           const iso = \`\${yyyy}-\${mm}-\${dd}\`;
           dataInicioFiltro = iso;
           dataFimFiltro = iso;
-          if (mesSelecionado === 'ALL') {
-            mesSelecionado = \`\${mm}/\${yyyy}\`;
-          }
         }
       }
 
@@ -1969,6 +2092,8 @@ const htmlContent = `<!DOCTYPE html>
       const internalCount = filtered.filter(n => n.arquivo).length;
       if (q) {
         listStatus.textContent = \`Encontrados \${internalCount} atos para "\${q}"\`;
+      } else if (diaSelecionado) {
+        listStatus.textContent = \`Exibindo \${internalCount} atos do dia \${diaSelecionado} (clique no dia para ver todos)\`;
       } else if (dataInicioFiltro && dataFimFiltro && dataInicioFiltro === dataFimFiltro) {
         const [y, m, d] = dataInicioFiltro.split('-');
         listStatus.textContent = \`Exibindo \${internalCount} atos de \${d}/\${m}/\${y}\`;
@@ -2011,16 +2136,7 @@ const htmlContent = `<!DOCTYPE html>
     // Filtros por Tipo de Ato
     document.querySelectorAll('.tipo-filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.tipo-filter-btn').forEach(b => {
-          b.classList.remove('bg-emerald-500', 'text-slate-950');
-          b.classList.add('bg-[#092217]', 'text-slate-300');
-        });
-        btn.classList.remove('bg-[#092217]', 'text-slate-300');
-        btn.classList.add('bg-emerald-500', 'text-slate-950');
-        tipoFiltro = btn.dataset.tipo;
-        alpha = 0.8;
-        aplicarFiltros();
-        wakeRender();
+        filtrarPorTipo(btn.dataset.tipo);
       });
     });
 
@@ -2085,6 +2201,15 @@ const htmlContent = `<!DOCTYPE html>
     };
 
     // Inicialização
+    try {
+      if (window.innerWidth >= 768) {
+        const preferHidden = localStorage.getItem('sidebar_visivel') === 'false';
+        if (preferHidden) {
+          toggleSidebar(false);
+        }
+      }
+    } catch (e) {}
+
     if (nodes.length > 0) {
       selecionarNo(nodes[0]);
     }
