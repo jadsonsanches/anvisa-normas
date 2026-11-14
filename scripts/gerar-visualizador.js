@@ -198,18 +198,10 @@ const htmlContent = `<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- Seletor de Período / Mês e Reset -->
+      <!-- Ações do Topbar: Resetar Filtros -->
       <div class="flex items-center gap-2.5 self-end md:self-auto flex-wrap">
-        <div class="flex items-center gap-2 bg-[#082016] border border-emerald-500/30 rounded-full px-3 py-1.5 text-xs text-emerald-300">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="font-medium text-slate-400 text-[11px]">Mês:</span>
-          <select id="select-mes-topbar" onchange="selecionarMes(this.value)" class="bg-transparent text-emerald-300 font-semibold focus:outline-none cursor-pointer pr-1">
-            <option value="ALL" class="bg-[#05140d] text-slate-200">Acervo Completo (Todos)</option>
-            <option value="11/2026" class="bg-[#05140d] text-slate-200">Novembro / 2026</option>
-            <option value="10/2026" class="bg-[#05140d] text-slate-200">Outubro / 2026</option>
-          </select>
-        </div>
-        <button onclick="limparTodosFiltros()" class="text-xs px-3 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 transition">
+        <button onclick="limparTodosFiltros()" class="text-xs px-3.5 py-1.5 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 transition flex items-center gap-1.5 shadow-sm active:scale-95">
+          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
           Resetar Filtros
         </button>
       </div>
@@ -230,12 +222,28 @@ const htmlContent = `<!DOCTYPE html>
             Selecione o mês desejado e clique em qualquer dia para filtrar instantaneamente os atos publicados no DOU.
           </p>
         </div>
-        <div class="flex items-center gap-2 flex-wrap">
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <!-- Filtro Rápido por Mês -->
           <div id="radar-mes-pills" class="flex items-center gap-1 bg-[#061810] p-1 rounded-xl border border-emerald-500/20">
             <button onclick="selecionarMes('ALL')" data-mes="ALL" class="mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition">Todos</button>
             <button onclick="selecionarMes('11/2026')" data-mes="11/2026" class="mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Nov/26</button>
             <button onclick="selecionarMes('10/2026')" data-mes="10/2026" class="mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Out/26</button>
           </div>
+
+          <!-- Filtro Específico por Data -->
+          <div class="flex items-center gap-1.5 bg-[#061810] px-3 py-1.5 rounded-xl border border-emerald-500/25">
+            <span class="text-[11px] text-slate-400 font-medium flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+              Data:
+            </span>
+            <input 
+              id="filtro-data-especifica" 
+              type="date" 
+              class="bg-transparent text-emerald-300 font-mono text-xs focus:outline-none cursor-pointer [color-scheme:dark]"
+              title="Filtrar por data específica do ato ou publicação no DOU"
+            >
+          </div>
+
           <button id="btn-ver-todos-dias" class="text-xs px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-semibold transition active:scale-95">
             Ver Todos os Dias
           </button>
@@ -551,14 +559,50 @@ const htmlContent = `<!DOCTYPE html>
     // Filtros Globais
     let termoBusca = '';
     let tipoFiltro = 'ALL';
+    const inputDataEspecifica = document.getElementById('filtro-data-especifica');
+
+    function atualizarRadarBadge() {
+      const radarBadge = document.getElementById('radar-badge-periodo');
+      if (!radarBadge) return;
+      if (diaSelecionado) {
+        radarBadge.textContent = \`📅 Dia: \${diaSelecionado}\`;
+        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-400 text-slate-950 font-bold shadow-sm';
+      } else if (mesSelecionado === 'ALL') {
+        radarBadge.textContent = 'Acervo Completo';
+        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
+      } else if (mesSelecionado === '10/2026') {
+        radarBadge.textContent = 'Outubro / 2026';
+        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
+      } else if (mesSelecionado === '11/2026') {
+        radarBadge.textContent = 'Novembro / 2026';
+        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
+      } else {
+        radarBadge.textContent = mesSelecionado;
+        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
+      }
+    }
+
+    if (inputDataEspecifica) {
+      inputDataEspecifica.addEventListener('change', (e) => {
+        const val = e.target.value; // YYYY-MM-DD
+        alpha = 0.8;
+        if (!val) {
+          diaSelecionado = null;
+        } else {
+          const [yyyy, mm, dd] = val.split('-');
+          diaSelecionado = \`\${dd}/\${mm}/\${yyyy}\`;
+        }
+        atualizarRadarBadge();
+        renderDailyTimeline();
+        aplicarFiltros();
+      });
+    }
 
     window.selecionarMes = function(mes) {
       mesSelecionado = mes;
       diaSelecionado = null;
+      if (inputDataEspecifica) inputDataEspecifica.value = '';
       alpha = 0.8;
-      
-      const sel = document.getElementById('select-mes-topbar');
-      if (sel) sel.value = mes;
       
       document.querySelectorAll('.mes-pill-btn').forEach(b => {
         if (b.dataset.mes === mes) {
@@ -568,32 +612,33 @@ const htmlContent = `<!DOCTYPE html>
         }
       });
 
-      const radarBadge = document.getElementById('radar-badge-periodo');
-      if (radarBadge) {
-        if (mes === 'ALL') radarBadge.textContent = 'Acervo Completo';
-        else if (mes === '10/2026') radarBadge.textContent = 'Outubro / 2026';
-        else if (mes === '11/2026') radarBadge.textContent = 'Novembro / 2026';
-        else radarBadge.textContent = mes;
-      }
-      
+      atualizarRadarBadge();
       renderDailyTimeline();
       aplicarFiltros();
     };
 
-    function filtrarPorDia(data) {
+    window.filtrarPorDia = function(data) {
       alpha = 0.8;
       if (diaSelecionado === data) {
         diaSelecionado = null;
+        if (inputDataEspecifica) inputDataEspecifica.value = '';
       } else {
         diaSelecionado = data;
+        if (inputDataEspecifica && data && data.length === 10) {
+          const [dd, mm, yyyy] = data.split('/');
+          inputDataEspecifica.value = \`\${yyyy}-\${mm}-\${dd}\`;
+        }
       }
+      atualizarRadarBadge();
       renderDailyTimeline();
       aplicarFiltros();
-    }
+    };
 
     document.getElementById('btn-ver-todos-dias').addEventListener('click', () => {
       diaSelecionado = null;
+      if (inputDataEspecifica) inputDataEspecifica.value = '';
       alpha = 0.8;
+      atualizarRadarBadge();
       renderDailyTimeline();
       aplicarFiltros();
     });
@@ -605,9 +650,7 @@ const htmlContent = `<!DOCTYPE html>
       tipoFiltro = 'ALL';
       alpha = 0.8;
       document.getElementById('search-input').value = '';
-      
-      const sel = document.getElementById('select-mes-topbar');
-      if (sel) sel.value = 'ALL';
+      if (inputDataEspecifica) inputDataEspecifica.value = '';
       
       document.querySelectorAll('.mes-pill-btn').forEach(b => {
         if (b.dataset.mes === 'ALL') {
@@ -617,8 +660,7 @@ const htmlContent = `<!DOCTYPE html>
         }
       });
 
-      const radarBadge = document.getElementById('radar-badge-periodo');
-      if (radarBadge) radarBadge.textContent = 'Acervo Completo';
+      atualizarRadarBadge();
 
       document.querySelectorAll('.tipo-filter-btn').forEach(b => {
         b.classList.remove('bg-emerald-500', 'text-slate-950');
