@@ -26,8 +26,8 @@ const dirDist = path.join(rootDir, 'data/dist');
 
 test('Desafio Empírico 1: Verificação da quantidade total de arquivos markdown em data/normas/', () => {
   const arquivos = listarArquivosMarkdown(dirNormas);
-  assert.ok(arquivos.length >= 6200, `Esperava acervo consolidado com mais de 6200 normas, encontrou ${arquivos.length}`);
-  assert.strictEqual(arquivos.length, 6257, `Esperava exatamente 6257 arquivos markdown, mas encontrou ${arquivos.length}`);
+  assert.ok(arquivos.length >= 14000, `Esperava acervo consolidado com mais de 14000 normas, encontrou ${arquivos.length}`);
+  assert.strictEqual(arquivos.length, 14363, `Esperava exatamente 14363 arquivos markdown, mas encontrou ${arquivos.length}`);
 });
 
 test('Desafio Empírico 2: Validação estrita de YAML frontmatter, 11 propriedades e integridade em todos os arquivos', () => {
@@ -155,7 +155,7 @@ test('Desafio Empírico 2: Validação estrita de YAML frontmatter, 11 proprieda
 
 test('Desafio Empírico 3: Formato estrito de datas (DD/MM/AAAA) nos campos de data', () => {
   const arquivos = listarArquivosMarkdown(dirNormas);
-  const dataRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+  const dataRegex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
   const falhasData = [];
 
   for (const arquivo of arquivos) {
@@ -173,12 +173,42 @@ test('Desafio Empírico 3: Formato estrito de datas (DD/MM/AAAA) nos campos de d
       }
     }
 
-    for (const dk of ['data_ato', 'data_promulgacao', 'data_publicacao_dou']) {
+    const dataAto = (campos['data_ato'] || '').replace(/"/g, '').trim();
+    if (!dataAto) {
+      if (rel.includes('/2025/')) {
+        falhasData.push(`${rel}: 'data_ato' obrigatória de 2025 está vazia`);
+      }
+    } else {
+      const matchAto = dataAto.match(dataRegex);
+      if (!matchAto) {
+        falhasData.push(`${rel}: 'data_ato' com formato não conforme: '${dataAto}' (esperado DD/MM/AAAA)`);
+      } else {
+        const dia = parseInt(matchAto[1], 10);
+        const mes = parseInt(matchAto[2], 10);
+        const ano = parseInt(matchAto[3], 10);
+        if (dia < 1 || dia > 31 || mes < 1 || mes > 12) {
+          falhasData.push(`${rel}: 'data_ato' com dia ou mês impossível: '${dataAto}'`);
+        }
+        if (rel.includes('/2025/') && ano !== 2025) {
+          falhasData.push(`${rel}: 'data_ato' de 2025 com ano incoerente: '${dataAto}'`);
+        }
+      }
+    }
+
+    for (const dk of ['data_promulgacao', 'data_publicacao_dou']) {
       if (campos[dk] !== undefined) {
         const val = campos[dk].replace(/"/g, '').trim();
-        // Se preenchido, deve ser rigorosamente DD/MM/AAAA
-        if (val.length > 0 && !dataRegex.test(val)) {
-          falhasData.push(`${rel}: '${dk}' com formato de data não conforme: '${val}' (esperado DD/MM/AAAA)`);
+        if (val.length > 0) {
+          const matchVal = val.match(dataRegex);
+          if (!matchVal) {
+            falhasData.push(`${rel}: '${dk}' com formato de data não conforme: '${val}' (esperado DD/MM/AAAA)`);
+          } else {
+            const dia = parseInt(matchVal[1], 10);
+            const mes = parseInt(matchVal[2], 10);
+            if (dia < 1 || dia > 31 || mes < 1 || mes > 12) {
+              falhasData.push(`${rel}: '${dk}' com dia ou mês impossível: '${val}'`);
+            }
+          }
         }
       }
     }
@@ -340,7 +370,7 @@ test('Desafio Empírico 7: Integridade do Grafo e Estatísticas (relacoes.json e
   assert.strictEqual(somaPorTipo, totalEsperado, `Soma de porTipo deve ser ${totalEsperado}`);
 
   // 2. Nós do grafo
-  assert.strictEqual(grafo.nodes.length, 6974, `Grafo deve ter exatamente 6974 nós`);
+  assert.strictEqual(grafo.nodes.length, 15345, `Grafo deve ter exatamente 15345 nós`);
   const nodesMap = new Map();
   let nosInternos = 0;
 
@@ -418,4 +448,51 @@ test('Desafio Empírico 8: Integridade de Artefatos Derivados (SQLite, JSON, CSV
 
   const indexContent = fs.readFileSync(indexPath, 'utf8');
   assert.strictEqual(visContent, indexContent, 'index.html e visualizador.html devem ser idênticos');
+});
+
+test('Desafio Empírico 9: Priorização Substantiva de Atos e Integridade Normativa de 2025', () => {
+  const arquivos = listarArquivosMarkdown(dirNormas).filter(f => f.includes(path.sep + '2025' + path.sep));
+
+  // 1. Nenhum ato normativo de 2025 pode ter fonte apontando para seqAto=RET ou RT*
+  const fontesRet = [];
+  for (const arq of arquivos) {
+    const rel = path.relative(rootDir, arq).replace(/\\/g, '/');
+    const conteudo = fs.readFileSync(arq, 'utf8');
+    const m = conteudo.match(/^fonte:\s*"([^"]+)"/m);
+    if (m && /seqAto=(RET|RT\d)/i.test(m[1])) {
+      fontesRet.push(`${rel}: fonte aponta para retificação '${m[1]}'`);
+    }
+  }
+  assert.strictEqual(fontesRet.length, 0, `Atos de 2025 com fonte de retificação (${fontesRet.length}):\n${fontesRet.slice(0, 10).join('\n')}`);
+
+  // 2. Verificação estrita dos atos fundamentais de 2025
+  const atosFundamentais = [
+    { p: 'data/normas/rdc/2025/rdc-1004.md', minLen: 50000, ementaParcial: 'fitoterápicos' },
+    { p: 'data/normas/rdc/2025/rdc-1006.md', minLen: 10000, ementaParcial: 'toxicológicos' },
+    { p: 'data/normas/rdc/2025/rdc-976.md', minLen: 50000, ementaParcial: 'fórmulas' },
+    { p: 'data/normas/rdc/2025/rdc-998.md', minLen: 15000, ementaParcial: 'agrotóxicos' },
+    { p: 'data/normas/rdc/2025/rdc-1001.md', minLen: 15000, ementaParcial: 'medicamentos' },
+    { p: 'data/normas/in/2025/in-414.md', minLen: 10000, ementaParcial: 'fórmulas infantis' },
+    { p: 'data/normas/in/2025/in-419.md', minLen: 3000, ementaParcial: 'especiarias' },
+    { p: 'data/normas/re/2025/re-100.md', minLen: 20000, ementaParcial: '' }
+  ];
+
+  for (const item of atosFundamentais) {
+    const full = path.join(rootDir, item.p);
+    assert.ok(fs.existsSync(full), `Ato fundamental ausente: ${item.p}`);
+
+    const conteudo = fs.readFileSync(full, 'utf8');
+    assert.ok(conteudo.length >= item.minLen, `${item.p} deve ter pelo menos ${item.minLen} caracteres, possui ${conteudo.length}`);
+    assert.ok(!conteudo.includes('seqAto=RET'), `${item.p} não deve conter seqAto=RET`);
+    assert.ok(conteudo.includes('seqAto=000'), `${item.p} deve conter seqAto=000 na fonte`);
+
+    const m = conteudo.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    assert.ok(m, `${item.p} deve ter frontmatter YAML`);
+    assert.ok(conteudo.includes('data_ato: "'), `${item.p} deve ter data_ato preenchida`);
+    assert.ok(/data_ato:\s*"[0-9]{2}\/[0-9]{2}\/2025"/.test(conteudo), `${item.p} deve ter data_ato do ano 2025`);
+
+    if (item.ementaParcial) {
+      assert.ok(conteudo.toLowerCase().includes(item.ementaParcial.toLowerCase()), `${item.p} deve conter menção a '${item.ementaParcial}'`);
+    }
+  }
 });

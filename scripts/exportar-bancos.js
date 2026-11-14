@@ -129,6 +129,7 @@ async function exportarBancos() {
   // 3. Exportar Banco de Dados SQLite Relacional com FTS
   const SQL = await initSqlJs();
   const db = new SQL.Database();
+  db.run('PRAGMA page_size = 1024;');
 
   // Criar Tabela de Normas
   db.run(`

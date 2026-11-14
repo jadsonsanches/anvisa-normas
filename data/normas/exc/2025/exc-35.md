@@ -2,8 +2,8 @@
 tipo: "EXC"
 numero: "35"
 ano: "2025"
-data_ato: ""
-data_promulgacao: "20/01/2026"
+data_ato: "01/01/2025"
+data_promulgacao: "01/01/2025"
 data_publicacao_dou: "20/01/2026"
 situacao: "vigente"
 ementa: "Extrato do Contrato nº 35/2025, celebrado entre a Agência Nacional de Vigilância Sanitária e a empresa PA Arquivos Ltda."
@@ -12,7 +12,7 @@ relacionadas: []
 fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=EXC&numeroAto=00000035&seqAto=000&valorAno=2025&orgao=ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
 ---
 
-# EXC nº 35, de 20/01/2026
+# EXC nº 35, de 01/01/2025
 
 MINISTÉRIO DA SAÚDE
 

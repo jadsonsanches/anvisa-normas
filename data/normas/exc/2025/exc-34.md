@@ -2,8 +2,8 @@
 tipo: "EXC"
 numero: "34"
 ano: "2025"
-data_ato: ""
-data_promulgacao: "02/01/2026"
+data_ato: "31/12/2025"
+data_promulgacao: "31/12/2025"
 data_publicacao_dou: "02/01/2026"
 situacao: "vigente"
 ementa: "Extrato do Contrato nº 34/2025, celebrado entre a Agência Nacional de Vigilância Sanitária e a empresa Centro de Integração Empresa Escola CIE E."
@@ -12,7 +12,7 @@ relacionadas: []
 fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=EXC&numeroAto=00000034&seqAto=000&valorAno=2025&orgao=ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
 ---
 
-# EXC nº 34, de 02/01/2026
+# EXC nº 34, de 31/12/2025
 
 MINISTÉRIO DA SAÚDE
 

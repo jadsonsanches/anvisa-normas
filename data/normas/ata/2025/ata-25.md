@@ -2,8 +2,8 @@
 tipo: "ATA"
 numero: "25"
 ano: "2025"
-data_ato: ""
-data_promulgacao: "10/09/2026"
+data_ato: "10/09/2025"
+data_promulgacao: "10/09/2025"
 data_publicacao_dou: "10/09/2026"
 situacao: "vigente"
 ementa: "Ata da 25ª Sessão de Julgamento Ordinária da Gerência-Geral de Recursos da Anvisa realizada em 10 de setembro de 2025."
@@ -12,7 +12,7 @@ relacionadas: ["ATA 24/2025","ATA 23/2025","ATA 20/2025","ATA 18/2025"]
 fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=ATA&numeroAto=00000025&seqAto=SJO&valorAno=2025&orgao=GGREC/ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
 ---
 
-# ATA nº 25, de 10/09/2026
+# ATA nº 25, de 10/09/2025
 
 MINISTÉRIO DA SAÚDE
 

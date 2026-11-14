@@ -2,8 +2,8 @@
 tipo: "ATA"
 numero: "26"
 ano: "2025"
-data_ato: ""
-data_promulgacao: "01/03/2026"
+data_ato: "26/03/2025"
+data_promulgacao: "26/03/2025"
 data_publicacao_dou: "01/03/2026"
 situacao: "vigente"
 ementa: ""
@@ -12,7 +12,7 @@ relacionadas: ["ATA 30/2021","ATA 28/2024","ATA 24/2025","ATA 25/2025"]
 fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=ATA&numeroAto=00000026&seqAto=SJO&valorAno=2025&orgao=GGREC/ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
 ---
 
-# ATA nº 26, de 01/03/2026
+# ATA nº 26, de 26/03/2025
 
 MINISTÉRIO DA SAÚDE
 

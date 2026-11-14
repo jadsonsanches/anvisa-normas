@@ -2,8 +2,8 @@
 tipo: "ATA"
 numero: "37"
 ano: "2025"
-data_ato: ""
-data_promulgacao: "01/01/2026"
+data_ato: "01/01/2025"
+data_promulgacao: "01/01/2025"
 data_publicacao_dou: "01/01/2026"
 situacao: "vigente"
 ementa: "Pauta da Ata 37ª Sessão de Julgamento Ordinária realizada no dia 13 de janeiro de 2026."
@@ -12,7 +12,7 @@ relacionadas: ["ATA 28/2025","ATA 27/2025","ATA 29/2025","ATA 33/2025","ATA 35/2
 fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=ATA&numeroAto=00000037&seqAto=SJO&valorAno=2025&orgao=GGREC/ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
 ---
 
-# ATA nº 37, de 01/01/2026
+# ATA nº 37, de 01/01/2025
 
 MINISTÉRIO DA SAÚDE
 

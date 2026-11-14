@@ -90,13 +90,16 @@ function parseNormaHtml(html, urlOrigem = '', metaBusca = {}) {
   const situacao = (metaBusca.situacao || 'vigente').toLowerCase();
   let ementa = metaBusca.ementa || '';
 
-  // Se ementa não veio nos metadados, tentar extrair do primeiro parágrafo relevante
+  // Se ementa não veio nos metadados, tentar extrair do primeiro parágrafo relevante ou do Art. 1º
   if (!ementa) {
     container.find('p').each((_, p) => {
       const txt = $(p).text().trim().replace(/\s+/g, ' ');
-      if (!ementa && /^(Aprova|Dispõe|Estabelece|Institui|Altera|Proíbe|Determina|Define|Regulamenta|Autoriza|Exonera|Nomeia|Designa|Revoga|Concede|Defere|Indefere|Adota|Renova)/i.test(txt)) {
-        if (txt.length > 20 && txt.length < 800) {
-          ementa = txt;
+      if (!ementa) {
+        const cleanTxt = txt.replace(/^Art\.\s*1[º°]\.?\s*/i, '');
+        if (/^(Aprova|Dispõe|Estabelece|Institui|Altera|Proíbe|Determina|Define|Regulamenta|Autoriza|Exonera|Nomeia|Designa|Revoga|Concede|Defere|Indefere|Adota|Renova|Inclui|Decide)/i.test(cleanTxt)) {
+          if (cleanTxt.length > 15 && cleanTxt.length < 800) {
+            ementa = cleanTxt;
+          }
         }
       }
     });
@@ -110,22 +113,78 @@ function parseNormaHtml(html, urlOrigem = '', metaBusca = {}) {
   };
 
   let dataAto = metaBusca.dataAto || metaBusca.dataPromulgacao || '';
+  // Se dataAto informada tiver ano divergente do ano da norma, descartar para extrair do corpo/metadados coerentes
+  if (dataAto) {
+    const m = dataAto.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+    if (m && ano && m[3] !== ano) {
+      dataAto = '';
+    }
+  }
+
+  const rawContainerText = container.text();
+
+  // Se não temos dataAto coerente com o ano, buscar no texto do contêiner
   if (!dataAto) {
-    const matchDataAto = container.text().match(/DE\s+(\d{1,2})\s+DE\s+([A-ZÇ]+)\s+DE\s+(\d{4})/i);
-    if (matchDataAto) {
-      const dia = matchDataAto[1].padStart(2, '0');
-      const mesNome = matchDataAto[2].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      const mes = meses[mesNome] || '01';
-      dataAto = `${dia}/${mes}/${matchDataAto[3]}`;
+    // 1. Tentar correspondência no cabeçalho ou título específico do ato com o ano exato
+    if (ano) {
+      const regexHeader = new RegExp(`(?:N[º°]|N[UÚ]MERO)\\s+[\\d\\.]+[\\s\\S]*?\\bDE\\s+(\\d{1,2})\\s+DE\\s+([A-ZÇ]+)\\s+DE\\s+(${ano})`, 'i');
+      const matchHeader = rawContainerText.match(regexHeader);
+      if (matchHeader) {
+        const dia = matchHeader[1].padStart(2, '0');
+        const mesNome = matchHeader[2].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const mes = meses[mesNome];
+        if (mes) {
+          dataAto = `${dia}/${mes}/${ano}`;
+        }
+      }
+
+      // 2. Se não achou no cabeçalho, buscar qualquer data com extenso que tenha o ANO da norma
+      if (!dataAto) {
+        const regexAno = new RegExp(`(?:DE|EM)\\s+(\\d{1,2})\\s+DE\\s+([A-ZÇ]+)\\s+DE\\s+(${ano})`, 'gi');
+        const allMatches = [...rawContainerText.matchAll(regexAno)];
+        if (allMatches.length > 0) {
+          // Se houver mais de uma, preferir a última ocorrência (geralmente data de assinatura no fecho: "Em 19 de agosto de 2025")
+          const last = allMatches[allMatches.length - 1];
+          const dia = last[1].padStart(2, '0');
+          const mesNome = last[2].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+          const mes = meses[mesNome];
+          if (mes) {
+            dataAto = `${dia}/${mes}/${ano}`;
+          }
+        }
+      }
+    } else {
+      const matchDataAto = rawContainerText.match(/DE\s+(\d{1,2})\s+DE\s+([A-ZÇ]+)\s+DE\s+(\d{4})/i);
+      if (matchDataAto) {
+        const dia = matchDataAto[1].padStart(2, '0');
+        const mesNome = matchDataAto[2].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const mes = meses[mesNome] || '01';
+        dataAto = `${dia}/${mes}/${matchDataAto[3]}`;
+      }
     }
   }
 
   let dataPublicacaoDou = '';
-  const matchDou = container.text().match(/PUB\s+D\.O\.U\.?\s*,?\s*(\d{2}\/\d{2}\/\d{4})/i);
+  const matchDou = rawContainerText.match(/PUB\s+D\.O\.U\.?\s*,?\s*(\d{2}\/\d{2}\/\d{4})/i);
   if (matchDou) {
     dataPublicacaoDou = matchDou[1];
   } else if (metaBusca.dataPublicacaoDou) {
     dataPublicacaoDou = metaBusca.dataPublicacaoDou;
+  }
+
+  // Fallback garantido: dataAto não pode ser vazia e deve ser coerente com ano
+  if (!dataAto && dataPublicacaoDou && (!ano || dataPublicacaoDou.endsWith(`/${ano}`))) {
+    dataAto = dataPublicacaoDou;
+  }
+
+  if (!dataAto) {
+    if (metaBusca.dataPublicacaoDou && (!ano || metaBusca.dataPublicacaoDou.endsWith(`/${ano}`))) {
+      dataAto = metaBusca.dataPublicacaoDou;
+    } else if (metaBusca.dataPromulgacao && (!ano || metaBusca.dataPromulgacao.endsWith(`/${ano}`))) {
+      dataAto = metaBusca.dataPromulgacao;
+    } else if (ano) {
+      dataAto = `01/01/${ano}`;
+    }
   }
 
   const dataReferencia = dataAto || dataPublicacaoDou || ano;

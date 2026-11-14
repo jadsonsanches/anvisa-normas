@@ -2,8 +2,8 @@
 tipo: "DOA"
 numero: "1"
 ano: "2025"
-data_ato: "11/05/2018"
-data_promulgacao: "11/05/2018"
+data_ato: "01/01/2025"
+data_promulgacao: "01/01/2025"
 data_publicacao_dou: "08/05/2026"
 situacao: "vigente"
 ementa: "Extrato de doação, celebrado entre a Agência Nacional de Vigilância Sanitária através da Coordenação Estadual de Vigilância Sanitária de Portos, Aeroportos, Fronteiras e Recintos Alfandegados do Rio Grande do Norte e a Universidade Federal da Paraíba."
@@ -12,7 +12,7 @@ relacionadas: ["DEC 9373/2018","DEC 10340/2020"]
 fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=DOA&numeroAto=00000001&seqAto=000&valorAno=2025&orgao=CVPAF-RN/GGPAF/ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
 ---
 
-# DOA nº 1, de 11/05/2018
+# DOA nº 1, de 01/01/2025
 
 MINISTÉRIO DA SAÚDE
 

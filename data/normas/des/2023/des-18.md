@@ -1,0 +1,29 @@
+---
+tipo: "DES"
+numero: "18"
+ano: "2023"
+data_ato: "13/05/2025"
+data_promulgacao: "13/05/2025"
+data_publicacao_dou: "15/05/2025"
+situacao: "vigente"
+ementa: "Designa, a servidora Paula de Jesus Nascimento, para exercer o encargo de substituta de Gerente, código CGE-IV, da Gerência de Desenvolvimento de Pessoas, da Gerência-Geral de Gestão de Pessoas."
+leis_base: []
+relacionadas: []
+fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=DES&numeroAto=00000018&seqAto=000&valorAno=2023&orgao=ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
+---
+
+# DES nº 18, de 13/05/2025
+
+MINISTÉRIO DA SAÚDE
+
+AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA
+
+PORTARIA N° 642, DE 13 DE MAIO DE 2025
+
+A CHEFE DE GABINETE DO DIRETOR-PRESIDENTE DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso da competência que lhe foi delegada pelo art. 18 da Portaria n° 874, de 10 de agosto de 2023, publicada no DOU de 14 de agosto de 2023, resolve:
+
+Designar, no período de 12/05/2025 e 13/05/2025, a servidora PAULA DE JESUS NASCIMENTO, matrícula SIAPE nº 1521560, para exercer o encargo de substituta de Gerente, código CGE-IV, da Gerência de Desenvolvimento de Pessoas, da Gerência-Geral de Gestão de Pessoas.
+
+KARIN SCHUCK HEMESATH MENDES
+
+PUB D.O.U., 15/05/2025 - Seção 2

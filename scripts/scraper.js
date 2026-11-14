@@ -156,6 +156,7 @@ async function pesquisarAtos(criterios = {}) {
       const rawNum = urlParams.get('numeroAto') || '0';
       const numero = parseInt(rawNum, 10).toString();
       const anoAto = urlParams.get('valorAno') || ano || new Date().getFullYear().toString();
+      const seqAto = urlParams.get('seqAto') || '000';
 
       // Extração da data exata do ato (ex: "Portaria n° 1.294, de 11/11/2026")
       let dataAto = '';
@@ -176,6 +177,7 @@ async function pesquisarAtos(criterios = {}) {
         tipo: cleanTipo,
         numero,
         ano: anoAto,
+        seqAto,
         situacao,
         dataAto,
         dataPublicacaoDou: dataInicio || dataFim || '',
@@ -208,8 +210,21 @@ async function processarAto(item, cookies, force = false) {
   const pastaTipo = item.tipo.toLowerCase();
   const filePath = path.join(__dirname, `../data/normas/${pastaTipo}/${item.ano}/${pastaTipo}-${item.numero}.md`);
 
+  const itemSeq = item.seqAto || (item.href ? (new URLSearchParams(item.href.split('?')[1] || '')).get('seqAto') : '000') || '000';
+  const isItemSubstantivo = itemSeq === '000';
+
   if (fs.existsSync(filePath) && !force) {
-    return { status: 'pulado', tipo: item.tipo, numero: item.numero, ano: item.ano };
+    const conteudoExistente = fs.readFileSync(filePath, 'utf-8');
+    const isExistenteRetificacao = /seqAto=(RET|RT\d)/i.test(conteudoExistente) ||
+                                  conteudoExistente.includes('RETIFICAÇÃO') ||
+                                  conteudoExistente.includes('RETIFICACAO');
+
+    if (isItemSubstantivo && isExistenteRetificacao) {
+      // Priorização Substantiva: o arquivo existente contém apenas retificação/errata
+      // e o novo item é o ato substantivo original (seqAto=000). Prossegue para sobrescrever!
+    } else {
+      return { status: 'pulado', tipo: item.tipo, numero: item.numero, ano: item.ano };
+    }
   }
 
   const fullUrl = `https://${HOST}${item.href}`;
@@ -391,6 +406,9 @@ async function coletarPorMes(mes, ano = new Date().getFullYear(), force = false)
 }
 
 module.exports = {
+  httpGet,
+  httpPost,
+  obterSessao,
   coletarPorData,
   coletarPorAno,
   coletarPorPeriodo,
