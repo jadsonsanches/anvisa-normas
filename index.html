@@ -84,6 +84,13 @@
       filter: brightness(1.25);
       stroke-width: 20;
     }
+    .cal-dot {
+      width: 4px;
+      height: 4px;
+      background-color: #00ff87;
+      border-radius: 9999px;
+      box-shadow: 0 0 4px #00ff87;
+    }
   </style>
 </head>
 <body class="min-h-screen flex text-slate-200 antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
@@ -151,10 +158,10 @@
   <!-- Conteúdo Principal -->
   <main class="flex-1 p-3 md:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto overflow-y-auto w-full">
 
-    <!-- Topbar: Barra de Busca & Status -->
-    <header class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <!-- Topbar: Barra de Busca & Filtros Rápidos / Calendário (Retângulo Azul) -->
+    <header class="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5">
       <!-- Barra de Busca Inspirada na Imagem 1 -->
-      <div class="relative flex-1 max-w-2xl">
+      <div class="relative flex-1 max-w-xl">
         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-emerald-400/80">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </div>
@@ -171,64 +178,109 @@
         </div>
       </div>
 
-      <!-- Ações do Topbar: Resetar Filtros -->
-      <div class="flex items-center gap-2.5 self-end md:self-auto flex-wrap">
-        <button onclick="limparTodosFiltros()" class="text-xs px-3.5 py-1.5 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 transition flex items-center gap-1.5 shadow-sm active:scale-95">
-          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-          Resetar Filtros
-        </button>
+      <!-- Área do Retângulo Azul: Controles de Período (7d, 14d, 30d, 60d + Calendário Moderno) -->
+      <div class="flex items-center gap-2 self-start lg:self-auto flex-wrap">
+        <!-- Filtros Rápidos de Período -->
+        <div id="radar-filtros-rapidos" class="flex items-center gap-1 bg-[#061810] p-1 rounded-xl border border-emerald-500/20 shadow-sm">
+          <button onclick="aplicarFiltroRapido('7_DIAS')" data-filtro="7_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition">7 dias</button>
+          <button onclick="aplicarFiltroRapido('14_DIAS')" data-filtro="14_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">14 dias</button>
+          <button onclick="aplicarFiltroRapido('30_DIAS')" data-filtro="30_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">30 dias</button>
+          <button onclick="aplicarFiltroRapido('60_DIAS')" data-filtro="60_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">60 dias</button>
+        </div>
+
+        <!-- Componente Moderno de Calendário (Custom Date Range Picker Dark Emerald) -->
+        <div class="relative" id="calendar-picker-wrapper">
+          <button 
+            id="calendar-trigger-btn"
+            type="button"
+            onclick="toggleCustomCalendar(event)" 
+            class="flex items-center gap-2 bg-[#061810] hover:bg-[#0c2a1d] px-3 py-1.5 rounded-xl border border-emerald-500/25 text-xs text-slate-200 hover:text-white transition shadow-sm cursor-pointer group active:scale-95"
+            title="Selecionar período personalizado no calendário"
+          >
+            <span class="text-sm">📅</span>
+            <span id="calendar-trigger-label" class="font-mono text-emerald-300 font-semibold text-xs">Últimos 7 dias</span>
+            <svg id="calendar-trigger-chevron" class="w-3.5 h-3.5 text-emerald-400/80 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+
+          <!-- Inputs ocultos para preservação de estado e integração -->
+          <input type="hidden" id="filtro-data-inicio">
+          <input type="hidden" id="filtro-data-fim">
+
+          <!-- Popover Dropdown de Calendário Customizado -->
+          <div 
+            id="custom-calendar-popover" 
+            class="hidden absolute right-0 top-full mt-2 z-50 w-[310px] bg-[#05150e]/95 backdrop-blur-2xl border border-emerald-500/30 rounded-2xl p-4 shadow-2xl shadow-black/90 select-none"
+          >
+            <!-- Header do Popover: Navegação Mês / Ano -->
+            <div class="flex items-center justify-between pb-3 border-b border-emerald-500/15">
+              <button type="button" onclick="calNavegarMes(-1)" class="w-7 h-7 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 flex items-center justify-center transition border border-emerald-500/20 active:scale-95" title="Mês anterior">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+              </button>
+              <span id="cal-month-year-title" class="font-semibold text-xs md:text-sm text-white tracking-wide">Novembro 2026</span>
+              <button type="button" onclick="calNavegarMes(1)" class="w-7 h-7 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 flex items-center justify-center transition border border-emerald-500/20 active:scale-95" title="Próximo mês">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              </button>
+            </div>
+
+            <!-- Cabeçalho Dias da Semana -->
+            <div class="grid grid-cols-7 gap-1 text-center py-2 text-[10px] font-bold text-emerald-400/70 uppercase">
+              <span>Dom</span>
+              <span>Seg</span>
+              <span>Ter</span>
+              <span>Qua</span>
+              <span>Qui</span>
+              <span>Sex</span>
+              <span>Sáb</span>
+            </div>
+
+            <!-- Grid de Dias -->
+            <div id="cal-days-grid" class="grid grid-cols-7 gap-1 text-xs">
+              <!-- Gerado dinamicamente via JS -->
+            </div>
+
+            <!-- Resumo e Dicas do Intervalo -->
+            <div class="pt-3 mt-3 border-t border-emerald-500/15 space-y-1">
+              <div class="flex items-center justify-between text-[11px]">
+                <span class="text-slate-400">De:</span>
+                <span id="cal-summary-inicio" class="font-mono text-emerald-300 font-medium">--/--/----</span>
+              </div>
+              <div class="flex items-center justify-between text-[11px]">
+                <span class="text-slate-400">Até:</span>
+                <span id="cal-summary-fim" class="font-mono text-emerald-300 font-medium">--/--/----</span>
+              </div>
+              <div id="cal-prompt-msg" class="text-[10px] text-emerald-400/80 pt-1 text-center">
+                Clique na data inicial e depois na data final
+              </div>
+            </div>
+
+            <!-- Ações do Popover -->
+            <div class="pt-3 flex items-center justify-end gap-2 border-t border-emerald-500/10">
+              <button type="button" onclick="fecharCustomCalendar()" class="px-3 py-1 rounded-lg text-xs text-slate-400 hover:text-white transition">
+                Cancelar
+              </button>
+              <button type="button" onclick="calAplicarSelecao()" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition active:scale-95 shadow-sm shadow-emerald-500/20">
+                Aplicar
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
 
     <!-- Componente Estrela: RADAR REGULATÓRIO DIÁRIO -->
     <section id="radar-section" class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 border-b border-emerald-500/15 pb-3">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-emerald-500/15 pb-3">
         <div>
           <div class="flex items-center gap-2">
             <span class="text-xl">📅</span>
             <h2 class="text-base md:text-lg font-bold text-white tracking-wide flex items-center gap-2">
               Linha do Tempo Diária de Publicações no DOU
-              <span id="radar-badge-periodo" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal">Acervo Completo</span>
+              <span id="radar-badge-periodo" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal">Últimos 7 dias</span>
             </h2>
           </div>
           <p class="text-xs text-slate-400 mt-0.5">
-            Filtre por período personalizado (data início e fim) ou selecione um atalho rápido para analisar os atos publicados no DOU.
+            Clique em um dia específico para filtrar o grafo e analisar os atos publicados no DOU.
           </p>
-        </div>
-        <div class="flex items-center gap-2.5 flex-wrap">
-          <!-- Filtros Rápidos de Período (Otimizado com Janela Máxima de 60 Dias) -->
-          <div id="radar-filtros-rapidos" class="flex items-center gap-1 bg-[#061810] p-1 rounded-xl border border-emerald-500/20">
-            <button onclick="aplicarFiltroRapido('60_DIAS')" data-filtro="60_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition">60 dias</button>
-            <button onclick="aplicarFiltroRapido('ESTE_MES')" data-filtro="ESTE_MES" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Este mês</button>
-            <button onclick="aplicarFiltroRapido('MES_ANTERIOR')" data-filtro="MES_ANTERIOR" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Mês Anterior</button>
-            <button onclick="aplicarFiltroRapido('14_DIAS')" data-filtro="14_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">14 dias</button>
-            <button onclick="aplicarFiltroRapido('7_DIAS')" data-filtro="7_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">7 dias</button>
-          </div>
-
-          <!-- Filtro por Período: Início e Fim (Máx 60 dias) -->
-          <div class="flex items-center gap-2 bg-[#061810] px-3 py-1.5 rounded-xl border border-emerald-500/25 text-xs">
-            <span class="text-[11px] text-slate-400 font-medium flex items-center gap-1">
-              <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-              De:
-            </span>
-            <input 
-              id="filtro-data-inicio" 
-              type="date" 
-              class="bg-transparent text-emerald-300 font-mono text-xs focus:outline-none cursor-pointer [color-scheme:dark]"
-              title="Data inicial do período (máx 60 dias)"
-            >
-            <span class="text-[11px] text-slate-400 font-medium">Até:</span>
-            <input 
-              id="filtro-data-fim" 
-              type="date" 
-              class="bg-transparent text-emerald-300 font-mono text-xs focus:outline-none cursor-pointer [color-scheme:dark]"
-              title="Data final do período (máx 60 dias)"
-            >
-          </div>
-
-          <button id="btn-ver-todos-dias" class="text-xs px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-semibold transition active:scale-95 flex items-center gap-1" title="Ver janela de 60 dias mais recentes">
-            <span>Últimos 60 Dias</span>
-          </button>
         </div>
       </div>
 
@@ -556,7 +608,7 @@
 
     let dataInicioFiltro = '';
     let dataFimFiltro = '';
-    let filtroRapidoAtivo = '60_DIAS';
+    let filtroRapidoAtivo = '7_DIAS';
     let mesSelecionado = 'ALL';
     let diaSelecionado = null;
     const statsTotalGeral = statsData.totalNormas || graphData.nodes.filter(n => n.arquivo).length;
@@ -684,6 +736,287 @@
 
     renderDailyTimeline();
 
+    // ==========================================
+    // COMPONENTE DE CALENDÁRIO MODERNO DARK EMERALD
+    // ==========================================
+    const calPopover = document.getElementById('custom-calendar-popover');
+    const calTriggerBtn = document.getElementById('calendar-trigger-btn');
+    const calTriggerLabel = document.getElementById('calendar-trigger-label');
+    const calTriggerChevron = document.getElementById('calendar-trigger-chevron');
+    const calPickerWrapper = document.getElementById('calendar-picker-wrapper');
+    const calMonthYearTitle = document.getElementById('cal-month-year-title');
+    const calDaysGrid = document.getElementById('cal-days-grid');
+    const calSummaryInicio = document.getElementById('cal-summary-inicio');
+    const calSummaryFim = document.getElementById('cal-summary-fim');
+    const calPromptMsg = document.getElementById('cal-prompt-msg');
+
+    let calMesVisualizacao = null; // Date do mês em visualização
+    let calTempStart = null;       // ISO 'YYYY-MM-DD'
+    let calTempEnd = null;         // ISO 'YYYY-MM-DD'
+    let calHoverDate = null;       // ISO 'YYYY-MM-DD'
+    let calPickingState = 'IDLE';  // 'IDLE' ou 'PICKING_END'
+
+    const NOMES_MESES = [
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+
+    window.toggleCustomCalendar = function(e) {
+      if (e) e.stopPropagation();
+      if (!calPopover) return;
+      const isHidden = calPopover.classList.contains('hidden');
+      if (isHidden) {
+        abrirCustomCalendar();
+      } else {
+        fecharCustomCalendar();
+      }
+    };
+
+    window.abrirCustomCalendar = function() {
+      if (!calPopover) return;
+      calPopover.classList.remove('hidden');
+      if (calTriggerChevron) calTriggerChevron.classList.add('rotate-180');
+
+      calTempStart = dataInicioFiltro || formatIsoDate(new Date());
+      calTempEnd = dataFimFiltro || calTempStart;
+      calHoverDate = null;
+      calPickingState = 'IDLE';
+
+      const baseDate = parseIsoDate(calTempEnd) || parseIsoDate(calTempStart) || getLatestAcervoDate();
+      calMesVisualizacao = new Date(baseDate.getFullYear(), baseDate.getMonth(), 1);
+
+      atualizarResumoCalendario();
+      renderCalGrid();
+    };
+
+    window.fecharCustomCalendar = function() {
+      if (!calPopover) return;
+      calPopover.classList.add('hidden');
+      if (calTriggerChevron) calTriggerChevron.classList.remove('rotate-180');
+      calHoverDate = null;
+      calPickingState = 'IDLE';
+    };
+
+    // Fechar ao clicar fora do wrapper do calendário
+    document.addEventListener('click', (e) => {
+      if (calPickerWrapper && !calPickerWrapper.contains(e.target)) {
+        fecharCustomCalendar();
+      }
+    });
+
+    // Fechar com ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') fecharCustomCalendar();
+    });
+
+    window.calNavegarMes = function(delta) {
+      if (!calMesVisualizacao) return;
+      calMesVisualizacao = new Date(calMesVisualizacao.getFullYear(), calMesVisualizacao.getMonth() + delta, 1);
+      renderCalGrid();
+    };
+
+    function atualizarTriggerLabel() {
+      if (!calTriggerLabel) return;
+      if (dataInicioFiltro && dataFimFiltro) {
+        if (dataInicioFiltro === dataFimFiltro) {
+          const [y, m, d] = dataInicioFiltro.split('-');
+          calTriggerLabel.textContent = `${d}/${m}/${y}`;
+        } else {
+          const [y1, m1, d1] = dataInicioFiltro.split('-');
+          const [y2, m2, d2] = dataFimFiltro.split('-');
+          calTriggerLabel.textContent = `${d1}/${m1} a ${d2}/${m2}/${y2}`;
+        }
+      } else {
+        calTriggerLabel.textContent = 'Selecionar período';
+      }
+    }
+
+    function atualizarResumoCalendario() {
+      if (calSummaryInicio) {
+        if (calTempStart) {
+          const [y, m, d] = calTempStart.split('-');
+          calSummaryInicio.textContent = `${d}/${m}/${y}`;
+        } else {
+          calSummaryInicio.textContent = '--/--/----';
+        }
+      }
+      if (calSummaryFim) {
+        if (calTempEnd) {
+          const [y, m, d] = calTempEnd.split('-');
+          calSummaryFim.textContent = `${d}/${m}/${y}`;
+        } else {
+          calSummaryFim.textContent = calTempStart ? 'Selecione o fim...' : '--/--/----';
+        }
+      }
+      if (calPromptMsg) {
+        if (calPickingState === 'PICKING_END') {
+          calPromptMsg.textContent = '👆 Clique no dia final do período (máx 60 dias)';
+          calPromptMsg.className = 'text-[10px] text-amber-300 font-semibold pt-1 text-center';
+        } else {
+          calPromptMsg.textContent = 'Clique na data inicial e depois na data final';
+          calPromptMsg.className = 'text-[10px] text-emerald-400/80 pt-1 text-center';
+        }
+      }
+    }
+
+    function renderCalGrid() {
+      if (!calDaysGrid || !calMesVisualizacao) return;
+
+      const ano = calMesVisualizacao.getFullYear();
+      const mes = calMesVisualizacao.getMonth();
+
+      if (calMonthYearTitle) {
+        calMonthYearTitle.textContent = `${NOMES_MESES[mes]} ${ano}`;
+      }
+
+      const primeiroDiaSemana = new Date(ano, mes, 1).getDay(); // 0 = Domingo
+      const ultimoDiaMes = new Date(ano, mes + 1, 0).getDate();
+      const ultimoDiaMesAnterior = new Date(ano, mes, 0).getDate();
+
+      let html = '';
+
+      // Dias do mês anterior para completar o grid inicial
+      for (let i = primeiroDiaSemana - 1; i >= 0; i--) {
+        const diaNum = ultimoDiaMesAnterior - i;
+        html += `<div class="h-8 flex items-center justify-center text-slate-600 text-[11px] rounded-lg cursor-not-allowed select-none opacity-40">${diaNum}</div>`;
+      }
+
+      // Dias do mês atual
+      for (let dia = 1; dia <= ultimoDiaMes; dia++) {
+        const mm = String(mes + 1).padStart(2, '0');
+        const dd = String(dia).padStart(2, '0');
+        const iso = `${ano}-${mm}-${dd}`;
+        const br = `${dd}/${mm}/${ano}`;
+        const qtdAtos = atosPorDiaMap[br] || 0;
+
+        const isStart = calTempStart === iso;
+        const isEnd = calTempEnd === iso;
+
+        let isInRange = false;
+        if (calTempStart && calTempEnd) {
+          isInRange = iso > calTempStart && iso < calTempEnd;
+        } else if (calTempStart && calHoverDate && calPickingState === 'PICKING_END') {
+          if (calHoverDate >= calTempStart) {
+            isInRange = iso > calTempStart && iso <= calHoverDate;
+          }
+        }
+
+        let diaClass = 'h-8 flex flex-col items-center justify-center rounded-lg text-xs font-medium cursor-pointer transition relative ';
+        if (isStart && isEnd) {
+          diaClass += 'bg-emerald-500 text-slate-950 font-bold shadow-md shadow-emerald-500/40 z-10';
+        } else if (isStart) {
+          diaClass += 'bg-emerald-500 text-slate-950 font-bold shadow-md shadow-emerald-500/40 rounded-r-none z-10';
+        } else if (isEnd) {
+          diaClass += 'bg-emerald-500 text-slate-950 font-bold shadow-md shadow-emerald-500/40 rounded-l-none z-10';
+        } else if (isInRange) {
+          diaClass += 'bg-emerald-500/20 text-emerald-200 rounded-none hover:bg-emerald-500/30';
+        } else {
+          diaClass += 'text-slate-200 hover:bg-emerald-500/15 hover:text-emerald-300';
+        }
+
+        const dotHtml = qtdAtos > 0 
+          ? `<span class="w-1 h-1 rounded-full ${isStart || isEnd ? 'bg-slate-950' : 'bg-emerald-400'} mt-0.5"></span>` 
+          : '';
+
+        html += `
+          <button 
+            type="button"
+            onclick="calClickDia('${iso}')"
+            onmouseenter="calHoverDia('${iso}')"
+            class="${diaClass}"
+            title="${br}: ${qtdAtos} ${qtdAtos === 1 ? 'ato' : 'atos'}"
+          >
+            <span class="leading-none text-[11px]">${dia}</span>
+            ${dotHtml}
+          </button>
+        `;
+      }
+
+      // Dias do próximo mês para completar o grid final
+      const totalCelulas = primeiroDiaSemana + ultimoDiaMes;
+      const resto = totalCelulas % 7;
+      if (resto !== 0) {
+        const diasExtras = 7 - resto;
+        for (let dia = 1; dia <= diasExtras; dia++) {
+          html += `<div class="h-8 flex items-center justify-center text-slate-600 text-[11px] rounded-lg cursor-not-allowed select-none opacity-40">${dia}</div>`;
+        }
+      }
+
+      calDaysGrid.innerHTML = html;
+    }
+
+    window.calHoverDia = function(iso) {
+      if (calPickingState === 'PICKING_END') {
+        calHoverDate = iso;
+        renderCalGrid();
+      }
+    };
+
+    window.calClickDia = function(iso) {
+      if (calPickingState === 'IDLE') {
+        calTempStart = iso;
+        calTempEnd = null;
+        calPickingState = 'PICKING_END';
+        atualizarResumoCalendario();
+        renderCalGrid();
+      } else {
+        // Segundo clique
+        if (iso < calTempStart) {
+          calTempStart = iso;
+          calTempEnd = null;
+          calPickingState = 'PICKING_END';
+        } else {
+          const dIni = parseIsoDate(calTempStart);
+          const dFim = parseIsoDate(iso);
+          const diffDays = Math.round((dFim - dIni) / (1000 * 60 * 60 * 24));
+          if (diffDays > 60) {
+            const limite = new Date(dIni);
+            limite.setDate(limite.getDate() + 59);
+            calTempEnd = formatIsoDate(limite);
+            mostrarToast('⚡ Limite de 60 dias: Para manter o grafo veloz, o intervalo máximo foi ajustado para 60 dias.');
+          } else {
+            calTempEnd = iso;
+          }
+          calPickingState = 'IDLE';
+          calHoverDate = null;
+        }
+        atualizarResumoCalendario();
+        renderCalGrid();
+      }
+    };
+
+    window.calAplicarSelecao = function() {
+      if (!calTempStart) {
+        fecharCustomCalendar();
+        return;
+      }
+      if (!calTempEnd) {
+        calTempEnd = calTempStart;
+      }
+
+      dataInicioFiltro = calTempStart;
+      dataFimFiltro = calTempEnd;
+      filtroRapidoAtivo = 'CUSTOM';
+      diaSelecionado = null;
+
+      if (inputInicio) inputInicio.value = dataInicioFiltro;
+      if (inputFim) inputFim.value = dataFimFiltro;
+
+      // Desmarcar botões rápidos
+      document.querySelectorAll('.filtro-rapido-btn').forEach(b => {
+        b.className = 'filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition';
+      });
+
+      atualizarTriggerLabel();
+      fecharCustomCalendar();
+
+      alpha = 0.8;
+      atualizarRadarBadge();
+      renderDailyTimeline();
+      aplicarFiltros();
+      wakeRender();
+    };
+
     // Filtros Globais
     let termoBusca = '';
     let tipoFiltro = 'ALL';
@@ -696,36 +1029,25 @@
         const [y, m, d] = dataInicioFiltro.split('-');
         radarBadge.textContent = `📅 Dia: ${d}/${m}/${y}`;
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-400 text-slate-950 font-bold shadow-sm';
-      } else if (dataInicioFiltro && dataFimFiltro) {
-        const [y1, m1, d1] = dataInicioFiltro.split('-');
-        const [y2, m2, d2] = dataFimFiltro.split('-');
-        radarBadge.textContent = `📅 ${d1}/${m1}/${y1} até ${d2}/${m2}/${y2}`;
-        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-400 text-slate-950 font-bold shadow-sm';
-      } else if (dataInicioFiltro) {
-        const [y, m, d] = dataInicioFiltro.split('-');
-        radarBadge.textContent = `📅 A partir de ${d}/${m}/${y}`;
-        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-400 text-slate-950 font-bold shadow-sm';
-      } else if (dataFimFiltro) {
-        const [y, m, d] = dataFimFiltro.split('-');
-        radarBadge.textContent = `📅 Até ${d}/${m}/${y}`;
-        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-400 text-slate-950 font-bold shadow-sm';
-      } else if (filtroRapidoAtivo === '60_DIAS') {
-        radarBadge.textContent = 'Últimos 60 dias';
-        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
       } else if (filtroRapidoAtivo === '7_DIAS') {
         radarBadge.textContent = 'Últimos 7 dias';
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
       } else if (filtroRapidoAtivo === '14_DIAS') {
         radarBadge.textContent = 'Últimos 14 dias';
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
-      } else if (filtroRapidoAtivo === 'ESTE_MES') {
-        radarBadge.textContent = 'Este mês';
+      } else if (filtroRapidoAtivo === '30_DIAS') {
+        radarBadge.textContent = 'Últimos 30 dias';
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
-      } else if (filtroRapidoAtivo === 'MES_ANTERIOR') {
-        radarBadge.textContent = 'Mês Anterior';
+      } else if (filtroRapidoAtivo === '60_DIAS') {
+        radarBadge.textContent = 'Últimos 60 dias';
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
+      } else if (dataInicioFiltro && dataFimFiltro) {
+        const [y1, m1, d1] = dataInicioFiltro.split('-');
+        const [y2, m2, d2] = dataFimFiltro.split('-');
+        radarBadge.textContent = `📅 ${d1}/${m1}/${y1} até ${d2}/${m2}/${y2}`;
+        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-400 text-slate-950 font-bold shadow-sm';
       } else {
-        radarBadge.textContent = 'Acervo Recente';
+        radarBadge.textContent = 'Últimos 7 dias';
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
       }
     }
@@ -734,49 +1056,35 @@
       filtroRapidoAtivo = tipo;
       diaSelecionado = null;
 
-      if (tipo === '60_DIAS') {
-        const fim = getLatestAcervoDate();
-        const ini = new Date(fim);
-        ini.setDate(ini.getDate() - 59);
-        dataInicioFiltro = formatIsoDate(ini);
-        dataFimFiltro = formatIsoDate(fim);
-        mesSelecionado = 'ALL';
-      } else if (tipo === '7_DIAS') {
-        const fim = getLatestAcervoDate();
-        const ini = new Date(fim);
+      const fim = getLatestAcervoDate();
+      const ini = new Date(fim);
+
+      if (tipo === '7_DIAS') {
         ini.setDate(ini.getDate() - 6);
         dataInicioFiltro = formatIsoDate(ini);
         dataFimFiltro = formatIsoDate(fim);
         mesSelecionado = 'ALL';
       } else if (tipo === '14_DIAS') {
-        const fim = getLatestAcervoDate();
-        const ini = new Date(fim);
         ini.setDate(ini.getDate() - 13);
         dataInicioFiltro = formatIsoDate(ini);
         dataFimFiltro = formatIsoDate(fim);
         mesSelecionado = 'ALL';
-      } else if (tipo === 'ESTE_MES') {
-        const ref = getLatestAcervoDate();
-        const y = ref.getFullYear();
-        const m = ref.getMonth();
-        const ini = new Date(y, m, 1);
-        const fim = new Date(y, m + 1, 0);
+      } else if (tipo === '30_DIAS') {
+        ini.setDate(ini.getDate() - 29);
         dataInicioFiltro = formatIsoDate(ini);
         dataFimFiltro = formatIsoDate(fim);
-        mesSelecionado = `${String(m + 1).padStart(2, '0')}/${y}`;
-      } else if (tipo === 'MES_ANTERIOR') {
-        const ref = getLatestAcervoDate();
-        const y = ref.getFullYear();
-        const m = ref.getMonth() - 1;
-        const ini = new Date(y, m, 1);
-        const fim = new Date(y, m + 1, 0);
+        mesSelecionado = 'ALL';
+      } else if (tipo === '60_DIAS') {
+        ini.setDate(ini.getDate() - 59);
         dataInicioFiltro = formatIsoDate(ini);
         dataFimFiltro = formatIsoDate(fim);
-        mesSelecionado = `${String(ini.getMonth() + 1).padStart(2, '0')}/${ini.getFullYear()}`;
+        mesSelecionado = 'ALL';
       }
 
       if (inputInicio) inputInicio.value = dataInicioFiltro;
       if (inputFim) inputFim.value = dataFimFiltro;
+      calTempStart = dataInicioFiltro;
+      calTempEnd = dataFimFiltro;
 
       document.querySelectorAll('.filtro-rapido-btn').forEach(b => {
         if (b.dataset.filtro === tipo) {
@@ -786,6 +1094,7 @@
         }
       });
 
+      atualizarTriggerLabel();
       alpha = 0.8;
       atualizarRadarBadge();
       renderDailyTimeline();
@@ -811,7 +1120,7 @@
       } else if (!iniMatch && fimMatch) {
         mesSelecionado = `${fimMatch[2]}/${fimMatch[1]}`;
       } else if (!dataInicioFiltro && !dataFimFiltro) {
-        aplicarFiltroRapido('60_DIAS');
+        aplicarFiltroRapido('7_DIAS');
         return;
       } else {
         mesSelecionado = 'ALL';
@@ -821,6 +1130,7 @@
         b.className = 'filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition';
       });
 
+      atualizarTriggerLabel();
       alpha = 0.8;
       atualizarRadarBadge();
       renderDailyTimeline();
@@ -835,49 +1145,20 @@
       alpha = 0.8;
       if (diaSelecionado === data) {
         diaSelecionado = null;
-        if (filtroRapidoAtivo === '60_DIAS') {
-          const fim = getLatestAcervoDate();
-          const ini = new Date(fim);
-          ini.setDate(ini.getDate() - 59);
-          dataInicioFiltro = formatIsoDate(ini);
-          dataFimFiltro = formatIsoDate(fim);
-          mesSelecionado = 'ALL';
-        } else if (filtroRapidoAtivo === '7_DIAS') {
-          const fim = getLatestAcervoDate();
-          const ini = new Date(fim);
+        const fim = getLatestAcervoDate();
+        const ini = new Date(fim);
+        if (filtroRapidoAtivo === '7_DIAS') {
           ini.setDate(ini.getDate() - 6);
-          dataInicioFiltro = formatIsoDate(ini);
-          dataFimFiltro = formatIsoDate(fim);
-          mesSelecionado = 'ALL';
         } else if (filtroRapidoAtivo === '14_DIAS') {
-          const fim = getLatestAcervoDate();
-          const ini = new Date(fim);
           ini.setDate(ini.getDate() - 13);
-          dataInicioFiltro = formatIsoDate(ini);
-          dataFimFiltro = formatIsoDate(fim);
-          mesSelecionado = 'ALL';
-        } else if (filtroRapidoAtivo === 'ESTE_MES') {
-          const ref = getLatestAcervoDate();
-          const y = ref.getFullYear();
-          const m = ref.getMonth();
-          const ini = new Date(y, m, 1);
-          const fim = new Date(y, m + 1, 0);
-          dataInicioFiltro = formatIsoDate(ini);
-          dataFimFiltro = formatIsoDate(fim);
-          mesSelecionado = `${String(m + 1).padStart(2, '0')}/${y}`;
-        } else if (filtroRapidoAtivo === 'MES_ANTERIOR') {
-          const ref = getLatestAcervoDate();
-          const y = ref.getFullYear();
-          const m = ref.getMonth() - 1;
-          const ini = new Date(y, m, 1);
-          const fim = new Date(y, m + 1, 0);
-          dataInicioFiltro = formatIsoDate(ini);
-          dataFimFiltro = formatIsoDate(fim);
-          mesSelecionado = `${String(ini.getMonth() + 1).padStart(2, '0')}/${ini.getFullYear()}`;
+        } else if (filtroRapidoAtivo === '30_DIAS') {
+          ini.setDate(ini.getDate() - 29);
         } else {
-          aplicarFiltroRapido('60_DIAS');
-          return;
+          ini.setDate(ini.getDate() - 59);
         }
+        dataInicioFiltro = formatIsoDate(ini);
+        dataFimFiltro = formatIsoDate(fim);
+        mesSelecionado = 'ALL';
       } else {
         diaSelecionado = data;
         if (data && data.length === 10) {
@@ -893,22 +1174,29 @@
 
       if (inputInicio) inputInicio.value = dataInicioFiltro;
       if (inputFim) inputFim.value = dataFimFiltro;
+      calTempStart = dataInicioFiltro;
+      calTempEnd = dataFimFiltro;
 
+      atualizarTriggerLabel();
       atualizarRadarBadge();
       renderDailyTimeline();
       aplicarFiltros();
       wakeRender();
     };
 
-    document.getElementById('btn-ver-todos-dias').addEventListener('click', () => {
-      aplicarFiltroRapido('60_DIAS');
-    });
+    const btnVerTodosDias = document.getElementById('btn-ver-todos-dias');
+    if (btnVerTodosDias) {
+      btnVerTodosDias.addEventListener('click', () => {
+        aplicarFiltroRapido('60_DIAS');
+      });
+    }
 
     window.limparTodosFiltros = function() {
       termoBusca = '';
       tipoFiltro = 'ALL';
       alpha = 0.8;
-      document.getElementById('search-input').value = '';
+      const searchEl = document.getElementById('search-input');
+      if (searchEl) searchEl.value = '';
       
       document.querySelectorAll('.tipo-filter-btn').forEach(b => {
         b.classList.remove('bg-emerald-500', 'text-slate-950');
@@ -918,7 +1206,7 @@
         }
       });
 
-      aplicarFiltroRapido('60_DIAS');
+      aplicarFiltroRapido('7_DIAS');
     };
 
     // Canvas & Grafo Engine
@@ -1655,16 +1943,14 @@
         const [y1, m1, d1] = dataInicioFiltro.split('-');
         const [y2, m2, d2] = dataFimFiltro.split('-');
         listStatus.textContent = `Exibindo ${internalCount} atos (${d1}/${m1} a ${d2}/${m2}/${y2})`;
-      } else if (filtroRapidoAtivo === '60_DIAS') {
-        listStatus.textContent = `Exibindo ${internalCount} atos (últimos 60 dias)`;
       } else if (filtroRapidoAtivo === '7_DIAS') {
         listStatus.textContent = `Exibindo ${internalCount} atos dos últimos 7 dias`;
       } else if (filtroRapidoAtivo === '14_DIAS') {
         listStatus.textContent = `Exibindo ${internalCount} atos dos últimos 14 dias`;
-      } else if (filtroRapidoAtivo === 'ESTE_MES') {
-        listStatus.textContent = `Exibindo ${internalCount} atos deste mês`;
-      } else if (filtroRapidoAtivo === 'MES_ANTERIOR') {
-        listStatus.textContent = `Exibindo ${internalCount} atos do mês anterior`;
+      } else if (filtroRapidoAtivo === '30_DIAS') {
+        listStatus.textContent = `Exibindo ${internalCount} atos dos últimos 30 dias`;
+      } else if (filtroRapidoAtivo === '60_DIAS') {
+        listStatus.textContent = `Exibindo ${internalCount} atos (últimos 60 dias)`;
       } else {
         listStatus.textContent = `Exibindo ${internalCount} atos`;
       }
@@ -1769,7 +2055,7 @@
     if (nodes.length > 0) {
       selecionarNo(nodes[0]);
     }
-    aplicarFiltroRapido('60_DIAS');
+    aplicarFiltroRapido('7_DIAS');
     wakeRender();
   </script>
 </body>
