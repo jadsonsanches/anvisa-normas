@@ -110,6 +110,10 @@
             <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-mono border border-emerald-500/30">AI</span>
           </div>
           <p class="text-[11px] text-emerald-400/70 truncate">Inteligência Regulatória</p>
+          <div class="mt-1 flex items-center gap-1.5 text-[10px] text-emerald-300 font-mono bg-emerald-500/15 px-2 py-0.5 rounded-md border border-emerald-500/25 w-fit">
+            <span>📅</span>
+            <span>Desde 01/01/2025</span>
+          </div>
         </div>
       </div>
 
@@ -127,11 +131,11 @@
         <div class="space-y-1">
           <a href="data/dist/anvisa.db" download class="flex items-center justify-between px-3 py-2 rounded-lg bg-[#082016] hover:bg-emerald-950/70 border border-emerald-500/20 text-xs text-slate-200 hover:text-emerald-300 transition">
             <span class="flex items-center gap-2">💾 SQLite (DB)</span>
-            <span class="text-[10px] text-emerald-400 font-mono">1.8 MB</span>
+            <span class="text-[10px] text-emerald-400 font-mono">~94 MB</span>
           </a>
           <a href="data/dist/normas.json" download class="flex items-center justify-between px-3 py-2 rounded-lg bg-[#082016] hover:bg-emerald-950/70 border border-emerald-500/20 text-xs text-slate-200 hover:text-emerald-300 transition">
             <span class="flex items-center gap-2">📊 JSON Consolidado</span>
-            <span class="text-[10px] text-emerald-400 font-mono">API</span>
+            <span class="text-[10px] text-emerald-400 font-mono">~96 MB</span>
           </a>
           <a href="data/dist/normas.csv" download class="flex items-center justify-between px-3 py-2 rounded-lg bg-[#082016] hover:bg-emerald-950/70 border border-emerald-500/20 text-xs text-slate-200 hover:text-emerald-300 transition">
             <span class="flex items-center gap-2">📑 Planilha CSV</span>
@@ -306,7 +310,7 @@
             Exibindo 14363
           </span>
         </div>
-        <p class="text-[11px] text-slate-400">Atos com texto integral limpo e YAML estruturado</p>
+        <p class="text-[11px] text-slate-300">Atos com texto integral e dados consolidados desde <span class="text-emerald-300 font-semibold font-mono">01/01/2025</span></p>
         <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-emerald-500/10 rounded-full blur-xl pointer-events-none"></div>
       </div>
 
@@ -473,9 +477,10 @@
     </div>
 
     <!-- Rodapé Geral -->
-    <footer class="text-center text-xs text-slate-500 pt-8 pb-4 border-t border-emerald-500/10 space-y-1">
-      <p>Acervo Aberto das Normas da Anvisa • Processamento Determinístico de Grafo Regulatório</p>
-      <p class="text-[11px] text-slate-600">Dados obtidos via portal oficial AnvisaLegis / Datalegis • Atualização contínua via GitHub Actions</p>
+    <footer class="text-center text-xs text-white pt-8 pb-4 border-t border-emerald-500/10 space-y-1.5">
+      <p class="text-white font-semibold">Acervo Aberto das Normas da Anvisa • Processamento Determinístico de Grafo Regulatório</p>
+      <p class="text-xs text-white">Dados obtidos via portal oficial AnvisaLegis / Datalegis • Atualização contínua via GitHub Actions</p>
+      <p class="text-[11px] text-emerald-300 font-mono">📅 Histórico regulatório contínuo com dados consolidados a partir de 01/01/2025</p>
     </footer>
 
     <!-- Toast Flutuante de Notificação / Performance -->
