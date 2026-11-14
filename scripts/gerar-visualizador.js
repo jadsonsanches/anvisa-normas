@@ -219,33 +219,41 @@ const htmlContent = `<!DOCTYPE html>
             </h2>
           </div>
           <p class="text-xs text-slate-400 mt-0.5">
-            Selecione o mês desejado e clique em qualquer dia para filtrar instantaneamente os atos publicados no DOU.
+            Filtre por período personalizado (data início e fim) ou selecione um atalho rápido para analisar os atos publicados no DOU.
           </p>
         </div>
         <div class="flex items-center gap-2.5 flex-wrap">
-          <!-- Filtro Rápido por Mês -->
-          <div id="radar-mes-pills" class="flex items-center gap-1 bg-[#061810] p-1 rounded-xl border border-emerald-500/20">
-            <button onclick="selecionarMes('ALL')" data-mes="ALL" class="mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition">Todos</button>
-            <button onclick="selecionarMes('11/2026')" data-mes="11/2026" class="mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Nov/26</button>
-            <button onclick="selecionarMes('10/2026')" data-mes="10/2026" class="mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Out/26</button>
+          <!-- Filtros Rápidos de Período -->
+          <div id="radar-filtros-rapidos" class="flex items-center gap-1 bg-[#061810] p-1 rounded-xl border border-emerald-500/20">
+            <button onclick="aplicarFiltroRapido('ALL')" data-filtro="ALL" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition">Todos</button>
+            <button onclick="aplicarFiltroRapido('ESTE_MES')" data-filtro="ESTE_MES" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Este Mês</button>
+            <button onclick="aplicarFiltroRapido('MES_ANTERIOR')" data-filtro="MES_ANTERIOR" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Mês Anterior</button>
+            <button onclick="aplicarFiltroRapido('ESTE_ANO')" data-filtro="ESTE_ANO" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Este Ano</button>
           </div>
 
-          <!-- Filtro Específico por Data -->
-          <div class="flex items-center gap-1.5 bg-[#061810] px-3 py-1.5 rounded-xl border border-emerald-500/25">
+          <!-- Filtro por Período: Início e Fim -->
+          <div class="flex items-center gap-2 bg-[#061810] px-3 py-1.5 rounded-xl border border-emerald-500/25 text-xs">
             <span class="text-[11px] text-slate-400 font-medium flex items-center gap-1">
               <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-              Data:
+              De:
             </span>
             <input 
-              id="filtro-data-especifica" 
+              id="filtro-data-inicio" 
               type="date" 
               class="bg-transparent text-emerald-300 font-mono text-xs focus:outline-none cursor-pointer [color-scheme:dark]"
-              title="Filtrar por data específica do ato ou publicação no DOU"
+              title="Data inicial do período"
+            >
+            <span class="text-[11px] text-slate-400 font-medium">Até:</span>
+            <input 
+              id="filtro-data-fim" 
+              type="date" 
+              class="bg-transparent text-emerald-300 font-mono text-xs focus:outline-none cursor-pointer [color-scheme:dark]"
+              title="Data final do período"
             >
           </div>
 
-          <button id="btn-ver-todos-dias" class="text-xs px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-semibold transition active:scale-95">
-            Ver Todos os Dias
+          <button id="btn-ver-todos-dias" class="text-xs px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-semibold transition active:scale-95 flex items-center gap-1">
+            <span>Ver Todos</span>
           </button>
         </div>
       </div>
@@ -511,11 +519,44 @@ const htmlContent = `<!DOCTYPE html>
       });
     }
 
+    function parseBrDate(str) {
+      if (!str || typeof str !== 'string') return null;
+      const parts = str.split('/');
+      if (parts.length !== 3) return null;
+      const d = parseInt(parts[0], 10);
+      const m = parseInt(parts[1], 10) - 1;
+      const y = parseInt(parts[2], 10);
+      if (isNaN(d) || isNaN(m) || isNaN(y)) return null;
+      return new Date(y, m, d);
+    }
+
+    function parseIsoDate(str) {
+      if (!str || typeof str !== 'string') return null;
+      const parts = str.split('-');
+      if (parts.length !== 3) return null;
+      const y = parseInt(parts[0], 10);
+      const m = parseInt(parts[1], 10) - 1;
+      const d = parseInt(parts[2], 10);
+      if (isNaN(d) || isNaN(m) || isNaN(y)) return null;
+      return new Date(y, m, d);
+    }
+
+    let dataInicioFiltro = '';
+    let dataFimFiltro = '';
+    let filtroRapidoAtivo = 'ALL';
     let mesSelecionado = 'ALL';
     let diaSelecionado = null;
 
+    const inputInicio = document.getElementById('filtro-data-inicio');
+    const inputFim = document.getElementById('filtro-data-fim');
+
     function renderDailyTimeline() {
-      const diasList = mesSelecionado === 'ALL' ? gerarDiasAcervo() : gerarDiasDoMes(mesSelecionado);
+      let diasList = [];
+      if (mesSelecionado !== 'ALL') {
+        diasList = gerarDiasDoMes(mesSelecionado);
+      } else {
+        diasList = gerarDiasAcervo();
+      }
       
       let maxQtd = 0;
       diasList.forEach(item => {
@@ -524,22 +565,40 @@ const htmlContent = `<!DOCTYPE html>
       });
       const peakThreshold = Math.max(20, Math.floor(maxQtd * 0.7));
 
+      const dtIni = dataInicioFiltro ? parseIsoDate(dataInicioFiltro) : null;
+      const dtFim = dataFimFiltro ? parseIsoDate(dataFimFiltro) : null;
+      const isSingleDay = dataInicioFiltro && dataFimFiltro && dataInicioFiltro === dataFimFiltro;
+
       carouselContainer.innerHTML = diasList.map(item => {
         const qtd = atosPorDiaMap[item.data] || 0;
         const isPeak = qtd >= peakThreshold && qtd > 0;
-        const isActive = diaSelecionado === item.data;
+        const dtItem = parseBrDate(item.data);
+        
+        const isExactDay = isSingleDay && item.data === diaSelecionado;
+        let isInRange = false;
+        if (!isSingleDay && (dtIni || dtFim) && dtItem) {
+          const aboveIni = !dtIni || dtItem >= dtIni;
+          const belowFim = !dtFim || dtItem <= dtFim;
+          isInRange = aboveIni && belowFim;
+        }
+
         const rotuloSemana = mesSelecionado === 'ALL' 
           ? \`\${item.sem} • \${item.mesStr === '10/2026' ? 'Out' : (item.mesStr === '11/2026' ? 'Nov' : '')}\`
           : item.sem;
 
+        let cardStyle = 'bg-[#040e0a]/60 border-emerald-500/10 text-slate-500 opacity-60 hover:opacity-90';
+        if (isExactDay) {
+          cardStyle = 'active bg-emerald-500/30 border-emerald-400 text-white shadow-lg ring-2 ring-emerald-400/40';
+        } else if (isInRange) {
+          cardStyle = 'bg-emerald-500/15 border-emerald-500/40 text-emerald-100 shadow-sm';
+        } else if (qtd > 0) {
+          cardStyle = 'bg-[#081e15]/80 hover:bg-[#0c2a1e] border-emerald-500/20 text-slate-200';
+        }
+
         return \`
           <button 
             onclick="filtrarPorDia('\${item.data}')" 
-            class="timeline-pill flex-1 min-w-[76px] p-2.5 rounded-xl border flex flex-col items-center justify-between text-center transition cursor-pointer \${
-              isActive 
-                ? 'active bg-emerald-500/25 border-emerald-400 text-white shadow-lg' 
-                : (qtd > 0 ? 'bg-[#081e15]/80 hover:bg-[#0c2a1e] border-emerald-500/20 text-slate-200' : 'bg-[#040e0a]/60 border-emerald-500/10 text-slate-500 opacity-60 hover:opacity-90')
-            }"
+            class="timeline-pill flex-1 min-w-[76px] p-2.5 rounded-xl border flex flex-col items-center justify-between text-center transition cursor-pointer \${cardStyle}"
           >
             <span class="text-[10px] uppercase font-semibold text-slate-400 whitespace-nowrap">\${rotuloSemana}</span>
             <span class="text-base font-extrabold font-mono text-white my-0.5">\${item.dia}</span>
@@ -559,109 +618,154 @@ const htmlContent = `<!DOCTYPE html>
     // Filtros Globais
     let termoBusca = '';
     let tipoFiltro = 'ALL';
-    const inputDataEspecifica = document.getElementById('filtro-data-especifica');
 
     function atualizarRadarBadge() {
       const radarBadge = document.getElementById('radar-badge-periodo');
       if (!radarBadge) return;
-      if (diaSelecionado) {
-        radarBadge.textContent = \`📅 Dia: \${diaSelecionado}\`;
+
+      if (dataInicioFiltro && dataFimFiltro && dataInicioFiltro === dataFimFiltro) {
+        const [y, m, d] = dataInicioFiltro.split('-');
+        radarBadge.textContent = \`📅 Dia: \${d}/\${m}/\${y}\`;
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-400 text-slate-950 font-bold shadow-sm';
-      } else if (mesSelecionado === 'ALL') {
-        radarBadge.textContent = 'Acervo Completo';
-        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
-      } else if (mesSelecionado === '10/2026') {
-        radarBadge.textContent = 'Outubro / 2026';
-        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
-      } else if (mesSelecionado === '11/2026') {
+      } else if (dataInicioFiltro && dataFimFiltro) {
+        const [y1, m1, d1] = dataInicioFiltro.split('-');
+        const [y2, m2, d2] = dataFimFiltro.split('-');
+        radarBadge.textContent = \`📅 \${d1}/\${m1}/\${y1} até \${d2}/\${m2}/\${y2}\`;
+        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-400 text-slate-950 font-bold shadow-sm';
+      } else if (dataInicioFiltro) {
+        const [y, m, d] = dataInicioFiltro.split('-');
+        radarBadge.textContent = \`📅 A partir de \${d}/\${m}/\${y}\`;
+        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-400 text-slate-950 font-bold shadow-sm';
+      } else if (dataFimFiltro) {
+        const [y, m, d] = dataFimFiltro.split('-');
+        radarBadge.textContent = \`📅 Até \${d}/\${m}/\${y}\`;
+        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-400 text-slate-950 font-bold shadow-sm';
+      } else if (filtroRapidoAtivo === 'ESTE_MES') {
         radarBadge.textContent = 'Novembro / 2026';
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
+      } else if (filtroRapidoAtivo === 'MES_ANTERIOR') {
+        radarBadge.textContent = 'Outubro / 2026';
+        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
+      } else if (filtroRapidoAtivo === 'ESTE_ANO') {
+        radarBadge.textContent = 'Ano 2026';
+        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
       } else {
-        radarBadge.textContent = mesSelecionado;
+        radarBadge.textContent = 'Acervo Completo';
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
       }
     }
 
-    if (inputDataEspecifica) {
-      inputDataEspecifica.addEventListener('change', (e) => {
-        const val = e.target.value; // YYYY-MM-DD
-        alpha = 0.8;
-        if (!val) {
-          diaSelecionado = null;
-        } else {
-          const [yyyy, mm, dd] = val.split('-');
-          diaSelecionado = \`\${dd}/\${mm}/\${yyyy}\`;
-        }
-        atualizarRadarBadge();
-        renderDailyTimeline();
-        aplicarFiltros();
-      });
-    }
-
-    window.selecionarMes = function(mes) {
-      mesSelecionado = mes;
+    window.aplicarFiltroRapido = function(tipo) {
+      filtroRapidoAtivo = tipo;
       diaSelecionado = null;
-      if (inputDataEspecifica) inputDataEspecifica.value = '';
-      alpha = 0.8;
-      
-      document.querySelectorAll('.mes-pill-btn').forEach(b => {
-        if (b.dataset.mes === mes) {
-          b.className = 'mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition';
+
+      if (tipo === 'ALL') {
+        dataInicioFiltro = '';
+        dataFimFiltro = '';
+        mesSelecionado = 'ALL';
+      } else if (tipo === 'ESTE_MES') {
+        dataInicioFiltro = '2026-11-01';
+        dataFimFiltro = '2026-11-30';
+        mesSelecionado = '11/2026';
+      } else if (tipo === 'MES_ANTERIOR') {
+        dataInicioFiltro = '2026-10-01';
+        dataFimFiltro = '2026-10-31';
+        mesSelecionado = '10/2026';
+      } else if (tipo === 'ESTE_ANO') {
+        dataInicioFiltro = '2026-01-01';
+        dataFimFiltro = '2026-12-31';
+        mesSelecionado = 'ALL';
+      }
+
+      if (inputInicio) inputInicio.value = dataInicioFiltro;
+      if (inputFim) inputFim.value = dataFimFiltro;
+
+      document.querySelectorAll('.filtro-rapido-btn').forEach(b => {
+        if (b.dataset.filtro === tipo) {
+          b.className = 'filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition';
         } else {
-          b.className = 'mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition';
+          b.className = 'filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition';
         }
       });
 
+      alpha = 0.8;
       atualizarRadarBadge();
       renderDailyTimeline();
       aplicarFiltros();
     };
 
+    function onDataManualChange() {
+      dataInicioFiltro = inputInicio ? inputInicio.value : '';
+      dataFimFiltro = inputFim ? inputFim.value : '';
+      filtroRapidoAtivo = 'CUSTOM';
+      diaSelecionado = null;
+
+      if (dataInicioFiltro.startsWith('2026-11') && dataFimFiltro.startsWith('2026-11')) {
+        mesSelecionado = '11/2026';
+      } else if (dataInicioFiltro.startsWith('2026-10') && dataFimFiltro.startsWith('2026-10')) {
+        mesSelecionado = '10/2026';
+      } else {
+        mesSelecionado = 'ALL';
+      }
+
+      document.querySelectorAll('.filtro-rapido-btn').forEach(b => {
+        b.className = 'filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition';
+      });
+
+      alpha = 0.8;
+      atualizarRadarBadge();
+      renderDailyTimeline();
+      aplicarFiltros();
+    }
+
+    if (inputInicio) inputInicio.addEventListener('change', onDataManualChange);
+    if (inputFim) inputFim.addEventListener('change', onDataManualChange);
+
     window.filtrarPorDia = function(data) {
       alpha = 0.8;
       if (diaSelecionado === data) {
         diaSelecionado = null;
-        if (inputDataEspecifica) inputDataEspecifica.value = '';
+        if (filtroRapidoAtivo === 'ESTE_MES') {
+          dataInicioFiltro = '2026-11-01';
+          dataFimFiltro = '2026-11-30';
+        } else if (filtroRapidoAtivo === 'MES_ANTERIOR') {
+          dataInicioFiltro = '2026-10-01';
+          dataFimFiltro = '2026-10-31';
+        } else if (filtroRapidoAtivo === 'ESTE_ANO') {
+          dataInicioFiltro = '2026-01-01';
+          dataFimFiltro = '2026-12-31';
+        } else {
+          dataInicioFiltro = '';
+          dataFimFiltro = '';
+        }
       } else {
         diaSelecionado = data;
-        if (inputDataEspecifica && data && data.length === 10) {
+        if (data && data.length === 10) {
           const [dd, mm, yyyy] = data.split('/');
-          inputDataEspecifica.value = \`\${yyyy}-\${mm}-\${dd}\`;
+          const iso = \`\${yyyy}-\${mm}-\${dd}\`;
+          dataInicioFiltro = iso;
+          dataFimFiltro = iso;
         }
       }
+
+      if (inputInicio) inputInicio.value = dataInicioFiltro;
+      if (inputFim) inputFim.value = dataFimFiltro;
+
       atualizarRadarBadge();
       renderDailyTimeline();
       aplicarFiltros();
     };
 
     document.getElementById('btn-ver-todos-dias').addEventListener('click', () => {
-      diaSelecionado = null;
-      if (inputDataEspecifica) inputDataEspecifica.value = '';
-      alpha = 0.8;
-      atualizarRadarBadge();
-      renderDailyTimeline();
-      aplicarFiltros();
+      aplicarFiltroRapido('ALL');
     });
 
     window.limparTodosFiltros = function() {
-      mesSelecionado = 'ALL';
-      diaSelecionado = null;
       termoBusca = '';
       tipoFiltro = 'ALL';
       alpha = 0.8;
       document.getElementById('search-input').value = '';
-      if (inputDataEspecifica) inputDataEspecifica.value = '';
       
-      document.querySelectorAll('.mes-pill-btn').forEach(b => {
-        if (b.dataset.mes === 'ALL') {
-          b.className = 'mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition';
-        } else {
-          b.className = 'mes-pill-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition';
-        }
-      });
-
-      atualizarRadarBadge();
-
       document.querySelectorAll('.tipo-filter-btn').forEach(b => {
         b.classList.remove('bg-emerald-500', 'text-slate-950');
         b.classList.add('bg-[#092217]', 'text-slate-300');
@@ -669,8 +773,8 @@ const htmlContent = `<!DOCTYPE html>
           b.classList.add('bg-emerald-500', 'text-slate-950');
         }
       });
-      renderDailyTimeline();
-      aplicarFiltros();
+
+      aplicarFiltroRapido('ALL');
     };
 
     // Canvas & Grafo Engine
@@ -1184,53 +1288,42 @@ const htmlContent = `<!DOCTYPE html>
     function aplicarFiltros() {
       const q = termoBusca.toLowerCase().trim();
 
-      // Mapear nós internos do mês selecionado
-      const internalInMonth = new Set();
+      const dtIni = dataInicioFiltro ? parseIsoDate(dataInicioFiltro) : null;
+      const dtFim = dataFimFiltro ? parseIsoDate(dataFimFiltro) : null;
+
+      function estaNoPeriodo(dataStr) {
+        if (!dataStr) return false;
+        const dt = parseBrDate(dataStr);
+        if (!dt) return false;
+        if (dtIni && dt < dtIni) return false;
+        if (dtFim && dt > dtFim) return false;
+        return true;
+      }
+
+      // Mapear nós internos que atendem ao período
+      const internalInPeriod = new Set();
       nodes.forEach(n => {
         if (!n.arquivo) return;
-        if (mesSelecionado === 'ALL') {
-          internalInMonth.add(n.id);
+        if (!dtIni && !dtFim) {
+          internalInPeriod.add(n.id);
           return;
         }
-        const maDou = n.data_publicacao_dou ? n.data_publicacao_dou.slice(3) : '';
-        const maAto = n.data_ato ? n.data_ato.slice(3) : '';
-        if (maDou === mesSelecionado || maAto === mesSelecionado) {
-          internalInMonth.add(n.id);
+        if (estaNoPeriodo(n.data_publicacao_dou) || estaNoPeriodo(n.data_ato)) {
+          internalInPeriod.add(n.id);
         }
       });
 
       const filtered = nodes.filter(n => {
-        // Filtro por Mês
-        if (mesSelecionado !== 'ALL') {
+        // Filtro por Período de Data
+        if (dtIni || dtFim) {
           if (n.arquivo) {
-            if (!internalInMonth.has(n.id)) return false;
+            if (!internalInPeriod.has(n.id)) return false;
           } else {
             const viz = adjacency.get(n.id);
             let hasConn = false;
             if (viz) {
               for (const v of viz) {
-                if (internalInMonth.has(v)) {
-                  hasConn = true;
-                  break;
-                }
-              }
-            }
-            if (!hasConn) return false;
-          }
-        }
-
-        // Filtro por dia
-        if (diaSelecionado) {
-          if (n.arquivo) {
-            const matchData = (n.data_publicacao_dou === diaSelecionado) || (n.data_ato === diaSelecionado);
-            if (!matchData) return false;
-          } else {
-            const viz = adjacency.get(n.id);
-            let hasConn = false;
-            if (viz) {
-              for (const v of viz) {
-                const vn = nodes.find(x => x.id === v);
-                if (vn && vn.arquivo && ((vn.data_publicacao_dou === diaSelecionado) || (vn.data_ato === diaSelecionado))) {
+                if (internalInPeriod.has(v)) {
                   hasConn = true;
                   break;
                 }
@@ -1263,11 +1356,25 @@ const htmlContent = `<!DOCTYPE html>
 
       const listStatus = document.getElementById('list-status-badge');
       const internalCount = filtered.filter(n => n.arquivo).length;
-      if (diaSelecionado) {
-        listStatus.textContent = \`Exibindo \${internalCount} atos de \${diaSelecionado}\`;
-      } else if (mesSelecionado !== 'ALL') {
-        const nomeMes = mesSelecionado === '10/2026' ? 'Outubro / 2026' : (mesSelecionado === '11/2026' ? 'Novembro / 2026' : mesSelecionado);
-        listStatus.textContent = \`Exibindo \${internalCount} atos de \${nomeMes}\`;
+      if (dataInicioFiltro && dataFimFiltro && dataInicioFiltro === dataFimFiltro) {
+        const [y, m, d] = dataInicioFiltro.split('-');
+        listStatus.textContent = \`Exibindo \${internalCount} atos de \${d}/\${m}/\${y}\`;
+      } else if (dataInicioFiltro && dataFimFiltro) {
+        const [y1, m1, d1] = dataInicioFiltro.split('-');
+        const [y2, m2, d2] = dataFimFiltro.split('-');
+        listStatus.textContent = \`Exibindo \${internalCount} atos (\${d1}/\${m1} a \${d2}/\${m2}/\${y2})\`;
+      } else if (dataInicioFiltro) {
+        const [y, m, d] = dataInicioFiltro.split('-');
+        listStatus.textContent = \`Exibindo \${internalCount} atos a partir de \${d}/\${m}/\${y}\`;
+      } else if (dataFimFiltro) {
+        const [y, m, d] = dataFimFiltro.split('-');
+        listStatus.textContent = \`Exibindo \${internalCount} atos até \${d}/\${m}/\${y}\`;
+      } else if (filtroRapidoAtivo === 'ESTE_MES') {
+        listStatus.textContent = \`Exibindo \${internalCount} atos de Novembro / 2026\`;
+      } else if (filtroRapidoAtivo === 'MES_ANTERIOR') {
+        listStatus.textContent = \`Exibindo \${internalCount} atos de Outubro / 2026\`;
+      } else if (filtroRapidoAtivo === 'ESTE_ANO') {
+        listStatus.textContent = \`Exibindo \${internalCount} atos de 2026\`;
       } else {
         listStatus.textContent = \`Exibindo \${internalCount} atos (acervo)\`;
       }
