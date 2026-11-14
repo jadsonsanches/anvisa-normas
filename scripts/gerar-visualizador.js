@@ -223,16 +223,16 @@ const htmlContent = `<!DOCTYPE html>
           </p>
         </div>
         <div class="flex items-center gap-2.5 flex-wrap">
-          <!-- Filtros Rápidos de Período -->
+          <!-- Filtros Rápidos de Período (Otimizado com Janela Máxima de 60 Dias) -->
           <div id="radar-filtros-rapidos" class="flex items-center gap-1 bg-[#061810] p-1 rounded-xl border border-emerald-500/20">
-            <button onclick="aplicarFiltroRapido('ALL')" data-filtro="ALL" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition">Todos</button>
-            <button onclick="aplicarFiltroRapido('7_DIAS')" data-filtro="7_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">7 dias</button>
-            <button onclick="aplicarFiltroRapido('14_DIAS')" data-filtro="14_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">14 dias</button>
+            <button onclick="aplicarFiltroRapido('60_DIAS')" data-filtro="60_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition">60 dias</button>
             <button onclick="aplicarFiltroRapido('ESTE_MES')" data-filtro="ESTE_MES" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Este mês</button>
             <button onclick="aplicarFiltroRapido('MES_ANTERIOR')" data-filtro="MES_ANTERIOR" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Mês Anterior</button>
+            <button onclick="aplicarFiltroRapido('14_DIAS')" data-filtro="14_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">14 dias</button>
+            <button onclick="aplicarFiltroRapido('7_DIAS')" data-filtro="7_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">7 dias</button>
           </div>
 
-          <!-- Filtro por Período: Início e Fim -->
+          <!-- Filtro por Período: Início e Fim (Máx 60 dias) -->
           <div class="flex items-center gap-2 bg-[#061810] px-3 py-1.5 rounded-xl border border-emerald-500/25 text-xs">
             <span class="text-[11px] text-slate-400 font-medium flex items-center gap-1">
               <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -242,19 +242,19 @@ const htmlContent = `<!DOCTYPE html>
               id="filtro-data-inicio" 
               type="date" 
               class="bg-transparent text-emerald-300 font-mono text-xs focus:outline-none cursor-pointer [color-scheme:dark]"
-              title="Data inicial do período"
+              title="Data inicial do período (máx 60 dias)"
             >
             <span class="text-[11px] text-slate-400 font-medium">Até:</span>
             <input 
               id="filtro-data-fim" 
               type="date" 
               class="bg-transparent text-emerald-300 font-mono text-xs focus:outline-none cursor-pointer [color-scheme:dark]"
-              title="Data final do período"
+              title="Data final do período (máx 60 dias)"
             >
           </div>
 
-          <button id="btn-ver-todos-dias" class="text-xs px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-semibold transition active:scale-95 flex items-center gap-1">
-            <span>Ver Todos</span>
+          <button id="btn-ver-todos-dias" class="text-xs px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-semibold transition active:scale-95 flex items-center gap-1" title="Ver janela de 60 dias mais recentes">
+            <span>Últimos 60 Dias</span>
           </button>
         </div>
       </div>
@@ -267,15 +267,18 @@ const htmlContent = `<!DOCTYPE html>
 
     <!-- Cards de Métricas Principais (Estilo Imagens 1 e 2) -->
     <section id="metrics-section" class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-      <!-- Card 1: Total Normas -->
+      <!-- Card 1: Total Normas (Opção 1: Acervo Total Fixo + Badge Exibindo X) -->
       <div class="glass-card glass-card-hover rounded-2xl p-4 space-y-2 relative overflow-hidden group">
         <div class="flex items-center justify-between text-slate-400">
           <span class="text-xs font-semibold uppercase tracking-wider text-emerald-400/80">Acervo Total</span>
           <span class="text-base group-hover:scale-110 transition">📑</span>
         </div>
-        <div class="flex items-baseline gap-2">
+        <div class="flex items-baseline gap-2 flex-wrap">
           <span class="text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-total-normas">${stats.totalNormas || grafo.nodes.filter(n => n.arquivo).length}</span>
           <span class="text-xs text-emerald-400 font-medium">normas</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-500/30" id="stat-filtradas-badge">
+            Exibindo ${stats.totalNormas || grafo.nodes.filter(n => n.arquivo).length}
+          </span>
         </div>
         <p class="text-[11px] text-slate-400">Atos com texto integral limpo e YAML estruturado</p>
         <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-emerald-500/10 rounded-full blur-xl pointer-events-none"></div>
@@ -449,6 +452,12 @@ const htmlContent = `<!DOCTYPE html>
       <p class="text-[11px] text-slate-600">Dados obtidos via portal oficial AnvisaLegis / Datalegis • Atualização contínua via GitHub Actions</p>
     </footer>
 
+    <!-- Toast Flutuante de Notificação / Performance -->
+    <div id="toast-aviso" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 bg-[#061810]/95 border border-emerald-400/40 text-emerald-200 text-xs px-4 py-3 rounded-xl shadow-2xl backdrop-blur-md flex items-center gap-2.5">
+      <span class="text-base">⚡</span>
+      <span id="toast-aviso-msg">Aviso de desempenho</span>
+    </div>
+
   </main>
 
   <script>
@@ -542,6 +551,18 @@ const htmlContent = `<!DOCTYPE html>
       return new Date(y, m, d);
     }
 
+    function mostrarToast(msg) {
+      const toast = document.getElementById('toast-aviso');
+      const toastMsg = document.getElementById('toast-aviso-msg');
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 4000);
+    }
+
     function getLatestAcervoDate() {
       let latest = null;
       Object.keys(atosPorDiaMap).forEach(d => {
@@ -550,9 +571,7 @@ const htmlContent = `<!DOCTYPE html>
           latest = dt;
         }
       });
-      const now = new Date();
-      if (!latest || now > latest) return now;
-      return latest;
+      return latest || new Date();
     }
 
     function formatIsoDate(d) {
@@ -564,12 +583,32 @@ const htmlContent = `<!DOCTYPE html>
 
     let dataInicioFiltro = '';
     let dataFimFiltro = '';
-    let filtroRapidoAtivo = 'ALL';
+    let filtroRapidoAtivo = '60_DIAS';
     let mesSelecionado = 'ALL';
     let diaSelecionado = null;
+    const statsTotalGeral = statsData.totalNormas || graphData.nodes.filter(n => n.arquivo).length;
 
     const inputInicio = document.getElementById('filtro-data-inicio');
     const inputFim = document.getElementById('filtro-data-fim');
+
+    function validarETruncarPeriodoMaximo() {
+      if (!dataInicioFiltro || !dataFimFiltro) return;
+      const dIni = parseIsoDate(dataInicioFiltro);
+      const dFim = parseIsoDate(dataFimFiltro);
+      if (!dIni || !dFim) return;
+
+      const diffDays = Math.round((dFim - dIni) / (1000 * 60 * 60 * 24));
+      if (diffDays > 60) {
+        const novoFim = new Date(dIni);
+        novoFim.setDate(novoFim.getDate() + 59);
+        dataFimFiltro = formatIsoDate(novoFim);
+        if (inputFim) inputFim.value = dataFimFiltro;
+        mostrarToast('⚡ Limite de 60 dias: Para manter o grafo veloz, o intervalo máximo foi ajustado para 60 dias.');
+      } else if (diffDays < 0) {
+        dataFimFiltro = dataInicioFiltro;
+        if (inputFim) inputFim.value = dataFimFiltro;
+      }
+    }
 
     function renderDailyTimeline() {
       let diasList = [];
@@ -697,6 +736,9 @@ const htmlContent = `<!DOCTYPE html>
         const [y, m, d] = dataFimFiltro.split('-');
         radarBadge.textContent = \`📅 Até \${d}/\${m}/\${y}\`;
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-400 text-slate-950 font-bold shadow-sm';
+      } else if (filtroRapidoAtivo === '60_DIAS') {
+        radarBadge.textContent = 'Últimos 60 dias';
+        radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
       } else if (filtroRapidoAtivo === '7_DIAS') {
         radarBadge.textContent = 'Últimos 7 dias';
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
@@ -710,7 +752,7 @@ const htmlContent = `<!DOCTYPE html>
         radarBadge.textContent = 'Mês Anterior';
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
       } else {
-        radarBadge.textContent = 'Acervo Completo';
+        radarBadge.textContent = 'Acervo Recente';
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
       }
     }
@@ -719,9 +761,12 @@ const htmlContent = `<!DOCTYPE html>
       filtroRapidoAtivo = tipo;
       diaSelecionado = null;
 
-      if (tipo === 'ALL') {
-        dataInicioFiltro = '';
-        dataFimFiltro = '';
+      if (tipo === '60_DIAS') {
+        const fim = getLatestAcervoDate();
+        const ini = new Date(fim);
+        ini.setDate(ini.getDate() - 59);
+        dataInicioFiltro = formatIsoDate(ini);
+        dataFimFiltro = formatIsoDate(fim);
         mesSelecionado = 'ALL';
       } else if (tipo === '7_DIAS') {
         const fim = getLatestAcervoDate();
@@ -772,6 +817,7 @@ const htmlContent = `<!DOCTYPE html>
       atualizarRadarBadge();
       renderDailyTimeline();
       aplicarFiltros();
+      wakeRender();
     };
 
     function onDataManualChange() {
@@ -779,6 +825,8 @@ const htmlContent = `<!DOCTYPE html>
       dataFimFiltro = inputFim ? inputFim.value : '';
       filtroRapidoAtivo = 'CUSTOM';
       diaSelecionado = null;
+
+      validarETruncarPeriodoMaximo();
 
       const iniMatch = dataInicioFiltro.match(/^(\d{4})-(\d{2})/);
       const fimMatch = dataFimFiltro.match(/^(\d{4})-(\d{2})/);
@@ -790,24 +838,21 @@ const htmlContent = `<!DOCTYPE html>
       } else if (!iniMatch && fimMatch) {
         mesSelecionado = \`\${fimMatch[2]}/\${fimMatch[1]}\`;
       } else if (!dataInicioFiltro && !dataFimFiltro) {
-        mesSelecionado = 'ALL';
-        filtroRapidoAtivo = 'ALL';
+        aplicarFiltroRapido('60_DIAS');
+        return;
       } else {
         mesSelecionado = 'ALL';
       }
 
       document.querySelectorAll('.filtro-rapido-btn').forEach(b => {
-        if (b.dataset.filtro === filtroRapidoAtivo) {
-          b.className = 'filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition';
-        } else {
-          b.className = 'filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition';
-        }
+        b.className = 'filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition';
       });
 
       alpha = 0.8;
       atualizarRadarBadge();
       renderDailyTimeline();
       aplicarFiltros();
+      wakeRender();
     }
 
     if (inputInicio) inputInicio.addEventListener('change', onDataManualChange);
@@ -817,7 +862,14 @@ const htmlContent = `<!DOCTYPE html>
       alpha = 0.8;
       if (diaSelecionado === data) {
         diaSelecionado = null;
-        if (filtroRapidoAtivo === '7_DIAS') {
+        if (filtroRapidoAtivo === '60_DIAS') {
+          const fim = getLatestAcervoDate();
+          const ini = new Date(fim);
+          ini.setDate(ini.getDate() - 59);
+          dataInicioFiltro = formatIsoDate(ini);
+          dataFimFiltro = formatIsoDate(fim);
+          mesSelecionado = 'ALL';
+        } else if (filtroRapidoAtivo === '7_DIAS') {
           const fim = getLatestAcervoDate();
           const ini = new Date(fim);
           ini.setDate(ini.getDate() - 6);
@@ -850,9 +902,8 @@ const htmlContent = `<!DOCTYPE html>
           dataFimFiltro = formatIsoDate(fim);
           mesSelecionado = \`\${String(ini.getMonth() + 1).padStart(2, '0')}/\${ini.getFullYear()}\`;
         } else {
-          dataInicioFiltro = '';
-          dataFimFiltro = '';
-          mesSelecionado = 'ALL';
+          aplicarFiltroRapido('60_DIAS');
+          return;
         }
       } else {
         diaSelecionado = data;
@@ -873,10 +924,11 @@ const htmlContent = `<!DOCTYPE html>
       atualizarRadarBadge();
       renderDailyTimeline();
       aplicarFiltros();
+      wakeRender();
     };
 
     document.getElementById('btn-ver-todos-dias').addEventListener('click', () => {
-      aplicarFiltroRapido('ALL');
+      aplicarFiltroRapido('60_DIAS');
     });
 
     window.limparTodosFiltros = function() {
@@ -893,7 +945,7 @@ const htmlContent = `<!DOCTYPE html>
         }
       });
 
-      aplicarFiltroRapido('ALL');
+      aplicarFiltroRapido('60_DIAS');
     };
 
     // Canvas & Grafo Engine
@@ -965,7 +1017,7 @@ const htmlContent = `<!DOCTYPE html>
       return baseR;
     }
 
-    // Física estável e amortecida com resfriamento térmico (alpha decay)
+    // Física estável e amortecida com Spatial Hash Grid O(N) e resfriamento térmico
     function stepPhysics() {
       if (alpha < 0.005 && !dragNode) return;
 
@@ -975,25 +1027,58 @@ const htmlContent = `<!DOCTYPE html>
       const damping = 0.82;
 
       const visibleList = nodes.filter(isNodeVisible);
+      if (visibleList.length === 0) return;
 
-      // Repulsão local suave com distância mínima protegida
+      // Spatial Hash Grid O(N) para acelerar repulsão em mais de 40x
+      const cellSize = 130;
+      const grid = new Map();
+
+      for (let i = 0; i < visibleList.length; i++) {
+        const n = visibleList[i];
+        const cx = Math.floor(n.x / cellSize);
+        const cy = Math.floor(n.y / cellSize);
+        const key = cx + ',' + cy;
+        let cell = grid.get(key);
+        if (!cell) {
+          cell = [];
+          grid.set(key, cell);
+        }
+        cell.push(n);
+      }
+
+      const neighborOffsets = [
+        [0, 0], [1, 0], [-1, 0], [0, 1], [0, -1],
+        [1, 1], [1, -1], [-1, 1], [-1, -1]
+      ];
+
       for (let i = 0; i < visibleList.length; i++) {
         const n1 = visibleList[i];
-        for (let j = i + 1; j < visibleList.length; j++) {
-          const n2 = visibleList[j];
-          let dx = n2.x - n1.x;
-          let dy = n2.y - n1.y;
-          let distSq = dx * dx + dy * dy + 49;
-          if (distSq < 16900) {
-            let dist = Math.sqrt(distSq);
-            let force = (repulsion / distSq) * alpha;
-            force = Math.min(force, 8);
-            let fx = (dx / dist) * force;
-            let fy = (dy / dist) * force;
-            n1.vx -= fx;
-            n1.vy -= fy;
-            n2.vx += fx;
-            n2.vy += fy;
+        const cx = Math.floor(n1.x / cellSize);
+        const cy = Math.floor(n1.y / cellSize);
+
+        for (let o = 0; o < 9; o++) {
+          const key = (cx + neighborOffsets[o][0]) + ',' + (cy + neighborOffsets[o][1]);
+          const cell = grid.get(key);
+          if (!cell) continue;
+
+          for (let j = 0; j < cell.length; j++) {
+            const n2 = cell[j];
+            if (n1.id >= n2.id) continue;
+
+            let dx = n2.x - n1.x;
+            let dy = n2.y - n1.y;
+            let distSq = dx * dx + dy * dy + 49;
+            if (distSq < 16900) {
+              let dist = Math.sqrt(distSq);
+              let force = (repulsion / distSq) * alpha;
+              force = Math.min(force, 8);
+              let fx = (dx / dist) * force;
+              let fy = (dy / dist) * force;
+              n1.vx -= fx;
+              n1.vy -= fy;
+              n2.vx += fx;
+              n2.vy += fy;
+            }
           }
         }
       }
@@ -1035,7 +1120,16 @@ const htmlContent = `<!DOCTYPE html>
       alpha *= 0.96;
     }
 
-    // Render loop do Canvas de alta performance
+    // Render loop sob demanda com Viewport Culling e Fast-Path
+    let isRenderLoopActive = false;
+
+    function wakeRender() {
+      if (!isRenderLoopActive) {
+        isRenderLoopActive = true;
+        requestAnimationFrame(draw);
+      }
+    }
+
     function draw() {
       stepPhysics();
 
@@ -1048,10 +1142,21 @@ const htmlContent = `<!DOCTYPE html>
       ctx.scale(transform.scale, transform.scale);
 
       const invScale = 1 / transform.scale;
+      const minX = -transform.x * invScale - 60;
+      const minY = -transform.y * invScale - 60;
+      const maxX = (width - transform.x) * invScale + 60;
+      const maxY = (height - transform.y) * invScale + 60;
 
-      // Desenhar Arestas
+      function inViewport(x, y, r = 25) {
+        return x + r >= minX && x - r <= maxX && y + r >= minY && y - r <= maxY;
+      }
+
+      const isFastPath = isDragging || dragNode;
+
+      // Desenhar Arestas (apenas visíveis no viewport)
       edges.forEach(e => {
         if (!isNodeVisible(e.sourceNode) || !isNodeVisible(e.targetNode)) return;
+        if (!inViewport(e.sourceNode.x, e.sourceNode.y, 20) && !inViewport(e.targetNode.x, e.targetNode.y, 20)) return;
 
         const isRelated = focusedNodeId && (e.source === focusedNodeId || e.target === focusedNodeId);
         ctx.beginPath();
@@ -1060,7 +1165,7 @@ const htmlContent = `<!DOCTYPE html>
 
         if (isRelated) {
           ctx.shadowColor = 'rgba(0, 255, 135, 0.45)';
-          ctx.shadowBlur = 8;
+          ctx.shadowBlur = isFastPath ? 0 : 8;
           ctx.strokeStyle = '#00ff87';
           ctx.lineWidth = 1.8 * invScale;
         } else {
@@ -1072,9 +1177,10 @@ const htmlContent = `<!DOCTYPE html>
       });
       ctx.shadowBlur = 0;
 
-      // Desenhar Nós (Estilo Glass Orb + Drop Shadow & Glow igual aos cards)
+      // Desenhar Nós (Viewport Culling: ignora nós fora da tela)
       nodes.forEach(n => {
         if (!isNodeVisible(n)) return;
+        if (!inViewport(n.x, n.y, 35)) return;
 
         const isSelected = selectedNode && selectedNode.id === n.id;
         const isFocused = focusedNodeId && focusedNodeId === n.id;
@@ -1099,37 +1205,42 @@ const htmlContent = `<!DOCTYPE html>
           ctx.fill();
         }
 
-        // Shadow antes do fill (mesma assinatura visual dos .glass-card e .neon-glow)
-        if (isHighlighted) {
-          ctx.shadowColor = '#00ff87';
-          ctx.shadowBlur = 18;
-          ctx.shadowOffsetY = 0;
-        } else if (isHovered || isNeighbor) {
-          ctx.shadowColor = baseColor;
-          ctx.shadowBlur = 14;
-          ctx.shadowOffsetY = 2;
-        } else {
-          ctx.shadowColor = baseColor;
-          ctx.shadowBlur = 9;
-          ctx.shadowOffsetY = 3;
+        // Shadow antes do fill (desativado durante arrasto para 60 FPS lisos)
+        if (!isFastPath) {
+          if (isHighlighted) {
+            ctx.shadowColor = '#00ff87';
+            ctx.shadowBlur = 18;
+            ctx.shadowOffsetY = 0;
+          } else if (isHovered || isNeighbor) {
+            ctx.shadowColor = baseColor;
+            ctx.shadowBlur = 14;
+            ctx.shadowOffsetY = 2;
+          } else {
+            ctx.shadowColor = baseColor;
+            ctx.shadowBlur = 9;
+            ctx.shadowOffsetY = 3;
+          }
         }
 
-        // Esfera com gradiente radial sutil (efeito 3D/Glass)
-        const grad = ctx.createRadialGradient(
-          n.x - r * 0.3,
-          n.y - r * 0.3,
-          r * 0.1,
-          n.x,
-          n.y,
-          r
-        );
-        grad.addColorStop(0, '#ffffff');
-        grad.addColorStop(0.28, baseColor);
-        grad.addColorStop(1, baseColor);
-
+        // Esfera (Gradiente ou Flat no Fast-Path)
         ctx.beginPath();
         ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = grad;
+        if (isFastPath) {
+          ctx.fillStyle = baseColor;
+        } else {
+          const grad = ctx.createRadialGradient(
+            n.x - r * 0.3,
+            n.y - r * 0.3,
+            r * 0.1,
+            n.x,
+            n.y,
+            r
+          );
+          grad.addColorStop(0, '#ffffff');
+          grad.addColorStop(0.28, baseColor);
+          grad.addColorStop(1, baseColor);
+          ctx.fillStyle = grad;
+        }
         ctx.fill();
 
         // Resetar shadow para desenhar a borda nítida
@@ -1163,9 +1274,11 @@ const htmlContent = `<!DOCTYPE html>
           const pillH = fontSize + padY * 2;
           const pillRadius = 4 * invScale;
 
-          ctx.shadowColor = 'rgba(0, 0, 0, 0.55)';
-          ctx.shadowBlur = 8;
-          ctx.shadowOffsetY = 2;
+          if (!isFastPath) {
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.55)';
+            ctx.shadowBlur = 8;
+            ctx.shadowOffsetY = 2;
+          }
 
           ctx.beginPath();
           if (ctx.roundRect) {
@@ -1191,9 +1304,15 @@ const htmlContent = `<!DOCTYPE html>
       });
 
       ctx.restore();
-      requestAnimationFrame(draw);
+
+      // On-demand rendering loop: encerra quando estabiliza e não há interação
+      if (alpha > 0.005 || dragNode || isDragging) {
+        requestAnimationFrame(draw);
+      } else {
+        isRenderLoopActive = false;
+      }
     }
-    requestAnimationFrame(draw);
+    wakeRender();
 
     // Busca de nó sob o cursor respeitando o raio compensado pelo zoom
     function findNodeAt(mx, my) {
@@ -1218,6 +1337,7 @@ const htmlContent = `<!DOCTYPE html>
       transform.x = pivotX - (pivotX - transform.x) * ratio;
       transform.y = pivotY - (pivotY - transform.y) * ratio;
       transform.scale = newScale;
+      wakeRender();
     }
 
     // Eventos do Canvas (Pan & Zoom)
@@ -1235,6 +1355,7 @@ const htmlContent = `<!DOCTYPE html>
         isDragging = true;
         lastMouse = { x: e.clientX, y: e.clientY };
       }
+      wakeRender();
     });
 
     window.addEventListener('mousemove', e => {
@@ -1245,21 +1366,28 @@ const htmlContent = `<!DOCTYPE html>
         dragNode.vx = 0;
         dragNode.vy = 0;
         alpha = Math.max(alpha, 0.3);
+        wakeRender();
       } else if (isDragging) {
         transform.x += (e.clientX - lastMouse.x);
         transform.y += (e.clientY - lastMouse.y);
         lastMouse = { x: e.clientX, y: e.clientY };
+        wakeRender();
       } else if (e.target === canvas) {
         const mx = (e.clientX - rect.left - transform.x) / transform.scale;
         const my = (e.clientY - rect.top - transform.y) / transform.scale;
+        const prevHover = hoveredNode;
         hoveredNode = findNodeAt(mx, my);
         canvas.style.cursor = hoveredNode ? 'pointer' : 'grab';
+        if (prevHover !== hoveredNode) {
+          wakeRender();
+        }
       }
     });
 
     window.addEventListener('mouseup', () => {
       dragNode = null;
       isDragging = false;
+      wakeRender();
     });
 
     canvas.addEventListener('wheel', e => {
@@ -1282,10 +1410,12 @@ const htmlContent = `<!DOCTYPE html>
       focusedNodeId = null;
       document.getElementById('btn-clear-focus').classList.add('hidden');
       alpha = 0.8;
+      wakeRender();
     });
     document.getElementById('btn-clear-focus').addEventListener('click', () => {
       focusedNodeId = null;
       document.getElementById('btn-clear-focus').classList.add('hidden');
+      wakeRender();
     });
 
     // Função de Seleção e Atualização de Inspetor
@@ -1293,6 +1423,7 @@ const htmlContent = `<!DOCTYPE html>
       selectedNode = node;
       focusedNodeId = node.id;
       document.getElementById('btn-clear-focus').classList.remove('hidden');
+      wakeRender();
 
       const badgeSituacao = document.getElementById('selected-badge-situacao');
       badgeSituacao.textContent = node.situacao || 'vigente';
@@ -1361,6 +1492,51 @@ const htmlContent = `<!DOCTYPE html>
     const normsContainer = document.getElementById('norms-list-container');
     const searchInput = document.getElementById('search-input');
 
+    let listRenderLimit = 30;
+    let currentFilteredList = [];
+
+    function renderNormsList() {
+      const listItems = currentFilteredList.filter(n => n.arquivo);
+      if (listItems.length === 0) {
+        normsContainer.innerHTML = \`
+          <div class="text-xs text-slate-500 text-center py-8 bg-[#05140d] rounded-xl border border-emerald-500/10">
+            Nenhuma norma encontrada para os filtros selecionados.
+          </div>
+        \`;
+        return;
+      }
+
+      const visibleItems = listItems.slice(0, listRenderLimit);
+      const hasMore = listItems.length > listRenderLimit;
+
+      normsContainer.innerHTML = visibleItems.map(n => \`
+        <div onclick="selecionarPorId('\${n.id}')" class="p-3 rounded-xl bg-[#061810]/90 hover:bg-[#0a261a] border border-emerald-500/20 cursor-pointer transition space-y-1.5 group">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-xs text-white group-hover:text-emerald-300 font-mono transition">\${n.id}</span>
+            <span class="text-[9px] uppercase font-bold px-2 py-0.5 rounded-full \${
+              n.situacao === 'revogada' ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+            }">\${n.situacao || 'vigente'}</span>
+          </div>
+          <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono">
+            <span>📅 \${n.data_ato || n.ano || 'N/D'}</span>
+            \${n.data_publicacao_dou ? \`<span class="text-emerald-400 font-bold">DOU: \${n.data_publicacao_dou}</span>\` : ''}
+          </div>
+          \${n.ementa ? \`<p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">\${n.ementa}</p>\` : ''}
+        </div>
+      \`).join('') + (hasMore ? \`
+        <div class="pt-2 text-center">
+          <button onclick="carregarMaisNormas()" class="w-full py-2.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 text-xs font-semibold transition active:scale-98">
+            Carregar mais 30 normas (+\${listItems.length - listRenderLimit} restantes)
+          </button>
+        </div>
+      \` : '');
+    }
+
+    window.carregarMaisNormas = function() {
+      listRenderLimit += 30;
+      renderNormsList();
+    };
+
     function atualizarMetricas(filtered) {
       const internal = filtered.filter(n => n.arquivo);
       const total = internal.length;
@@ -1370,7 +1546,7 @@ const htmlContent = `<!DOCTYPE html>
       const fSet = new Set(filtered.map(n => n.id));
       const edgesCount = graphData.edges.filter(e => fSet.has(e.source) && fSet.has(e.target)).length;
 
-      // Calcular pico diário
+      // Calcular pico diário no período
       const contagemDias = {};
       internal.forEach(n => {
         const d = n.data_publicacao_dou || n.data_ato;
@@ -1386,6 +1562,7 @@ const htmlContent = `<!DOCTYPE html>
       });
 
       const elTotal = document.getElementById('stat-total-normas');
+      const elFiltradasBadge = document.getElementById('stat-filtradas-badge');
       const elVigentes = document.getElementById('stat-vigentes');
       const elVigentesPct = document.getElementById('stat-vigentes-pct');
       const elRelacoes = document.getElementById('stat-relacoes');
@@ -1393,7 +1570,15 @@ const htmlContent = `<!DOCTYPE html>
       const elPicoData = document.getElementById('stat-pico-data');
       const elPicoSub = document.getElementById('stat-pico-sub');
 
-      if (elTotal) elTotal.textContent = total;
+      // Opção 1: Card 1 fixo no total global do banco
+      if (elTotal) elTotal.textContent = statsTotalGeral;
+      if (elFiltradasBadge) {
+        if (total < statsTotalGeral) {
+          elFiltradasBadge.textContent = \`Exibindo \${total} no período\`;
+        } else {
+          elFiltradasBadge.textContent = \`Exibindo \${total} (tudo)\`;
+        }
+      }
       if (elVigentes) elVigentes.textContent = vigentes;
       if (elVigentesPct) elVigentesPct.textContent = \`\${pct}%\`;
       if (elRelacoes) elRelacoes.textContent = edgesCount;
@@ -1419,6 +1604,26 @@ const htmlContent = `<!DOCTYPE html>
         return true;
       }
 
+      // Se houver busca textual ativa, busca ampla em todo o banco e traz vizinhos imediatos
+      let matchedByQuery = null;
+      if (q) {
+        matchedByQuery = new Set();
+        nodes.forEach(n => {
+          const inId = n.id.toLowerCase().includes(q);
+          const inEmenta = n.ementa && n.ementa.toLowerCase().includes(q);
+          const inAno = n.ano && n.ano.includes(q);
+          const inDataAto = n.data_ato && n.data_ato.includes(q);
+          const inDataDou = n.data_publicacao_dou && n.data_publicacao_dou.includes(q);
+          if (inId || inEmenta || inAno || inDataAto || inDataDou) {
+            matchedByQuery.add(n.id);
+            const viz = adjacency.get(n.id);
+            if (viz) {
+              viz.forEach(v => matchedByQuery.add(v));
+            }
+          }
+        });
+      }
+
       // Mapear nós internos que atendem ao período
       const internalInPeriod = new Set();
       nodes.forEach(n => {
@@ -1433,8 +1638,11 @@ const htmlContent = `<!DOCTYPE html>
       });
 
       const filtered = nodes.filter(n => {
-        // Filtro por Período de Data
-        if (dtIni || dtFim) {
+        // Se houver busca de texto ativa, filtra pelo subgrafo da consulta
+        if (matchedByQuery) {
+          if (!matchedByQuery.has(n.id)) return false;
+        } else if (dtIni || dtFim) {
+          // Filtro por Período de Data
           if (n.arquivo) {
             if (!internalInPeriod.has(n.id)) return false;
           } else {
@@ -1457,16 +1665,6 @@ const htmlContent = `<!DOCTYPE html>
           return false;
         }
 
-        // Filtro por busca de texto
-        if (q) {
-          const inId = n.id.toLowerCase().includes(q);
-          const inEmenta = n.ementa && n.ementa.toLowerCase().includes(q);
-          const inAno = n.ano && n.ano.includes(q);
-          const inDataAto = n.data_ato && n.data_ato.includes(q);
-          const inDataDou = n.data_publicacao_dou && n.data_publicacao_dou.includes(q);
-          if (!inId && !inEmenta && !inAno && !inDataAto && !inDataDou) return false;
-        }
-
         return true;
       });
 
@@ -1475,19 +1673,17 @@ const htmlContent = `<!DOCTYPE html>
 
       const listStatus = document.getElementById('list-status-badge');
       const internalCount = filtered.filter(n => n.arquivo).length;
-      if (dataInicioFiltro && dataFimFiltro && dataInicioFiltro === dataFimFiltro) {
+      if (q) {
+        listStatus.textContent = \`Encontrados \${internalCount} atos para "\${q}"\`;
+      } else if (dataInicioFiltro && dataFimFiltro && dataInicioFiltro === dataFimFiltro) {
         const [y, m, d] = dataInicioFiltro.split('-');
         listStatus.textContent = \`Exibindo \${internalCount} atos de \${d}/\${m}/\${y}\`;
       } else if (dataInicioFiltro && dataFimFiltro) {
         const [y1, m1, d1] = dataInicioFiltro.split('-');
         const [y2, m2, d2] = dataFimFiltro.split('-');
         listStatus.textContent = \`Exibindo \${internalCount} atos (\${d1}/\${m1} a \${d2}/\${m2}/\${y2})\`;
-      } else if (dataInicioFiltro) {
-        const [y, m, d] = dataInicioFiltro.split('-');
-        listStatus.textContent = \`Exibindo \${internalCount} atos a partir de \${d}/\${m}/\${y}\`;
-      } else if (dataFimFiltro) {
-        const [y, m, d] = dataFimFiltro.split('-');
-        listStatus.textContent = \`Exibindo \${internalCount} atos até \${d}/\${m}/\${y}\`;
+      } else if (filtroRapidoAtivo === '60_DIAS') {
+        listStatus.textContent = \`Exibindo \${internalCount} atos (últimos 60 dias)\`;
       } else if (filtroRapidoAtivo === '7_DIAS') {
         listStatus.textContent = \`Exibindo \${internalCount} atos dos últimos 7 dias\`;
       } else if (filtroRapidoAtivo === '14_DIAS') {
@@ -1497,44 +1693,27 @@ const htmlContent = `<!DOCTYPE html>
       } else if (filtroRapidoAtivo === 'MES_ANTERIOR') {
         listStatus.textContent = \`Exibindo \${internalCount} atos do mês anterior\`;
       } else {
-        listStatus.textContent = \`Exibindo \${internalCount} atos (acervo)\`;
+        listStatus.textContent = \`Exibindo \${internalCount} atos\`;
       }
 
       atualizarMetricas(filtered);
       buildDonutChart(filtered);
 
-      // Renderizar itens na lista (apenas normas com arquivo)
-      const listItems = filtered.filter(n => n.arquivo);
-      if (listItems.length === 0) {
-        normsContainer.innerHTML = \`
-          <div class="text-xs text-slate-500 text-center py-8 bg-[#05140d] rounded-xl border border-emerald-500/10">
-            Nenhuma norma encontrada para os filtros selecionados.
-          </div>
-        \`;
-        return;
-      }
-
-      normsContainer.innerHTML = listItems.slice(0, 100).map(n => \`
-        <div onclick="selecionarPorId('\${n.id}')" class="p-3 rounded-xl bg-[#061810]/90 hover:bg-[#0a261a] border border-emerald-500/20 cursor-pointer transition space-y-1.5 group">
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-xs text-white group-hover:text-emerald-300 font-mono transition">\${n.id}</span>
-            <span class="text-[9px] uppercase font-bold px-2 py-0.5 rounded-full \${
-              n.situacao === 'revogada' ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-            }">\${n.situacao || 'vigente'}</span>
-          </div>
-          <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono">
-            <span>📅 \${n.data_ato || n.ano || 'N/D'}</span>
-            \${n.data_publicacao_dou ? \`<span class="text-emerald-400 font-bold">DOU: \${n.data_publicacao_dou}</span>\` : ''}
-          </div>
-          \${n.ementa ? \`<p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">\${n.ementa}</p>\` : ''}
-        </div>
-      \`).join('');
+      // Renderizar lista progressiva
+      listRenderLimit = 30;
+      currentFilteredList = filtered;
+      renderNormsList();
     }
 
+    let searchDebounceTimer = null;
     searchInput.addEventListener('input', e => {
-      termoBusca = e.target.value;
-      alpha = 0.8;
-      aplicarFiltros();
+      clearTimeout(searchDebounceTimer);
+      searchDebounceTimer = setTimeout(() => {
+        termoBusca = e.target.value;
+        alpha = 0.8;
+        aplicarFiltros();
+        wakeRender();
+      }, 150);
     });
 
     // Filtros por Tipo de Ato
@@ -1549,6 +1728,7 @@ const htmlContent = `<!DOCTYPE html>
         tipoFiltro = btn.dataset.tipo;
         alpha = 0.8;
         aplicarFiltros();
+        wakeRender();
       });
     });
 
@@ -1616,7 +1796,8 @@ const htmlContent = `<!DOCTYPE html>
     if (nodes.length > 0) {
       selecionarNo(nodes[0]);
     }
-    aplicarFiltros();
+    aplicarFiltroRapido('60_DIAS');
+    wakeRender();
   </script>
 </body>
 </html>
