@@ -226,10 +226,10 @@ const htmlContent = `<!DOCTYPE html>
           <!-- Filtros Rápidos de Período -->
           <div id="radar-filtros-rapidos" class="flex items-center gap-1 bg-[#061810] p-1 rounded-xl border border-emerald-500/20">
             <button onclick="aplicarFiltroRapido('ALL')" data-filtro="ALL" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition">Todos</button>
-            <button onclick="aplicarFiltroRapido('ESTE_MES')" data-filtro="ESTE_MES" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Novembro</button>
-            <button onclick="aplicarFiltroRapido('OUTUBRO')" data-filtro="OUTUBRO" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Outubro</button>
-            <button onclick="aplicarFiltroRapido('SETEMBRO')" data-filtro="SETEMBRO" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Setembro</button>
-            <button onclick="aplicarFiltroRapido('ESTE_ANO')" data-filtro="ESTE_ANO" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Ano 2026</button>
+            <button onclick="aplicarFiltroRapido('7_DIAS')" data-filtro="7_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">7 dias</button>
+            <button onclick="aplicarFiltroRapido('14_DIAS')" data-filtro="14_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">14 dias</button>
+            <button onclick="aplicarFiltroRapido('ESTE_MES')" data-filtro="ESTE_MES" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Este mês</button>
+            <button onclick="aplicarFiltroRapido('MES_ANTERIOR')" data-filtro="MES_ANTERIOR" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">Mês Anterior</button>
           </div>
 
           <!-- Filtro por Período: Início e Fim -->
@@ -542,6 +542,26 @@ const htmlContent = `<!DOCTYPE html>
       return new Date(y, m, d);
     }
 
+    function getLatestAcervoDate() {
+      let latest = null;
+      Object.keys(atosPorDiaMap).forEach(d => {
+        const dt = parseBrDate(d);
+        if (dt && (!latest || dt > latest)) {
+          latest = dt;
+        }
+      });
+      const now = new Date();
+      if (!latest || now > latest) return now;
+      return latest;
+    }
+
+    function formatIsoDate(d) {
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return \`\${yyyy}-\${mm}-\${dd}\`;
+    }
+
     let dataInicioFiltro = '';
     let dataFimFiltro = '';
     let filtroRapidoAtivo = 'ALL';
@@ -677,17 +697,17 @@ const htmlContent = `<!DOCTYPE html>
         const [y, m, d] = dataFimFiltro.split('-');
         radarBadge.textContent = \`📅 Até \${d}/\${m}/\${y}\`;
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-400 text-slate-950 font-bold shadow-sm';
-      } else if (filtroRapidoAtivo === 'ESTE_MES' || (mesSelecionado === '11/2026' && dataInicioFiltro === '2026-11-01' && dataFimFiltro === '2026-11-30')) {
-        radarBadge.textContent = 'Novembro / 2026';
+      } else if (filtroRapidoAtivo === '7_DIAS') {
+        radarBadge.textContent = 'Últimos 7 dias';
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
-      } else if (filtroRapidoAtivo === 'OUTUBRO' || filtroRapidoAtivo === 'MES_ANTERIOR' || (mesSelecionado === '10/2026' && dataInicioFiltro === '2026-10-01' && dataFimFiltro === '2026-10-31')) {
-        radarBadge.textContent = 'Outubro / 2026';
+      } else if (filtroRapidoAtivo === '14_DIAS') {
+        radarBadge.textContent = 'Últimos 14 dias';
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
-      } else if (filtroRapidoAtivo === 'SETEMBRO' || (mesSelecionado === '09/2026' && dataInicioFiltro === '2026-09-01' && dataFimFiltro === '2026-09-30')) {
-        radarBadge.textContent = 'Setembro / 2026';
+      } else if (filtroRapidoAtivo === 'ESTE_MES') {
+        radarBadge.textContent = 'Este mês';
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
-      } else if (filtroRapidoAtivo === 'ESTE_ANO') {
-        radarBadge.textContent = 'Ano 2026';
+      } else if (filtroRapidoAtivo === 'MES_ANTERIOR') {
+        radarBadge.textContent = 'Mês Anterior';
         radarBadge.className = 'text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal';
       } else {
         radarBadge.textContent = 'Acervo Completo';
@@ -703,22 +723,38 @@ const htmlContent = `<!DOCTYPE html>
         dataInicioFiltro = '';
         dataFimFiltro = '';
         mesSelecionado = 'ALL';
-      } else if (tipo === 'ESTE_MES') {
-        dataInicioFiltro = '2026-11-01';
-        dataFimFiltro = '2026-11-30';
-        mesSelecionado = '11/2026';
-      } else if (tipo === 'OUTUBRO' || tipo === 'MES_ANTERIOR') {
-        dataInicioFiltro = '2026-10-01';
-        dataFimFiltro = '2026-10-31';
-        mesSelecionado = '10/2026';
-      } else if (tipo === 'SETEMBRO') {
-        dataInicioFiltro = '2026-09-01';
-        dataFimFiltro = '2026-09-30';
-        mesSelecionado = '09/2026';
-      } else if (tipo === 'ESTE_ANO') {
-        dataInicioFiltro = '2026-01-01';
-        dataFimFiltro = '2026-12-31';
+      } else if (tipo === '7_DIAS') {
+        const fim = getLatestAcervoDate();
+        const ini = new Date(fim);
+        ini.setDate(ini.getDate() - 6);
+        dataInicioFiltro = formatIsoDate(ini);
+        dataFimFiltro = formatIsoDate(fim);
         mesSelecionado = 'ALL';
+      } else if (tipo === '14_DIAS') {
+        const fim = getLatestAcervoDate();
+        const ini = new Date(fim);
+        ini.setDate(ini.getDate() - 13);
+        dataInicioFiltro = formatIsoDate(ini);
+        dataFimFiltro = formatIsoDate(fim);
+        mesSelecionado = 'ALL';
+      } else if (tipo === 'ESTE_MES') {
+        const ref = getLatestAcervoDate();
+        const y = ref.getFullYear();
+        const m = ref.getMonth();
+        const ini = new Date(y, m, 1);
+        const fim = new Date(y, m + 1, 0);
+        dataInicioFiltro = formatIsoDate(ini);
+        dataFimFiltro = formatIsoDate(fim);
+        mesSelecionado = \`\${String(m + 1).padStart(2, '0')}/\${y}\`;
+      } else if (tipo === 'MES_ANTERIOR') {
+        const ref = getLatestAcervoDate();
+        const y = ref.getFullYear();
+        const m = ref.getMonth() - 1;
+        const ini = new Date(y, m, 1);
+        const fim = new Date(y, m + 1, 0);
+        dataInicioFiltro = formatIsoDate(ini);
+        dataFimFiltro = formatIsoDate(fim);
+        mesSelecionado = \`\${String(ini.getMonth() + 1).padStart(2, '0')}/\${ini.getFullYear()}\`;
       }
 
       if (inputInicio) inputInicio.value = dataInicioFiltro;
@@ -749,9 +785,6 @@ const htmlContent = `<!DOCTYPE html>
 
       if (iniMatch && fimMatch && iniMatch[1] === fimMatch[1] && iniMatch[2] === fimMatch[2]) {
         mesSelecionado = \`\${iniMatch[2]}/\${iniMatch[1]}\`;
-        if (dataInicioFiltro === '2026-11-01' && dataFimFiltro === '2026-11-30') filtroRapidoAtivo = 'ESTE_MES';
-        else if (dataInicioFiltro === '2026-10-01' && dataFimFiltro === '2026-10-31') filtroRapidoAtivo = 'OUTUBRO';
-        else if (dataInicioFiltro === '2026-09-01' && dataFimFiltro === '2026-09-30') filtroRapidoAtivo = 'SETEMBRO';
       } else if (iniMatch && !fimMatch) {
         mesSelecionado = \`\${iniMatch[2]}/\${iniMatch[1]}\`;
       } else if (!iniMatch && fimMatch) {
@@ -784,22 +817,38 @@ const htmlContent = `<!DOCTYPE html>
       alpha = 0.8;
       if (diaSelecionado === data) {
         diaSelecionado = null;
-        if (filtroRapidoAtivo === 'ESTE_MES') {
-          dataInicioFiltro = '2026-11-01';
-          dataFimFiltro = '2026-11-30';
-          mesSelecionado = '11/2026';
-        } else if (filtroRapidoAtivo === 'OUTUBRO' || filtroRapidoAtivo === 'MES_ANTERIOR') {
-          dataInicioFiltro = '2026-10-01';
-          dataFimFiltro = '2026-10-31';
-          mesSelecionado = '10/2026';
-        } else if (filtroRapidoAtivo === 'SETEMBRO') {
-          dataInicioFiltro = '2026-09-01';
-          dataFimFiltro = '2026-09-30';
-          mesSelecionado = '09/2026';
-        } else if (filtroRapidoAtivo === 'ESTE_ANO') {
-          dataInicioFiltro = '2026-01-01';
-          dataFimFiltro = '2026-12-31';
+        if (filtroRapidoAtivo === '7_DIAS') {
+          const fim = getLatestAcervoDate();
+          const ini = new Date(fim);
+          ini.setDate(ini.getDate() - 6);
+          dataInicioFiltro = formatIsoDate(ini);
+          dataFimFiltro = formatIsoDate(fim);
           mesSelecionado = 'ALL';
+        } else if (filtroRapidoAtivo === '14_DIAS') {
+          const fim = getLatestAcervoDate();
+          const ini = new Date(fim);
+          ini.setDate(ini.getDate() - 13);
+          dataInicioFiltro = formatIsoDate(ini);
+          dataFimFiltro = formatIsoDate(fim);
+          mesSelecionado = 'ALL';
+        } else if (filtroRapidoAtivo === 'ESTE_MES') {
+          const ref = getLatestAcervoDate();
+          const y = ref.getFullYear();
+          const m = ref.getMonth();
+          const ini = new Date(y, m, 1);
+          const fim = new Date(y, m + 1, 0);
+          dataInicioFiltro = formatIsoDate(ini);
+          dataFimFiltro = formatIsoDate(fim);
+          mesSelecionado = \`\${String(m + 1).padStart(2, '0')}/\${y}\`;
+        } else if (filtroRapidoAtivo === 'MES_ANTERIOR') {
+          const ref = getLatestAcervoDate();
+          const y = ref.getFullYear();
+          const m = ref.getMonth() - 1;
+          const ini = new Date(y, m, 1);
+          const fim = new Date(y, m + 1, 0);
+          dataInicioFiltro = formatIsoDate(ini);
+          dataFimFiltro = formatIsoDate(fim);
+          mesSelecionado = \`\${String(ini.getMonth() + 1).padStart(2, '0')}/\${ini.getFullYear()}\`;
         } else {
           dataInicioFiltro = '';
           dataFimFiltro = '';
@@ -1439,14 +1488,14 @@ const htmlContent = `<!DOCTYPE html>
       } else if (dataFimFiltro) {
         const [y, m, d] = dataFimFiltro.split('-');
         listStatus.textContent = \`Exibindo \${internalCount} atos até \${d}/\${m}/\${y}\`;
+      } else if (filtroRapidoAtivo === '7_DIAS') {
+        listStatus.textContent = \`Exibindo \${internalCount} atos dos últimos 7 dias\`;
+      } else if (filtroRapidoAtivo === '14_DIAS') {
+        listStatus.textContent = \`Exibindo \${internalCount} atos dos últimos 14 dias\`;
       } else if (filtroRapidoAtivo === 'ESTE_MES') {
-        listStatus.textContent = \`Exibindo \${internalCount} atos de Novembro / 2026\`;
-      } else if (filtroRapidoAtivo === 'OUTUBRO' || filtroRapidoAtivo === 'MES_ANTERIOR') {
-        listStatus.textContent = \`Exibindo \${internalCount} atos de Outubro / 2026\`;
-      } else if (filtroRapidoAtivo === 'SETEMBRO') {
-        listStatus.textContent = \`Exibindo \${internalCount} atos de Setembro / 2026\`;
-      } else if (filtroRapidoAtivo === 'ESTE_ANO') {
-        listStatus.textContent = \`Exibindo \${internalCount} atos de 2026\`;
+        listStatus.textContent = \`Exibindo \${internalCount} atos deste mês\`;
+      } else if (filtroRapidoAtivo === 'MES_ANTERIOR') {
+        listStatus.textContent = \`Exibindo \${internalCount} atos do mês anterior\`;
       } else {
         listStatus.textContent = \`Exibindo \${internalCount} atos (acervo)\`;
       }
