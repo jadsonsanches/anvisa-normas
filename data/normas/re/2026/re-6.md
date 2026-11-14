@@ -1,0 +1,43 @@
+---
+tipo: "RE"
+numero: "6"
+ano: "2026"
+data_ato: "02/01/2026"
+data_promulgacao: "02/01/2026"
+data_publicacao_dou: "05/01/2026"
+situacao: "vigente"
+ementa: "Cancela a Autorização de Funcionamento a empresas dos setores de comércio de alimentos, cosméticos, perfumes, produtos de higiene e saúde, e dispensação de medicamentos, conforme especificações no anexo desta Resolução."
+leis_base: []
+relacionadas: ["RDC 585/2021"]
+fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=RES&numeroAto=00000006&seqAto=000&valorAno=2026&orgao=RE/COAFE/ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
+---
+
+# RE nº 6, de 02/01/2026
+
+MINISTÉRIO DA SAÚDE
+
+AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA
+
+4ª DIRETORIA
+
+COORDENAÇÃO DE AUTORIZAÇÃO DE FUNCIONAMENTO DE EMPRESAS
+
+RESOLUÇÃO-RE Nº 6, DE 2 DE JANEIRO DE 2026
+
+O COORDENADOR DE AUTORIZAÇÃO DE FUNCIONAMENTO DE EMPRESAS DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso das atribuições que lhe confere o [art. 144](../rdc/2021/rdc-585.md), aliado ao [art. 203, I, §1° do Regimento Interno](../rdc/2021/rdc-585.md) aprovado pela [Resolução da Diretoria Colegiada - RDC n° 585, de 10 de dezembro de 2021](../rdc/2021/rdc-585.md), resolve:
+
+Art. 1º. Cancelar a Autorização de Funcionamento constante no anexo desta Resolução.
+
+Art. 2º Esta Resolução entra em vigor na data de sua publicação.
+
+DANIEL MARCOS PEREIRA DOURADO
+
+ANEXO
+
+YASMINI VITÓRIA GOMES DE OLIVEIRA / 41.452.071/0001-02  
+25351.743323/2021-75 / 7868883  
+7044 - AFE - CANCELAMENTO - FARMÁCIAS E DROGARIAS / 1659411254  
+MOTIVO DO CANCELAMENTO:  
+Cancelamento a pedido da empresa.
+
+PUB D.O.U., 05/01/2026 - Seção 1

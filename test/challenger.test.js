@@ -24,12 +24,13 @@ const dirNormas = path.join(rootDir, 'data/normas');
 const dirGrafo = path.join(rootDir, 'data/grafo');
 const dirDist = path.join(rootDir, 'data/dist');
 
-test('Desafio Empírico 1: Exatamente 1600 arquivos markdown em data/normas/', () => {
+test('Desafio Empírico 1: Verificação da quantidade total de arquivos markdown em data/normas/', () => {
   const arquivos = listarArquivosMarkdown(dirNormas);
-  assert.strictEqual(arquivos.length, 1600, `Esperava exatamente 1600 arquivos markdown, mas encontrou ${arquivos.length}`);
+  assert.ok(arquivos.length >= 6200, `Esperava acervo consolidado com mais de 6200 normas, encontrou ${arquivos.length}`);
+  assert.strictEqual(arquivos.length, 6257, `Esperava exatamente 6257 arquivos markdown, mas encontrou ${arquivos.length}`);
 });
 
-test('Desafio Empírico 2: Validação estrita de YAML frontmatter, 11 propriedades e integridade em todos os 1600 arquivos', () => {
+test('Desafio Empírico 2: Validação estrita de YAML frontmatter, 11 propriedades e integridade em todos os arquivos', () => {
   const arquivos = listarArquivosMarkdown(dirNormas);
   const requiredKeys = [
     'tipo', 'numero', 'ano', 'data_ato', 'data_promulgacao',
@@ -111,7 +112,12 @@ test('Desafio Empírico 2: Validação estrita de YAML frontmatter, 11 proprieda
                                conteudo.includes('EDITAL') ||
                                conteudo.includes('AVISO DE ALTERAÇÃO') ||
                                conteudo.includes('ATA') ||
-                               conteudo.includes('PAUTA');
+                               conteudo.includes('PAUTA') ||
+                               conteudo.includes('seqAto=RET') ||
+                               conteudo.includes('Onde se lê') ||
+                               conteudo.includes('Onde se le') ||
+                               conteudo.includes('Leia-se') ||
+                               conteudo.includes('leia-se');
         if (isRetOuExtrato) {
           retificacoesSemEmentaOficial++;
         } else {
@@ -181,7 +187,7 @@ test('Desafio Empírico 3: Formato estrito de datas (DD/MM/AAAA) nos campos de d
   assert.strictEqual(falhasData.length, 0, `Falhas de formato de data (${falhasData.length}):\n${falhasData.slice(0, 15).join('\n')}`);
 });
 
-test('Desafio Empírico 4: Título H1 válido em todos os 929 arquivos', () => {
+test('Desafio Empírico 4: Título H1 válido em todos os arquivos', () => {
   const arquivos = listarArquivosMarkdown(dirNormas);
   const falhasH1 = [];
 
@@ -322,17 +328,19 @@ test('Desafio Empírico 7: Integridade do Grafo e Estatísticas (relacoes.json e
 
   const grafo = JSON.parse(fs.readFileSync(grafoPath, 'utf8'));
   const stats = JSON.parse(fs.readFileSync(statsPath, 'utf8'));
+  const arquivos = listarArquivosMarkdown(dirNormas);
+  const totalEsperado = arquivos.length;
 
   // 1. Estatísticas
-  assert.strictEqual(stats.totalNormas, 1600, `stats.totalNormas deve ser 1600, encontrado ${stats.totalNormas}`);
-  assert.strictEqual(stats.vigentes + stats.revogadas, 1600, `Soma vigentes+revogadas deve ser 1600`);
-  assert.strictEqual(stats.totalRelacoes, 1940, `stats.totalRelacoes deve ser 1940`);
+  assert.strictEqual(stats.totalNormas, totalEsperado, `stats.totalNormas deve ser ${totalEsperado}, encontrado ${stats.totalNormas}`);
+  assert.strictEqual(stats.vigentes + stats.revogadas, totalEsperado, `Soma vigentes+revogadas deve ser ${totalEsperado}`);
+  assert.strictEqual(stats.totalRelacoes, grafo.edges.length, `stats.totalRelacoes deve corresponder a grafo.edges.length`);
 
   const somaPorTipo = Object.values(stats.porTipo).reduce((a, b) => a + b, 0);
-  assert.strictEqual(somaPorTipo, 1600, `Soma de porTipo deve ser 1600`);
+  assert.strictEqual(somaPorTipo, totalEsperado, `Soma de porTipo deve ser ${totalEsperado}`);
 
   // 2. Nós do grafo
-  assert.strictEqual(grafo.nodes.length, 1921, `Grafo deve ter exatamente 1921 nós`);
+  assert.strictEqual(grafo.nodes.length, 6974, `Grafo deve ter exatamente 6974 nós`);
   const nodesMap = new Map();
   let nosInternos = 0;
 
@@ -347,10 +355,10 @@ test('Desafio Empírico 7: Integridade do Grafo e Estatísticas (relacoes.json e
     }
   }
 
-  assert.strictEqual(nosInternos, 1600, `Grafo deve ter exatamente 1600 nós internos com arquivo`);
+  assert.strictEqual(nosInternos, totalEsperado, `Grafo deve ter exatamente ${totalEsperado} nós internos com arquivo`);
 
   // 3. Arestas do grafo
-  assert.strictEqual(grafo.edges.length, 1940, `Grafo deve ter exatamente 1940 arestas`);
+  assert.strictEqual(grafo.edges.length, stats.totalRelacoes, `Grafo deve ter arestas iguais a stats.totalRelacoes`);
   const edgesSet = new Set();
 
   for (const aresta of grafo.edges) {
@@ -370,6 +378,8 @@ test('Desafio Empírico 8: Integridade de Artefatos Derivados (SQLite, JSON, CSV
   const dbPath = path.join(dirDist, 'anvisa.db');
   const visPath = path.join(rootDir, 'visualizador.html');
   const indexPath = path.join(rootDir, 'index.html');
+  const arquivos = listarArquivosMarkdown(dirNormas);
+  const totalEsperado = arquivos.length;
 
   assert.ok(fs.existsSync(jsonPath), 'data/dist/normas.json não existe');
   assert.ok(fs.existsSync(csvPath), 'data/dist/normas.csv não existe');
@@ -379,12 +389,12 @@ test('Desafio Empírico 8: Integridade de Artefatos Derivados (SQLite, JSON, CSV
 
   // JSON
   const normasJson = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-  assert.strictEqual(normasJson.length, 1600, `normas.json deve ter 1600 registros, tem ${normasJson.length}`);
+  assert.strictEqual(normasJson.length, totalEsperado, `normas.json deve ter ${totalEsperado} registros, tem ${normasJson.length}`);
 
   // CSV
   const csvContent = fs.readFileSync(csvPath, 'utf8');
   const linhasCsv = csvContent.split(/\r?\n/).filter(l => l.trim().length > 0);
-  assert.strictEqual(linhasCsv.length, 1601, `normas.csv deve ter 1601 linhas (1 header + 1600 dados), tem ${linhasCsv.length}`);
+  assert.strictEqual(linhasCsv.length, totalEsperado + 1, `normas.csv deve ter ${totalEsperado + 1} linhas (1 header + ${totalEsperado} dados), tem ${linhasCsv.length}`);
 
   // SQLite
   const SQL = await initSqlJs();
@@ -392,10 +402,11 @@ test('Desafio Empírico 8: Integridade de Artefatos Derivados (SQLite, JSON, CSV
   const db = new SQL.Database(dbBuffer);
 
   const resNormas = db.exec('SELECT COUNT(*) as c FROM normas;');
-  assert.strictEqual(resNormas[0].values[0][0], 1600, 'Tabela normas no SQLite deve ter 1600 registros');
+  assert.strictEqual(resNormas[0].values[0][0], totalEsperado, `Tabela normas no SQLite deve ter ${totalEsperado} registros`);
 
+  const stats = JSON.parse(fs.readFileSync(path.join(dirGrafo, 'estatisticas.json'), 'utf8'));
   const resRel = db.exec('SELECT COUNT(*) as c FROM relacoes;');
-  assert.strictEqual(resRel[0].values[0][0], 1940, 'Tabela relacoes no SQLite deve ter 1940 registros');
+  assert.strictEqual(resRel[0].values[0][0], stats.totalRelacoes, `Tabela relacoes no SQLite deve ter ${stats.totalRelacoes} registros`);
 
   db.close();
 

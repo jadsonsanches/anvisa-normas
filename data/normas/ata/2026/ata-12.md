@@ -1,0 +1,584 @@
+---
+tipo: "ATA"
+numero: "12"
+ano: "2026"
+data_ato: ""
+data_promulgacao: "01/05/2026"
+data_publicacao_dou: "01/05/2026"
+situacao: "vigente"
+ementa: ""
+leis_base: []
+relacionadas: ["ATA 10/2026","ATA 11/2026"]
+fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=ATA&numeroAto=00000012&seqAto=SJO&valorAno=2026&orgao=GGREC/ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
+---
+
+# ATA nº 12, de 01/05/2026
+
+MINISTÉRIO DA SAÚDE
+
+AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA
+
+ATA
+
+GERÊNCIA-GERAL DE RECURSOS - GGREC
+
+12ª Sessão de Julgamento Ordinária
+
+SJO 12/2026
+
+A Gerência-Geral de Recursos reuniu-se no dia vinte de maio de dois mil e vinte e seis para deliberação, sendo a Sessão de Julgamento presidida pela Gerente-Geral de Recursos, Sra. Maria Ilca da Silva Moitinho, contando ainda com os seguintes membros votantes para composição do colegiado julgador: a Coordenadora da Primeira Coordenação Especializada de Recursos, Núbia de Cassia Albuquerque Figueiredo, a Coordenadora Substituta da Segunda Coordenação Especializada de Recursos, Thais Cremonesi Endo, o Coordenador Substituto da Terceira Coordenação Especializada de Recursos, Mateus Matias Pinheiro, além de membros designados, os quais assentaram entendimento e decisão sobre as matérias pautadas, estando presente também a Coordenadora Substituta da Coordenação Processante, Tatiana Barbosa Sousa, a qual ficou incumbida de tomar nota das deliberações e elaborar a Ata da Sessão de Julgamento Ordinária.
+
+1\. ASSUNTOS DE GESTÃO
+
+1.1 Indicação de membro designado para compor a mesa deliberativo A Gerente-Geral de Recursos designou sucessivamente, como membros julgadores, os servidores Nádia Lima Dias Cabral Gomes e Teresa Amanda Correia Lima Castelo Branco, da Primeira Coordenação Especializada de Recursos; e Ana Cecília Ferreira de Almeida Martins de Morais, da Terceira Coordenação Especializada de Recursos.
+
+1.2 Relatoria dos itens da Primeira Coordenação Especializada de Recursos
+
+O item 2.1.001 foi relatado, com prerrogativa de voto, pela servidora Nádia Lima Dias Cabral Gomes. Por fim, os itens 2.1.002 a 2.1.005 foram relatados, com prerrogativa de voto, pela servidora Teresa Amanda Correia Lima Castelo Branco.
+
+1.3 Relatoria dos itens da Terceira Coordenação Especializada de Recursos
+
+Os itens 2.3.001 a 2.3.008 foram relatados, com prerrogativa de voto, pela servidora Ana Cecília Ferreira de Almeida Martins de Morais.
+
+1.4 Itens com requerimento de sigilo Após apreciação e decisão do Colegiado, foi indeferido o requerimento de sigilo para o item 2.1.002.
+
+1.5 Declaração de impedimento e suspeição Não houve.
+
+1.6 Quantidade de recursos julgados Foram julgados 58 (cinquenta e oito) recursos, conforme detalhado nos tópicos 2 e 3 a seguir.
+
+2\. RECURSOS DELIBERADOS
+
+2.1 Recursos da Primeira Coordenação Especializada de Recurso
+
+Item: 2.1.001  
+Recorrente: FARMA VISION IMPORTAÇÃO E EXPORTAÇÃO DE MEDICAMENTOS LTDA.  
+CNPJ/CPF/Passaporte: 09.058.502/0001-48  
+Número do Processo: 25351.454156/2024-33  
+Expediente: 0104987/26-0  
+Área de origem: GGMED  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0413174/26-6 - CRES1/GGREC/GADIP/ANVISA.
+
+Item: 2.1.002  
+Recorrente: PHARMAESTHETICS DO BRASIL - INDUSTRIA DE MEDICAMENTOS LTDA.  
+CNPJ/CPF/Passaporte: 27.711.659/0001-02  
+Número do Processo: 25351.102931/2025-59  
+Expediente: 1511843/25-0  
+Área de origem: GGFIS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0458588/26-0 - CRES1/GGREC/GADIP/ANVISA.
+
+Item: 2.1.003  
+Recorrente: BANDEIRA & CAVALCANTI INDÚSTRIA DE COSMÉTICOS LTDA.  
+CNPJ/CPF/Passaporte: 07.046.464/0001-88  
+Número do Processo: 25351.219449/2025-57  
+Expediente: 1572988/25-8  
+Área de origem: GGFIS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0471866/26-2 - CRES1/GGREC/GADIP/ANVISA.
+
+Item: 2.1.004  
+Recorrente: R.T.K INDUSTRIA DE COSMÉTICOS E ALIMENTOS NATURAIS LTDA. EPP  
+CNPJ/CPF/Passaporte: 09.139.778/0001-50  
+Número do Processo: 25351.225511/2025-40  
+Expediente: 1625092/25-3  
+Área de origem: GGFIS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0474851/26-9 - CRES1/GGREC/GADIP/ANVISA.
+
+Item: 2.1.005  
+Recorrente: FORMUS MAGISTRAL COMERCIO DE INSUMOS FARMACEUTICOS LTDA.  
+12ª Sessão de Julgamento OrdináriaCNPJ/CPF/Passaporte: 35.677.373/0001-86  
+Número do Processo: 25351.094081/2025-16  
+Expediente: 0030823/26-9  
+Área de origem: GGFIS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0482150/26-5 - CRES1/GGREC/GADIP/ANVISA.
+
+Item: 2.1.006  
+Recorrente: DE VOLTA AS RAIZES COMERCIO LTDA.  
+CNPJ/CPF/Passaporte: 48.677.241/0001-04  
+Número do Processo: 25351.074566/2025-85  
+Expediente: 1474132/25-1  
+Área de origem: GGFIS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0331780/26-8 - CRES1/GGREC/GADIP/ANVISA.  
+Retorno da [SJO 10/2026](../ata/2026/ata-10.md)
+
+2.2 Recursos da Segunda Coordenação Especializada de Recursos
+
+Item: 2.2.001  
+Recorrente: PRIME MEDICAMENTOS ESPECIAIS LTDA.  
+CNPJ/CPF/Passaporte: 50.039.210/0001-61  
+Número do Processo: 25351.419725/2024-02  
+Expediente: 0175667/26-8  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0404013/26-7 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.002  
+Recorrente: FGF COMÉRCIO E SERVIÇOS DE ESTERILIZAÇÃO EM ÓXIDO DE ETILENO LTDA.  
+CNPJ/CPF/Passaporte: 01.805.305/0001-33  
+Número do Processo: 25351.161261/2025-11  
+Expediente: 0192452/26-6  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0404006/26-4 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.003  
+Recorrente: NASS DERMOCOSMETIQUE LTDA.  
+CNPJ/CPF/Passaporte: 61.722.786/0001-45  
+Número do Processo: 25351.023990/2026-42  
+Expediente: 0195040/26-1  
+12ª Sessão de Julgamento OrdináriaÁrea de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0401583/26-5 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.004  
+Recorrente: JMT TRANSPORTES E SERVIÇOS DE LOCAÇÃO LTDA.  
+CNPJ/CPF/Passaporte: 11.167.060/0001-10  
+Número do Processo: 25351.024484/2026-71  
+Expediente: 0196729/26-2  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0401623/26-1 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.005  
+Recorrente: BRAZZA COMERCIO E REPRESENTACOES LTDA.  
+CNPJ/CPF/Passaporte: 57.124.410/0001-61  
+Número do Processo: 25351.016107/2026-68  
+Expediente: 0210231/26-2  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0401624/26-8 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.006  
+Recorrente: HAPVIDA ASSISTENCIA MEDICA S.A.  
+CNPJ/CPF/Passaporte: 63.554.067/0001-98  
+Número do Processo: 25351.025629/2026-51  
+Expediente: 0212918/26-5  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0404054/26-2 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.007  
+Recorrente: HOSPMEDICA COM. DE PRODUTOS MEDICO HOSPITALARES LTDA.  
+CNPJ/CPF/Passaporte: 61.574.411/0001-85  
+Número do Processo: 25351.026798/2026-16  
+Expediente: 0222345/26-8  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0401696/26-4 - CRES2/GGREC/GADIP/ANVISA.  
+12ª Sessão de Julgamento Ordinária
+
+Item: 2.2.008  
+Recorrente: PPK GASES MEDICINAIS E INDUSTRIAIS LTDA. - EPP  
+CNPJ/CPF/Passaporte: 04.014.774/0001-22  
+Número do Processo: 25351.026199/2026-94  
+Expediente: 0234628/26-0  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0403978/26-6 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.009  
+Recorrente: LIFECHEMM COMERCIO DE INGREDIENTES E QUIMICOS LTDA.  
+CNPJ/CPF/Passaporte: 35.738.290/0001-50  
+Número do Processo: 25351.026878/2026-63  
+Expediente: 0236113/26-7  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0404051/26-1 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.010  
+Recorrente: YSTOPA - DISTRIBUIDORA LTDA.  
+CNPJ/CPF/Passaporte: 57.247.947/0001-19  
+Número do Processo: 25351.055949/2025-54  
+Expediente: 0763042/25-1  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0404053/26-5 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.011  
+Recorrente: UNIMED RECIFE COOPERATIVA DE TRABALHO MEDICO  
+CNPJ/CPF/Passaporte: 11.214.624/0041-15  
+Número do Processo: 25351.005782/2026-61  
+Expediente: 0152038/26-4  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0404033/26-6 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.012  
+Recorrente: UNIMED RECIFE COOPERATIVA DE TRABALHO MEDICO  
+CNPJ/CPF/Passaporte: 11.214.624/0041-15  
+Número do Processo: 25351.005785/2026-03  
+12ª Sessão de Julgamento OrdináriaExpediente: 0152057/26-9  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0404034/26-3 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.013  
+Recorrente: UNIMED RECIFE COOPERATIVA DE TRABALHO MEDICO  
+CNPJ/CPF/Passaporte: 11.214.624/0041-15  
+Número do Processo: 25351.005783/2026-14  
+Expediente: 0152064/26-5  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0404041/26-6 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.014  
+Recorrente: BSB PRODUTORA DE EQUIPAMENTOS DE PROTECAO INDIVIDUAL S.A.  
+CNPJ/CPF/Passaporte: 10.472.968/0001-74  
+Número do Processo: 25351.012664/2026-18  
+Expediente: 0163692/26-2  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0404042/26-3 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.015  
+Recorrente: BELEZA MINHA IMPORTACOES E COMERCIO LTDA.  
+CNPJ/CPF/Passaporte: 62.863.474/0001-14  
+Número do Processo: 25351.011072/2026-71  
+Expediente: 0169684/26-1  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0404043/26-1 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.016  
+Recorrente: PRIME MEDICAMENTOS ESPECIAIS LTDA.  
+CNPJ/CPF/Passaporte: 50.039.210/0001-61  
+Número do Processo: 25351.419725/2024-02  
+Expediente: 0172985/26-9  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0404044/26-8 - CRES2/GGREC/GADIP/ANVISA.  
+12ª Sessão de Julgamento Ordinária
+
+Item: 2.2.017  
+Recorrente: FARMÁCIA E DROGARIA LOBATO LTDA.  
+CNPJ/CPF/Passaporte: 24.996.241/0001-09  
+Número do Processo: 25351.016875/2026-11  
+Expediente: 0202735/26-5  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0404055/26-0 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.018  
+Recorrente: HOSPMEDICA COM. DE PRODUTOS MEDICO HOSPITALARES LTDA.  
+CNPJ/CPF/Passaporte: 61.574.411/0001-85  
+Número do Processo: 25351.026797/2026-63  
+Expediente: 0222291/26-5  
+Área de origem: COAFE  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0404056/26-7 - CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.019  
+Recorrente: N3N MEDICAL LTDA. (ATALANTA PRODUTOS DE HIGIENE E LIMPEZA LTDA.)  
+CNPJ/CPF/Passaporte: 04.785.103/0001-65  
+Número do Processo: 25351.646696/2020-18  
+Expediente: 4478979/22-7  
+Área de origem: GGFIS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 177/2026 – SEI/CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.020  
+Recorrente: VIDA DISTRIBUIDORA DE SUPLEMENTOS LTDA. - EPP  
+CNPJ/CPF/Passaporte: 24.065.389/0001-11  
+Número do Processo: 25351.274705/2021-45  
+Expediente: SEI 2815591  
+Área de origem: GGFIS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 191/2026 – SEI/CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.021  
+Recorrente: TAM LINHAS AÉREAS S.A.  
+CNPJ/CPF/Passaporte: 02.012.862/0027-07  
+Número do Processo: 25757.642325/2019-61  
+12ª Sessão de Julgamento OrdináriaExpediente: 0411762/23-1  
+Área de origem: GGPAF  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 194/2026 – SEI/CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.022  
+Recorrente: AZUL LINHAS AÉREAS BRASILEIRAS S.A  
+CNPJ/CPF/Passaporte: 09.296.295/0002-40  
+Número do Processo: 25351.475828/2020-11  
+Expediente: 4841265/22-1  
+Área de origem: GGPAF  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 196/2026 – SEI/CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.023  
+Recorrente: J.F. INDUSTRIA DE COSMETICOS LTDA.  
+CNPJ/CPF/Passaporte: 01.394.209/0001-40  
+Número do Processo: 25351.614024/2019-18  
+Expediente: SEI 2990457  
+Área de origem: GGFIS  
+RETIRADO DE PAUTA A PEDIDO DO RELATOR
+
+Item: 2.2.024  
+Recorrente: TRANSPORTES AEREOS PORTUGUESES SA  
+CNPJ/CPF/Passaporte: 33.136.896/0020-52  
+Número do Processo: 25757.785028/2021-23  
+Expediente: SEI 2826364  
+Área de origem: GGPAF  
+RETIRADO DE PAUTA A PEDIDO DO RELATOR
+
+Item: 2.2.025  
+Recorrente: CAPSUL BRASIL INDÚSTRIA E COMÉRCIO LTDA.  
+CNPJ/CPF/Passaporte: 29.822.523/0001-03  
+Número do Processo: 25351.102700/2022-01  
+Expediente: SEI 3300686  
+Área de origem: GGFIS  
+RETIRADO DE PAUTA A PEDIDO DO RELATOR
+
+Item: 2.2.026  
+Recorrente: SANTISTA LABORATÓRIO FARMACÊUTICO S/A.  
+CNPJ/CPF/Passaporte: 04.099.395/0001-82  
+Número do Processo: 25351.565348/2020-41  
+12ª Sessão de Julgamento OrdináriaExpediente: SEI 2731772  
+Área de origem: GGFIS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E DAR-LHE PARCIAL PROVIMENTO, para minorar a penalidade de multa, acompanhando a posição do relator descrita no Voto nº 211/2026 – SEI/CRES2/GGREC/GADIP/ANVISA.
+
+Item: 2.2.027  
+Recorrente: LOPEX QUIMICA DO BRASIL LTDA.  
+CNPJ/CPF/Passaporte: 31.206.664/0001-35  
+Número do Processo: 25351.576282/2020-14  
+Expediente: 1017633/23-1  
+Área de origem: GGFIS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 38/2026 – SEI/CRES2/GGREC/GADIP/ANVISA.
+
+2.3 Recursos da Terceira Coordenação Especializada de Recursos
+
+Item: 2.3.001  
+Recorrente: BASF S.A.  
+CNPJ/CPF/Passaporte: 48.539.407/0001-18  
+Número do Processo: 25351.055337/2010-31  
+Expediente: 1127142/25-9  
+Área de origem: COSAN/GHCOS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0470548/26-1 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.002  
+Recorrente: DENGO INDÚSTRIA E COMÉRCIO DE PRODUTOS DE LIMPEZA LTDA. ME  
+CNPJ/CPF/Passaporte: 00.303.353/0001-60  
+Número do Processo: 25351.092484/2025-12  
+Expediente: 1142774/25-2  
+Área de origem: COSAN/GHCOS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0470558/26-5 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.003  
+Recorrente: LUBRILIMP INDÚSTRIA DE PRODUTOS DE LIMPEZA LTDA.  
+CNPJ/CPF/Passaporte: 07.872.571/0001-65  
+Número do Processo: 25351.034763/2025-61  
+Expediente: 1144941/25-3  
+Área de origem: COSAN/GHCOS  
+12ª Sessão de Julgamento OrdináriaDecisão: A Gerência-Geral de Recursos decidiu, por unanimidade, NÃO CONHECER DO RECURSO POR INTEMPESTIVIDADE, acompanhando a posição do relator descrita no Voto nº 0470593/26-7 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.004  
+Recorrente: SOLUTION QUIMICA INDUSTRIA E COMERCIO DE PRODUTOS QUIMICOS LTDA.  
+CNPJ/CPF/Passaporte: 35.729.467/0001-51  
+Número do Processo: 25351.089808/2025-35  
+Expediente: 1143057/25-2  
+Área de origem: COSAN/GHCOS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0470747/26-9 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.005  
+Recorrente: PHILIPEIA INDUSTRIA QUIMICA LTDA.  
+CNPJ/CPF/Passaporte: 30.567.878/0001-74  
+Número do Processo: 25351.083221/2025-12  
+Expediente: 1169650/25-2  
+Área de origem: COSAN/GHCOS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0470822/26-6 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.006  
+Recorrente: APYCE BRASIL LTDA.  
+CNPJ/CPF/Passaporte: 10.207.873/0001-23  
+Número do Processo: 25351.083397/2025-74  
+Expediente: 1175027/25-1  
+Área de origem: COSAN/GHCOS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E DAR-LHE PARCIAL PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0471073/26-3 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.007  
+Recorrente: LUBRILIMP INDÚSTRIA DE PRODUTOS DE LIMPEZA LTDA.  
+CNPJ/CPF/Passaporte: 07.872.571/0001-65  
+Número do Processo: 25351.043874/2025-69  
+Expediente: 1230273/25-5  
+Área de origem: COSAN/GHCOS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, NÃO CONHECER DO RECURSO POR INTEMPESTIVIDADE, acompanhando a posição do relator descrita no Voto nº 0479878/26-4 - CRES3/GGREC/GADIP/ANVISA.  
+12ª Sessão de Julgamento Ordinária
+
+Item: 2.3.008  
+Recorrente: LAGOS QUÍMICA LTDA.  
+CNPJ/CPF/Passaporte: 64.398.159/0001-99  
+Número do Processo: 25351.089287/2025-16  
+Expediente: 1234584/25-5  
+Área de origem: COSAN/GHCOS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E DAR-LHE PARCIAL PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0479948/26-3 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.009  
+Recorrente: ANCLA¿S INDÚSTRIA E COMÉRCIO DE COSMÉTICOS LTDA. - EPP  
+CNPJ/CPF/Passaporte: 19.138.182/0001-90  
+Número do Processo: 25351.055654/2025-88  
+Expediente: 1169124/25-9  
+Área de origem: CCOSM/GHCOS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, EXTINGUIR O RECURSO POR PERDA DE OBJETO, acompanhando a posição do relator descrita no Voto nº 0479075/26-1 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.010  
+Recorrente: ANCLA¿S INDÚSTRIA E COMÉRCIO DE COSMÉTICOS LTDA. - EPP  
+CNPJ/CPF/Passaporte: 19.138.182/0001-90  
+Número do Processo: 25351.057527/2025-13  
+Expediente: 1169109/25-0  
+Área de origem: CCOSM/GHCOS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, EXTINGUIR O RECURSO POR PERDA DE OBJETO, acompanhando a posição do relator descrita no Voto nº 0479076/26-8 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.011  
+Recorrente: JAH COSMETICOS DO BRASIL LTDA.  
+CNPJ/CPF/Passaporte: 34.456.774/0001-43  
+Número do Processo: 25351.060055/2025-86  
+Expediente: 1183342/25-0  
+Área de origem: CCOSM/GHCOS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E NEGAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0479107/26-6 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.012  
+Recorrente: CHAMS INDÚSTRIA DE COSMÉTICOS LTDA. - ME  
+CNPJ/CPF/Passaporte: 04.284.635/0001-19  
+Número do Processo: 25351.054982/2025-67  
+12ª Sessão de Julgamento OrdináriaExpediente: 1211005/25-9  
+Área de origem: CCOSM/GHCOS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, EXTINGUIR O RECURSO POR PERDA DE OBJETO, acompanhando a posição do relator descrita no Voto nº 0479077/26-5 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.013  
+Recorrente: LABORATORIO LAPRONAT LTDA.  
+CNPJ/CPF/Passaporte: 85.000.966/0001-81  
+Número do Processo: 25351.054783/2019-19  
+Expediente: 1258915/25-1  
+Área de origem: CCOSM/GHCOS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, NÃO CONHECER DO RECURSO POR AUSÊNCIA DE INTERESSE RECURSAL, acompanhando a posição do relator descrita no Voto nº 0479087/26-0 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.014  
+Recorrente: NEW CONCEPT INDÚSTRIA E COMÉRCIO DE COSMÉTICOS LTDA.  
+CNPJ/CPF/Passaporte: 23.759.374/0001-90  
+Número do Processo: 25351.066105/2025-39  
+Expediente: 1278529/25-0  
+Área de origem: CCOSM/GHCOS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, EXTINGUIR O RECURSO POR PERDA DE OBJETO, acompanhando a posição do relator descrita no Voto nº 0479078/26-2 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.015  
+Recorrente: DICINA INDÚSTRIA E COMÉRCIO, IMPORTAÇÃO E EXPORTAÇÃO DE TABACOS LIMITADA  
+CNPJ/CPF/Passaporte: 10.742.854/0001-05  
+Número do Processo: 25351.417461/2024-44  
+Expediente: 1270845/25-0  
+Área de origem: GGTAB  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, NÃO CONHECER DO RECURSO POR AUSÊNCIA DE INTERESSE RECURSAL, acompanhando a posição do relator descrita no Voto nº 0476580/26-5 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.016  
+Recorrente: DICINA INDÚSTRIA E COMÉRCIO, IMPORTAÇÃO E EXPORTAÇÃO DE TABACOS LIMITADA  
+CNPJ/CPF/Passaporte: 10.742.854/0001-05  
+Número do Processo: 25351.417462/2024-99  
+Expediente: 1270905/25-2  
+Área de origem: GGTAB  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, NÃO CONHECER DO RECURSO POR AUSÊNCIA DE INTERESSE RECURSAL, acompanhando a posição do relator descrita no Voto nº 0474817/26-4 - CRES3/GGREC/GADIP/ANVISA.  
+12ª Sessão de Julgamento Ordinária
+
+Item: 2.3.017  
+Recorrente: DICINA INDÚSTRIA E COMÉRCIO, IMPORTAÇÃO E EXPORTAÇÃO DE TABACOS LIMITADA  
+CNPJ/CPF/Passaporte: 10.742.854/0001-05  
+Número do Processo: 25351.424453/2024-54  
+Expediente: 1270769/25-1  
+Área de origem: GGTAB  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, NÃO CONHECER DO RECURSO POR AUSÊNCIA DE INTERESSE RECURSAL, acompanhando a posição do relator descrita no Voto nº 0476582/26-0 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.018  
+Recorrente: DICINA INDÚSTRIA E COMÉRCIO, IMPORTAÇÃO E EXPORTAÇÃO DE TABACOS LIMITADA  
+CNPJ/CPF/Passaporte: 10.742.854/0001-05  
+Número do Processo: 25351.424455/2024-43  
+Expediente: 1270914/25-1  
+Área de origem: GGTAB  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, NÃO CONHECER DO RECURSO POR AUSÊNCIA DE INTERESSE RECURSAL, acompanhando a posição do relator descrita no Voto nº 0476583/26-7 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.019  
+Recorrente: DICINA INDÚSTRIA E COMÉRCIO, IMPORTAÇÃO E EXPORTAÇÃO DE TABACOS LIMITADA  
+CNPJ/CPF/Passaporte: 10.742.854/0001-05  
+Número do Processo: 25351.424456/2024-98  
+Expediente: 1270763/25-3  
+Área de origem: GGTAB  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, NÃO CONHECER DO RECURSO POR AUSÊNCIA DE INTERESSE RECURSAL, acompanhando a posição do relator descrita no Voto nº 0476581/26-2 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.020  
+Recorrente: DICINA INDÚSTRIA E COMÉRCIO, IMPORTAÇÃO E EXPORTAÇÃO DE TABACOS LIMITADA  
+CNPJ/CPF/Passaporte: 10.742.854/0001-05  
+Número do Processo: 25351.425214/2024-11  
+Expediente: 1270722/25-5  
+Área de origem: GGTAB  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, NÃO CONHECER DO RECURSO POR AUSÊNCIA DE INTERESSE RECURSAL, acompanhando a posição do relator descrita no Voto nº 0476584/26-4 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.021  
+Recorrente: DICINA INDÚSTRIA E COMÉRCIO, IMPORTAÇÃO E EXPORTAÇÃO DE TABACOS LIMITADA  
+CNPJ/CPF/Passaporte: 10.742.854/0001-05  
+Número do Processo: 25351.860497/2018-04  
+12ª Sessão de Julgamento OrdináriaExpediente: 1270908/25-1  
+Área de origem: GGTAB  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, EXTINGUIR O RECURSO POR PERDA DE OBJETO, acompanhando a posição do relator descrita no Voto nº 0473623/26-5 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.022  
+Recorrente: ZOE BIOTECH IND E COM LTDA.  
+CNPJ/CPF/Passaporte: 44.134.398/0001-24  
+Número do Processo: 25351.083968/2025-71  
+Expediente: 1301301/25-6  
+Área de origem: COSAN/GHCOS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E DAR-LHE PARCIAL PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0479276/26-3 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.023  
+Recorrente: ACDG INDÚSTRIA E COMÉRCIO DE ENVAZADOS LTDA. - ME  
+CNPJ/CPF/Passaporte: 73.163.925/0001-27  
+Número do Processo: 25351.074440/2025-19  
+Expediente: 1292862/25-4  
+Área de origem: COSAN/GHCOS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, EXTINGUIR O RECURSO POR PERDA DE OBJETO, acompanhando a posição do relator descrita no Voto nº 0479014/26-6 - CRES3/GGREC/GADIP/ANVISA.
+
+Item: 2.3.024  
+Recorrente: AIR LIQUIDE MEDICAL SYSTEM DO BRASIL LTDA.  
+CNPJ/CPF/Passaporte: 11.657.773/0001-61  
+Número do Processo: 25351.746408/2023-77  
+Expediente: 1539094/25-1  
+Área de origem: GGTPS  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, CONHECER DO RECURSO E DAR-LHE PROVIMENTO, acompanhando a posição do relator descrita no Voto nº 0484216/26-1 - CRES3/GGREC/GADIP/ANVISA.  
+Retorno da [SJO 11/2026](../ata/2026/ata-11.md)
+
+2.4 Coordenação Processante  
+Não há item a deliberar.
+
+3\. JUÍZO DE RETRATAÇÃO DE RECURSOS EM SEGUNDA INSTÂNCIA
+
+3.1 Primeira Coordenação Especializada de Recursos  
+12ª Sessão de Julgamento Ordinária  
+Não há item a deliberar.
+
+3.2 Segunda Coordenação Especializada de Recursos
+
+Item: 3.2.001  
+Recorrente: F&L EMPREENDIMENTOS COMERCIAIS LTDA.  
+CNPJ/CPF/Passaporte: 10.841.547/0005-05  
+Número do Processo: 25750.189548/2015-96  
+Expediente: SEI 4170429  
+Área de origem: GGREC  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, NÃO SE RETRATAR da decisão a quo, conforme teor do Despacho nº 404/2026 – SEI/GGREC/GADIP/ANVISA.
+
+3.3 Terceira Coordenação Especializada de Recursos
+
+Item: 3.3.001  
+Recorrente: BR3 TECNOLOGIA E INDUSTRIA QUIMICA E FARMACEUTICA LTDA.  
+CNPJ/CPF/Passaporte: 07.161.191/0001-12  
+Número do Processo: 25351.711046/2014-62  
+Expediente: 0372672/26-4  
+Área de origem: GGREC  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, NÃO SE RETRATAR da decisão a quo, conforme teor do Despacho nº 0484334/26-9 - GGREC/GADIP/ANVISA.
+
+Item: 3.3.002  
+Recorrente: QUALITHINGS MEDICAL GROUP LTDA.  
+CNPJ/CPF/Passaporte: 53.053.723/0001-15  
+Número do Processo: 25351.434142/2024-01  
+Expediente: 0381493/26-1  
+Área de origem: GGREC  
+RETIRADO DE PAUTA A PEDIDO DO RELATOR
+
+Item: 3.3.003  
+Recorrente: CCD COSM CIENTIFICA DERM COMERCIO E INDUSTRIA LTDA.  
+CNPJ/CPF/Passaporte: 40.367.856/0001-14  
+Número do Processo: 25351.084259/2025-11  
+Expediente: 0399914/26-9  
+Área de origem: GGREC  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, NÃO SE RETRATAR da decisão a quo, conforme teor do Despacho nº 0484335/26-6 - GGREC/GADIP/ANVISA.
+
+Item: 3.3.004  
+Recorrente: CCD COSM CIENTIFICA DERM COMERCIO E INDUSTRIA LTDA.  
+CNPJ/CPF/Passaporte: 40.367.856/0001-14  
+12ª Sessão de Julgamento OrdináriaNúmero do Processo: 25351.089325/2025-31  
+Expediente: 0399923/26-8  
+Área de origem: GGREC  
+Decisão: A Gerência-Geral de Recursos decidiu, por unanimidade, NÃO SE RETRATAR da decisão a quo, conforme teor do Despacho nº 0484336/26-3 - GGREC/GADIP/ANVISA.
+
+3.4 Coordenação Processante
+
+Não há item a deliberar.
+
+A reunião teve início às nove horas, sendo suspensa às doze horas e retomada às quatorze horas. Por não haver nada mais a tratar, a Senhora Presidente deu por encerrada a 12ª Sessão de Julgamento Ordinária da GGREC às quinze horas e vinte e sete minutos do dia vinte de maio de dois mil e vinte e seis.
+
+A presente ata segue lavrada pela Coordenadora Substituta da Coordenação Processante.
+
+TATIANA BARBOSA SOUA  
+Coordenadora Substituta  
+Coordenação Processante - CPROC
+
+Publicado Internamente pela ANVISA em 20/05/2026
