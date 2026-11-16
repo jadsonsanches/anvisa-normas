@@ -1,0 +1,40 @@
+{
+  "hosting": {
+    "public": "docs",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/sse",
+        "run": {
+          "serviceId": "anvisa-mcp",
+          "region": "southamerica-east1"
+        }
+      },
+      {
+        "source": "/messages",
+        "run": {
+          "serviceId": "anvisa-mcp",
+          "region": "southamerica-east1"
+        }
+      },
+      {
+        "source": "/mcp",
+        "run": {
+          "serviceId": "anvisa-mcp",
+          "region": "southamerica-east1"
+        }
+      },
+      {
+        "source": "/health",
+        "run": {
+          "serviceId": "anvisa-mcp",
+          "region": "southamerica-east1"
+        }
+      }
+    ]
+  }
+}
