@@ -2,7 +2,7 @@
 
 <p align="center">
   <strong>Base de Dados Aberta de Normas da Anvisa em Markdown, SQLite, JSON & Grafo de Conexões</strong><br>
-  Pronta para Inteligência Artificial, RAG, Compliance Farmacêutico e Análises Regulatórias
+  Pronta para Inteligência Artificial, RAG, Servidores MCP, Compliance Farmacêutico e Análises Regulatórias
 </p>
 
 <p align="center">
@@ -13,6 +13,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/licença-MIT-blue.svg?style=flat-square" alt="Licença MIT" /></a>
   <a href=".github/workflows/atualiza.yml"><img src="https://img.shields.io/badge/pipeline-GitHub%20Actions-green.svg?style=flat-square" alt="Pipeline de Atualização" /></a>
+  <a href="https://modelcontextprotocol.io/"><img src="https://img.shields.io/badge/MCP-Model%20Context%20Protocol-8A2BE2.svg?style=flat-square" alt="Model Context Protocol" /></a>
   <a href="https://jadsonsanches.github.io/anvisa-normas/"><img src="https://img.shields.io/badge/visualizador-online%20(demo)-blueviolet.svg?style=flat-square" alt="Visualizador Online" /></a>
   <a href="data/dist/anvisa.db"><img src="https://img.shields.io/badge/database-SQLite%203-003B57.svg?style=flat-square" alt="SQLite 3" /></a>
   <a href="#-formato-padronizado-de-cada-norma"><img src="https://img.shields.io/badge/formato-Markdown%20%2B%20YAML-orange.svg?style=flat-square" alt="Markdown + YAML" /></a>
@@ -25,9 +26,151 @@
 
 O **AnvisaNormas** transforma o acervo normativo da **Agência Nacional de Vigilância Sanitária (Anvisa)** em uma infraestrutura moderna de dados abertos. Cada resolução (RDC), instrução normativa (IN), portaria ou resolução especial (RE) é convertida em texto simples (Markdown), enriquecida com metadados estruturados (YAML Frontmatter), conectada em um **Grafo de Relações Regulatórias** determinístico e compilada em bases consolidadas (**SQLite, JSON e CSV**).
 
+Além disso, o projeto inclui um **Servidor MCP (Model Context Protocol)** oficial de alto desempenho, permitindo que modelos de linguagem (Claude Desktop, Cursor, VS Code Copilot e Antigravity) consultem o acervo sanitário em tempo real, verifiquem vigência de atos e naveguem no grafo normativo com latência inferior a 30 ms.
+
 > 🌐 **Acesse a Demonstração Interativa:** Explore o grafo e faça buscas em tempo real em [jadsonsanches.github.io/anvisa-normas](https://jadsonsanches.github.io/anvisa-normas/).
 
 Inspirado nas iniciativas de transparência pública do [ctresb/leis](https://github.com/ctresb/leis) (Legislação Federal) e do [Bruno Moniz](https://github.com/BrunooMoniz/normas-bcb) (Banco Central e CVM).
+
+---
+
+## 🤖 Servidor MCP (Model Context Protocol)
+
+O **AnvisaNormas MCP Server** implementa o protocolo oficial aberto da Anthropic/ModelContextProtocol (`@modelcontextprotocol/sdk`), transformando assistentes de IA em especialistas em regulação sanitária brasileira com acesso nativo e local aos dados.
+
+### ⚡ Execução Imediata (Zero Config)
+
+Você pode iniciar o servidor diretamente via `npx` (não requer compilação nativa C++, opera em WebAssembly puro):
+
+```bash
+npx -y anvisa-normas-mcp
+```
+
+Ou, caso tenha clonado este repositório localmente:
+
+```bash
+npm run build
+npm run mcp
+```
+
+---
+
+### 🛠️ Ferramentas (Tools) Disponíveis
+
+O servidor disponibiliza 6 ferramentas com validação estrita via esquemas Zod:
+
+| Ferramenta | Descrição | Principais Parâmetros |
+| :--- | :--- | :--- |
+| `buscar_normas` | Pesquisa textual rápida na ementa e identificadores com **UDF `unaccent`** (tolerante a acentuação em português: "sanitária" == "sanitaria") e filtros estruturados. | `termo` (string), `tipo` (string), `ano` (int), `situacao` (`vigente` \| `revogada`), `limite` (int, padrão: 20) |
+| `obter_norma` | Detalhes cadastrais completos por ID canônico ou informal (ex: `"RDC 658/2022"`, `"rdc nº 658/2022"`, `"PORTARIA 344/1998"`). | `id` (string, obrigatório) |
+| `verificar_vigencia` | Análise técnica rigorosa de vigência (`vigente`, `revogada` ou `desconhecida`), com **extração automática do ato revogador** e rastreamento de referências no grafo regulatório. | `id` (string, obrigatório) |
+| `consultar_relacoes` | Navegação bidirecional no grafo regulatório: leis que fundamentam a norma (`baseada_em`), atos citados (`cita`) e normas que a referenciam. | `id` (string, obrigatório), `direcao` (`todas` \| `saida` \| `entrada`), `tipo_relacao` (`todas` \| `cita` \| `baseada_em`) |
+| `obter_estatisticas` | Panorama quantitativo em tempo real: total de normas, vigentes, revogadas, arestas no grafo e agrupamento por tipo de ato. | `tipo` (string, opcional, ex: `"RDC"`, `"IN"`) |
+| `obter_texto_norma` | Recupera o texto integral em Markdown original com parâmetro opcional de corte de caracteres para proteção de contexto em modelos menores. | `id` (string, obrigatório), `limite_caracteres` (int, opcional) |
+
+---
+
+### 📦 Recursos (Resources) MCP
+
+* **`normas://{id}`**: Acesso direto ao documento textual em Markdown de qualquer norma através de sua URI (suporta identificadores com barras via URI Template RFC 6570, ex: `normas://RDC%20658/2022` ou `normas://ACM%201/2025`).
+* **`normas://estatisticas`**: Recurso estático com métricas quantitativas globais do acervo em formato JSON (`application/json`).
+
+---
+
+### 💡 Templates de Prompts Regulatórios
+
+O servidor MCP registra 3 roteiros padronizados para auditorias e investigações de alto nível:
+
+1. **`analise_conformidade_anvisa`**:
+   - *Parâmetros:* `tema` (obrigatório, ex: `"Boas Práticas de Fabricação"`), `normas_especificas` (opcional).
+   - *Finalidade:* Conduz a IA a mapear normas ativas, checar vigência, auditar artigos e gerar checklist de conformidade sanitária.
+2. **`verificar_revogacao`**:
+   - *Parâmetros:* `norma_id` (obrigatório, ex: `"DCP 108/2025"`).
+   - *Finalidade:* Rastreia a linha sucessória histórica de um ato, confirmando se houve revogação total ou parcial e qual instrumento o substituiu.
+3. **`analisar_impacto_regulatorio`**:
+   - *Parâmetros:* `norma_id` (obrigatório, ex: `"RDC 958/2024"`).
+   - *Finalidade:* Mapeia o efeito cascata e dependências normativas através da navegação no grafo de relações.
+
+---
+
+### ⚙️ Como Configurar em Clientes MCP
+
+#### 1. Claude Desktop
+
+Abra o arquivo de configuração do Claude Desktop:
+- **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+- **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+Adicione a seção `mcpServers`:
+
+```json
+{
+  "mcpServers": {
+    "anvisa-normas": {
+      "command": "npx",
+      "args": ["-y", "anvisa-normas-mcp"]
+    }
+  }
+}
+```
+
+*Ou para desenvolvimento com clone local apontando para o binário compilado:*
+
+```json
+{
+  "mcpServers": {
+    "anvisa-normas": {
+      "command": "node",
+      "args": ["C:/jadson/anvisa-normas/dist/bin/mcp.js"]
+    }
+  }
+}
+```
+
+#### 2. Cursor
+
+No Cursor, acesse **Cursor Settings** > **Features** > **MCP Servers** > **Add New MCP Server** (ou edite o arquivo `.cursor/mcp.json` na raiz de seu workspace):
+
+```json
+{
+  "mcpServers": {
+    "anvisa-normas": {
+      "command": "node",
+      "args": ["${workspaceFolder}/dist/bin/mcp.js"]
+    }
+  }
+}
+```
+
+#### 3. VS Code Copilot
+
+No VS Code, crie ou edite o arquivo `.vscode/mcp.json`:
+
+```json
+{
+  "servers": {
+    "anvisa-normas": {
+      "command": "node",
+      "args": ["${workspaceFolder}/dist/bin/mcp.js"]
+    }
+  }
+}
+```
+
+#### 4. Antigravity
+
+Em seu arquivo de configuração de MCP (`mcp_config.json` ou painel de configurações):
+
+```json
+{
+  "mcpServers": {
+    "anvisa-normas": {
+      "command": "node",
+      "args": ["c:/jadson/anvisa-normas/dist/bin/mcp.js"]
+    }
+  }
+}
+```
 
 ---
 
@@ -53,6 +196,7 @@ Profissionais de **Assuntos Regulatórios, Jurídico, Compliance, P&D, Indústri
 - Falta de texto limpo para alimentar modelos de linguagem (LLMs), agentes autônomos e sistemas RAG (Retrieval-Augmented Generation).
 
 ### O que este projeto entrega:
+- ✅ **Servidor MCP Integrado:** Conexão nativa e padronizada com Claude Desktop, Cursor, VS Code Copilot e Antigravity.
 - ✅ **Texto Integral em Markdown:** Arquivos leves, limpos e versionados no Git.
 - ✅ **Metadados Ricos (YAML Frontmatter):** Situação jurídica oficial (`vigente` / `revogada`), ementa, datas distintas (**Data do Ato** vs **Data de Publicação no DOU**), leis-base e referências cruzadas.
 - ✅ **Grafo Determinístico (`relacoes.json`):** Mapeamento preciso de citações, alterações e revogações — sem alucinações de inteligência artificial.
@@ -165,11 +309,21 @@ Art. 1º Esta Resolução altera a Resolução de Diretoria Colegiada - RDC nº 
 
 ```text
 anvisa-normas/
+├── src/                          # 🚀 Código-fonte TypeScript do Servidor MCP
+│   ├── bin/                      # CLI executável stdio (shebang #!/usr/bin/env node)
+│   ├── db/                       # Provedores de banco (DatabaseProvider e sql.js WASM)
+│   ├── tools/                    # 6 Ferramentas MCP (busca, vigência, texto, relações, estatísticas)
+│   ├── resources/                # Recursos MCP (normas://{id} e normas://estatisticas)
+│   ├── prompts/                  # Prompts regulatórios padronizados
+│   ├── config.ts                 # Resolução dinâmica e resiliente de caminhos
+│   ├── server.ts                 # Fábrica createAnvisaMcpServer
+│   └── index.ts                  # Ponto de exportação de bibliotecas
+├── dist/                         # 📦 Artefatos compilados em ESM
 ├── docs/
 │   └── assets/                   # 🖼️ Imagens do visualizador e logotipos
 ├── data/
 │   ├── dist/                     # 💾 Bancos de dados consolidados (SQLite, JSON, CSV)
-│   │   ├── anvisa.db             # Banco SQLite 3 relacional
+│   │   ├── anvisa.db             # Banco SQLite 3 relacional (~94 MB)
 │   │   ├── normas.json           # Base JSON completa
 │   │   └── normas.csv            # Tabela CSV
 │   ├── normas/                   # 📄 Atos normativos individuais em Markdown (.md)
@@ -187,6 +341,14 @@ anvisa-normas/
 │   ├── exportar-bancos.js       # Exportador consolidado (SQLite, JSON, CSV)
 │   ├── gerar-visualizador.js    # Compilador do visualizador web estático
 │   └── pipeline.js              # Orquestrador geral de atualização contínua
+├── test/
+│   ├── mcp.test.js              # Testes automatizados do Servidor MCP (InMemoryTransport)
+│   ├── challenger.test.js       # Testes de integridade do acervo e datas
+│   ├── normas.test.js           # Validação de frontmatter
+│   ├── parser.test.js           # Testes do parser HTML
+│   └── scripts.test.js          # Validação de sintaxe e módulos
+├── tsconfig.json                 # Configuração do TypeScript ESM/NodeNext
+├── tsup.config.ts                # Configuração do bundler tsup
 ├── index.html                   # Visualizador interativo publicado no GitHub Pages
 └── .github/
     └── workflows/
@@ -195,10 +357,10 @@ anvisa-normas/
 
 ---
 
-## 🚀 Execução Local
+## 🚀 Execução Local e Testes
 
 ### Pré-requisitos
-* [Node.js](https://nodejs.org/) (versão 20 ou superior recomendada)
+* [Node.js](https://nodejs.org/) (versão 20 LTS ou superior recomendada)
 * Git instalado
 
 ### Instalação
@@ -208,7 +370,22 @@ cd anvisa-normas
 npm install
 ```
 
-### Comandos Principais
+### Compilar e Testar o Servidor MCP
+```bash
+# Compila o servidor MCP com TypeScript e tsup
+npm run build
+
+# Executa o servidor MCP em modo stdio
+npm run mcp
+
+# Executa os testes automatizados do servidor MCP (12 testes via InMemoryTransport)
+npm run test:mcp
+
+# Executa a suíte completa de testes do repositório (26 testes de integridade + MCP)
+npm test
+```
+
+### Comandos do Pipeline de Dados
 ```bash
 # Executa o pipeline completo: coleta, parse, grafo, bancos e visualizador
 npm run pipeline
@@ -232,6 +409,7 @@ npm run gerar:visualizador
 
 Contribuições são muito bem-vindas! Você pode contribuir:
 - Reportando inconsistências de texto ou links em atos específicos via [Issues](https://github.com/jadsonsanches/anvisa-normas/issues).
+- Sugerindo novas ferramentas e melhorias para o Servidor MCP.
 - Sugerindo novas regras de extração e relacionamentos no `scripts/grafo.js`.
 - Aprimorando o visualizador em `index.html`.
 

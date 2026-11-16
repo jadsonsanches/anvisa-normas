@@ -3,7 +3,22 @@
   "version": "1.0.0",
   "description": "Acervo aberto de todas as normas da Anvisa em Markdown com grafo de relações determinístico e atualização automática",
   "main": "scripts/pipeline.js",
+  "bin": {
+    "anvisa-normas-mcp": "./dist/bin/mcp.js",
+    "anvisa-mcp": "./dist/bin/mcp.js"
+  },
+  "files": [
+    "dist",
+    "data/dist/anvisa.db",
+    "data/grafo/relacoes.json",
+    "data/grafo/estatisticas.json"
+  ],
   "scripts": {
+    "build": "tsup",
+    "start": "node ./dist/bin/sse.js",
+    "mcp": "node ./dist/bin/mcp.js",
+    "mcp:web": "node ./dist/bin/sse.js",
+    "test:mcp": "node --test test/mcp.test.js",
     "test": "node --test test/",
     "test:syntax": "node -e \"const fs=require('fs'),cp=require('child_process');fs.readdirSync('scripts').filter(f=>f.endsWith('.js')).forEach(f=>{console.log('Validando sintaxe:',f);cp.execFileSync(process.execPath,['--check','scripts/'+f],{stdio:'inherit'});});console.log('Sintaxe validada com sucesso em todos os scripts!');\"",
     "test:integrity": "node scripts/grafo.js && node scripts/gerar-visualizador.js && node scripts/exportar-bancos.js",
@@ -23,13 +38,27 @@
     "sqlite",
     "open-data",
     "compliance",
-    "regulatory-affairs"
+    "regulatory-affairs",
+    "mcp",
+    "model-context-protocol"
   ],
   "author": "Jadson Sanches",
   "license": "MIT",
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
     "cheerio": "^1.0.0",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
     "sql.js": "^1.16.0",
-    "turndown": "^7.2.0"
+    "turndown": "^7.2.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.6",
+    "@types/sql.js": "^1.4.11",
+    "tsup": "^8.3.6",
+    "typescript": "^5.7.3"
   }
 }
