@@ -1,0 +1,2 @@
+data/dist/anvisa.db filter=lfs diff=lfs merge=lfs -text
+data/dist/normas.json filter=lfs diff=lfs merge=lfs -text

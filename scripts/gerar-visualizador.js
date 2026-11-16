@@ -153,7 +153,7 @@ const htmlContent = `<!DOCTYPE html>
             <p class="text-[11px] text-emerald-400/70 truncate">Inteligência Regulatória</p>
             <div class="mt-1 flex items-center gap-1.5 text-[10px] text-emerald-300 font-mono bg-emerald-500/15 px-2 py-0.5 rounded-md border border-emerald-500/25 w-fit">
               <span>📅</span>
-              <span>Desde 01/01/2025</span>
+              <span>Desde 01/01/2024</span>
             </div>
           </div>
         </div>
@@ -371,7 +371,7 @@ const htmlContent = `<!DOCTYPE html>
             Exibindo ${stats.totalNormas || grafo.nodes.filter(n => n.arquivo).length}
           </span>
         </div>
-        <p class="text-[10px] sm:text-[11px] text-slate-300">Atos com texto e dados desde <span class="text-emerald-300 font-semibold font-mono">01/01/2025</span></p>
+        <p class="text-[10px] sm:text-[11px] text-slate-300">Atos com texto e dados desde <span class="text-emerald-300 font-semibold font-mono">01/01/2024</span></p>
         <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-emerald-500/10 rounded-full blur-xl pointer-events-none"></div>
       </div>
 
@@ -525,7 +525,7 @@ const htmlContent = `<!DOCTYPE html>
               <span>📊</span>
               <span>Proporção por Tipologia Normativa</span>
             </h4>
-            <p class="text-[11px] sm:text-xs text-slate-400">Composição do acervo regulatório coletado em 2026</p>
+            <p class="text-[11px] sm:text-xs text-slate-400">Composição do acervo regulatório consolidado (2024–2026)</p>
           </div>
           <div id="donut-container" class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-4">
             <!-- Donut SVG gerado dinamicamente -->
@@ -586,7 +586,7 @@ const htmlContent = `<!DOCTYPE html>
     <footer class="text-center text-xs text-white pt-8 pb-4 border-t border-emerald-500/10 space-y-1.5">
       <p class="text-white font-semibold">Acervo Aberto das Normas da Anvisa • Processamento Determinístico de Grafo Regulatório</p>
       <p class="text-xs text-white">Dados obtidos via portal oficial AnvisaLegis / Datalegis • Atualização contínua via GitHub Actions</p>
-      <p class="text-[11px] text-emerald-300 font-mono">📅 Histórico regulatório contínuo com dados consolidados a partir de 01/01/2025</p>
+      <p class="text-[11px] text-emerald-300 font-mono">📅 Histórico regulatório contínuo com dados consolidados a partir de 01/01/2024</p>
     </footer>
 
     <!-- Toast Flutuante de Notificação / Performance -->

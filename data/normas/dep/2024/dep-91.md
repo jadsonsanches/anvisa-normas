@@ -1,0 +1,52 @@
+---
+tipo: "DEP"
+numero: "91"
+ano: "2024"
+data_ato: "28/05/2024"
+data_promulgacao: "28/05/2024"
+data_publicacao_dou: "03/06/2024"
+situacao: "vigente"
+ementa: "Dispõe sobre a aprovação da abertura de Processo Administrativo de Regulação nº: 25351.803500/2024-22 conforme deliberação da Diretoria Colegiada em reunião."
+leis_base: ["LEI 9782/1999"]
+relacionadas: ["RDC 585/2021","PORTARIA 162/2021"]
+fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=DEP&numeroAto=00000091&seqAto=000&valorAno=2024&orgao=DC/ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
+---
+
+# DEP nº 91, de 28/05/2024
+
+MINISTÉRIO DA SAÚDE
+
+AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA
+
+DIRETORIA COLEGIADA
+
+DESPACHO Nº 91, DE 28 DE MAIO DE 2024
+
+A DIRETORIA COLEGIADA DA AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA, no uso das atribuições que lhe confere o [art. 15, III e IV, da Lei nº 9.782, de 26 de janeiro de 1999](https://www.planalto.gov.br), aliado ao [art. 187, X, § 1º do Regimento Interno](../rdc/2021/rdc-585.md) aprovado pela [Resolução da Diretoria Colegiada - RDC nº 585, de 10 de dezembro de 2021](../rdc/2021/rdc-585.md), resolve aprovar a abertura do Processo Administrativo de Regulação, em Anexo, com dispensas de Análise de Impacto Regulatório (AIR), de Consulta Pública (CP) e de Avaliação do Resultado Regulatório (ARR) previstas, respectivamente, no [art. 18](../portaria/2021/portaria-162.md), [art. 39](../portaria/2021/portaria-162.md) e no [art. 57 da Portaria nº 162, de 12 de março de 2021](../portaria/2021/portaria-162.md), conforme deliberado em reunião realizada em 27 de maio de 2024, e eu,
+
+Diretor-Presidente, determino a sua publicação.
+
+ANTONIO BARRA TORRES  
+Diretor-Presidente
+
+ANEXO
+
+  
+Processo nº: 25351.803500/2024-22  
+Assunto: Abertura de processo administrativo de regulação para tratar das ações  
+normativas excepcionais e temporárias a serem adotadas em caráter emergencial pela  
+Agência Nacional de Vigilância Sanitária - Anvisa, em decorrência do estado de calamidade  
+pública em municípios do Estado do Rio Grande do Sul, reconhecido pelo Decreto nº  
+57.596, de 1º de maio de 2024, e ratificado pelos Decretos nº 57.600, de 4 de maio de  
+2024, e nº 56.603, de 5 de maio de 2024, todos do Estado do Rio Grande do Sul.  
+Área responsável: GADIP  
+Agenda Regulatória 2024-2025: Não é tema da Agenda Regulatória.  
+Excepcionalidades: Dispensa de Análise de Impacto Regulatório (AIR) e dispensa  
+de Consulta Pública (CP) para enfrentamento de situação de urgência. Dispensa de  
+Avaliação do Resultado Regulatório (ARR) por ser ato normativo de vigência temporária e  
+de caráter excepcional, para tratar situação específica e pontual e para a qual a realização  
+de ARR se caracteriza como improdutiva e representa emprego de recursos  
+desproporcionais aos eventuais impactos esperados com o ato normativo.  
+Relatoria: Antonio Barra Torres
+
+PUB D.O.U., 03/06/2024 - Seção 1

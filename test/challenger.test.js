@@ -26,8 +26,8 @@ const dirDist = path.join(rootDir, 'data/dist');
 
 test('Desafio Empírico 1: Verificação da quantidade total de arquivos markdown em data/normas/', () => {
   const arquivos = listarArquivosMarkdown(dirNormas);
-  assert.ok(arquivos.length >= 14000, `Esperava acervo consolidado com mais de 14000 normas, encontrou ${arquivos.length}`);
-  assert.strictEqual(arquivos.length, 14363, `Esperava exatamente 14363 arquivos markdown, mas encontrou ${arquivos.length}`);
+  assert.ok(arquivos.length >= 23000, `Esperava acervo consolidado com mais de 23000 normas, encontrou ${arquivos.length}`);
+  assert.strictEqual(arquivos.length, 23601, `Esperava exatamente 23601 arquivos markdown, mas encontrou ${arquivos.length}`);
 });
 
 test('Desafio Empírico 2: Validação estrita de YAML frontmatter, 11 propriedades e integridade em todos os arquivos', () => {
@@ -106,13 +106,22 @@ test('Desafio Empírico 2: Validação estrita de YAML frontmatter, 11 proprieda
         ementasNaoVazias++;
       } else {
         // Se ementa é vazia, deve ser comprovadamente uma Retificação oficial ou Extrato/Edital que não possui ementa no DOU
-        const isRetOuExtrato = conteudo.includes('RETIFICAÇÃO') ||
+        const tipoNorma = (campos['tipo'] || '').replace(/"/g, '');
+        const isRetOuExtrato = ['BIB', 'MAN'].includes(tipoNorma) ||
+                               conteudo.includes('RETIFICAÇÃO') ||
                                conteudo.includes('RETIFICACAO') ||
                                conteudo.includes('EXTRATO') ||
                                conteudo.includes('EDITAL') ||
                                conteudo.includes('AVISO DE ALTERAÇÃO') ||
                                conteudo.includes('ATA') ||
                                conteudo.includes('PAUTA') ||
+                               conteudo.includes('PREGÃO') ||
+                               conteudo.includes('PREGAO') ||
+                               conteudo.includes('NOTA') ||
+                               conteudo.includes('MANUAL') ||
+                               conteudo.includes('Manual') ||
+                               conteudo.includes('BIBLIOTECA') ||
+                               conteudo.includes('RESULTADO DE JULGAMENTO') ||
                                conteudo.includes('seqAto=RET') ||
                                conteudo.includes('Onde se lê') ||
                                conteudo.includes('Onde se le') ||
@@ -370,7 +379,7 @@ test('Desafio Empírico 7: Integridade do Grafo e Estatísticas (relacoes.json e
   assert.strictEqual(somaPorTipo, totalEsperado, `Soma de porTipo deve ser ${totalEsperado}`);
 
   // 2. Nós do grafo
-  assert.strictEqual(grafo.nodes.length, 15345, `Grafo deve ter exatamente 15345 nós`);
+  assert.strictEqual(grafo.nodes.length, 25669, `Grafo deve ter exatamente 25669 nós`);
   const nodesMap = new Map();
   let nosInternos = 0;
 
