@@ -92,6 +92,16 @@
       border-radius: 9999px;
       box-shadow: 0 0 4px #00ff87;
     }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    #graph-canvas {
+      touch-action: none;
+    }
   </style>
 </head>
 <body class="min-h-screen flex text-slate-200 antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
@@ -103,21 +113,26 @@
   <aside id="app-sidebar" class="w-64 bg-[#05140d]/95 border-r border-emerald-500/15 flex flex-col justify-between p-4 sticky top-0 h-screen z-50 shrink-0 backdrop-blur-2xl transition-all duration-300 ease-in-out fixed md:sticky inset-y-0 left-0 -translate-x-full md:translate-x-0 shadow-2xl md:shadow-none overflow-y-auto">
     <div class="space-y-6">
       <!-- Logo / Marca -->
-      <div class="flex items-center gap-3 px-1 pt-1 border-b border-emerald-500/15 pb-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-emerald-500/20 shrink-0">
-          🌿
-        </div>
-        <div class="overflow-hidden">
-          <div class="font-bold text-sm tracking-wide text-white flex items-center gap-1.5">
-            <span>AnvisaNormas</span>
-            <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-mono border border-emerald-500/30">AI</span>
+      <div class="flex items-center justify-between px-1 pt-1 border-b border-emerald-500/15 pb-3">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-emerald-500/20 shrink-0">
+            🌿
           </div>
-          <p class="text-[11px] text-emerald-400/70 truncate">Inteligência Regulatória</p>
-          <div class="mt-1 flex items-center gap-1.5 text-[10px] text-emerald-300 font-mono bg-emerald-500/15 px-2 py-0.5 rounded-md border border-emerald-500/25 w-fit">
-            <span>📅</span>
-            <span>Desde 01/01/2025</span>
+          <div class="overflow-hidden">
+            <div class="font-bold text-sm tracking-wide text-white flex items-center gap-1.5">
+              <span>AnvisaNormas</span>
+              <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-mono border border-emerald-500/30">AI</span>
+            </div>
+            <p class="text-[11px] text-emerald-400/70 truncate">Inteligência Regulatória</p>
+            <div class="mt-1 flex items-center gap-1.5 text-[10px] text-emerald-300 font-mono bg-emerald-500/15 px-2 py-0.5 rounded-md border border-emerald-500/25 w-fit">
+              <span>📅</span>
+              <span>Desde 01/01/2025</span>
+            </div>
           </div>
         </div>
+        <button onclick="toggleSidebar(false)" class="md:hidden p-2 text-slate-400 hover:text-white rounded-lg hover:bg-emerald-500/20 border border-transparent hover:border-emerald-500/30 transition shrink-0" aria-label="Fechar Menu">
+          ✕
+        </button>
       </div>
 
       <!-- Menu Principal de Navegação -->
@@ -164,17 +179,17 @@
   </aside>
 
   <!-- Conteúdo Principal -->
-  <main class="flex-1 p-3 md:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto overflow-y-auto w-full transition-all duration-300">
+  <main class="flex-1 p-3 sm:p-5 md:p-6 lg:p-8 space-y-5 sm:space-y-6 overflow-y-auto w-full min-w-0 transition-all duration-300">
 
     <!-- Topbar: Botão Hamburger + Barra de Busca & Filtros Rápidos / Calendário -->
     <header class="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5">
-      <div class="flex items-center gap-2.5 flex-1 max-w-xl">
+      <div class="flex items-center gap-2 sm:gap-2.5 flex-1 w-full lg:max-w-xl min-w-0">
         <!-- Botão Hamburger para alternar Menu Lateral -->
         <button 
           id="btn-toggle-sidebar" 
           type="button"
           onclick="toggleSidebar()" 
-          class="p-2.5 rounded-xl bg-[#082016] hover:bg-emerald-950/80 border border-emerald-500/25 text-emerald-300 hover:text-white transition shadow-sm flex items-center justify-center shrink-0 cursor-pointer group" 
+          class="p-2 sm:p-2.5 rounded-xl bg-[#082016] hover:bg-emerald-950/80 border border-emerald-500/25 text-emerald-300 hover:text-white transition shadow-sm flex items-center justify-center shrink-0 cursor-pointer group" 
           title="Alternar Menu Lateral"
           aria-label="Alternar Menu Lateral"
         >
@@ -184,32 +199,32 @@
         </button>
 
         <!-- Barra de Busca -->
-        <div class="relative flex-1">
-          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-emerald-400/80">
+        <div class="relative flex-1 min-w-0">
+          <div class="absolute inset-y-0 left-0 pl-3 sm:pl-3.5 flex items-center pointer-events-none text-emerald-400/80">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
           </div>
           <input 
             id="search-input" 
             type="text" 
-            placeholder="Buscar por número do ato, ementa, setor regulado (ex: alimentos, medicamentos, cosméticos)..." 
-            class="w-full pl-10 pr-24 py-2.5 rounded-full bg-[#081f15]/80 border border-emerald-500/25 text-slate-100 placeholder-emerald-400/40 text-xs md:text-sm focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition shadow-inner"
+            placeholder="Buscar por número do ato, ementa, setor..." 
+            class="w-full pl-9 sm:pl-10 pr-20 sm:pr-24 py-2 sm:py-2.5 rounded-full bg-[#081f15]/80 border border-emerald-500/25 text-slate-100 placeholder-emerald-400/40 text-xs sm:text-sm focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition shadow-inner"
           >
           <div class="absolute inset-y-0 right-0 pr-2 flex items-center gap-1">
-            <span id="count-filtered" class="text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+            <span id="count-filtered" class="text-[9px] sm:text-[10px] font-mono font-medium px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 whitespace-nowrap">
               15345 nós
             </span>
           </div>
         </div>
       </div>
 
-      <!-- Área do Retângulo Azul: Controles de Período (7d, 14d, 30d, 60d + Calendário Moderno) -->
-      <div class="flex items-center gap-2 self-start lg:self-auto flex-wrap">
+      <!-- Área de Controles de Período (7d, 14d, 30d, 60d + Calendário Moderno) -->
+      <div class="flex items-center gap-2 self-start lg:self-auto flex-wrap w-full sm:w-auto">
         <!-- Filtros Rápidos de Período -->
-        <div id="radar-filtros-rapidos" class="flex items-center gap-1 bg-[#061810] p-1 rounded-xl border border-emerald-500/20 shadow-sm">
-          <button onclick="aplicarFiltroRapido('7_DIAS')" data-filtro="7_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition">7 dias</button>
-          <button onclick="aplicarFiltroRapido('14_DIAS')" data-filtro="14_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">14 dias</button>
-          <button onclick="aplicarFiltroRapido('30_DIAS')" data-filtro="30_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">30 dias</button>
-          <button onclick="aplicarFiltroRapido('60_DIAS')" data-filtro="60_DIAS" class="filtro-rapido-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition">60 dias</button>
+        <div id="radar-filtros-rapidos" class="flex items-center gap-1 bg-[#061810] p-1 rounded-xl border border-emerald-500/20 shadow-sm overflow-x-auto no-scrollbar max-w-full">
+          <button onclick="aplicarFiltroRapido('7_DIAS')" data-filtro="7_DIAS" class="filtro-rapido-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition shrink-0">7 dias</button>
+          <button onclick="aplicarFiltroRapido('14_DIAS')" data-filtro="14_DIAS" class="filtro-rapido-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition shrink-0">14 dias</button>
+          <button onclick="aplicarFiltroRapido('30_DIAS')" data-filtro="30_DIAS" class="filtro-rapido-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition shrink-0">30 dias</button>
+          <button onclick="aplicarFiltroRapido('60_DIAS')" data-filtro="60_DIAS" class="filtro-rapido-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-transparent text-slate-300 hover:text-white transition shrink-0">60 dias</button>
         </div>
 
         <!-- Componente Moderno de Calendário (Custom Date Range Picker Dark Emerald) -->
@@ -218,7 +233,7 @@
             id="calendar-trigger-btn"
             type="button"
             onclick="toggleCustomCalendar(event)" 
-            class="flex items-center gap-2 bg-[#061810] hover:bg-[#0c2a1d] px-3 py-1.5 rounded-xl border border-emerald-500/25 text-xs text-slate-200 hover:text-white transition shadow-sm cursor-pointer group active:scale-95"
+            class="flex items-center gap-1.5 sm:gap-2 bg-[#061810] hover:bg-[#0c2a1d] px-2.5 sm:px-3 py-1.5 rounded-xl border border-emerald-500/25 text-xs text-slate-200 hover:text-white transition shadow-sm cursor-pointer group active:scale-95 shrink-0"
             title="Selecionar período personalizado no calendário"
           >
             <span class="text-sm">📅</span>
@@ -233,7 +248,7 @@
           <!-- Popover Dropdown de Calendário Customizado -->
           <div 
             id="custom-calendar-popover" 
-            class="hidden absolute right-0 top-full mt-2 z-50 w-[310px] bg-[#05150e]/95 backdrop-blur-2xl border border-emerald-500/30 rounded-2xl p-4 shadow-2xl shadow-black/90 select-none"
+            class="hidden absolute left-0 sm:left-auto sm:right-0 top-full mt-2 z-50 w-[300px] sm:w-[310px] max-w-[calc(100vw-24px)] bg-[#05150e]/95 backdrop-blur-2xl border border-emerald-500/30 rounded-2xl p-3 sm:p-4 shadow-2xl shadow-black/90 select-none"
           >
             <!-- Header do Popover: Navegação Mês / Ano -->
             <div class="flex items-center justify-between pb-3 border-b border-emerald-500/15">
@@ -292,88 +307,88 @@
     </header>
 
     <!-- Componente Estrela: RADAR REGULATÓRIO DIÁRIO -->
-    <section id="radar-section" class="glass-card rounded-2xl p-4 md:p-6 space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-emerald-500/15 pb-3">
+    <section id="radar-section" class="glass-card rounded-2xl p-3.5 sm:p-5 md:p-6 space-y-3 sm:space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 border-b border-emerald-500/15 pb-3">
         <div>
-          <div class="flex items-center gap-2">
-            <span class="text-xl">📅</span>
-            <h2 class="text-base md:text-lg font-bold text-white tracking-wide flex items-center gap-2">
-              Linha do Tempo Diária de Publicações no DOU
-              <span id="radar-badge-periodo" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal">Últimos 7 dias</span>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-lg sm:text-xl">📅</span>
+            <h2 class="text-sm sm:text-base md:text-lg font-bold text-white tracking-wide flex items-center gap-2 flex-wrap">
+              <span>Linha do Tempo Diária no DOU</span>
+              <span id="radar-badge-periodo" class="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-normal">Últimos 7 dias</span>
             </h2>
           </div>
-          <p class="text-xs text-slate-400 mt-0.5">
+          <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">
             Clique em um dia específico para filtrar o grafo e analisar os atos publicados no DOU.
           </p>
         </div>
       </div>
 
       <!-- Carrossel de Dias com Contador de Atos por Dia -->
-      <div id="daily-timeline-carousel" class="flex items-stretch gap-2.5 overflow-x-auto pb-2 pt-1 scroll-smooth">
+      <div id="daily-timeline-carousel" class="flex items-stretch gap-2 sm:gap-2.5 overflow-x-auto pb-2 pt-1 scroll-smooth touch-pan-x">
         <!-- Gerado via JavaScript -->
       </div>
     </section>
 
-    <!-- Cards de Métricas Principais (Estilo Imagens 1 e 2) -->
-    <section id="metrics-section" class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-      <!-- Card 1: Total Normas (Opção 1: Acervo Total Fixo + Badge Exibindo X) -->
-      <div class="glass-card glass-card-hover rounded-2xl p-4 space-y-2 relative overflow-hidden group">
+    <!-- Cards de Métricas Principais -->
+    <section id="metrics-section" class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+      <!-- Card 1: Total Normas -->
+      <div class="glass-card glass-card-hover rounded-2xl p-3 sm:p-4 space-y-1.5 sm:space-y-2 relative overflow-hidden group">
         <div class="flex items-center justify-between text-slate-400">
-          <span class="text-xs font-semibold uppercase tracking-wider text-emerald-400/80">Acervo Total</span>
-          <span class="text-base group-hover:scale-110 transition">📑</span>
+          <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-emerald-400/80">Acervo Total</span>
+          <span class="text-sm sm:text-base group-hover:scale-110 transition">📑</span>
         </div>
-        <div class="flex items-baseline gap-2 flex-wrap">
-          <span class="text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-total-normas">14363</span>
-          <span class="text-xs text-emerald-400 font-medium">normas</span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-500/30" id="stat-filtradas-badge">
+        <div class="flex items-baseline gap-1.5 sm:gap-2 flex-wrap">
+          <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-total-normas">14363</span>
+          <span class="text-[11px] sm:text-xs text-emerald-400 font-medium">normas</span>
+          <span class="text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-500/30 truncate max-w-full" id="stat-filtradas-badge">
             Exibindo 14363
           </span>
         </div>
-        <p class="text-[11px] text-slate-300">Atos com texto integral e dados consolidados desde <span class="text-emerald-300 font-semibold font-mono">01/01/2025</span></p>
+        <p class="text-[10px] sm:text-[11px] text-slate-300">Atos com texto e dados desde <span class="text-emerald-300 font-semibold font-mono">01/01/2025</span></p>
         <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-emerald-500/10 rounded-full blur-xl pointer-events-none"></div>
       </div>
 
       <!-- Card 2: Vigentes -->
-      <div class="glass-card glass-card-hover rounded-2xl p-4 space-y-2 relative overflow-hidden group">
+      <div class="glass-card glass-card-hover rounded-2xl p-3 sm:p-4 space-y-1.5 sm:space-y-2 relative overflow-hidden group">
         <div class="flex items-center justify-between text-slate-400">
-          <span class="text-xs font-semibold uppercase tracking-wider text-teal-400/80">Normas Vigentes</span>
-          <span class="text-base group-hover:scale-110 transition">✅</span>
+          <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-teal-400/80">Normas Vigentes</span>
+          <span class="text-sm sm:text-base group-hover:scale-110 transition">✅</span>
         </div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-vigentes">14233</span>
-          <span class="text-xs px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px]" id="stat-vigentes-pct">
+        <div class="flex items-baseline gap-1.5 sm:gap-2">
+          <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-vigentes">14233</span>
+          <span class="text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono" id="stat-vigentes-pct">
             99%
           </span>
         </div>
-        <p class="text-[11px] text-slate-400">Plena eficácia jurídica em vigor no Brasil</p>
+        <p class="text-[10px] sm:text-[11px] text-slate-400">Plena eficácia jurídica em vigor no Brasil</p>
         <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-teal-500/10 rounded-full blur-xl pointer-events-none"></div>
       </div>
 
       <!-- Card 3: Grafo de Relações -->
-      <div class="glass-card glass-card-hover rounded-2xl p-4 space-y-2 relative overflow-hidden group">
+      <div class="glass-card glass-card-hover rounded-2xl p-3 sm:p-4 space-y-1.5 sm:space-y-2 relative overflow-hidden group">
         <div class="flex items-center justify-between text-slate-400">
-          <span class="text-xs font-semibold uppercase tracking-wider text-cyan-400/80">Conexões Mapeadas</span>
-          <span class="text-base group-hover:scale-110 transition">🕸️</span>
+          <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-cyan-400/80">Conexões Mapeadas</span>
+          <span class="text-sm sm:text-base group-hover:scale-110 transition">🕸️</span>
         </div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-relacoes">26337</span>
-          <span class="text-xs text-cyan-400 font-medium">arestas</span>
+        <div class="flex items-baseline gap-1.5 sm:gap-2">
+          <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-relacoes">26337</span>
+          <span class="text-[11px] sm:text-xs text-cyan-400 font-medium">arestas</span>
         </div>
-        <p class="text-[11px] text-slate-400">Relações determinísticas (altera, revoga, cita)</p>
+        <p class="text-[10px] sm:text-[11px] text-slate-400">Relações (altera, revoga, cita)</p>
         <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-cyan-500/10 rounded-full blur-xl pointer-events-none"></div>
       </div>
 
       <!-- Card 4: Volume Médio / Picos -->
-      <div class="glass-card glass-card-hover rounded-2xl p-4 space-y-2 relative overflow-hidden group">
+      <div class="glass-card glass-card-hover rounded-2xl p-3 sm:p-4 space-y-1.5 sm:space-y-2 relative overflow-hidden group">
         <div class="flex items-center justify-between text-slate-400">
-          <span class="text-xs font-semibold uppercase tracking-wider text-amber-400/80">Pico Regulatório</span>
-          <span class="text-base group-hover:scale-110 transition">⚡</span>
+          <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-amber-400/80">Pico Regulatório</span>
+          <span class="text-sm sm:text-base group-hover:scale-110 transition">⚡</span>
         </div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-pico-valor">121</span>
-          <span class="text-xs px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-[10px]" id="stat-pico-data">19/10</span>
+        <div class="flex items-baseline gap-1.5 sm:gap-2">
+          <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-pico-valor">121</span>
+          <span class="text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono" id="stat-pico-data">19/10</span>
         </div>
-        <p class="text-[11px] text-slate-400" id="stat-pico-sub">Maior volume diário no período</p>
+        <p class="text-[10px] sm:text-[11px] text-slate-400" id="stat-pico-sub">Maior volume diário no período</p>
         <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-amber-500/10 rounded-full blur-xl pointer-events-none"></div>
       </div>
     </section>
@@ -383,15 +398,15 @@
 
       <!-- Coluna da Esquerda: Grafo Determinístico Interativo & Analytics -->
       <div id="graph-section" class="lg:col-span-7 space-y-4">
-        <div class="glass-card rounded-2xl p-4 md:p-5 space-y-3 relative">
+        <div class="glass-card rounded-2xl p-3.5 sm:p-5 space-y-3 relative">
           
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between flex-wrap gap-2">
             <div>
               <h3 class="text-sm md:text-base font-bold text-white flex items-center gap-2">
                 <span>🕸️</span>
                 <span>Grafo de Relações Regulatórias</span>
               </h3>
-              <p class="text-xs text-slate-400">Física interativa de conexões entre RDCs, Portarias, REs e Leis</p>
+              <p class="text-[11px] sm:text-xs text-slate-400">Física interativa de conexões entre RDCs, Portarias, REs e Leis</p>
             </div>
             <div class="flex items-center gap-1.5 text-xs">
               <button id="btn-zoom-in" class="w-8 h-8 rounded-lg bg-[#0b241a] hover:bg-emerald-950 text-emerald-300 border border-emerald-500/30 flex items-center justify-center font-bold" title="Aproximar">+</button>
@@ -401,11 +416,11 @@
           </div>
 
           <!-- Canvas do Grafo -->
-          <div class="relative w-full h-[480px] bg-[#030a07] rounded-xl overflow-hidden border border-emerald-500/20 shadow-[inset_0_4px_24px_rgba(0,0,0,0.65)]" style="background-image: radial-gradient(rgba(16, 185, 129, 0.12) 1px, transparent 1px); background-size: 22px 22px;">
+          <div class="relative w-full h-[340px] sm:h-[420px] md:h-[480px] lg:h-[520px] bg-[#030a07] rounded-xl overflow-hidden border border-emerald-500/20 shadow-[inset_0_4px_24px_rgba(0,0,0,0.65)]" style="background-image: radial-gradient(rgba(16, 185, 129, 0.12) 1px, transparent 1px); background-size: 22px 22px;">
             <canvas id="graph-canvas" class="w-full h-full block"></canvas>
             
             <!-- Legenda Flutuante Completa e Interativa com Botão Minimizar -->
-            <div id="grafo-legenda-card" class="absolute bottom-3 left-3 bg-[#04130c]/95 backdrop-blur-md border border-emerald-500/30 rounded-xl p-2.5 text-[10px] md:text-[11px] shadow-[0_12px_36px_rgba(0,0,0,0.7)] z-20 transition-all duration-200 max-w-[270px] pointer-events-auto">
+            <div id="grafo-legenda-card" class="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 bg-[#04130c]/95 backdrop-blur-md border border-emerald-500/30 rounded-xl p-2 sm:p-2.5 text-[10px] md:text-[11px] shadow-[0_12px_36px_rgba(0,0,0,0.7)] z-20 transition-all duration-200 max-w-[calc(100%-16px)] sm:max-w-[270px] pointer-events-auto">
               <div class="flex items-center justify-between gap-2 border-b border-emerald-500/20 pb-1.5 mb-1.5 cursor-pointer select-none" onclick="toggleLegendaGrafo()" title="Minimizar ou expandir legenda">
                 <div class="font-bold text-slate-200 flex items-center gap-1.5">
                   <span class="text-emerald-400">🏷️</span>
@@ -463,29 +478,33 @@
           </div>
 
           <!-- Filtro de Tipos Rápido em Pills -->
-          <div class="pt-1 flex items-center gap-1.5 flex-wrap">
-            <span class="text-[11px] text-slate-400 font-medium">Filtrar Tipo:</span>
-            <button data-tipo="ALL" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition">Todos</button>
-            <button data-tipo="RE" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">RE</button>
-            <button data-tipo="PORTARIA" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">Portaria</button>
-            <button data-tipo="IN" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">IN</button>
-            <button data-tipo="RDC" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">RDC</button>
-            <button data-tipo="CPB" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">CPB</button>
-            <button data-tipo="DEP" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">Despacho</button>
-            <button data-tipo="TAP" class="tipo-filter-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition">Apreensão</button>
+          <div class="pt-1 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+            <span class="text-[11px] text-slate-400 font-medium shrink-0">Filtrar:</span>
+            <button data-tipo="ALL" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition shrink-0">Todos</button>
+            <button data-tipo="RE" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">RE</button>
+            <button data-tipo="PORTARIA" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">Portaria</button>
+            <button data-tipo="IN" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">IN</button>
+            <button data-tipo="RDC" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">RDC</button>
+            <button data-tipo="CPB" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">CPB</button>
+            <button data-tipo="DEP" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">Despacho</button>
+            <button data-tipo="TAP" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">Apreensão</button>
           </div>
         </div>
 
         <!-- Distribuição por Tipologia (Donut & Analytics) -->
-        <div class="glass-card rounded-2xl p-4 md:p-5 flex flex-col sm:flex-row items-center justify-between gap-5">
-          <div class="space-y-1">
-            <h4 class="text-sm font-bold text-white flex items-center gap-2">
+        <div class="glass-card rounded-2xl p-3.5 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-5">
+          <div class="space-y-1 text-center sm:text-left w-full sm:w-auto">
+            <h4 class="text-sm font-bold text-white flex items-center justify-center sm:justify-start gap-2">
               <span>📊</span>
               <span>Proporção por Tipologia Normativa</span>
             </h4>
-            <p class="text-xs text-slate-400">Composição do acervo regulatório coletado em 2026</p>
+            <p class="text-[11px] sm:text-xs text-slate-400">Composição do acervo regulatório coletado em 2026</p>
           </div>
-          <div id="donut-container" class="flex items-center gap-4">
+          <div id="donut-container" class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-4">
+            <!-- Donut SVG gerado dinamicamente -->
+          </div>
+        </div>
+      </div>
             <!-- Donut SVG gerado dinamicamente -->
           </div>
         </div>
@@ -774,11 +793,11 @@
           <button 
             type="button"
             onclick="filtrarPorDia('${item.data}')" 
-            class="timeline-pill flex-1 min-w-[76px] p-2.5 rounded-xl border flex flex-col items-center justify-between text-center transition cursor-pointer select-none ${cardStyle}"
+            class="timeline-pill flex-1 min-w-[66px] sm:min-w-[76px] p-2 sm:p-2.5 rounded-xl border flex flex-col items-center justify-between text-center transition cursor-pointer select-none ${cardStyle}"
             title="${item.data} (${rotuloSemana}): ${qtd} ${qtd === 1 ? 'ato' : 'atos'}${qtd === 0 ? ' (sem publicações)' : ''}"
           >
-            <span class="text-[10px] uppercase font-semibold text-slate-400 whitespace-nowrap">${rotuloSemana}</span>
-            <span class="text-base font-extrabold font-mono text-white my-0.5">${item.dia}</span>
+            <span class="text-[9px] sm:text-[10px] uppercase font-semibold text-slate-400 whitespace-nowrap">${rotuloSemana}</span>
+            <span class="text-sm sm:text-base font-extrabold font-mono text-white my-0.5">${item.dia}</span>
             ${badgeHtml}
           </button>
         `;
@@ -1766,6 +1785,88 @@
       wakeRender();
     });
 
+    // Eventos de Toque Mobile (Touch / Pinch-to-Zoom / Pan)
+    let lastTouchDist = null;
+    let touchStartPos = null;
+
+    canvas.addEventListener('touchstart', e => {
+      const rect = canvas.getBoundingClientRect();
+      if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        const mx = (touch.clientX - rect.left - transform.x) / transform.scale;
+        const my = (touch.clientY - rect.top - transform.y) / transform.scale;
+        const clicked = findNodeAt(mx, my);
+
+        touchStartPos = { x: touch.clientX, y: touch.clientY };
+        lastMouse = { x: touch.clientX, y: touch.clientY };
+
+        if (clicked) {
+          dragNode = clicked;
+          selecionarNo(clicked);
+          e.preventDefault();
+        } else {
+          isDragging = true;
+        }
+      } else if (e.touches.length === 2) {
+        e.preventDefault();
+        isDragging = false;
+        dragNode = null;
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        lastTouchDist = Math.hypot(dx, dy);
+      }
+      wakeRender();
+    }, { passive: false });
+
+    window.addEventListener('touchmove', e => {
+      if (e.touches.length === 2 && lastTouchDist) {
+        e.preventDefault();
+        const rect = canvas.getBoundingClientRect();
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const newDist = Math.hypot(dx, dy);
+        const factor = newDist / lastTouchDist;
+        const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
+        const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
+
+        applyZoomAt(factor, midX, midY);
+        lastTouchDist = newDist;
+      } else if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        if (dragNode) {
+          e.preventDefault();
+          const rect = canvas.getBoundingClientRect();
+          dragNode.x = (touch.clientX - rect.left - transform.x) / transform.scale;
+          dragNode.y = (touch.clientY - rect.top - transform.y) / transform.scale;
+          dragNode.vx = 0;
+          dragNode.vy = 0;
+          alpha = Math.max(alpha, 0.3);
+          wakeRender();
+        } else if (isDragging && e.target === canvas) {
+          const distMoved = touchStartPos ? Math.hypot(touch.clientX - touchStartPos.x, touch.clientY - touchStartPos.y) : 0;
+          if (distMoved > 6) {
+            e.preventDefault();
+            transform.x += (touch.clientX - lastMouse.x);
+            transform.y += (touch.clientY - lastMouse.y);
+            lastMouse = { x: touch.clientX, y: touch.clientY };
+            wakeRender();
+          }
+        }
+      }
+    }, { passive: false });
+
+    window.addEventListener('touchend', e => {
+      if (e.touches.length === 0) {
+        dragNode = null;
+        isDragging = false;
+        lastTouchDist = null;
+        wakeRender();
+      } else if (e.touches.length === 1) {
+        lastTouchDist = null;
+        lastMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+    });
+
     canvas.addEventListener('wheel', e => {
       e.preventDefault();
       const rect = canvas.getBoundingClientRect();
@@ -1846,15 +1947,19 @@
           </div>
 
           ${node.arquivo ? `
-            <div class="pt-2 border-t border-emerald-500/15 flex items-center justify-between">
-              <span class="text-[11px] text-slate-400 font-mono truncate max-w-[200px]">${node.arquivo}</span>
-              <a href="https://github.com/jadsonsanches/anvisa-normas/blob/main/${node.arquivo.replace(/\\/g, '/')}" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-[11px] font-semibold transition">
+            <div class="pt-2 border-t border-emerald-500/15 flex items-center justify-between gap-2">
+              <span class="text-[11px] text-slate-400 font-mono truncate max-w-[130px] sm:max-w-[200px]">${node.arquivo}</span>
+              <a href="https://github.com/jadsonsanches/anvisa-normas/blob/main/${node.arquivo.replace(/\\/g, '/')}" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-[11px] font-semibold transition shrink-0">
                 Ver Markdown ↗
               </a>
             </div>
           ` : ''}
         </div>
       `;
+
+      if (window.innerWidth < 1024 && !dragNode) {
+        document.getElementById('inspector-content')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
     }
 
     window.selecionarPorId = function(id) {
@@ -2161,6 +2266,15 @@
 
     // Inicialização
     try {
+      if (window.innerWidth < 640) {
+        const legBody = document.getElementById('grafo-legenda-body');
+        const legBtn = document.getElementById('legenda-toggle-btn');
+        if (legBody && legBtn) {
+          legBody.classList.add('hidden');
+          legBtn.textContent = '▲';
+          legBtn.title = 'Expandir legenda';
+        }
+      }
       if (window.innerWidth >= 768) {
         const preferHidden = localStorage.getItem('sidebar_visivel') === 'false';
         if (preferHidden) {
