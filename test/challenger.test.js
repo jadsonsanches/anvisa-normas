@@ -26,8 +26,8 @@ const dirDist = path.join(rootDir, 'data/dist');
 
 test('Desafio Empírico 1: Verificação da quantidade total de arquivos markdown em data/normas/', () => {
   const arquivos = listarArquivosMarkdown(dirNormas);
-  assert.ok(arquivos.length >= 23000, `Esperava acervo consolidado com mais de 23000 normas, encontrou ${arquivos.length}`);
-  assert.strictEqual(arquivos.length, 23601, `Esperava exatamente 23601 arquivos markdown, mas encontrou ${arquivos.length}`);
+  assert.ok(arquivos.length >= 29000, `Esperava acervo consolidado com mais de 29000 normas, encontrou ${arquivos.length}`);
+  assert.strictEqual(arquivos.length, 29744, `Esperava exatamente 29744 arquivos markdown, mas encontrou ${arquivos.length}`);
 });
 
 test('Desafio Empírico 2: Validação estrita de YAML frontmatter, 11 propriedades e integridade em todos os arquivos', () => {
@@ -113,15 +113,21 @@ test('Desafio Empírico 2: Validação estrita de YAML frontmatter, 11 proprieda
                                conteudo.includes('EXTRATO') ||
                                conteudo.includes('EDITAL') ||
                                conteudo.includes('AVISO DE ALTERAÇÃO') ||
+                               conteudo.includes('AVISO DE LICITAÇÃO') ||
+                               conteudo.includes('AVISO DE LICITACAO') ||
                                conteudo.includes('ATA') ||
                                conteudo.includes('PAUTA') ||
                                conteudo.includes('PREGÃO') ||
                                conteudo.includes('PREGAO') ||
+                               conteudo.includes('Pregão') ||
+                               conteudo.includes('Pregao') ||
                                conteudo.includes('NOTA') ||
                                conteudo.includes('MANUAL') ||
                                conteudo.includes('Manual') ||
                                conteudo.includes('BIBLIOTECA') ||
                                conteudo.includes('RESULTADO DE JULGAMENTO') ||
+                               conteudo.includes('Decisões Administrativas') ||
+                               conteudo.includes('Decisoes Administrativas') ||
                                conteudo.includes('seqAto=RET') ||
                                conteudo.includes('Onde se lê') ||
                                conteudo.includes('Onde se le') ||
@@ -184,8 +190,8 @@ test('Desafio Empírico 3: Formato estrito de datas (DD/MM/AAAA) nos campos de d
 
     const dataAto = (campos['data_ato'] || '').replace(/"/g, '').trim();
     if (!dataAto) {
-      if (rel.includes('/2025/')) {
-        falhasData.push(`${rel}: 'data_ato' obrigatória de 2025 está vazia`);
+      if (rel.includes('/2023/') || rel.includes('/2025/')) {
+        falhasData.push(`${rel}: 'data_ato' obrigatória de 2023/2025 está vazia`);
       }
     } else {
       const matchAto = dataAto.match(dataRegex);
@@ -200,6 +206,9 @@ test('Desafio Empírico 3: Formato estrito de datas (DD/MM/AAAA) nos campos de d
         }
         if (rel.includes('/2025/') && ano !== 2025) {
           falhasData.push(`${rel}: 'data_ato' de 2025 com ano incoerente: '${dataAto}'`);
+        }
+        if (rel.includes('/2023/') && ano !== 2023) {
+          falhasData.push(`${rel}: 'data_ato' de 2023 com ano incoerente: '${dataAto}'`);
         }
       }
     }
@@ -379,7 +388,7 @@ test('Desafio Empírico 7: Integridade do Grafo e Estatísticas (relacoes.json e
   assert.strictEqual(somaPorTipo, totalEsperado, `Soma de porTipo deve ser ${totalEsperado}`);
 
   // 2. Nós do grafo
-  assert.strictEqual(grafo.nodes.length, 25669, `Grafo deve ter exatamente 25669 nós`);
+  assert.strictEqual(grafo.nodes.length, 31849, `Grafo deve ter exatamente 31849 nós`);
   const nodesMap = new Map();
   let nosInternos = 0;
 

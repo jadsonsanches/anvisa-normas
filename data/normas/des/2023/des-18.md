@@ -2,7 +2,7 @@
 tipo: "DES"
 numero: "18"
 ano: "2023"
-data_ato: "13/05/2025"
+data_ato: "10/08/2023"
 data_promulgacao: "13/05/2025"
 data_publicacao_dou: "15/05/2025"
 situacao: "vigente"
@@ -12,7 +12,7 @@ relacionadas: []
 fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=DES&numeroAto=00000018&seqAto=000&valorAno=2023&orgao=ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
 ---
 
-# DES nº 18, de 13/05/2025
+# DES nº 18, de 10/08/2023
 
 MINISTÉRIO DA SAÚDE
 

@@ -2,7 +2,7 @@
 tipo: "ETA"
 numero: "1"
 ano: "2023"
-data_ato: ""
+data_ato: "01/01/2023"
 data_promulgacao: "19/12/2025"
 data_publicacao_dou: "19/12/2025"
 situacao: "vigente"
@@ -12,7 +12,7 @@ relacionadas: ["EXC 6/2021"]
 fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=ETA&numeroAto=00000001&seqAto=007&valorAno=2023&orgao=ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
 ---
 
-# ETA nº 1, de 19/12/2025
+# ETA nº 1, de 01/01/2023
 
 MINISTÉRIO DA SAÚDE
 

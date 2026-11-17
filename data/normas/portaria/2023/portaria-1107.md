@@ -1,0 +1,29 @@
+---
+tipo: "PORTARIA"
+numero: "1107"
+ano: "2023"
+data_ato: "03/10/2023"
+data_promulgacao: "03/10/2023"
+data_publicacao_dou: "04/10/2023"
+situacao: "vigente"
+ementa: "Autoriza o afastamento do país o servidor EDUARDO AGOSTINHO FREITAS FERNANDES."
+leis_base: []
+relacionadas: ["RE 585/2021"]
+fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=POR&numeroAto=00001107&seqAto=000&valorAno=2023&orgao=ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
+---
+
+# PORTARIA nº 1107, de 03/10/2023
+
+MINISTÉRIO DA SAÚDE
+
+AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA
+
+PORTARIA Nº 1.107 DE 3 DE OUTUBRO DE 2023
+
+O Diretor-Presidente substituto da Agência Nacional de Vigilância Sanitária, no uso de suas atribuições e tendo em vista o disposto no art. 203, III, § 3º, aliado ao inciso III, parágrafo único do art 6º e ao art. 187, I,§ 1º do Regimento Interno aprovado pela [Resolução de Diretoria Colegiada - RDC nº 585, de 10 de dezembro de 2021](../re/2021/re-585.md), resolve autorizar o afastamento do país o seguinte servidor:
+
+EDUARDO AGOSTINHO FREITAS FERNANDES, Especialista em Regulação e Vigilância Sanitária, SIAPE Nº 1491223, para inspecionar a empresa Sitec Labs Pvt Ltd, em Mumbai, Índia, no período de 12/10/23 a 21/10/23, incluído o trânsito, com ônus para ANVISA, conforme deliberação da Diretoria Colegiada por Circuito Deliberativo nº 908/2023. (Processo nº. 25351.912264/2023-53).
+
+RÔMISON RODRIGUES MOTA
+
+PUB D.O.U., 04/10/2023 - Seção 2

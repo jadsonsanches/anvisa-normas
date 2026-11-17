@@ -2,7 +2,7 @@
 tipo: "DOA"
 numero: "1"
 ano: "2023"
-data_ato: ""
+data_ato: "01/01/2023"
 data_promulgacao: "26/06/2025"
 data_publicacao_dou: "26/06/2025"
 situacao: "vigente"
@@ -12,7 +12,7 @@ relacionadas: ["DEC 9373/2018"]
 fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=DOA&numeroAto=00000001&seqAto=001&valorAno=2023&orgao=CVPAF-ES/GGPAF/ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
 ---
 
-# DOA nº 1, de 26/06/2025
+# DOA nº 1, de 01/01/2023
 
 MINISTÉRIO DA SAÚDE
 

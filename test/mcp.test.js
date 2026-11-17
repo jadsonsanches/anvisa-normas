@@ -185,10 +185,10 @@ test('Suíte de Testes Automatizados do AnvisaNormas MCP Server', async (suite) 
       arguments: {},
     });
     const dataGlobal = JSON.parse(resGlobal.content[0].text);
-    assert.equal(dataGlobal.totalNormas, 23601, 'Total de normas deve ser exatamente 23.601');
-    assert.equal(dataGlobal.vigentes, 23404, 'Total de vigentes deve ser 23.404');
-    assert.equal(dataGlobal.revogadas, 197, 'Total de revogadas deve ser 197');
-    assert.equal(dataGlobal.totalRelacoes, 41561, 'Total de relações deve ser 41.561');
+    assert.equal(dataGlobal.totalNormas, 29744, 'Total de normas deve ser exatamente 29.744');
+    assert.equal(dataGlobal.vigentes, 29456, 'Total de vigentes deve ser 29.456');
+    assert.equal(dataGlobal.revogadas, 288, 'Total de revogadas deve ser 288');
+    assert.equal(dataGlobal.totalRelacoes, 49491, 'Total de relações deve ser 49.491');
     assert.ok(dataGlobal.porTipo.RE > 9000, 'Tipo RE deve ter mais de 9000 registros');
 
     // Estatísticas por tipo específico
@@ -198,7 +198,7 @@ test('Suíte de Testes Automatizados do AnvisaNormas MCP Server', async (suite) 
     });
     const dataTipo = JSON.parse(resTipo.content[0].text);
     assert.equal(dataTipo.tipo, 'RDC');
-    assert.equal(dataTipo.total, 203, 'Total de RDCs cadastradas no acervo deve ser 203');
+    assert.equal(dataTipo.total, 272, 'Total de RDCs cadastradas no acervo deve ser 272');
   });
 
   await suite.test('Tool obter_texto_norma: recuperação do Markdown integral e limitação de caracteres', async () => {
@@ -226,7 +226,7 @@ test('Suíte de Testes Automatizados do AnvisaNormas MCP Server', async (suite) 
     const resStats = await env.client.readResource({ uri: 'normas://estatisticas' });
     assert.equal(resStats.contents[0].mimeType, 'application/json');
     const statsObj = JSON.parse(resStats.contents[0].text);
-    assert.equal(statsObj.totalNormas, 23601);
+    assert.equal(statsObj.totalNormas, 29744);
 
     // Recurso dinâmico (template)
     const resNorma = await env.client.readResource({ uri: 'normas://ACM%201/2025' });

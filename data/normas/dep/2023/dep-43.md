@@ -1,0 +1,39 @@
+---
+tipo: "DEP"
+numero: "43"
+ano: "2023"
+data_ato: "11/05/2023"
+data_promulgacao: "11/05/2023"
+data_publicacao_dou: "15/05/2023"
+situacao: "vigente"
+ementa: "Dispõe sobre a aprovação da abertura de Processo Administrativo de Regulação nº: 25351.907766/2023-62 conforme deliberação da Diretoria Colegiada em reunião."
+leis_base: []
+relacionadas: []
+fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=DEP&numeroAto=00000043&seqAto=000&valorAno=2023&orgao=DC/ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
+---
+
+# DEP nº 43, de 11/05/2023
+
+MINISTÉRIO DA SAÚDE
+
+AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA
+
+DIRETORIA COLEGIADA
+
+DESPACHO N° 43, DE 11 DE MAIO DE 2023
+
+A Diretoria Colegiada da Agência Nacional de Vigilância Sanitária, no uso das atribuições que lhe confere o art. 15, III e IV, da Lei nº 9.782, de 26 de janeiro de 1999, aliado ao art. 187, X, § 1º do Regimento Interno aprovado pela Resolução de Diretoria Colegiada - RDC nº 585, de 10 de dezembro de 2021, resolve aprovar a abertura do Processo Administrativo de Regulação, em Anexo, com dispensas de Análise de Impacto Regulatório (AIR), de Consulta Pública (CP) previstas, respectivamente, no art. 18 e art. 39 da Portaria nº 162, de 12 de março de 2021, conforme deliberado em reunião realizada em 10 de maio de 2023, e eu, Diretor-Presidente, determino a sua publicação.
+
+ANTONIO BARRA TORRES  
+Diretor-Presidente
+
+ANEXO
+
+Processo nº: 25351.907766/2023-62  
+Assunto: Proposta de abertura de processo regulatório para revogar a Resolução da Diretoria Colegiada - RDC nº 754, de 29 de setembro de 2022 que dispõe sobre os requisitos sanitários para o embarque, desembarque e transporte de viajantes em embarcações de cruzeiros marítimos localizadas em águas jurisdicionais brasileiras, incluindo aquelas com viajantes provenientes de outro País, em virtude da Emergência de Saúde Pública de Importância Internacional (ESPII) decorrente do SARS-CoV-2 (Covid-19), e revogar a Resolução da Diretoria Colegiada - RDC nº 759, de 23 de novembro de 2022 que dispõe sobre medidas sanitárias para operação e para o embarque e desembarque de tripulantes em plataformas situadas em águas jurisdicionais brasileiras, em embarcações de carga, de apoio portuário e marítimo, incluindo aquelas com tripulantes provenientes de outro País, em virtude da Emergência de Saúde Pública de Importância Internacional - ESPII decorrente da pandemia de SARS-CoV-2.  
+Área responsável: GGPAF/DIRE5  
+Agenda Regulatória 2021-2023: Não é projeto regulatório da Agenda 2021-2023.  
+Excepcionalidades: Dispensa de Análise de Impacto Regulatório (AIR) para redução de exigências, obrigações, restrições, requerimentos ou especificações com o objetivo de diminuir os custos regulatórios; dispensa de Consulta Pública (CP) por ser improdutiva, considerando a finalidade e os princípios da eficiência, razoabilidade e proporcionalidade administrativas.  
+Relatoria: Daniel Meirelles Fernandes Pereira
+
+PUB D.O.U., 15/05/2023 - Seção 1
