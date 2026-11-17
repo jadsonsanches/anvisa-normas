@@ -473,7 +473,7 @@
                   <button type="button" onclick="filtrarPorTipo('TAP')" class="flex items-center gap-1.5 text-slate-300 hover:text-red-300 text-left transition cursor-pointer" title="Filtrar Termo de Apreensão">
                     <span class="w-2.5 h-2.5 rounded-full bg-[#ef4444] shadow-[0_0_8px_#ef4444] shrink-0"></span> Apreensão
                   </button>
-                  <button type="button" onclick="filtrarPorTipo('ALL')" class="col-span-2 flex items-center gap-1.5 text-slate-400 hover:text-slate-200 text-left transition cursor-pointer pt-0.5" title="Outros atos regulatórios">
+                  <button type="button" onclick="filtrarPorTipo('OUTROS')" class="col-span-2 flex items-center gap-1.5 text-slate-400 hover:text-slate-200 text-left transition cursor-pointer pt-0.5" title="Outros atos regulatórios">
                     <span class="w-2.5 h-2.5 rounded-full bg-[#64748b] shadow-[0_0_6px_#64748b] shrink-0"></span> Outros Atos
                   </button>
                 </div>
@@ -500,13 +500,15 @@
           <div class="pt-1 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
             <span class="text-[11px] text-slate-400 font-medium shrink-0">Filtrar:</span>
             <button data-tipo="ALL" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition shrink-0">Todos</button>
+            <button data-tipo="RDC" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">RDC</button>
             <button data-tipo="RE" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">RE</button>
             <button data-tipo="PORTARIA" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">Portaria</button>
             <button data-tipo="IN" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">IN</button>
-            <button data-tipo="RDC" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">RDC</button>
             <button data-tipo="CPB" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">CPB</button>
+            <button data-tipo="LEI_FEDERAL" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">Lei Federal</button>
             <button data-tipo="DEP" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">Despacho</button>
             <button data-tipo="TAP" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">Apreensão</button>
+            <button data-tipo="OUTROS" class="tipo-filter-btn px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#092217] text-slate-300 hover:text-white border border-emerald-500/20 transition shrink-0">Outros</button>
           </div>
         </div>
 
@@ -2186,8 +2188,13 @@
         }
 
         // Filtro por tipo
-        if (tipoFiltro !== 'ALL' && n.tipo !== tipoFiltro) {
-          return false;
+        if (tipoFiltro !== 'ALL') {
+          if (tipoFiltro === 'OUTROS') {
+            const tiposPrincipais = ['RDC', 'RE', 'PORTARIA', 'IN', 'CPB', 'LEI_FEDERAL', 'DEP', 'TAP'];
+            if (tiposPrincipais.includes(n.tipo)) return false;
+          } else if (n.tipo !== tipoFiltro) {
+            return false;
+          }
         }
 
         return true;
