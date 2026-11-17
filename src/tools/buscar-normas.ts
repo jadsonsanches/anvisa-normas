@@ -28,6 +28,19 @@ export const buscarNormasSchema = {
     .enum(['vigente', 'revogada'])
     .optional()
     .describe('Filtro por situação de vigência da norma'),
+  data: z
+    .string()
+    .optional()
+    .describe(
+      'Filtro por data exata da norma ou publicação no DOU (aceita formato DD/MM/AAAA ou AAAA-MM-DD, ex: "16/11/2026" ou "2026-11-16")'
+    ),
+  ordenar_por: z
+    .enum(['recentes', 'id'])
+    .optional()
+    .default('recentes')
+    .describe(
+      'Critério de ordenação dos resultados: "recentes" (padrão, normas publicadas mais recentemente primeiro) ou "id"'
+    ),
   limite: z
     .number()
     .int()
@@ -53,6 +66,8 @@ export function registerBuscarNormasTool(
           tipo: args.tipo,
           ano: args.ano,
           situacao: args.situacao,
+          data: args.data,
+          ordenar_por: args.ordenar_por,
           limite: args.limite,
         });
 
@@ -68,6 +83,8 @@ export function registerBuscarNormasTool(
                     tipo: args.tipo || null,
                     ano: args.ano || null,
                     situacao: args.situacao || null,
+                    data: args.data || null,
+                    ordenar_por: args.ordenar_por || 'recentes',
                     limite: args.limite,
                   },
                   normas,

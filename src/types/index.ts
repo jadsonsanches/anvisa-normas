@@ -67,5 +67,7 @@ export interface FiltrosBusca {
   tipo?: string;
   ano?: number;
   situacao?: 'vigente' | 'revogada';
+  data?: string;
+  ordenar_por?: 'recentes' | 'id';
   limite?: number;
 }

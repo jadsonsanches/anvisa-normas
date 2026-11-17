@@ -127,16 +127,34 @@ export class SqlJsDatabaseProvider implements DatabaseProvider {
       params[':situacao'] = filtros.situacao.toLowerCase();
     }
 
+    if (filtros.data && filtros.data.trim()) {
+      let dataFmt = filtros.data.trim();
+      const isoMatch = dataFmt.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (isoMatch) {
+        dataFmt = `${isoMatch[3]}/${isoMatch[2]}/${isoMatch[1]}`;
+      }
+      conditions.push('(data_publicacao_dou = :data OR data_ato = :data OR data_promulgacao = :data)');
+      params[':data'] = dataFmt;
+    }
+
     const whereClause =
       conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
     const limite = Math.min(Math.max(filtros.limite || 20, 1), 100);
+
+    const orderClause = filtros.ordenar_por === 'id'
+      ? 'ORDER BY ano DESC, id DESC'
+      : `ORDER BY 
+           SUBSTR(COALESCE(NULLIF(data_publicacao_dou, ''), NULLIF(data_ato, ''), '01/01/1900'), 7, 4) || '-' ||
+           SUBSTR(COALESCE(NULLIF(data_publicacao_dou, ''), NULLIF(data_ato, ''), '01/01/1900'), 4, 2) || '-' ||
+           SUBSTR(COALESCE(NULLIF(data_publicacao_dou, ''), NULLIF(data_ato, ''), '01/01/1900'), 1, 2) DESC,
+           id DESC`;
 
     const sql = `
       SELECT id, tipo, numero, ano, data_ato, data_promulgacao, data_publicacao_dou,
              situacao, ementa, leis_base, relacionadas, arquivo, fonte
       FROM normas
       ${whereClause}
-      ORDER BY ano DESC, id DESC
+      ${orderClause}
       LIMIT ${limite}
     `;
 
