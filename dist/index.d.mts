@@ -39,8 +39,8 @@ declare const buscarNormasSchema: {
     }>>;
     data: z.ZodOptional<z.ZodString>;
     ordenar_por: z.ZodDefault<z.ZodOptional<z.ZodEnum<{
-        recentes: "recentes";
         id: "id";
+        recentes: "recentes";
     }>>>;
     limite: z.ZodDefault<z.ZodNumber>;
 };
