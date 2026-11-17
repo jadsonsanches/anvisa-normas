@@ -64913,6 +64913,18 @@
       "arquivo": "data/normas/dep/2026/dep-137.md"
     },
     {
+      "id": "DEP 138/2026",
+      "tipo": "DEP",
+      "numero": "138",
+      "ano": "2026",
+      "data_ato": "16/11/2026",
+      "data_promulgacao": "16/11/2026",
+      "data_publicacao_dou": "17/11/2026",
+      "situacao": "vigente",
+      "ementa": "Torna pública as Decisões Administrativas referentes aos processos relacionados.",
+      "arquivo": "data/normas/dep/2026/dep-138.md"
+    },
+    {
       "id": "DEP 14/2026",
       "tipo": "DEP",
       "numero": "14",
@@ -430247,6 +430259,54 @@
       "situacao": "vigente",
       "ementa": "Renova às empresas constantes no anexo a Certificação de Boas Práticas de Fabricação de Produtos para Saúde.",
       "arquivo": "data/normas/re/2026/re-450.md"
+    },
+    {
+      "id": "RE 4500/2026",
+      "tipo": "RE",
+      "numero": "4500",
+      "ano": "2026",
+      "data_ato": "16/11/2026",
+      "data_promulgacao": "16/11/2026",
+      "data_publicacao_dou": "17/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4500.md"
+    },
+    {
+      "id": "RE 4501/2026",
+      "tipo": "RE",
+      "numero": "4501",
+      "ano": "2026",
+      "data_ato": "16/11/2026",
+      "data_promulgacao": "16/11/2026",
+      "data_publicacao_dou": "17/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições relacionadas à Gerência-Geral de Medicamentos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4501.md"
+    },
+    {
+      "id": "RE 4502/2026",
+      "tipo": "RE",
+      "numero": "4502",
+      "ano": "2026",
+      "data_ato": "16/11/2026",
+      "data_promulgacao": "16/11/2026",
+      "data_publicacao_dou": "17/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4502.md"
+    },
+    {
+      "id": "RE 4504/2026",
+      "tipo": "RE",
+      "numero": "4504",
+      "ano": "2026",
+      "data_ato": "16/11/2026",
+      "data_promulgacao": "16/11/2026",
+      "data_publicacao_dou": "17/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela a Autorização de Funcionamento a empresas dos setores de comércio de alimentos, cosméticos, perfumes, produtos de higiene e saúde, e dispensação de medicamentos, conforme especificações no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4504.md"
     },
     {
       "id": "RE 451/2026",
