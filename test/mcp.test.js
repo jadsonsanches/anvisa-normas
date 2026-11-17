@@ -185,8 +185,8 @@ test('Suíte de Testes Automatizados do AnvisaNormas MCP Server', async (suite) 
       arguments: {},
     });
     const dataGlobal = JSON.parse(resGlobal.content[0].text);
-    assert.equal(dataGlobal.totalNormas, 35981, 'Total de normas deve ser exatamente 35.981');
-    assert.equal(dataGlobal.vigentes, 35587, 'Total de vigentes deve ser 35.587');
+    assert.equal(dataGlobal.totalNormas, 35986, 'Total de normas deve ser exatamente 35.986');
+    assert.equal(dataGlobal.vigentes, 35592, 'Total de vigentes deve ser 35.592');
     assert.equal(dataGlobal.revogadas, 394, 'Total de revogadas deve ser 394');
     assert.equal(dataGlobal.totalRelacoes, 53066, 'Total de relações deve ser 53.066');
     assert.ok(dataGlobal.porTipo.RE > 20000, 'Tipo RE deve ter mais de 20000 registros');
@@ -226,7 +226,7 @@ test('Suíte de Testes Automatizados do AnvisaNormas MCP Server', async (suite) 
     const resStats = await env.client.readResource({ uri: 'normas://estatisticas' });
     assert.equal(resStats.contents[0].mimeType, 'application/json');
     const statsObj = JSON.parse(resStats.contents[0].text);
-    assert.equal(statsObj.totalNormas, 35981);
+    assert.equal(statsObj.totalNormas, 35986);
 
     // Recurso dinâmico (template)
     const resNorma = await env.client.readResource({ uri: 'normas://ACM%201/2025' });

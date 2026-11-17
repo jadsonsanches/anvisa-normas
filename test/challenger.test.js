@@ -27,7 +27,7 @@ const dirDist = path.join(rootDir, 'data/dist');
 test('Desafio Empírico 1: Verificação da quantidade total de arquivos markdown em data/normas/', () => {
   const arquivos = listarArquivosMarkdown(dirNormas);
   assert.ok(arquivos.length >= 35000, `Esperava acervo consolidado com mais de 35000 normas, encontrou ${arquivos.length}`);
-  assert.strictEqual(arquivos.length, 35981, `Esperava exatamente 35981 arquivos markdown, mas encontrou ${arquivos.length}`);
+  assert.strictEqual(arquivos.length, 35986, `Esperava exatamente 35986 arquivos markdown, mas encontrou ${arquivos.length}`);
 });
 
 test('Desafio Empírico 2: Validação estrita de YAML frontmatter, 11 propriedades e integridade em todos os arquivos', () => {
@@ -393,7 +393,7 @@ test('Desafio Empírico 7: Integridade do Grafo e Estatísticas (relacoes.json e
   assert.strictEqual(somaPorTipo, totalEsperado, `Soma de porTipo deve ser ${totalEsperado}`);
 
   // 2. Nós do grafo
-  assert.strictEqual(grafo.nodes.length, 38044, `Grafo deve ter exatamente 38044 nós`);
+  assert.strictEqual(grafo.nodes.length, 38049, `Grafo deve ter exatamente 38049 nós`);
   const nodesMap = new Map();
   let nosInternos = 0;
 
