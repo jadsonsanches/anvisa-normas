@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import express from 'express';
 import cors from 'cors';
-import { randomUUID } from 'crypto';
+import { randomUUID, timingSafeEqual } from 'crypto';
 import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import * as fs from 'fs';
@@ -1016,14 +1016,76 @@ function createAnvisaMcpServer(dbProvider) {
 }
 
 // src/bin/sse.ts
+var configuredKeys = (process.env.MCP_API_KEY || "").split(",").map((k) => k.trim()).filter((k) => k.length > 0);
+var isAuthEnabled = configuredKeys.length > 0;
+function isValidApiKey(providedKey, validKeys) {
+  const provBuf = Buffer.from(providedKey);
+  for (const validKey of validKeys) {
+    const validBuf = Buffer.from(validKey);
+    if (provBuf.length === validBuf.length && timingSafeEqual(provBuf, validBuf)) {
+      return true;
+    }
+  }
+  return false;
+}
+function extractApiKey(req) {
+  const authHeader = req.headers["authorization"];
+  if (authHeader) {
+    const parts = authHeader.split(" ");
+    if (parts.length === 2 && /^bearer$/i.test(parts[0])) {
+      return parts[1].trim();
+    }
+    return authHeader.trim();
+  }
+  const customHeader = req.headers["x-api-key"] || req.headers["mcp-api-key"];
+  if (customHeader) {
+    return customHeader.trim();
+  }
+  const queryKey = req.query.apiKey || req.query.api_key || req.query.key;
+  if (queryKey) {
+    return queryKey.trim();
+  }
+  return null;
+}
 async function main() {
   console.error("[anvisa-normas-mcp-web] Inicializando servidor Web/SSE MCP AnvisaNormas...");
+  if (isAuthEnabled) {
+    console.error(
+      `[anvisa-normas-mcp-web] \u{1F512} Autentica\xE7\xE3o MCP ATIVADA com ${configuredKeys.length} chave(s) autorizada(s).`
+    );
+  } else {
+    console.error(
+      "[anvisa-normas-mcp-web] \u26A0\uFE0F AVISO: Autentica\xE7\xE3o MCP DESATIVADA (vari\xE1vel MCP_API_KEY n\xE3o configurada). Servidor aberto."
+    );
+  }
   const app = express();
   app.use(cors());
   let isReady = false;
   let initError = null;
   const dbPath = resolveDbPath();
   const dbProvider = new SqlJsDatabaseProvider(dbPath);
+  const authenticatedSessions = /* @__PURE__ */ new Set();
+  const authMiddleware = (req, res, next) => {
+    if (!isAuthEnabled) {
+      return next();
+    }
+    const sessionId = req.headers["mcp-session-id"] || req.query.sessionId;
+    if (sessionId && authenticatedSessions.has(sessionId)) {
+      return next();
+    }
+    const key = extractApiKey(req);
+    if (key && isValidApiKey(key, configuredKeys)) {
+      if (sessionId) {
+        authenticatedSessions.add(sessionId);
+      }
+      return next();
+    }
+    res.status(401).json({
+      error: "Unauthorized",
+      message: "Acesso negado: chave de autentica\xE7\xE3o MCP_API_KEY ausente ou inv\xE1lida.",
+      docs: 'Forne\xE7a a chave via header "Authorization: Bearer <key>", "x-api-key: <key>" ou query parameter "?apiKey=<key>".'
+    });
+  };
   const initPromise = (async () => {
     try {
       console.error(`[anvisa-normas-mcp-web] Carregando banco de dados: ${dbPath}`);
@@ -1038,7 +1100,7 @@ async function main() {
   const ensureReady = async (_req, res, next) => {
     if (!isReady) {
       if (initError) {
-        res.status(500).json({ error: `Falha na inicializa\xE7\xE3o do banco: ${initError.message}` });
+        res.status(500).json({ error: "Falha interna na inicializa\xE7\xE3o do acervo regulat\xF3rio." });
         return;
       }
       await initPromise;
@@ -1052,10 +1114,12 @@ async function main() {
       let transport = sessionId ? streamableSessions.get(sessionId) : null;
       if (!transport) {
         const newSessionId = randomUUID();
+        authenticatedSessions.add(newSessionId);
         transport = new StreamableHTTPServerTransport({
           sessionIdGenerator: () => newSessionId,
           onsessionclosed: (id) => {
             streamableSessions.delete(id);
+            authenticatedSessions.delete(id);
           }
         });
         const server = createAnvisaMcpServer(dbProvider);
@@ -1074,7 +1138,7 @@ async function main() {
     res.json({
       status: isReady ? "healthy" : "initializing",
       ready: isReady,
-      error: initError ? initError.message : null,
+      auth_required: isAuthEnabled,
       name: "anvisa-normas-mcp",
       description: "Servidor MCP Oficial do acervo de normas da Anvisa",
       version: "1.0.0"
@@ -1082,11 +1146,16 @@ async function main() {
   });
   app.get("/", (req, res, next) => {
     if (req.headers.accept?.includes("text/event-stream")) {
-      return ensureReady(req, res, () => handleStreamableRequest(req, res));
+      return authMiddleware(
+        req,
+        res,
+        () => ensureReady(req, res, () => handleStreamableRequest(req, res))
+      );
     }
     res.json({
       status: isReady ? "healthy" : "initializing",
       ready: isReady,
+      auth_required: isAuthEnabled,
       name: "anvisa-normas-mcp",
       description: "Servidor MCP Oficial do acervo de normas da Anvisa",
       version: "1.0.0",
@@ -1097,19 +1166,21 @@ async function main() {
       }
     });
   });
-  app.all("/mcp", ensureReady, handleStreamableRequest);
-  app.post("/", ensureReady, handleStreamableRequest);
-  app.post("/sse", ensureReady, handleStreamableRequest);
+  app.all("/mcp", authMiddleware, ensureReady, handleStreamableRequest);
+  app.post("/", authMiddleware, ensureReady, handleStreamableRequest);
+  app.post("/sse", authMiddleware, ensureReady, handleStreamableRequest);
   const sseTransports = /* @__PURE__ */ new Map();
-  app.get("/sse", ensureReady, async (req, res) => {
-    console.error(`[anvisa-normas-mcp-web] Nova conex\xE3o SSE recebida de ${req.ip}`);
+  app.get("/sse", authMiddleware, ensureReady, async (req, res) => {
+    console.error(`[anvisa-normas-mcp-web] Nova conex\xE3o SSE autorizada de ${req.ip}`);
     try {
       const transport = new SSEServerTransport("/messages", res);
       const sessionId = transport.sessionId;
       sseTransports.set(sessionId, transport);
+      authenticatedSessions.add(sessionId);
       transport.onclose = () => {
         console.error(`[anvisa-normas-mcp-web] Conex\xE3o SSE encerrada (sess\xE3o ${sessionId})`);
         sseTransports.delete(sessionId);
+        authenticatedSessions.delete(sessionId);
       };
       const server = createAnvisaMcpServer(dbProvider);
       await server.connect(transport);
@@ -1121,7 +1192,7 @@ async function main() {
       }
     }
   });
-  app.post("/messages", ensureReady, async (req, res) => {
+  app.post("/messages", authMiddleware, ensureReady, async (req, res) => {
     const sessionId = req.query.sessionId;
     if (!sessionId) {
       res.status(400).json({ error: "sessionId query parameter is required" });
