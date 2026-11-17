@@ -1,6 +1,6 @@
 {
-  "totalNormas": 29744,
-  "vigentes": 29456,
+  "totalNormas": 29749,
+  "vigentes": 29461,
   "revogadas": 288,
   "porTipo": {
     "ACM": 55,
@@ -29,7 +29,7 @@
     "DCP": 7,
     "DCS": 5,
     "DEM": 1,
-    "DEP": 615,
+    "DEP": 616,
     "DES": 396,
     "DIS": 55,
     "DLB": 1874,
@@ -72,7 +72,7 @@
     "PRF": 2,
     "PRG": 65,
     "RDC": 272,
-    "RE": 19750,
+    "RE": 19754,
     "REC": 1,
     "REQ": 1,
     "RLT": 7,
