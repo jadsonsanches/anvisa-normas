@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import express from 'express';
 import cors from 'cors';
+import { randomUUID } from 'crypto';
 import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import * as fs from 'fs';
@@ -143,14 +144,28 @@ var SqlJsDatabaseProvider = class {
       conditions.push("situacao = :situacao");
       params[":situacao"] = filtros.situacao.toLowerCase();
     }
+    if (filtros.data && filtros.data.trim()) {
+      let dataFmt = filtros.data.trim();
+      const isoMatch = dataFmt.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (isoMatch) {
+        dataFmt = `${isoMatch[3]}/${isoMatch[2]}/${isoMatch[1]}`;
+      }
+      conditions.push("(data_publicacao_dou = :data OR data_ato = :data OR data_promulgacao = :data)");
+      params[":data"] = dataFmt;
+    }
     const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
     const limite = Math.min(Math.max(filtros.limite || 20, 1), 100);
+    const orderClause = filtros.ordenar_por === "id" ? "ORDER BY ano DESC, id DESC" : `ORDER BY 
+           SUBSTR(COALESCE(NULLIF(data_publicacao_dou, ''), NULLIF(data_ato, ''), '01/01/1900'), 7, 4) || '-' ||
+           SUBSTR(COALESCE(NULLIF(data_publicacao_dou, ''), NULLIF(data_ato, ''), '01/01/1900'), 4, 2) || '-' ||
+           SUBSTR(COALESCE(NULLIF(data_publicacao_dou, ''), NULLIF(data_ato, ''), '01/01/1900'), 1, 2) DESC,
+           id DESC`;
     const sql = `
       SELECT id, tipo, numero, ano, data_ato, data_promulgacao, data_publicacao_dou,
              situacao, ementa, leis_base, relacionadas, arquivo, fonte
       FROM normas
       ${whereClause}
-      ORDER BY ano DESC, id DESC
+      ${orderClause}
       LIMIT ${limite}
     `;
     const stmt = db.prepare(sql);
@@ -450,6 +465,12 @@ var buscarNormasSchema = {
   ),
   ano: z.number().int().optional().describe("Ano da norma (ex: 2024, 2025, 2026)"),
   situacao: z.enum(["vigente", "revogada"]).optional().describe("Filtro por situa\xE7\xE3o de vig\xEAncia da norma"),
+  data: z.string().optional().describe(
+    'Filtro por data exata da norma ou publica\xE7\xE3o no DOU (aceita formato DD/MM/AAAA ou AAAA-MM-DD, ex: "16/11/2026" ou "2026-11-16")'
+  ),
+  ordenar_por: z.enum(["recentes", "id"]).optional().default("recentes").describe(
+    'Crit\xE9rio de ordena\xE7\xE3o dos resultados: "recentes" (padr\xE3o, normas publicadas mais recentemente primeiro) ou "id"'
+  ),
   limite: z.number().int().min(1).max(100).default(20).describe("Quantidade m\xE1xima de resultados a retornar (padr\xE3o: 20, m\xE1x: 100)")
 };
 function registerBuscarNormasTool(server, dbProvider) {
@@ -465,6 +486,8 @@ function registerBuscarNormasTool(server, dbProvider) {
           tipo: args.tipo,
           ano: args.ano,
           situacao: args.situacao,
+          data: args.data,
+          ordenar_por: args.ordenar_por,
           limite: args.limite
         });
         return {
@@ -479,6 +502,8 @@ function registerBuscarNormasTool(server, dbProvider) {
                     tipo: args.tipo || null,
                     ano: args.ano || null,
                     situacao: args.situacao || null,
+                    data: args.data || null,
+                    ordenar_por: args.ordenar_por || "recentes",
                     limite: args.limite
                   },
                   normas
@@ -993,32 +1018,90 @@ function createAnvisaMcpServer(dbProvider) {
 // src/bin/sse.ts
 async function main() {
   console.error("[anvisa-normas-mcp-web] Inicializando servidor Web/SSE MCP AnvisaNormas...");
-  const dbPath = resolveDbPath();
-  console.error(`[anvisa-normas-mcp-web] Carregando banco de dados: ${dbPath}`);
-  const dbProvider = new SqlJsDatabaseProvider(dbPath);
-  await dbProvider.init();
-  console.error("[anvisa-normas-mcp-web] Banco SQLite carregado em mem\xF3ria com sucesso.");
   const app = express();
   app.use(cors());
-  app.get(["/", "/health"], (_req, res) => {
+  let isReady = false;
+  let initError = null;
+  const dbPath = resolveDbPath();
+  const dbProvider = new SqlJsDatabaseProvider(dbPath);
+  const initPromise = (async () => {
+    try {
+      console.error(`[anvisa-normas-mcp-web] Carregando banco de dados: ${dbPath}`);
+      await dbProvider.init();
+      isReady = true;
+      console.error("[anvisa-normas-mcp-web] Banco SQLite carregado em mem\xF3ria com sucesso.");
+    } catch (err) {
+      initError = err;
+      console.error("[anvisa-normas-mcp-web] Erro ao carregar banco SQLite:", err);
+    }
+  })();
+  const ensureReady = async (_req, res, next) => {
+    if (!isReady) {
+      if (initError) {
+        res.status(500).json({ error: `Falha na inicializa\xE7\xE3o do banco: ${initError.message}` });
+        return;
+      }
+      await initPromise;
+    }
+    next();
+  };
+  const streamableSessions = /* @__PURE__ */ new Map();
+  const handleStreamableRequest = async (req, res) => {
+    try {
+      const sessionId = req.headers["mcp-session-id"];
+      let transport = sessionId ? streamableSessions.get(sessionId) : null;
+      if (!transport) {
+        const newSessionId = randomUUID();
+        transport = new StreamableHTTPServerTransport({
+          sessionIdGenerator: () => newSessionId,
+          onsessionclosed: (id) => {
+            streamableSessions.delete(id);
+          }
+        });
+        const server = createAnvisaMcpServer(dbProvider);
+        await server.connect(transport);
+        streamableSessions.set(newSessionId, transport);
+      }
+      await transport.handleRequest(req, res);
+    } catch (err) {
+      console.error("[anvisa-normas-mcp-web] Erro no Streamable HTTP:", err);
+      if (!res.headersSent) {
+        res.status(500).json({ error: err?.message || "Internal Server Error" });
+      }
+    }
+  };
+  app.get("/health", (_req, res) => {
     res.json({
-      status: "healthy",
+      status: isReady ? "healthy" : "initializing",
+      ready: isReady,
+      error: initError ? initError.message : null,
+      name: "anvisa-normas-mcp",
+      description: "Servidor MCP Oficial do acervo de normas da Anvisa",
+      version: "1.0.0"
+    });
+  });
+  app.get("/", (req, res, next) => {
+    if (req.headers.accept?.includes("text/event-stream")) {
+      return ensureReady(req, res, () => handleStreamableRequest(req, res));
+    }
+    res.json({
+      status: isReady ? "healthy" : "initializing",
+      ready: isReady,
       name: "anvisa-normas-mcp",
       description: "Servidor MCP Oficial do acervo de normas da Anvisa",
       version: "1.0.0",
-      transports: {
-        sse: {
-          connect: "/sse",
-          messages: "/messages?sessionId={sessionId}"
-        },
-        streamableHttp: {
-          endpoint: "/mcp"
-        }
+      endpoints: {
+        streamableHttp: "/mcp",
+        sse: "/sse",
+        health: "/health"
       }
     });
   });
+  app.all("/mcp", ensureReady, handleStreamableRequest);
+  app.post("/", ensureReady, handleStreamableRequest);
+  app.post("/sse", ensureReady, handleStreamableRequest);
   const sseTransports = /* @__PURE__ */ new Map();
-  app.get("/sse", async (req, res) => {
+  app.get("/sse", ensureReady, async (req, res) => {
     console.error(`[anvisa-normas-mcp-web] Nova conex\xE3o SSE recebida de ${req.ip}`);
     try {
       const transport = new SSEServerTransport("/messages", res);
@@ -1038,7 +1121,7 @@ async function main() {
       }
     }
   });
-  app.post("/messages", async (req, res) => {
+  app.post("/messages", ensureReady, async (req, res) => {
     const sessionId = req.query.sessionId;
     if (!sessionId) {
       res.status(400).json({ error: "sessionId query parameter is required" });
@@ -1055,21 +1138,6 @@ async function main() {
       console.error(`[anvisa-normas-mcp-web] Erro ao processar mensagem na sess\xE3o ${sessionId}:`, err);
       if (!res.headersSent) {
         res.status(500).json({ error: "Failed to process message" });
-      }
-    }
-  });
-  const streamableTransport = new StreamableHTTPServerTransport({
-    sessionIdGenerator: void 0
-  });
-  const streamableServer = createAnvisaMcpServer(dbProvider);
-  await streamableServer.connect(streamableTransport);
-  app.all("/mcp", async (req, res) => {
-    try {
-      await streamableTransport.handleRequest(req, res);
-    } catch (err) {
-      console.error("[anvisa-normas-mcp-web] Erro no endpoint /mcp:", err);
-      if (!res.headersSent) {
-        res.status(500).json({ error: "Internal Server Error" });
       }
     }
   });

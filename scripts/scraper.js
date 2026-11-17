@@ -7,12 +7,13 @@ const { parseNormaHtml, normalizarTipo } = require('./parser');
 
 const HOST = 'anvisalegis.datalegis.net';
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
+const REQUEST_TIMEOUT_MS = 30000;
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function httpGet(pathUrl, cookies = '') {
+function httpGet(pathUrl, cookies = '', timeoutMs = REQUEST_TIMEOUT_MS) {
   return new Promise((resolve, reject) => {
     const options = {
       hostname: HOST,
@@ -25,8 +26,9 @@ function httpGet(pathUrl, cookies = '') {
       }
     };
 
-    https.get(options, res => {
+    const req = https.get(options, res => {
       let chunks = [];
+      res.on('error', reject);
       res.on('data', chunk => chunks.push(chunk));
       res.on('end', () => {
         resolve({
@@ -35,13 +37,20 @@ function httpGet(pathUrl, cookies = '') {
           body: Buffer.concat(chunks).toString('latin1')
         });
       });
-    }).on('error', reject);
+    });
+
+    req.setTimeout(timeoutMs, () => {
+      req.destroy(new Error(`Timeout na requisição GET após ${timeoutMs}ms: ${pathUrl}`));
+    });
+    req.on('error', reject);
   });
 }
 
-function httpPost(pathUrl, data, cookies = '', extraHeaders = {}) {
+function httpPost(pathUrl, data, cookies = '', extraHeaders = {}, timeoutMs = REQUEST_TIMEOUT_MS) {
   return new Promise((resolve, reject) => {
-    const postBody = typeof data === 'string' ? data : querystring.stringify(data);
+    const postBody = typeof data === 'string'
+      ? data
+      : (data instanceof URLSearchParams ? data.toString() : querystring.stringify(data));
     const options = {
       hostname: HOST,
       path: pathUrl,
@@ -58,6 +67,7 @@ function httpPost(pathUrl, data, cookies = '', extraHeaders = {}) {
 
     const req = https.request(options, res => {
       let chunks = [];
+      res.on('error', reject);
       res.on('data', chunk => chunks.push(chunk));
       res.on('end', () => {
         resolve({
@@ -68,6 +78,9 @@ function httpPost(pathUrl, data, cookies = '', extraHeaders = {}) {
       });
     });
 
+    req.setTimeout(timeoutMs, () => {
+      req.destroy(new Error(`Timeout na requisição POST após ${timeoutMs}ms: ${pathUrl}`));
+    });
     req.on('error', reject);
     req.write(postBody);
     req.end();
@@ -79,62 +92,200 @@ function httpPost(pathUrl, data, cookies = '', extraHeaders = {}) {
  */
 async function obterSessao() {
   const res = await httpGet('/action/ActionDatalegis.php?acao=abrirLegislacao&cod_modulo=134&cod_menu=1696');
+  if (res.statusCode >= 400) {
+    throw new Error(`HTTP ${res.statusCode} ao obter sessão`);
+  }
   const rawCookies = res.headers['set-cookie'] || [];
   const cookies = rawCookies.map(c => c.split(';')[0]).join('; ');
   return cookies;
 }
 
-/**
- * Realiza a busca de atos por critérios (datas ou ano)
- */
-async function pesquisarAtos(criterios = {}) {
-  const cookies = await obterSessao();
+const MESES_EXTENSO = {
+  janeiro: '01',
+  fevereiro: '02',
+  marco: '03',
+  abril: '04',
+  maio: '05',
+  junho: '06',
+  julho: '07',
+  agosto: '08',
+  setembro: '09',
+  outubro: '10',
+  novembro: '11',
+  dezembro: '12'
+};
 
+function extrairDataLinkTexto(text) {
+  const matchDataAto = text.match(/de\s+(\d{2}\/\d{2}\/\d{4})/i);
+  if (matchDataAto) {
+    return matchDataAto[1];
+  }
+  const matchExtenso = text.match(/(?:de|em)\s+(\d{1,2})\s+de\s+([a-zçáéíóúâêôãõ]+)\s+de\s+(\d{4})/i);
+  if (matchExtenso) {
+    const diaNum = parseInt(matchExtenso[1], 10);
+    const mesNorm = matchExtenso[2].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const mesStr = MESES_EXTENSO[mesNorm];
+    const anoNum = parseInt(matchExtenso[3], 10);
+    if (mesStr && diaNum >= 1 && diaNum <= 31) {
+      const mesNum = parseInt(mesStr, 10);
+      const dt = new Date(anoNum, mesNum - 1, diaNum);
+      if (dt.getFullYear() === anoNum && dt.getMonth() === mesNum - 1 && dt.getDate() === diaNum) {
+        return `${String(diaNum).padStart(2, '0')}/${mesStr}/${matchExtenso[3]}`;
+      }
+    }
+  }
+  return '';
+}
+
+function buildSearchParams({ ano, dataInicio, dataFim, ordenacao, pageSize, sglTipo, numAto }) {
+  const params = new URLSearchParams();
+  params.set('cod_modulo', '134');
+  params.set('cod_menu', '1696');
+  params.set('redirect_consultaato', 'apresentarAtos');
+  params.set('cod_local', 'BR');
+  params.set('inApsModuloBase', 'S');
+  params.set('ind_legis_juris', 'L');
+  params.set('vlr_ano', ano);
+  params.set('dta_promulgacao', dataInicio);
+  params.set('dta_promulgacao_final', dataFim);
+  params.set('ordenacao', ordenacao);
+  params.set('qtd_pagina', String(pageSize));
+
+  if (numAto !== undefined && numAto !== null && String(numAto).trim() !== '') {
+    params.set('num_ato', String(numAto).trim());
+  }
+
+  if (sglTipo) {
+    const tipos = Array.isArray(sglTipo) ? sglTipo : [sglTipo];
+    for (const t of tipos) {
+      if (t && String(t).trim()) {
+        params.append('sgl_tipo[]', String(t).trim());
+      }
+    }
+  }
+
+  return params;
+}
+
+function parseBrDate(str) {
+  const [d, m, y] = str.split('/').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+function formatBrDate(date) {
+  const d = String(date.getDate()).padStart(2, '0');
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const y = date.getFullYear();
+  return `${d}/${m}/${y}`;
+}
+
+async function executarPesquisaUnica(criterios = {}) {
   const ano = criterios.ano ? criterios.ano.toString() : '';
   const dataInicio = criterios.dataInicio || '';
   const dataFim = criterios.dataFim || '';
+  const ordenacao = criterios.ordenacao || 'dta_promulgacao:ASC';
+  let pageSize = Number(criterios.qtdPagina) || 500;
+  const sglTipo = criterios.sglTipo;
+  const numAto = criterios.numAto;
 
-  const postData = {
-    cod_modulo: '134',
-    cod_menu: '1696',
-    redirect_consultaato: 'apresentarAtos',
-    cod_local: 'BR',
-    inApsModuloBase: 'S',
-    ind_legis_juris: 'L',
-    vlr_ano: ano,
-    dta_promulgacao: dataInicio,
-    dta_promulgacao_final: dataFim
-  };
+  let cookies = '';
+  let initRes = null;
+  let params = buildSearchParams({ ano, dataInicio, dataFim, ordenacao, pageSize, sglTipo, numAto });
 
-  // 1. Inicializa o estado de busca na sessão PHP
-  await httpPost(
-    '/action/ActionDatalegis.php?acao=consultarAtosInicial&cod_modulo=134&cod_menu=1696',
-    postData,
-    cookies
-  );
+  async function inicializarSessaoBusca() {
+    let lastInitErr = null;
+    for (let tentativa = 1; tentativa <= 3; tentativa++) {
+      try {
+        cookies = await obterSessao();
+        initRes = await httpPost(
+          '/action/ActionDatalegis.php?acao=consultarAtosInicial&cod_modulo=134&cod_menu=1696',
+          params.toString(),
+          cookies
+        );
+        if (initRes.statusCode >= 400) {
+          throw new Error(`HTTP ${initRes.statusCode} em consultarAtosInicial`);
+        }
+        lastInitErr = null;
+        return;
+      } catch (e) {
+        lastInitErr = e;
+        if (tentativa < 3) {
+          console.warn(`[Aviso] Falha ao inicializar busca (tentativa ${tentativa}/3): ${e.message}. Retentando...`);
+          await sleep(1000 * tentativa);
+        }
+      }
+    }
+    throw new Error(`Falha ao inicializar sessão de busca no Datalegis: ${lastInitErr.message}`);
+  }
+
+  await inicializarSessaoBusca();
+
+  if (/Nenhum ato encontrado/i.test(initRes.body)) {
+    return { cookies, listaAtos: [], expectedTotal: 0, params };
+  }
+
+  const $init = cheerio.load(initRes.body);
+  let expectedTotal = null;
+  const regEl = $init('#numeroRegistroInicial');
+  if (regEl.length > 0) {
+    const regText = regEl.parent().text().replace(/\s+/g, ' ').trim();
+    const matchTotal = regText.match(/de\s+([\d.]+)\s+iten/i);
+    if (matchTotal) {
+      expectedTotal = parseInt(matchTotal[1].replace(/\./g, ''), 10);
+    }
+  }
 
   // 2. Coleta os itens paginados
   let pagina = 1;
-  let totalEncontrados = 0;
   const listaAtos = [];
 
   while (true) {
-    const pageRes = await httpPost(
-      `/action/ActionDatalegis.php?acao=abrirPagina&pagina=${pagina}&legisjuris=L`,
-      postData,
-      cookies,
-      { 'X-Requested-With': 'XMLHttpRequest' }
-    );
+    let data = null;
+    let lastErr = null;
+    let caiuPara100 = false;
 
-    let data;
-    try {
-      data = JSON.parse(pageRes.body);
-    } catch (e) {
-      console.warn(`[Aviso] Resposta não-JSON na página ${pagina}`);
-      break;
+    for (let tentativa = 1; tentativa <= 3; tentativa++) {
+      try {
+        const pageRes = await httpPost(
+          `/action/ActionDatalegis.php?acao=abrirPagina&pagina=${pagina}&legisjuris=L`,
+          params.toString(),
+          cookies,
+          { 'X-Requested-With': 'XMLHttpRequest' }
+        );
+        if (pageRes.statusCode !== 200) {
+          throw new Error(`HTTP ${pageRes.statusCode} na página ${pagina}`);
+        }
+        data = JSON.parse(pageRes.body);
+        lastErr = null;
+        break;
+      } catch (e) {
+        lastErr = e;
+        if (pagina === 1 && pageSize > 100 && (/HTTP 500/.test(e.message) || e instanceof SyntaxError)) {
+          console.warn(`[Aviso] Falha com qtd_pagina=${pageSize} na página 1 (${e.message}). Aplicando fallback para qtd_pagina=100...`);
+          pageSize = 100;
+          params = buildSearchParams({ ano, dataInicio, dataFim, ordenacao, pageSize, sglTipo, numAto });
+          await inicializarSessaoBusca();
+          caiuPara100 = true;
+          lastErr = null;
+          break;
+        }
+        if (tentativa < 3) {
+          console.warn(`[Aviso] Resposta não-JSON ou falha na página ${pagina} (tentativa ${tentativa}/3): ${e.message}. Retentando...`);
+          await sleep(1000 * tentativa);
+        }
+      }
     }
 
-    if (!data.resultado) break;
+    if (caiuPara100) {
+      pagina = 1;
+      continue;
+    }
+
+    if (lastErr) {
+      throw new Error(`Falha na paginação do Datalegis na página ${pagina}: ${lastErr.message}`);
+    }
+
+    if (!data || !data.resultado) break;
 
     const $ = cheerio.load(data.resultado);
     const itensPagina = [];
@@ -158,12 +309,7 @@ async function pesquisarAtos(criterios = {}) {
       const anoAto = urlParams.get('valorAno') || ano || new Date().getFullYear().toString();
       const seqAto = urlParams.get('seqAto') || '000';
 
-      // Extração da data exata do ato (ex: "Portaria n° 1.294, de 11/11/2026")
-      let dataAto = '';
-      const matchDataAto = text.match(/de\s+(\d{2}\/\d{2}\/\d{4})/i);
-      if (matchDataAto) {
-        dataAto = matchDataAto[1];
-      }
+      const dataAto = extrairDataLinkTexto(text);
 
       // Extração de ementa do texto do link (geralmente vem após a data)
       let ementa = '';
@@ -180,7 +326,7 @@ async function pesquisarAtos(criterios = {}) {
         seqAto,
         situacao,
         dataAto,
-        dataPublicacaoDou: dataInicio || dataFim || '',
+        dataPublicacaoDou: (dataInicio && dataInicio === dataFim) ? dataInicio : '',
         ementa,
         textoCompleto: text
       });
@@ -190,9 +336,7 @@ async function pesquisarAtos(criterios = {}) {
 
     listaAtos.push(...itensPagina);
 
-    // O Datalegis pagina de 50 em 50 registros por página.
-    // Se a página retornou menos de 50 registros, chegamos ao final dos resultados.
-    if (itensPagina.length < 50) {
+    if (itensPagina.length < pageSize) {
       break;
     }
 
@@ -200,7 +344,167 @@ async function pesquisarAtos(criterios = {}) {
     await sleep(300);
   }
 
-  return { cookies, listaAtos };
+  return { cookies, listaAtos, expectedTotal, params };
+}
+
+async function obterTiposFacetas(params, cookies) {
+  const qs = params.toString();
+  const res = await httpGet(`/action/ActionDatalegis.php?acao=getFiltrosPesquisa&${qs}`, cookies);
+  if (res.statusCode >= 400) {
+    throw new Error(`HTTP ${res.statusCode} em getFiltrosPesquisa`);
+  }
+  const json = JSON.parse(res.body);
+  if (!json || typeof json !== 'object' || !json.sgl_tipo) {
+    return [];
+  }
+  if (Array.isArray(json.sgl_tipo)) {
+    return json.sgl_tipo.map(entry => entry.SGL_TIPO || entry.sgl_tipo || entry.chave || entry.id).filter(Boolean);
+  }
+  return Object.keys(json.sgl_tipo).filter(Boolean);
+}
+
+/**
+ * Realiza a busca de atos por critérios (datas ou ano) com ordenação determinística e reconciliação
+ */
+async function pesquisarAtos(criterios = {}) {
+  const ordenacaoInicial = criterios.ordenacao || 'dta_promulgacao:ASC';
+  const primeira = await executarPesquisaUnica({ ...criterios, ordenacao: ordenacaoInicial });
+  const unicosPorHref = new Map();
+  for (const item of primeira.listaAtos) {
+    if (!unicosPorHref.has(item.href)) {
+      unicosPorHref.set(item.href, item);
+    }
+  }
+
+  const expectedTotal = primeira.expectedTotal;
+  let lastCookies = primeira.cookies;
+
+  if (expectedTotal !== null && unicosPorHref.size < expectedTotal) {
+    console.warn(`[Reconciliação] Obtidos ${unicosPorHref.size}/${expectedTotal} únicos com ordenacao=${ordenacaoInicial}. Tentando ordenacao=num_ato:ASC...`);
+    const segunda = await executarPesquisaUnica({ ...criterios, ordenacao: 'num_ato:ASC' });
+    lastCookies = segunda.cookies || lastCookies;
+    for (const item of segunda.listaAtos) {
+      if (!unicosPorHref.has(item.href)) {
+        unicosPorHref.set(item.href, item);
+      }
+    }
+  }
+
+  if (expectedTotal !== null && unicosPorHref.size < expectedTotal && criterios.dataInicio && criterios.dataFim && criterios.dataInicio !== criterios.dataFim) {
+    const dtInicio = parseBrDate(criterios.dataInicio);
+    const dtFim = parseBrDate(criterios.dataFim);
+    const diffDias = Math.round((dtFim - dtInicio) / 86400000);
+    if (diffDias >= 1) {
+      const meioTime = dtInicio.getTime() + Math.floor(diffDias / 2) * 86400000;
+      const dtMeio = new Date(meioTime);
+      const dtMeioSeguinte = new Date(meioTime + 86400000);
+      console.warn(`[Reconciliação] Dividindo janela ${criterios.dataInicio}..${criterios.dataFim} ao meio (${formatBrDate(dtMeio)})...`);
+      const esquerda = await pesquisarAtos({ ...criterios, dataFim: formatBrDate(dtMeio) });
+      const direita = await pesquisarAtos({ ...criterios, dataInicio: formatBrDate(dtMeioSeguinte) });
+      lastCookies = direita.cookies || esquerda.cookies || lastCookies;
+      for (const item of [...esquerda.listaAtos, ...direita.listaAtos]) {
+        if (!unicosPorHref.has(item.href)) {
+          unicosPorHref.set(item.href, item);
+        }
+      }
+    }
+  }
+
+  if (expectedTotal !== null && unicosPorHref.size < expectedTotal && !criterios.sglTipo) {
+    console.warn(`[Reconciliação] Ainda faltam itens (${unicosPorHref.size}/${expectedTotal}). Subdividindo por sgl_tipo[] via getFiltrosPesquisa...`);
+    let tipos = [];
+    try {
+      tipos = await obterTiposFacetas(primeira.params, primeira.cookies);
+    } catch (e) {
+      console.warn(`[Aviso] getFiltrosPesquisa falhou: ${e.message}`);
+    }
+    for (const tipo of tipos) {
+      const sub = await pesquisarAtos({ ...criterios, sglTipo: tipo });
+      lastCookies = sub.cookies || lastCookies;
+      for (const item of sub.listaAtos) {
+        if (!unicosPorHref.has(item.href)) {
+          unicosPorHref.set(item.href, item);
+        }
+      }
+    }
+  }
+
+  if (expectedTotal !== null && unicosPorHref.size < expectedTotal) {
+    throw new Error(`Pesquisa incompleta no Datalegis: esperados ${expectedTotal} itens, obtidos apenas ${unicosPorHref.size} únicos.`);
+  }
+
+  return {
+    cookies: lastCookies,
+    listaAtos: [...unicosPorHref.values()],
+    expectedTotal,
+    uniqueRawCount: unicosPorHref.size
+  };
+}
+
+/**
+ * Valida se o HTML retornado contém um ato legislativo válido e não uma página de erro ou sessão expirada.
+ */
+function validarHtmlAto(html, meta = null) {
+  if (!html || typeof html !== 'string' || html.trim().length < 100) {
+    return { valido: false, motivo: 'Payload vazio ou truncado' };
+  }
+
+  const $ = cheerio.load(html);
+  const temAto = $('.ato').length > 0;
+
+  const marcadoresGlobais = [
+    /sess[aã]o\s+expirada/i,
+    /este\s+ato\s+est[aá]\s+sendo\s+processado/i
+  ];
+  for (const regex of marcadoresGlobais) {
+    if (regex.test(html)) {
+      return { valido: false, motivo: `Marcador de erro/sessão detectado (${regex})` };
+    }
+  }
+
+  if (!temAto) {
+    const marcadoresEscopados = [
+      /acesso\s+negado/i,
+      /erro\s+interno\s+do\s+servidor/i,
+      /502\s+bad\s+gateway/i,
+      /503\s+service\s+unavailable/i,
+      /504\s+gateway\s+time-?out/i,
+      /fatal\s+error/i
+    ];
+    for (const regex of marcadoresEscopados) {
+      if (regex.test(html)) {
+        return { valido: false, motivo: `Marcador de erro/sessão detectado (${regex})` };
+      }
+    }
+  }
+
+  const container = temAto
+    ? $('.ato')
+    : $('#conteudo, #corpo, .conteudo').first();
+
+  if (container.length === 0) {
+    return { valido: false, motivo: 'Contêiner legislativo (.ato/#conteudo/#corpo/.conteudo) ausente' };
+  }
+
+  const containerLimpo = container.clone();
+  containerLimpo.find('script, style, nav, header, footer').remove();
+  containerLimpo.find('.noprint, #loading, .btn, .navbar, .menu').remove();
+  containerLimpo.find('p:contains("Este texto não substitui a Publicação Oficial")').remove();
+  containerLimpo.find('p:contains("Este texto nao substitui a Publicacao Oficial")').remove();
+  containerLimpo.find('a:contains("Voltar"), a:contains("IMPRIMIR"), a:contains("COPIAR LINK"), a:contains("CRIAR TAGS")').remove();
+  containerLimpo.find('a:contains("VER NOTAS"), a:contains("FECHAR NOTAS"), a:contains("PDF")').remove();
+
+  const texto = containerLimpo.text().replace(/\s+/g, ' ').trim();
+  if (texto.length < 20) {
+    const temHrComEmenta = temAto &&
+      containerLimpo.find('hr').length > 0 &&
+      Boolean(meta && typeof meta.ementa === 'string' && meta.ementa.trim().length > 10);
+    if (!temHrComEmenta) {
+      return { valido: false, motivo: 'Conteúdo textual do ato insuficiente' };
+    }
+  }
+
+  return { valido: true };
 }
 
 /**
@@ -215,23 +519,44 @@ async function processarAto(item, cookies, force = false) {
 
   if (fs.existsSync(filePath) && !force) {
     const conteudoExistente = fs.readFileSync(filePath, 'utf-8');
-    const isExistenteRetificacao = /seqAto=(RET|RT\d)/i.test(conteudoExistente) ||
-                                  conteudoExistente.includes('RETIFICAÇÃO') ||
-                                  conteudoExistente.includes('RETIFICACAO');
+    const matchSeqExistente = conteudoExistente.match(/seqAto=([^&\s"]+)/i);
+    const seqExistente = matchSeqExistente ? matchSeqExistente[1] : '';
+    const isExistenteNaoSubstantivo = Boolean(seqExistente && seqExistente !== '000');
+    const isExistenteDataAtoVazia = /^data_ato:\s*""/m.test(conteudoExistente);
+    const isExistenteRetificacao = /^fonte:.*seqAto=(RET|RT\d)/im.test(conteudoExistente) ||
+                                  (!seqExistente && /^\s*RETIFICA[CÇ][AÃ]O\b/m.test(conteudoExistente));
 
-    if (isItemSubstantivo && isExistenteRetificacao) {
-      // Priorização Substantiva: o arquivo existente contém apenas retificação/errata
-      // e o novo item é o ato substantivo original (seqAto=000). Prossegue para sobrescrever!
+    if (isItemSubstantivo && (isExistenteRetificacao || isExistenteNaoSubstantivo || isExistenteDataAtoVazia)) {
+      // Priorização Substantiva: o arquivo existente contém apenas retificação, anexo não-000
+      // ou data_ato vazia e o novo item é o ato substantivo original (seqAto=000). Prossegue para sobrescrever!
     } else {
       return { status: 'pulado', tipo: item.tipo, numero: item.numero, ano: item.ano };
     }
   }
 
   const fullUrl = `https://${HOST}${item.href}`;
-  const res = await httpGet(item.href, cookies);
+  let res = await httpGet(item.href, cookies);
+  let validacao = res.statusCode === 200 ? validarHtmlAto(res.body, item) : { valido: false, motivo: `HTTP ${res.statusCode}` };
+  let renewedCookies = null;
 
-  if (res.statusCode !== 200 || !res.body) {
-    return { status: 'erro', item, statusCode: res.statusCode };
+  // Se houver falha de sessão/HTML inválido, renova cookie e tenta uma segunda vez antes de desistir
+  if (!validacao.valido) {
+    try {
+      const freshCookies = await obterSessao();
+      if (freshCookies) {
+        res = await httpGet(item.href, freshCookies);
+        validacao = res.statusCode === 200 ? validarHtmlAto(res.body, item) : { valido: false, motivo: `HTTP ${res.statusCode}` };
+        if (validacao.valido) {
+          renewedCookies = freshCookies;
+        }
+      }
+    } catch (_) {
+      // mantém validacao falha e deixa retry externo tratar
+    }
+  }
+
+  if (res.statusCode !== 200 || !validacao.valido) {
+    return { status: 'erro', item, statusCode: res.statusCode, motivo: validacao.motivo };
   }
 
   const parsed = parseNormaHtml(res.body, fullUrl, item);
@@ -245,7 +570,8 @@ async function processarAto(item, cookies, force = false) {
     numero: item.numero,
     ano: item.ano,
     situacao: parsed.situacao,
-    caminho: filePath
+    caminho: filePath,
+    ...(renewedCookies ? { freshCookies: renewedCookies } : {})
   };
 }
 
@@ -409,6 +735,7 @@ module.exports = {
   httpGet,
   httpPost,
   obterSessao,
+  validarHtmlAto,
   coletarPorData,
   coletarPorAno,
   coletarPorPeriodo,

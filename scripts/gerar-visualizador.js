@@ -17,11 +17,30 @@ const CORES_TIPOS = {
   OUTROS: { bg: 'bg-slate-700/50', text: 'text-slate-300', border: 'border-slate-600', hex: '#64748b', label: 'Outros' }
 };
 
+const fmtNode = n => Number(n || 0).toLocaleString('pt-BR');
+
+// Calcular pico histórico global
+const contagemDiasGlobal = {};
+grafo.nodes.forEach(n => {
+  if (n.arquivo) {
+    const d = n.data_publicacao_dou || n.data_ato;
+    if (d) contagemDiasGlobal[d] = (contagemDiasGlobal[d] || 0) + 1;
+  }
+});
+let picoHistoricoValor = 0;
+let picoHistoricoData = '-';
+Object.entries(contagemDiasGlobal).forEach(([d, q]) => {
+  if (q > picoHistoricoValor) {
+    picoHistoricoValor = q;
+    picoHistoricoData = d;
+  }
+});
+
 // Pills de distribuição por tipo no header
 const distribuicaoHtml = Object.entries(stats.porTipo || {})
   .map(([tipo, qtd]) => {
     const conf = CORES_TIPOS[tipo] || CORES_TIPOS.OUTROS;
-    return `<span class="px-2.5 py-1 rounded-full ${conf.bg} ${conf.text} border ${conf.border} text-xs font-semibold tracking-wide">${tipo}: ${qtd}</span>`;
+    return `<span class="px-2.5 py-1 rounded-full ${conf.bg} ${conf.text} border ${conf.border} text-xs font-semibold tracking-wide">${tipo}: ${fmtNode(qtd)}</span>`;
   })
   .join('\n');
 
@@ -153,7 +172,7 @@ const htmlContent = `<!DOCTYPE html>
             <p class="text-[11px] text-emerald-400/70 truncate">Inteligência Regulatória</p>
             <div class="mt-1 flex items-center gap-1.5 text-[10px] text-emerald-300 font-mono bg-emerald-500/15 px-2 py-0.5 rounded-md border border-emerald-500/25 w-fit">
               <span>📅</span>
-              <span>Desde 01/01/2023</span>
+              <span>Desde 01/01/2022</span>
             </div>
           </div>
         </div>
@@ -176,11 +195,11 @@ const htmlContent = `<!DOCTYPE html>
         <div class="space-y-1">
           <a href="data/dist/anvisa.db" download class="flex items-center justify-between px-3 py-2 rounded-lg bg-[#082016] hover:bg-emerald-950/70 border border-emerald-500/20 text-xs text-slate-200 hover:text-emerald-300 transition">
             <span class="flex items-center gap-2">💾 SQLite (DB)</span>
-            <span class="text-[10px] text-emerald-400 font-mono">~94 MB</span>
+            <span class="text-[10px] text-emerald-400 font-mono">~226 MB</span>
           </a>
           <a href="data/dist/normas.json" download class="flex items-center justify-between px-3 py-2 rounded-lg bg-[#082016] hover:bg-emerald-950/70 border border-emerald-500/20 text-xs text-slate-200 hover:text-emerald-300 transition">
             <span class="flex items-center gap-2">📊 JSON Consolidado</span>
-            <span class="text-[10px] text-emerald-400 font-mono">~96 MB</span>
+            <span class="text-[10px] text-emerald-400 font-mono">~231 MB</span>
           </a>
           <a href="data/dist/normas.csv" download class="flex items-center justify-between px-3 py-2 rounded-lg bg-[#082016] hover:bg-emerald-950/70 border border-emerald-500/20 text-xs text-slate-200 hover:text-emerald-300 transition">
             <span class="flex items-center gap-2">📑 Planilha CSV</span>
@@ -361,17 +380,19 @@ const htmlContent = `<!DOCTYPE html>
       <!-- Card 1: Total Normas -->
       <div class="glass-card glass-card-hover rounded-2xl p-3 sm:p-4 space-y-1.5 sm:space-y-2 relative overflow-hidden group">
         <div class="flex items-center justify-between text-slate-400">
-          <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-emerald-400/80">Acervo Total</span>
+          <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-emerald-400/80">Normas no Período</span>
           <span class="text-sm sm:text-base group-hover:scale-110 transition">📑</span>
         </div>
         <div class="flex items-baseline gap-1.5 sm:gap-2 flex-wrap">
-          <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-total-normas">${stats.totalNormas || grafo.nodes.filter(n => n.arquivo).length}</span>
+          <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-total-normas">0</span>
           <span class="text-[11px] sm:text-xs text-emerald-400 font-medium">normas</span>
-          <span class="text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-500/30 truncate max-w-full" id="stat-filtradas-badge">
-            Exibindo ${stats.totalNormas || grafo.nodes.filter(n => n.arquivo).length}
+        </div>
+        <div class="pt-0.5">
+          <span class="inline-block text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-500/30 truncate max-w-full" id="stat-filtradas-badge">
+            Total no acervo: ${fmtNode(stats.totalNormas || grafo.nodes.filter(n => n.arquivo).length)}
           </span>
         </div>
-        <p class="text-[10px] sm:text-[11px] text-slate-300">Atos com texto e dados desde <span class="text-emerald-300 font-semibold font-mono">01/01/2023</span></p>
+        <p class="text-[10px] sm:text-[11px] text-slate-300">Atos com texto e dados desde <span class="text-emerald-300 font-semibold font-mono">01/01/2022</span></p>
         <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-emerald-500/10 rounded-full blur-xl pointer-events-none"></div>
       </div>
 
@@ -381,10 +402,16 @@ const htmlContent = `<!DOCTYPE html>
           <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-teal-400/80">Normas Vigentes</span>
           <span class="text-sm sm:text-base group-hover:scale-110 transition">✅</span>
         </div>
-        <div class="flex items-baseline gap-1.5 sm:gap-2">
-          <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-vigentes">${stats.vigentes || 0}</span>
-          <span class="text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono" id="stat-vigentes-pct">
-            ${Math.round(((stats.vigentes || 0) / (stats.totalNormas || 1)) * 100)}%
+        <div class="flex items-baseline gap-1.5 sm:gap-2 flex-wrap">
+          <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-vigentes">0</span>
+          <span class="text-[11px] sm:text-xs text-teal-400 font-medium">vigentes</span>
+          <span class="text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-500/30" id="stat-vigentes-pct">
+            100%
+          </span>
+        </div>
+        <div class="pt-0.5">
+          <span class="inline-block text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-500/30 truncate max-w-full" id="stat-vigentes-badge">
+            Total no acervo: ${fmtNode(stats.vigentes || 0)}
           </span>
         </div>
         <p class="text-[10px] sm:text-[11px] text-slate-400">Plena eficácia jurídica em vigor no Brasil</p>
@@ -397,9 +424,14 @@ const htmlContent = `<!DOCTYPE html>
           <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-cyan-400/80">Conexões Mapeadas</span>
           <span class="text-sm sm:text-base group-hover:scale-110 transition">🕸️</span>
         </div>
-        <div class="flex items-baseline gap-1.5 sm:gap-2">
-          <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-relacoes">${stats.totalRelacoes || grafo.edges.length}</span>
+        <div class="flex items-baseline gap-1.5 sm:gap-2 flex-wrap">
+          <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-relacoes">0</span>
           <span class="text-[11px] sm:text-xs text-cyan-400 font-medium">arestas</span>
+        </div>
+        <div class="pt-0.5">
+          <span class="inline-block text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-500/30 truncate max-w-full" id="stat-relacoes-badge">
+            Total no acervo: ${fmtNode(stats.totalRelacoes || grafo.edges.length)}
+          </span>
         </div>
         <p class="text-[10px] sm:text-[11px] text-slate-400">Relações (altera, revoga, cita)</p>
         <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-cyan-500/10 rounded-full blur-xl pointer-events-none"></div>
@@ -411,9 +443,15 @@ const htmlContent = `<!DOCTYPE html>
           <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-amber-400/80">Pico Regulatório</span>
           <span class="text-sm sm:text-base group-hover:scale-110 transition">⚡</span>
         </div>
-        <div class="flex items-baseline gap-1.5 sm:gap-2">
-          <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-pico-valor">121</span>
-          <span class="text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono" id="stat-pico-data">19/10</span>
+        <div class="flex items-baseline gap-1.5 sm:gap-2 flex-wrap">
+          <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-pico-valor">0</span>
+          <span class="text-[11px] sm:text-xs text-amber-400 font-medium">atos</span>
+          <span class="text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono border border-amber-500/30" id="stat-pico-data">-</span>
+        </div>
+        <div class="pt-0.5">
+          <span class="inline-block text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-500/30 truncate max-w-full" id="stat-pico-badge">
+            Recorde histórico: ${fmtNode(picoHistoricoValor)} atos
+          </span>
         </div>
         <p class="text-[10px] sm:text-[11px] text-slate-400" id="stat-pico-sub">Maior volume diário no período</p>
         <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-amber-500/10 rounded-full blur-xl pointer-events-none"></div>
@@ -525,7 +563,7 @@ const htmlContent = `<!DOCTYPE html>
               <span>📊</span>
               <span>Proporção por Tipologia Normativa</span>
             </h4>
-            <p class="text-[11px] sm:text-xs text-slate-400">Composição do acervo regulatório consolidado (2023–2026)</p>
+            <p class="text-[11px] sm:text-xs text-slate-400">Composição do acervo regulatório consolidado (2022–2026)</p>
           </div>
           <div id="donut-container" class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-4">
             <!-- Donut SVG gerado dinamicamente -->
@@ -586,7 +624,7 @@ const htmlContent = `<!DOCTYPE html>
     <footer class="text-center text-xs text-white pt-8 pb-4 border-t border-emerald-500/10 space-y-1.5">
       <p class="text-white font-semibold">Acervo Aberto das Normas da Anvisa • Processamento Determinístico de Grafo Regulatório</p>
       <p class="text-xs text-white">Dados obtidos via portal oficial AnvisaLegis / Datalegis • Atualização contínua via GitHub Actions</p>
-      <p class="text-[11px] text-emerald-300 font-mono">📅 Histórico regulatório contínuo com dados consolidados a partir de 01/01/2023</p>
+      <p class="text-[11px] text-emerald-300 font-mono">📅 Histórico regulatório contínuo com dados consolidados a partir de 01/01/2022</p>
     </footer>
 
     <!-- Toast Flutuante de Notificação / Performance -->
@@ -619,6 +657,15 @@ const htmlContent = `<!DOCTYPE html>
       const d = n.data_publicacao_dou || n.data_ato || '';
       if (d) {
         atosPorDiaMap[d] = (atosPorDiaMap[d] || 0) + 1;
+      }
+    });
+
+    let globalPicoValor = 0;
+    let globalPicoData = '-';
+    Object.entries(atosPorDiaMap).forEach(([d, q]) => {
+      if (q > globalPicoValor) {
+        globalPicoValor = q;
+        globalPicoData = d;
       }
     });
 
@@ -2073,25 +2120,41 @@ const htmlContent = `<!DOCTYPE html>
       const elFiltradasBadge = document.getElementById('stat-filtradas-badge');
       const elVigentes = document.getElementById('stat-vigentes');
       const elVigentesPct = document.getElementById('stat-vigentes-pct');
+      const elVigentesBadge = document.getElementById('stat-vigentes-badge');
       const elRelacoes = document.getElementById('stat-relacoes');
+      const elRelacoesBadge = document.getElementById('stat-relacoes-badge');
       const elPicoValor = document.getElementById('stat-pico-valor');
       const elPicoData = document.getElementById('stat-pico-data');
+      const elPicoBadge = document.getElementById('stat-pico-badge');
       const elPicoSub = document.getElementById('stat-pico-sub');
 
-      // Opção 1: Card 1 fixo no total global do banco
-      if (elTotal) elTotal.textContent = statsTotalGeral;
+      const fmt = n => Number(n || 0).toLocaleString('pt-BR');
+
+      // Card 1: Destaque mostra o período, badge mostra o total full
+      if (elTotal) elTotal.textContent = fmt(total);
       if (elFiltradasBadge) {
-        if (total < statsTotalGeral) {
-          elFiltradasBadge.textContent = \`Exibindo \${total} no período\`;
-        } else {
-          elFiltradasBadge.textContent = \`Exibindo \${total} (tudo)\`;
-        }
+        elFiltradasBadge.textContent = \`Total no acervo: \${fmt(statsTotalGeral)}\`;
       }
-      if (elVigentes) elVigentes.textContent = vigentes;
+
+      // Card 2: Destaque mostra vigentes no período, badge mostra total de vigentes no acervo
+      if (elVigentes) elVigentes.textContent = fmt(vigentes);
       if (elVigentesPct) elVigentesPct.textContent = \`\${pct}%\`;
-      if (elRelacoes) elRelacoes.textContent = edgesCount;
-      if (elPicoValor) elPicoValor.textContent = picoQtd;
+      if (elVigentesBadge) {
+        elVigentesBadge.textContent = \`Total no acervo: \${fmt(statsData.vigentes || 0)}\`;
+      }
+
+      // Card 3: Destaque mostra arestas no período, badge mostra conexões no acervo
+      if (elRelacoes) elRelacoes.textContent = fmt(edgesCount);
+      if (elRelacoesBadge) {
+        elRelacoesBadge.textContent = \`Total no acervo: \${fmt(statsData.totalRelacoes || graphData.edges.length)}\`;
+      }
+
+      // Card 4: Destaque mostra o pico no período, badge mostra recorde histórico
+      if (elPicoValor) elPicoValor.textContent = fmt(picoQtd);
       if (elPicoData) elPicoData.textContent = picoData !== '-' ? picoData.slice(0, 5) : '-';
+      if (elPicoBadge && globalPicoValor > 0) {
+        elPicoBadge.textContent = \`Recorde histórico: \${fmt(globalPicoValor)} atos\`;
+      }
       if (elPicoSub) {
         elPicoSub.textContent = picoData !== '-' ? \`Pico registrado em \${picoData}\` : 'Sem dados para o filtro';
       }
@@ -2177,31 +2240,33 @@ const htmlContent = `<!DOCTYPE html>
       });
 
       filteredNodeIds = new Set(filtered.map(n => n.id));
-      document.getElementById('count-filtered').textContent = \`\${filtered.length} de \${nodes.length} nós\`;
+      const fmt = n => Number(n || 0).toLocaleString('pt-BR');
+      document.getElementById('count-filtered').textContent = \`\${fmt(filtered.length)} de \${fmt(nodes.length)} nós\`;
 
       const listStatus = document.getElementById('list-status-badge');
       const internalCount = filtered.filter(n => n.arquivo).length;
+      const fmtInternal = fmt(internalCount);
       if (q) {
-        listStatus.textContent = \`Encontrados \${internalCount} atos para "\${q}"\`;
+        listStatus.textContent = \`Encontrados \${fmtInternal} atos para "\${q}"\`;
       } else if (diaSelecionado) {
-        listStatus.textContent = \`Exibindo \${internalCount} atos do dia \${diaSelecionado} (clique no dia para ver todos)\`;
+        listStatus.textContent = \`Exibindo \${fmtInternal} atos do dia \${diaSelecionado} (clique no dia para ver todos)\`;
       } else if (dataInicioFiltro && dataFimFiltro && dataInicioFiltro === dataFimFiltro) {
         const [y, m, d] = dataInicioFiltro.split('-');
-        listStatus.textContent = \`Exibindo \${internalCount} atos de \${d}/\${m}/\${y}\`;
+        listStatus.textContent = \`Exibindo \${fmtInternal} atos de \${d}/\${m}/\${y}\`;
       } else if (dataInicioFiltro && dataFimFiltro) {
         const [y1, m1, d1] = dataInicioFiltro.split('-');
         const [y2, m2, d2] = dataFimFiltro.split('-');
-        listStatus.textContent = \`Exibindo \${internalCount} atos (\${d1}/\${m1} a \${d2}/\${m2}/\${y2})\`;
+        listStatus.textContent = \`Exibindo \${fmtInternal} atos (\${d1}/\${m1} a \${d2}/\${m2}/\${y2})\`;
       } else if (filtroRapidoAtivo === '7_DIAS') {
-        listStatus.textContent = \`Exibindo \${internalCount} atos dos últimos 7 dias\`;
+        listStatus.textContent = \`Exibindo \${fmtInternal} atos dos últimos 7 dias\`;
       } else if (filtroRapidoAtivo === '14_DIAS') {
-        listStatus.textContent = \`Exibindo \${internalCount} atos dos últimos 14 dias\`;
+        listStatus.textContent = \`Exibindo \${fmtInternal} atos dos últimos 14 dias\`;
       } else if (filtroRapidoAtivo === '30_DIAS') {
-        listStatus.textContent = \`Exibindo \${internalCount} atos dos últimos 30 dias\`;
+        listStatus.textContent = \`Exibindo \${fmtInternal} atos dos últimos 30 dias\`;
       } else if (filtroRapidoAtivo === '60_DIAS') {
-        listStatus.textContent = \`Exibindo \${internalCount} atos (últimos 60 dias)\`;
+        listStatus.textContent = \`Exibindo \${fmtInternal} atos (últimos 60 dias)\`;
       } else {
-        listStatus.textContent = \`Exibindo \${internalCount} atos\`;
+        listStatus.textContent = \`Exibindo \${fmtInternal} atos\`;
       }
 
       atualizarMetricas(filtered);
@@ -2269,7 +2334,7 @@ const htmlContent = `<!DOCTYPE html>
             const d = s.pct >= 0.999 ? 'M 50 10 A 40 40 0 1 1 49.99 10 Z' :
                       \`M \${x1} \${y1} A 40 40 0 \${largeArc} 1 \${x2} \${y2}\`;
             return \`<path d="\${d}" fill="none" stroke="\${s.color}" stroke-width="16" class="donut-segment cursor-pointer transition">
-              <title>\${s.tipo}: \${s.count} (\${Math.round(s.pct * 100)}%)</title>
+              <title>\${s.tipo}: \${Number(s.count).toLocaleString('pt-BR')} (\${Math.round(s.pct * 100)}%)</title>
             </path>\`;
           }).join('')}
         </svg>
@@ -2278,7 +2343,7 @@ const htmlContent = `<!DOCTYPE html>
             <div class="flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full" style="background-color: \${s.color}"></span>
               <span class="text-slate-300 font-medium">\${s.tipo}:</span>
-              <strong class="text-white font-mono">\${s.count}</strong>
+              <strong class="text-white font-mono">\${Number(s.count).toLocaleString('pt-BR')}</strong>
             </div>
           \`).join('')}
         </div>
@@ -2321,6 +2386,18 @@ const htmlContent = `<!DOCTYPE html>
 `;
 
 // Salvar no repositório (visualizador.html e index.html para o GitHub Pages)
-fs.writeFileSync(path.join(__dirname, '../visualizador.html'), htmlContent, 'utf8');
-fs.writeFileSync(path.join(__dirname, '../index.html'), htmlContent, 'utf8');
+function salvarArquivoComRetry(destino, conteudo, tentativas = 5) {
+  for (let i = 1; i <= tentativas; i++) {
+    try {
+      fs.writeFileSync(destino, conteudo, 'utf8');
+      return;
+    } catch (err) {
+      if (i === tentativas) throw err;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 300 * i);
+    }
+  }
+}
+
+salvarArquivoComRetry(path.join(__dirname, '../visualizador.html'), htmlContent);
+salvarArquivoComRetry(path.join(__dirname, '../index.html'), htmlContent);
 console.log('✅ Novo visualizador Dark Emerald AI gerado com sucesso em visualizador.html e index.html!');

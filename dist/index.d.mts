@@ -1,5 +1,5 @@
-import { D as DatabaseProvider, F as FiltrosBusca, N as NormaRegistro, V as VigenciaInfo, R as RelacoesInfo, E as EstatisticasAcervo, a as EstatisticasPorTipo } from './server-BqlvLZOi.mjs';
-export { b as RelacaoItemEntrada, c as RelacaoItemSaida, d as RelacaoRegistro, e as createAnvisaMcpServer } from './server-BqlvLZOi.mjs';
+import { D as DatabaseProvider, F as FiltrosBusca, N as NormaRegistro, V as VigenciaInfo, R as RelacoesInfo, E as EstatisticasAcervo, a as EstatisticasPorTipo } from './server-AYq_-Wr7.mjs';
+export { b as RelacaoItemEntrada, c as RelacaoItemSaida, d as RelacaoRegistro, e as createAnvisaMcpServer } from './server-AYq_-Wr7.mjs';
 export { resolveDataDir, resolveDbPath, resolveEstatisticasPath, resolveGrafoPath, resolveNormasDir } from './config.mjs';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
@@ -37,6 +37,11 @@ declare const buscarNormasSchema: {
         vigente: "vigente";
         revogada: "revogada";
     }>>;
+    data: z.ZodOptional<z.ZodString>;
+    ordenar_por: z.ZodDefault<z.ZodOptional<z.ZodEnum<{
+        recentes: "recentes";
+        id: "id";
+    }>>>;
     limite: z.ZodDefault<z.ZodNumber>;
 };
 declare function registerBuscarNormasTool(server: McpServer, dbProvider: DatabaseProvider): void;

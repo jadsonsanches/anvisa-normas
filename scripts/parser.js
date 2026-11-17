@@ -96,7 +96,7 @@ function parseNormaHtml(html, urlOrigem = '', metaBusca = {}) {
       const txt = $(p).text().trim().replace(/\s+/g, ' ');
       if (!ementa) {
         const cleanTxt = txt.replace(/^Art\.\s*1[º°]\.?\s*/i, '');
-        if (/^(Aprova|Dispõe|Estabelece|Institui|Altera|Proíbe|Determina|Define|Regulamenta|Autoriza|Exonera|Nomeia|Designa|Revoga|Concede|Defere|Indefere|Adota|Renova|Inclui|Decide)/i.test(cleanTxt)) {
+        if (/^(Aprova|Dispõe|Estabelece|Institui|Altera|Proíbe|Determina|Define|Regulamenta|Autoriza|Exonera|Nomeia|Designa|Revoga|Concede|Defere|Deferir|Indefere|Indeferir|Adota|Renova|Inclui|Decide)/i.test(cleanTxt)) {
           if (cleanTxt.length > 15 && cleanTxt.length < 800) {
             ementa = cleanTxt;
           }
@@ -111,6 +111,17 @@ function parseNormaHtml(html, urlOrigem = '', metaBusca = {}) {
     maio: '05', junho: '06', julho: '07', agosto: '08', setembro: '09',
     outubro: '10', novembro: '11', dezembro: '12'
   };
+
+  function normalizarDataValida(diaRaw, mesRaw, anoRaw) {
+    const d = parseInt(diaRaw, 10);
+    const m = parseInt(mesRaw, 10);
+    const y = parseInt(anoRaw, 10);
+    if (!Number.isInteger(d) || !Number.isInteger(m) || !Number.isInteger(y)) return '';
+    if (d < 1 || d > 31 || m < 1 || m > 12) return '';
+    const dt = new Date(y, m - 1, d);
+    if (dt.getFullYear() !== y || dt.getMonth() !== m - 1 || dt.getDate() !== d) return '';
+    return `${String(d).padStart(2, '0')}/${String(m).padStart(2, '0')}/${String(y)}`;
+  }
 
   let dataAto = metaBusca.dataAto || metaBusca.dataPromulgacao || '';
   // Se dataAto informada tiver ano divergente do ano da norma, descartar para extrair do corpo/metadados coerentes
@@ -130,11 +141,10 @@ function parseNormaHtml(html, urlOrigem = '', metaBusca = {}) {
       const regexHeader = new RegExp(`(?:N[º°]|N[UÚ]MERO)\\s+[\\d\\.]+[\\s\\S]*?\\bDE\\s+(\\d{1,2})\\s+DE\\s+([A-ZÇ]+)\\s+DE\\s+(${ano})`, 'i');
       const matchHeader = rawContainerText.match(regexHeader);
       if (matchHeader) {
-        const dia = matchHeader[1].padStart(2, '0');
         const mesNome = matchHeader[2].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const mes = meses[mesNome];
         if (mes) {
-          dataAto = `${dia}/${mes}/${ano}`;
+          dataAto = normalizarDataValida(matchHeader[1], mes, ano);
         }
       }
 
@@ -145,11 +155,57 @@ function parseNormaHtml(html, urlOrigem = '', metaBusca = {}) {
         if (allMatches.length > 0) {
           // Se houver mais de uma, preferir a última ocorrência (geralmente data de assinatura no fecho: "Em 19 de agosto de 2025")
           const last = allMatches[allMatches.length - 1];
-          const dia = last[1].padStart(2, '0');
           const mesNome = last[2].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
           const mes = meses[mesNome];
           if (mes) {
-            dataAto = `${dia}/${mes}/${ano}`;
+            dataAto = normalizarDataValida(last[1], mes, ano);
+          }
+        }
+      }
+
+      // 3. Fallback determinístico com guarda de ano na ementa e em marcadores explícitos do corpo
+      if (!dataAto && ementa) {
+        const regexEmenta = new RegExp(`(?:realizada\\s+em|em|de)\\s+(\\d{1,2})\\s+de\\s+([A-ZÇÁÉÍÓÚÂÊÔÃÕ]+)\\s+de\\s+(${ano})`, 'i');
+        const matchEmentaData = ementa.match(regexEmenta);
+        if (matchEmentaData) {
+          const mesNome = matchEmentaData[2].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+          const mes = meses[mesNome];
+          if (mes) {
+            dataAto = normalizarDataValida(matchEmentaData[1], mes, ano);
+          }
+        }
+      }
+
+      if (!dataAto) {
+        const padroesNumericosAno = [
+          new RegExp(`Publicado\\s+Internamente\\s+pela\\s+ANVISA\\s+em\\s*(\\d{1,2})\\/(\\d{1,2})\\/(${ano})`, 'i'),
+          new RegExp(`Data\\s+de\\s+Assinatura:\\s*(\\d{1,2})\\/(\\d{1,2})\\/(${ano})`, 'i'),
+          new RegExp(`Encerrada\\s+em:?\\s*(\\d{1,2})\\/(\\d{1,2})\\/(${ano})`, 'i'),
+          new RegExp(`Prazo\\s+de\\s+Contribui[çc][aã]o\\s*(\\d{1,2})\\/(\\d{1,2})\\/(${ano})`, 'i'),
+          new RegExp(`realizada\\s+no\\s+dia\\s*(\\d{1,2})\\/(\\d{1,2})\\/(${ano})`, 'i'),
+          new RegExp(`Data\\s+de\\s+realiza[çc][aã]o[\\s\\S]{0,40}?(\\d{1,2})\\/(\\d{1,2})\\/(${ano})`, 'i'),
+          new RegExp(`\\(SIASGnet\\s*-\\s*(\\d{1,2})\\/(\\d{1,2})\\/(${ano})\\)`, 'i')
+        ];
+        for (const regexNum of padroesNumericosAno) {
+          const matchNum = rawContainerText.match(regexNum);
+          if (matchNum) {
+            const candidata = normalizarDataValida(matchNum[1], matchNum[2], matchNum[3]);
+            if (candidata) {
+              dataAto = candidata;
+              break;
+            }
+          }
+        }
+      }
+
+      if (!dataAto) {
+        const regexRealizacaoExtenso = new RegExp(`Data\\s+de\\s+realiza[çc][aã]o[\\s\\S]{0,40}?(\\d{1,2})\\s+de\\s+([A-ZÇÁÉÍÓÚÂÊÔÃÕ]+)\\s+de\\s+(${ano})`, 'i');
+        const matchRealiz = rawContainerText.match(regexRealizacaoExtenso);
+        if (matchRealiz) {
+          const mesNome = matchRealiz[2].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+          const mes = meses[mesNome];
+          if (mes) {
+            dataAto = normalizarDataValida(matchRealiz[1], mes, ano);
           }
         }
       }

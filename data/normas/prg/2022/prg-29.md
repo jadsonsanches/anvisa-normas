@@ -2,8 +2,8 @@
 tipo: "PRG"
 numero: "29"
 ano: "2022"
-data_ato: "01/01/2022"
-data_promulgacao: "01/01/2022"
+data_ato: "30/12/2022"
+data_promulgacao: "30/12/2022"
 data_publicacao_dou: "02/01/2023"
 situacao: "vigente"
 ementa: "- UASG 253002Torna publica a abertura do Pregão nº 29/2022, que tem por objeto contratação de Técnico em Secretariado região sudeste."
@@ -12,7 +12,7 @@ relacionadas: []
 fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=PRG&numeroAto=00000029&seqAto=000&valorAno=2022&orgao=ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
 ---
 
-# PRG nº 29, de 01/01/2022
+# PRG nº 29, de 30/12/2022
 
 MINISTÉRIO DA SAÚDE
 

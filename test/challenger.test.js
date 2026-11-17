@@ -26,8 +26,8 @@ const dirDist = path.join(rootDir, 'data/dist');
 
 test('Desafio Empírico 1: Verificação da quantidade total de arquivos markdown em data/normas/', () => {
   const arquivos = listarArquivosMarkdown(dirNormas);
-  assert.ok(arquivos.length >= 29000, `Esperava acervo consolidado com mais de 29000 normas, encontrou ${arquivos.length}`);
-  assert.strictEqual(arquivos.length, 29744, `Esperava exatamente 29744 arquivos markdown, mas encontrou ${arquivos.length}`);
+  assert.ok(arquivos.length >= 35000, `Esperava acervo consolidado com mais de 35000 normas, encontrou ${arquivos.length}`);
+  assert.strictEqual(arquivos.length, 35981, `Esperava exatamente 35981 arquivos markdown, mas encontrou ${arquivos.length}`);
 });
 
 test('Desafio Empírico 2: Validação estrita de YAML frontmatter, 11 propriedades e integridade em todos os arquivos', () => {
@@ -108,10 +108,12 @@ test('Desafio Empírico 2: Validação estrita de YAML frontmatter, 11 proprieda
         // Se ementa é vazia, deve ser comprovadamente uma Retificação oficial ou Extrato/Edital que não possui ementa no DOU
         const tipoNorma = (campos['tipo'] || '').replace(/"/g, '');
         const isRetOuExtrato = ['BIB', 'MAN'].includes(tipoNorma) ||
+                               (tipoNorma === 'ORT' && conteudo.includes('.pdf')) ||
                                conteudo.includes('RETIFICAÇÃO') ||
                                conteudo.includes('RETIFICACAO') ||
                                conteudo.includes('EXTRATO') ||
                                conteudo.includes('EDITAL') ||
+                               (tipoNorma === 'DEP' && /^DESPACHO N[º°]/m.test(conteudo)) ||
                                conteudo.includes('AVISO DE ALTERAÇÃO') ||
                                conteudo.includes('AVISO DE LICITAÇÃO') ||
                                conteudo.includes('AVISO DE LICITACAO') ||
@@ -190,8 +192,8 @@ test('Desafio Empírico 3: Formato estrito de datas (DD/MM/AAAA) nos campos de d
 
     const dataAto = (campos['data_ato'] || '').replace(/"/g, '').trim();
     if (!dataAto) {
-      if (rel.includes('/2023/') || rel.includes('/2025/')) {
-        falhasData.push(`${rel}: 'data_ato' obrigatória de 2023/2025 está vazia`);
+      if (rel.includes('/2022/') || rel.includes('/2023/') || rel.includes('/2025/')) {
+        falhasData.push(`${rel}: 'data_ato' obrigatória de 2022/2023/2025 está vazia`);
       }
     } else {
       const matchAto = dataAto.match(dataRegex);
@@ -209,6 +211,9 @@ test('Desafio Empírico 3: Formato estrito de datas (DD/MM/AAAA) nos campos de d
         }
         if (rel.includes('/2023/') && ano !== 2023) {
           falhasData.push(`${rel}: 'data_ato' de 2023 com ano incoerente: '${dataAto}'`);
+        }
+        if (rel.includes('/2022/') && ano !== 2022) {
+          falhasData.push(`${rel}: 'data_ato' de 2022 com ano incoerente: '${dataAto}'`);
         }
       }
     }
@@ -388,7 +393,7 @@ test('Desafio Empírico 7: Integridade do Grafo e Estatísticas (relacoes.json e
   assert.strictEqual(somaPorTipo, totalEsperado, `Soma de porTipo deve ser ${totalEsperado}`);
 
   // 2. Nós do grafo
-  assert.strictEqual(grafo.nodes.length, 31849, `Grafo deve ter exatamente 31849 nós`);
+  assert.strictEqual(grafo.nodes.length, 38044, `Grafo deve ter exatamente 38044 nós`);
   const nodesMap = new Map();
   let nosInternos = 0;
 
@@ -512,5 +517,43 @@ test('Desafio Empírico 9: Priorização Substantiva de Atos e Integridade Norma
     if (item.ementaParcial) {
       assert.ok(conteudo.toLowerCase().includes(item.ementaParcial.toLowerCase()), `${item.p} deve conter menção a '${item.ementaParcial}'`);
     }
+  }
+});
+
+test('Desafio Empírico 10: Integridade Normativa e Atos Estruturantes de 2022', () => {
+  const arquivos2022 = listarArquivosMarkdown(dirNormas).filter(f => f.includes(path.sep + '2022' + path.sep));
+  assert.ok(arquivos2022.length >= 6211, `Esperava pelo menos 6211 arquivos de 2022, encontrou ${arquivos2022.length}`);
+
+  for (const arq of arquivos2022) {
+    const rel = path.relative(rootDir, arq).replace(/\\/g, '/');
+    const conteudo = fs.readFileSync(arq, 'utf8');
+    assert.ok(!/este ato est[áa] sendo processado/i.test(conteudo), `${rel}: contém placeholder não processado`);
+    assert.ok(/data_ato:\s*"\d{2}\/\d{2}\/2022"/.test(conteudo), `${rel}: data_ato de 2022 inválida ou ausente`);
+  }
+
+  const atos2022 = [
+    { p: 'data/normas/rdc/2022/rdc-658.md', minLen: 50000, ementaParcial: 'Boas Práticas de Fabricação de Medicamentos' },
+    { p: 'data/normas/rdc/2022/rdc-659.md', minLen: 10000, ementaParcial: 'importação e exportação' },
+    { p: 'data/normas/rdc/2022/rdc-660.md', minLen: 5000, ementaParcial: 'Cannabis' },
+    { p: 'data/normas/rdc/2022/rdc-751.md', minLen: 30000, ementaParcial: 'classificação de risco' },
+    { p: 'data/normas/in/2022/in-160.md', minLen: 15000, ementaParcial: 'contaminantes em alimentos' },
+    { p: 'data/normas/in/2022/in-172.md', minLen: 1500, ementaParcial: 'Trichoderma viride' },
+    { p: 'data/normas/portaria/2022/portaria-143.md', minLen: 1000, ementaParcial: 'afastamento' },
+    { p: 'data/normas/re/2022/re-1055.md', minLen: 5000, ementaParcial: 'Autorização de Funcionamento' },
+    { p: 'data/normas/re/2022/re-2446.md', minLen: 1500, ementaParcial: 'REBLAS' },
+    { p: 'data/normas/re/2022/re-2630.md', minLen: 1500, ementaParcial: 'Boas Práticas' },
+    { p: 'data/normas/re/2022/re-2831.md', minLen: 1000, ementaParcial: 'insubsistente' },
+    { p: 'data/normas/re/2022/re-3507.md', minLen: 1000, ementaParcial: 'terapia avançada' },
+    { p: 'data/normas/re/2022/re-4255.md', minLen: 1500, ementaParcial: 'Tecnologia de Produtos' },
+    { p: 'data/normas/exc/2022/exc-41.md', minLen: 500, ementaParcial: 'Contrato' }
+  ];
+
+  for (const item of atos2022) {
+    const full = path.join(rootDir, item.p);
+    assert.ok(fs.existsSync(full), `Ato estruturante de 2022 ausente: ${item.p}`);
+    const conteudo = fs.readFileSync(full, 'utf8');
+    assert.ok(conteudo.length >= item.minLen, `${item.p} deve ter pelo menos ${item.minLen} caracteres, possui ${conteudo.length}`);
+    assert.ok(conteudo.includes('seqAto=000'), `${item.p} deve conter seqAto=000 na fonte`);
+    assert.ok(conteudo.toLowerCase().includes(item.ementaParcial.toLowerCase()), `${item.p} deve conter '${item.ementaParcial}'`);
   }
 });

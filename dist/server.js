@@ -12,6 +12,12 @@ var buscarNormasSchema = {
   ),
   ano: z.number().int().optional().describe("Ano da norma (ex: 2024, 2025, 2026)"),
   situacao: z.enum(["vigente", "revogada"]).optional().describe("Filtro por situa\xE7\xE3o de vig\xEAncia da norma"),
+  data: z.string().optional().describe(
+    'Filtro por data exata da norma ou publica\xE7\xE3o no DOU (aceita formato DD/MM/AAAA ou AAAA-MM-DD, ex: "16/11/2026" ou "2026-11-16")'
+  ),
+  ordenar_por: z.enum(["recentes", "id"]).optional().default("recentes").describe(
+    'Crit\xE9rio de ordena\xE7\xE3o dos resultados: "recentes" (padr\xE3o, normas publicadas mais recentemente primeiro) ou "id"'
+  ),
   limite: z.number().int().min(1).max(100).default(20).describe("Quantidade m\xE1xima de resultados a retornar (padr\xE3o: 20, m\xE1x: 100)")
 };
 function registerBuscarNormasTool(server, dbProvider) {
@@ -27,6 +33,8 @@ function registerBuscarNormasTool(server, dbProvider) {
           tipo: args.tipo,
           ano: args.ano,
           situacao: args.situacao,
+          data: args.data,
+          ordenar_por: args.ordenar_por,
           limite: args.limite
         });
         return {
@@ -41,6 +49,8 @@ function registerBuscarNormasTool(server, dbProvider) {
                     tipo: args.tipo || null,
                     ano: args.ano || null,
                     situacao: args.situacao || null,
+                    data: args.data || null,
+                    ordenar_por: args.ordenar_por || "recentes",
                     limite: args.limite
                   },
                   normas

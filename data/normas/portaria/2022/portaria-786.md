@@ -1,0 +1,29 @@
+---
+tipo: "PORTARIA"
+numero: "786"
+ano: "2022"
+data_ato: "09/09/2022"
+data_promulgacao: "09/09/2022"
+data_publicacao_dou: "12/09/2022"
+situacao: "vigente"
+ementa: "Designa o servidor HENRIQUE BUENO KUSSAMA, para exercer o encargo de substituto de Gerente, código CGE-IV, da Gerência de Produtos de Higiene, Perfumes, Cosméticos e Saneantes."
+leis_base: []
+relacionadas: []
+fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=POR&numeroAto=00000786&seqAto=000&valorAno=2022&orgao=ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
+---
+
+# PORTARIA nº 786, de 09/09/2022
+
+MINISTÉRIO DA SAÚDE
+
+AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA
+
+PORTARIA Nº 786, DE 9 DE SETEMBRO DE 2022
+
+A Chefe de Gabinete do Diretor-Presidente da Agência Nacional de Vigilância Sanitária, no uso da competência que lhe foi delegada pela Portaria n° 1.596, de 8 de agosto de 2016, alterada pela Portaria nº 1.724, de 5 de setembro de 2016, resolve:
+
+Designar o servidor HENRIQUE BUENO KUSSAMA, matrícula SIAPE nº 1822205, para exercer o encargo de substituto de Gerente, código CGE-IV, da Gerência de Produtos de Higiene, Perfumes, Cosméticos e Saneantes.
+
+KARIN SCHUCK HEMESATH MENDES
+
+PUB D.O.U., 12/09/2022 - Seção 2

@@ -140,14 +140,28 @@ var SqlJsDatabaseProvider = class {
       conditions.push("situacao = :situacao");
       params[":situacao"] = filtros.situacao.toLowerCase();
     }
+    if (filtros.data && filtros.data.trim()) {
+      let dataFmt = filtros.data.trim();
+      const isoMatch = dataFmt.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (isoMatch) {
+        dataFmt = `${isoMatch[3]}/${isoMatch[2]}/${isoMatch[1]}`;
+      }
+      conditions.push("(data_publicacao_dou = :data OR data_ato = :data OR data_promulgacao = :data)");
+      params[":data"] = dataFmt;
+    }
     const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
     const limite = Math.min(Math.max(filtros.limite || 20, 1), 100);
+    const orderClause = filtros.ordenar_por === "id" ? "ORDER BY ano DESC, id DESC" : `ORDER BY 
+           SUBSTR(COALESCE(NULLIF(data_publicacao_dou, ''), NULLIF(data_ato, ''), '01/01/1900'), 7, 4) || '-' ||
+           SUBSTR(COALESCE(NULLIF(data_publicacao_dou, ''), NULLIF(data_ato, ''), '01/01/1900'), 4, 2) || '-' ||
+           SUBSTR(COALESCE(NULLIF(data_publicacao_dou, ''), NULLIF(data_ato, ''), '01/01/1900'), 1, 2) DESC,
+           id DESC`;
     const sql = `
       SELECT id, tipo, numero, ano, data_ato, data_promulgacao, data_publicacao_dou,
              situacao, ementa, leis_base, relacionadas, arquivo, fonte
       FROM normas
       ${whereClause}
-      ORDER BY ano DESC, id DESC
+      ${orderClause}
       LIMIT ${limite}
     `;
     const stmt = db.prepare(sql);
@@ -447,6 +461,12 @@ var buscarNormasSchema = {
   ),
   ano: z.number().int().optional().describe("Ano da norma (ex: 2024, 2025, 2026)"),
   situacao: z.enum(["vigente", "revogada"]).optional().describe("Filtro por situa\xE7\xE3o de vig\xEAncia da norma"),
+  data: z.string().optional().describe(
+    'Filtro por data exata da norma ou publica\xE7\xE3o no DOU (aceita formato DD/MM/AAAA ou AAAA-MM-DD, ex: "16/11/2026" ou "2026-11-16")'
+  ),
+  ordenar_por: z.enum(["recentes", "id"]).optional().default("recentes").describe(
+    'Crit\xE9rio de ordena\xE7\xE3o dos resultados: "recentes" (padr\xE3o, normas publicadas mais recentemente primeiro) ou "id"'
+  ),
   limite: z.number().int().min(1).max(100).default(20).describe("Quantidade m\xE1xima de resultados a retornar (padr\xE3o: 20, m\xE1x: 100)")
 };
 function registerBuscarNormasTool(server, dbProvider) {
@@ -462,6 +482,8 @@ function registerBuscarNormasTool(server, dbProvider) {
           tipo: args.tipo,
           ano: args.ano,
           situacao: args.situacao,
+          data: args.data,
+          ordenar_por: args.ordenar_por,
           limite: args.limite
         });
         return {
@@ -476,6 +498,8 @@ function registerBuscarNormasTool(server, dbProvider) {
                     tipo: args.tipo || null,
                     ano: args.ano || null,
                     situacao: args.situacao || null,
+                    data: args.data || null,
+                    ordenar_por: args.ordenar_por || "recentes",
                     limite: args.limite
                   },
                   normas

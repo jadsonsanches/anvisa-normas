@@ -185,11 +185,11 @@ test('Suíte de Testes Automatizados do AnvisaNormas MCP Server', async (suite) 
       arguments: {},
     });
     const dataGlobal = JSON.parse(resGlobal.content[0].text);
-    assert.equal(dataGlobal.totalNormas, 29744, 'Total de normas deve ser exatamente 29.744');
-    assert.equal(dataGlobal.vigentes, 29456, 'Total de vigentes deve ser 29.456');
-    assert.equal(dataGlobal.revogadas, 288, 'Total de revogadas deve ser 288');
-    assert.equal(dataGlobal.totalRelacoes, 49491, 'Total de relações deve ser 49.491');
-    assert.ok(dataGlobal.porTipo.RE > 9000, 'Tipo RE deve ter mais de 9000 registros');
+    assert.equal(dataGlobal.totalNormas, 35981, 'Total de normas deve ser exatamente 35.981');
+    assert.equal(dataGlobal.vigentes, 35587, 'Total de vigentes deve ser 35.587');
+    assert.equal(dataGlobal.revogadas, 394, 'Total de revogadas deve ser 394');
+    assert.equal(dataGlobal.totalRelacoes, 53066, 'Total de relações deve ser 53.066');
+    assert.ok(dataGlobal.porTipo.RE > 20000, 'Tipo RE deve ter mais de 20000 registros');
 
     // Estatísticas por tipo específico
     const resTipo = await env.client.callTool({
@@ -198,7 +198,7 @@ test('Suíte de Testes Automatizados do AnvisaNormas MCP Server', async (suite) 
     });
     const dataTipo = JSON.parse(resTipo.content[0].text);
     assert.equal(dataTipo.tipo, 'RDC');
-    assert.equal(dataTipo.total, 272, 'Total de RDCs cadastradas no acervo deve ser 272');
+    assert.equal(dataTipo.total, 448, 'Total de RDCs cadastradas no acervo deve ser 448');
   });
 
   await suite.test('Tool obter_texto_norma: recuperação do Markdown integral e limitação de caracteres', async () => {
@@ -226,7 +226,7 @@ test('Suíte de Testes Automatizados do AnvisaNormas MCP Server', async (suite) 
     const resStats = await env.client.readResource({ uri: 'normas://estatisticas' });
     assert.equal(resStats.contents[0].mimeType, 'application/json');
     const statsObj = JSON.parse(resStats.contents[0].text);
-    assert.equal(statsObj.totalNormas, 29744);
+    assert.equal(statsObj.totalNormas, 35981);
 
     // Recurso dinâmico (template)
     const resNorma = await env.client.readResource({ uri: 'normas://ACM%201/2025' });
@@ -278,5 +278,65 @@ test('Suíte de Testes Automatizados do AnvisaNormas MCP Server', async (suite) 
         resInvalido.content[0].text.includes('Invalid input'),
       'Mensagem deve indicar erro de validação de input'
     );
+  });
+
+  await suite.test('Consulta de normas de 2022 via MCP (buscar_normas, obter_norma, obter_texto_norma, consultar_relacoes)', async () => {
+    const resBusca = await env.client.callTool({
+      name: 'buscar_normas',
+      arguments: { tipo: 'RDC', ano: 2022, limite: 10 },
+    });
+    assert.ok(!resBusca.isError);
+    const dataBusca = JSON.parse(resBusca.content[0].text);
+    assert.equal(dataBusca.total_encontrado, 10, 'Deve retornar 10 RDCs de 2022 respeitando limite=10');
+    for (const norma of dataBusca.normas) {
+      assert.equal(norma.tipo, 'RDC');
+      assert.equal(norma.ano, 2022);
+    }
+
+    const resNorma = await env.client.callTool({
+      name: 'obter_norma',
+      arguments: { id: 'RDC 658/2022' },
+    });
+    assert.ok(!resNorma.isError);
+    const dataNorma = JSON.parse(resNorma.content[0].text);
+    assert.equal(dataNorma.encontrada, true);
+    assert.equal(dataNorma.norma.id, 'RDC 658/2022');
+    assert.ok(dataNorma.norma.ementa.includes('Boas Práticas'));
+
+    const resTexto = await env.client.callTool({
+      name: 'obter_texto_norma',
+      arguments: { id: 'RDC 658/2022', limite_caracteres: 500 },
+    });
+    assert.ok(!resTexto.isError);
+    assert.ok(resTexto.content[0].text.includes('RDC'));
+    assert.ok(resTexto.content[0].text.includes('658'));
+
+    const resRel = await env.client.callTool({
+      name: 'consultar_relacoes',
+      arguments: { id: 'RDC 658/2022', direcao: 'todas' },
+    });
+    assert.ok(!resRel.isError);
+    const dataRel = JSON.parse(resRel.content[0].text);
+    assert.ok(dataRel.total_saida > 0, 'RDC 658/2022 deve ter relações de saída');
+
+    const resPortaria143 = await env.client.callTool({
+      name: 'obter_norma',
+      arguments: { id: 'PORTARIA 143/2022' },
+    });
+    assert.ok(!resPortaria143.isError);
+    const dataPortaria143 = JSON.parse(resPortaria143.content[0].text);
+    assert.equal(dataPortaria143.encontrada, true);
+    assert.equal(dataPortaria143.norma.id, 'PORTARIA 143/2022');
+    assert.equal(dataPortaria143.norma.data_ato, '03/03/2022');
+
+    const resRe2446 = await env.client.callTool({
+      name: 'obter_norma',
+      arguments: { id: 'RE 2446/2022' },
+    });
+    assert.ok(!resRe2446.isError);
+    const dataRe2446 = JSON.parse(resRe2446.content[0].text);
+    assert.equal(dataRe2446.encontrada, true);
+    assert.equal(dataRe2446.norma.id, 'RE 2446/2022');
+    assert.ok(dataRe2446.norma.ementa.includes('REBLAS'));
   });
 });

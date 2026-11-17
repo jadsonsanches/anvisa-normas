@@ -1,0 +1,29 @@
+---
+tipo: "PORTARIA"
+numero: "1113"
+ano: "2022"
+data_ato: "16/11/2022"
+data_promulgacao: "16/11/2022"
+data_publicacao_dou: "21/11/2022"
+situacao: "vigente"
+ementa: "Designa, no período de 16/11/2022 a 09/12/2022 a servidora LORENA THEREZA GOMES DA SILVA DOURADO, para exercer o encargo de substituta do Ouvidor, código CGE-II, da Ouvidoria."
+leis_base: []
+relacionadas: []
+fonte: "https://anvisalegis.datalegis.net/action/ActionDatalegis.php?acao=abrirTextoAto&tipo=POR&numeroAto=00001113&seqAto=000&valorAno=2022&orgao=ANVISA/MS&codTipo=&desItem=&desItemFim=&cod_menu=1696&cod_modulo=134&pesquisa=true"
+---
+
+# PORTARIA nº 1113, de 16/11/2022
+
+MINISTÉRIO DA SAÚDE
+
+AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA
+
+PORTARIA N° 1.113, DE 18 DE NOVEMBRO DE 2022
+
+A Chefe de Gabinete do Diretor-Presidente da Agência Nacional de Vigilância Sanitária, no uso da competência que lhe foi delegada pela Portaria n° 1.596, de 8 de agosto de 2016, alterada pela Portaria nº 1.724, de 5 de setembro de 2016, resolve:
+
+Designar, no período de 16/11/2022 a 09/12/2022 a servidora LORENA THEREZA GOMES DA SILVA DOURADO, matrícula SIAPE nº 1269769, para exercer o encargo de substituta do Ouvidor, código CGE-II, da Ouvidoria.
+
+KARIN SCHUCK HEMESATH MENDES
+
+PUB D.O.U., 21/11/2022 - Seção 2
