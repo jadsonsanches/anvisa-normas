@@ -2,6 +2,7 @@
 
 import express from 'express';
 import cors from 'cors';
+import { randomUUID } from 'crypto';
 import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { SqlJsDatabaseProvider } from '../db/sqljs-provider.js';
@@ -11,40 +12,110 @@ import { resolveDbPath } from '../config.js';
 async function main() {
   console.error('[anvisa-normas-mcp-web] Inicializando servidor Web/SSE MCP AnvisaNormas...');
 
-  const dbPath = resolveDbPath();
-  console.error(`[anvisa-normas-mcp-web] Carregando banco de dados: ${dbPath}`);
-
-  const dbProvider = new SqlJsDatabaseProvider(dbPath);
-  await dbProvider.init();
-  console.error('[anvisa-normas-mcp-web] Banco SQLite carregado em memória com sucesso.');
-
   const app = express();
   app.use(cors());
 
-  // Rota de saúde e informações gerais
-  app.get(['/', '/health'], (_req, res) => {
+  let isReady = false;
+  let initError: Error | null = null;
+  const dbPath = resolveDbPath();
+  const dbProvider = new SqlJsDatabaseProvider(dbPath);
+
+  // Inicialização assíncrona do banco em segundo plano
+  const initPromise = (async () => {
+    try {
+      console.error(`[anvisa-normas-mcp-web] Carregando banco de dados: ${dbPath}`);
+      await dbProvider.init();
+      isReady = true;
+      console.error('[anvisa-normas-mcp-web] Banco SQLite carregado em memória com sucesso.');
+    } catch (err: any) {
+      initError = err;
+      console.error('[anvisa-normas-mcp-web] Erro ao carregar banco SQLite:', err);
+    }
+  })();
+
+  // Middleware para aguardar o banco estar pronto antes de responder chamadas MCP
+  const ensureReady = async (_req: express.Request, res: express.Response, next: express.NextFunction) => {
+    if (!isReady) {
+      if (initError) {
+        res.status(500).json({ error: `Falha na inicialização do banco: ${initError.message}` });
+        return;
+      }
+      await initPromise;
+    }
+    next();
+  };
+
+  // Gerenciador de sessões Streamable HTTP (compatível com Claude Custom Connectors, Cursor e padrão oficial)
+  const streamableSessions = new Map<string, StreamableHTTPServerTransport>();
+
+  const handleStreamableRequest = async (req: express.Request, res: express.Response) => {
+    try {
+      const sessionId = req.headers['mcp-session-id'] as string | undefined;
+      let transport = sessionId ? streamableSessions.get(sessionId) : null;
+
+      if (!transport) {
+        const newSessionId = randomUUID();
+        transport = new StreamableHTTPServerTransport({
+          sessionIdGenerator: () => newSessionId,
+          onsessionclosed: (id) => {
+            streamableSessions.delete(id);
+          },
+        });
+        const server = createAnvisaMcpServer(dbProvider);
+        await server.connect(transport);
+        streamableSessions.set(newSessionId, transport);
+      }
+
+      await transport.handleRequest(req, res);
+    } catch (err: any) {
+      console.error('[anvisa-normas-mcp-web] Erro no Streamable HTTP:', err);
+      if (!res.headersSent) {
+        res.status(500).json({ error: err?.message || 'Internal Server Error' });
+      }
+    }
+  };
+
+  // Rota de saúde e informações gerais (responde imediatamente às sondas do Cloud Run)
+  app.get('/health', (_req, res) => {
     res.json({
-      status: 'healthy',
+      status: isReady ? 'healthy' : 'initializing',
+      ready: isReady,
+      error: initError ? initError.message : null,
       name: 'anvisa-normas-mcp',
       description: 'Servidor MCP Oficial do acervo de normas da Anvisa',
       version: '1.0.0',
-      transports: {
-        sse: {
-          connect: '/sse',
-          messages: '/messages?sessionId={sessionId}'
-        },
-        streamableHttp: {
-          endpoint: '/mcp'
-        }
+    });
+  });
+
+  // Rota raiz GET: se cliente solicitar event-stream, atende como Streamable HTTP; caso contrário, retorna status JSON
+  app.get('/', (req, res, next) => {
+    if (req.headers.accept?.includes('text/event-stream')) {
+      return ensureReady(req, res, () => handleStreamableRequest(req, res));
+    }
+    res.json({
+      status: isReady ? 'healthy' : 'initializing',
+      ready: isReady,
+      name: 'anvisa-normas-mcp',
+      description: 'Servidor MCP Oficial do acervo de normas da Anvisa',
+      version: '1.0.0',
+      endpoints: {
+        streamableHttp: '/mcp',
+        sse: '/sse',
+        health: '/health'
       }
     });
   });
 
-  // Mapa de sessões ativas para SSE
+  // Endpoints Streamable HTTP: /mcp, / e fallback de POST em /sse
+  app.all('/mcp', ensureReady, handleStreamableRequest);
+  app.post('/', ensureReady, handleStreamableRequest);
+  app.post('/sse', ensureReady, handleStreamableRequest);
+
+  // Mapa de sessões ativas para SSE legado
   const sseTransports = new Map<string, SSEServerTransport>();
 
-  // Endpoint SSE (Server-Sent Events) - compatível com Claude Desktop, Cursor e outros clientes MCP
-  app.get('/sse', async (req, res) => {
+  // Endpoint SSE GET (Server-Sent Events)
+  app.get('/sse', ensureReady, async (req, res) => {
     console.error(`[anvisa-normas-mcp-web] Nova conexão SSE recebida de ${req.ip}`);
     try {
       const transport = new SSEServerTransport('/messages', res);
@@ -67,8 +138,8 @@ async function main() {
     }
   });
 
-  // Endpoint POST /messages para receber as chamadas dos clientes SSE
-  app.post('/messages', async (req, res) => {
+  // Endpoint POST /messages para receber as chamadas dos clientes SSE legado
+  app.post('/messages', ensureReady, async (req, res) => {
     const sessionId = req.query.sessionId as string;
     if (!sessionId) {
       res.status(400).json({ error: 'sessionId query parameter is required' });
@@ -87,24 +158,6 @@ async function main() {
       console.error(`[anvisa-normas-mcp-web] Erro ao processar mensagem na sessão ${sessionId}:`, err);
       if (!res.headersSent) {
         res.status(500).json({ error: 'Failed to process message' });
-      }
-    }
-  });
-
-  // Endpoint Streamable HTTP (/mcp) - novo padrão MCP
-  const streamableTransport = new StreamableHTTPServerTransport({
-    sessionIdGenerator: undefined,
-  });
-  const streamableServer = createAnvisaMcpServer(dbProvider);
-  await streamableServer.connect(streamableTransport);
-
-  app.all('/mcp', async (req, res) => {
-    try {
-      await streamableTransport.handleRequest(req, res);
-    } catch (err) {
-      console.error('[anvisa-normas-mcp-web] Erro no endpoint /mcp:', err);
-      if (!res.headersSent) {
-        res.status(500).json({ error: 'Internal Server Error' });
       }
     }
   });
