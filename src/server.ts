@@ -8,8 +8,12 @@ export function createAnvisaMcpServer(dbProvider: DatabaseProvider): McpServer {
   const server = new McpServer(
     {
       name: 'anvisa-normas-mcp',
+      title: '🌿 AnvisaNormas MCP',
       version: '1.0.0',
-    },
+      description: 'Servidor MCP Oficial do acervo de normas regulatórias da Anvisa',
+      icon: '🌿',
+      iconUrl: 'https://jadsonsanches.github.io/anvisa-normas/favicon.svg',
+    } as any,
     {
       capabilities: {
         tools: {},

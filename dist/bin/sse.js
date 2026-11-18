@@ -998,7 +998,11 @@ function createAnvisaMcpServer(dbProvider) {
   const server = new McpServer(
     {
       name: "anvisa-normas-mcp",
-      version: "1.0.0"
+      title: "\u{1F33F} AnvisaNormas MCP",
+      version: "1.0.0",
+      description: "Servidor MCP Oficial do acervo de normas regulat\xF3rias da Anvisa",
+      icon: "\u{1F33F}",
+      iconUrl: "https://jadsonsanches.github.io/anvisa-normas/favicon.svg"
     },
     {
       capabilities: {
@@ -1134,10 +1138,17 @@ async function main() {
       }
     }
   };
+  const FAVICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">\u{1F33F}</text></svg>`;
+  app.get(["/favicon.ico", "/favicon.svg"], (_req, res) => {
+    res.setHeader("Content-Type", "image/svg+xml");
+    res.setHeader("Cache-Control", "public, max-age=86400");
+    res.send(FAVICON_SVG);
+  });
   app.get("/health", (_req, res) => {
     res.json({
       status: isReady ? "healthy" : "initializing",
       ready: isReady,
+      icon: "\u{1F33F}",
       auth_required: isAuthEnabled,
       name: "anvisa-normas-mcp",
       description: "Servidor MCP Oficial do acervo de normas da Anvisa",
@@ -1152,11 +1163,67 @@ async function main() {
         () => ensureReady(req, res, () => handleStreamableRequest(req, res))
       );
     }
+    if (req.headers.accept?.includes("text/html")) {
+      res.setHeader("Content-Type", "text/html; charset=utf-8");
+      return res.send(`<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>\u{1F33F} AnvisaNormas \u2014 Servidor MCP Oficial</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>\u{1F33F}</text></svg>">
+  <style>
+    :root { --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --muted: #94a3b8; --accent: #10b981; --border: #334155; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 2rem; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 1rem; max-width: 650px; width: 100%; padding: 2.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+    .header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .logo { font-size: 3.5rem; line-height: 1; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); }
+    h1 { margin: 0; font-size: 1.75rem; font-weight: 700; color: #fff; }
+    p { color: var(--muted); margin: 0.5rem 0 0; line-height: 1.5; }
+    .badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1.5rem 0; }
+    .badge { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 9999px; background: #064e3b; color: #6ee7b7; border: 1px solid #059669; }
+    .badge-lock { background: #3730a3; color: #c7d2fe; border-color: #6366f1; }
+    .box { background: #090d16; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem; margin-top: 1rem; }
+    code { font-family: ui-monospace, monospace; font-size: 0.85rem; color: #38bdf8; word-break: break-all; }
+    .footer { margin-top: 1.5rem; font-size: 0.85rem; color: var(--muted); text-align: center; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div class="logo">\u{1F33F}</div>
+      <div>
+        <h1>AnvisaNormas MCP Server</h1>
+        <p>Servidor oficial Model Context Protocol do acervo consolidado da Anvisa</p>
+      </div>
+    </div>
+    <div class="badges">
+      <span class="badge">\u25CF Online & Saud\xE1vel</span>
+      <span class="badge">35.986+ Normas Consolidadas</span>
+      <span class="badge badge-lock">${isAuthEnabled ? "\u{1F512} Autentica\xE7\xE3o MCP Ativa" : "\u{1F513} Acesso Livre"}</span>
+    </div>
+    <div class="box">
+      <div style="font-weight: 600; margin-bottom: 0.5rem; color: #e2e8f0;">Endpoints MCP Dispon\xEDveis:</div>
+      <div>\u2022 <strong>Streamable HTTP:</strong> <code>/mcp</code></div>
+      <div>\u2022 <strong>SSE (Server-Sent Events):</strong> <code>/sse</code></div>
+      <div>\u2022 <strong>Health Check:</strong> <code>/health</code></div>
+    </div>
+    <div class="footer">
+      Desenvolvido por <a href="https://github.com/jadsonsanches/anvisa-normas" target="_blank">Jadson Sanches</a> \u2022 Licen\xE7a MIT
+    </div>
+  </div>
+</body>
+</html>`);
+    }
     res.json({
       status: isReady ? "healthy" : "initializing",
       ready: isReady,
+      icon: "\u{1F33F}",
       auth_required: isAuthEnabled,
       name: "anvisa-normas-mcp",
+      title: "\u{1F33F} AnvisaNormas MCP",
       description: "Servidor MCP Oficial do acervo de normas da Anvisa",
       version: "1.0.0",
       endpoints: {
