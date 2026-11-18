@@ -121,7 +121,7 @@ Adicione a seção `mcpServers`:
   "mcpServers": {
     "anvisa-normas": {
       "command": "node",
-      "args": ["C:/jadson/anvisa-normas/dist/bin/mcp.js"]
+      "args": ["/caminho/para/anvisa-normas/dist/bin/mcp.js"]
     }
   }
 }
@@ -159,14 +159,27 @@ No VS Code, crie ou edite o arquivo `.vscode/mcp.json`:
 
 #### 4. Antigravity
 
-Em seu arquivo de configuração de MCP (`mcp_config.json` ou painel de configurações):
+No painel de configurações ou arquivo de configuração MCP:
+
+```json
+{
+  "mcpServers": {
+    "anvisa-normas": {
+      "command": "npx",
+      "args": ["-y", "anvisa-normas-mcp"]
+    }
+  }
+}
+```
+
+*Ou para desenvolvimento com clone local:*
 
 ```json
 {
   "mcpServers": {
     "anvisa-normas": {
       "command": "node",
-      "args": ["c:/jadson/anvisa-normas/dist/bin/mcp.js"]
+      "args": ["/caminho/para/anvisa-normas/dist/bin/mcp.js"]
     }
   }
 }
