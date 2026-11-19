@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 import express from 'express';
-import cors from 'cors';
+import * as fs from 'fs';
+import * as path from 'path';
+import { fileURLToPath } from 'url';
 import { randomUUID, timingSafeEqual } from 'crypto';
 import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
-import * as fs from 'fs';
-import * as path from 'path';
 import initSqlJs from 'sql.js';
-import { fileURLToPath } from 'url';
 import { McpServer, ResourceTemplate } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 
+// src/bin/sse.ts
 function getDirname() {
   try {
     return path.dirname(fileURLToPath(import.meta.url));
@@ -1020,8 +1020,82 @@ function createAnvisaMcpServer(dbProvider) {
 }
 
 // src/bin/sse.ts
-var configuredKeys = (process.env.MCP_API_KEY || "").split(",").map((k) => k.trim()).filter((k) => k.length > 0);
-var isAuthEnabled = configuredKeys.length > 0;
+var SECURITY_HEADERS = {
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "Referrer-Policy": "strict-origin-when-cross-origin"
+};
+var DEFAULT_CORS_METHODS = "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS";
+var DEFAULT_CORS_HEADERS = "Content-Type, Authorization, x-api-key, mcp-api-key, mcp-session-id, mcp-protocol-version, Last-Event-ID";
+function parseCorsAllowedOrigins(rawValue) {
+  if (rawValue === void 0) {
+    return { allowAll: true, allowedOrigins: /* @__PURE__ */ new Set() };
+  }
+  const tokens = rawValue.split(",").map((origin) => origin.trim().replace(/\/+$/, "")).filter((origin) => origin.length > 0);
+  if (tokens.includes("*")) {
+    return { allowAll: true, allowedOrigins: /* @__PURE__ */ new Set() };
+  }
+  return { allowAll: false, allowedOrigins: new Set(tokens) };
+}
+function createSecurityHeadersMiddleware() {
+  return (_req, res, next) => {
+    for (const [header, value] of Object.entries(SECURITY_HEADERS)) {
+      res.setHeader(header, value);
+    }
+    next();
+  };
+}
+function createCorsMiddleware(config) {
+  return (req, res, next) => {
+    const applyPreflightHeaders = () => {
+      res.setHeader("Access-Control-Allow-Methods", DEFAULT_CORS_METHODS);
+      const requestedHeaders = req.headers["access-control-request-headers"];
+      if (typeof requestedHeaders === "string" && requestedHeaders.trim().length > 0) {
+        res.vary("Access-Control-Request-Headers");
+        res.setHeader("Access-Control-Allow-Headers", requestedHeaders);
+      } else {
+        res.setHeader("Access-Control-Allow-Headers", DEFAULT_CORS_HEADERS);
+      }
+    };
+    if (config.allowAll) {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      if (req.method === "OPTIONS") {
+        applyPreflightHeaders();
+        res.status(204).setHeader("Content-Length", "0");
+        res.end();
+        return;
+      }
+      next();
+      return;
+    }
+    res.vary("Origin");
+    const requestOrigin = typeof req.headers.origin === "string" ? req.headers.origin : void 0;
+    if (requestOrigin && config.allowedOrigins.has(requestOrigin)) {
+      res.setHeader("Access-Control-Allow-Origin", requestOrigin);
+      if (req.method === "OPTIONS") {
+        applyPreflightHeaders();
+        res.status(204).setHeader("Content-Length", "0");
+        res.end();
+        return;
+      }
+      next();
+      return;
+    }
+    if (req.method === "OPTIONS") {
+      if (requestOrigin) {
+        res.status(403).json({
+          error: "Forbidden",
+          message: "Origin not allowed by CORS policy."
+        });
+        return;
+      }
+      res.status(204).setHeader("Content-Length", "0");
+      res.end();
+      return;
+    }
+    next();
+  };
+}
 function isValidApiKey(providedKey, validKeys) {
   const provBuf = Buffer.from(providedKey);
   for (const validKey of validKeys) {
@@ -1051,23 +1125,19 @@ function extractApiKey(req) {
   }
   return null;
 }
-async function main() {
-  console.error("[anvisa-normas-mcp-web] Inicializando servidor Web/SSE MCP AnvisaNormas...");
-  if (isAuthEnabled) {
-    console.error(
-      `[anvisa-normas-mcp-web] \u{1F512} Autentica\xE7\xE3o MCP ATIVADA com ${configuredKeys.length} chave(s) autorizada(s).`
-    );
-  } else {
-    console.error(
-      "[anvisa-normas-mcp-web] \u26A0\uFE0F AVISO: Autentica\xE7\xE3o MCP DESATIVADA (vari\xE1vel MCP_API_KEY n\xE3o configurada). Servidor aberto."
-    );
-  }
+function createSseApp(options = {}) {
+  const configuredKeys = options.apiKeys ? options.apiKeys.map((k) => k.trim()).filter((k) => k.length > 0) : (process.env.MCP_API_KEY || "").split(",").map((k) => k.trim()).filter((k) => k.length > 0);
+  const isAuthEnabled = configuredKeys.length > 0;
+  const rawCorsOrigins = "corsAllowedOrigins" in options ? options.corsAllowedOrigins : process.env.CORS_ALLOWED_ORIGINS;
+  const corsConfig = parseCorsAllowedOrigins(rawCorsOrigins);
   const app = express();
-  app.use(cors());
+  app.disable("x-powered-by");
+  app.use(createSecurityHeadersMiddleware());
+  app.use(createCorsMiddleware(corsConfig));
   let isReady = false;
   let initError = null;
-  const dbPath = resolveDbPath();
-  const dbProvider = new SqlJsDatabaseProvider(dbPath);
+  const dbPath = options.dbPath ?? resolveDbPath();
+  const dbProvider = options.dbProvider ?? new SqlJsDatabaseProvider(dbPath);
   const authenticatedSessions = /* @__PURE__ */ new Set();
   const authMiddleware = (req, res, next) => {
     if (!isAuthEnabled) {
@@ -1279,6 +1349,71 @@ async function main() {
       }
     }
   });
+  const close = async (closeDb = !options.dbProvider) => {
+    for (const transport of sseTransports.values()) {
+      try {
+        await transport.close();
+      } catch {
+      }
+    }
+    sseTransports.clear();
+    for (const transport of streamableSessions.values()) {
+      try {
+        await transport.close();
+      } catch {
+      }
+    }
+    streamableSessions.clear();
+    if (closeDb) {
+      await dbProvider.close();
+    }
+  };
+  return {
+    app,
+    dbProvider,
+    initPromise,
+    isAuthEnabled,
+    configuredKeys,
+    corsConfig,
+    sseTransports,
+    streamableSessions,
+    close
+  };
+}
+function isDirectExecution() {
+  if (!process.argv[1]) {
+    return false;
+  }
+  try {
+    const entryPath = fs.realpathSync(path.resolve(process.argv[1]));
+    const modulePath = fs.realpathSync(fileURLToPath(import.meta.url));
+    if (process.platform === "win32") {
+      return entryPath.toLowerCase() === modulePath.toLowerCase();
+    }
+    return entryPath === modulePath;
+  } catch {
+    return false;
+  }
+}
+async function main() {
+  console.error("[anvisa-normas-mcp-web] Inicializando servidor Web/SSE MCP AnvisaNormas...");
+  const { app, isAuthEnabled, configuredKeys, corsConfig, close } = createSseApp();
+  if (isAuthEnabled) {
+    console.error(
+      `[anvisa-normas-mcp-web] \u{1F512} Autentica\xE7\xE3o MCP ATIVADA com ${configuredKeys.length} chave(s) autorizada(s).`
+    );
+  } else {
+    console.error(
+      "[anvisa-normas-mcp-web] \u26A0\uFE0F AVISO: Autentica\xE7\xE3o MCP DESATIVADA (vari\xE1vel MCP_API_KEY n\xE3o configurada). Servidor aberto."
+    );
+  }
+  if (corsConfig.allowAll) {
+    console.error("[anvisa-normas-mcp-web] \u{1F310} CORS configurado em modo aberto (*).");
+  } else {
+    console.error(
+      `[anvisa-normas-mcp-web] \u{1F6E1}\uFE0F CORS restrito a ${corsConfig.allowedOrigins.size} origem(ns) configurada(s).`
+    );
+  }
   const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
   const host = "0.0.0.0";
   const httpServer = app.listen(port, host, () => {
@@ -1290,7 +1425,7 @@ async function main() {
     console.error(`[anvisa-normas-mcp-web] Encerrando servidor HTTP (sinal ${signal})...`);
     httpServer.close(async () => {
       try {
-        await dbProvider.close();
+        await close(true);
         console.error("[anvisa-normas-mcp-web] Servidor encerrado com sucesso.");
         process.exit(0);
       } catch (err) {
@@ -1302,9 +1437,13 @@ async function main() {
   process.on("SIGINT", () => shutdown("SIGINT"));
   process.on("SIGTERM", () => shutdown("SIGTERM"));
 }
-main().catch((error) => {
-  console.error("[anvisa-normas-mcp-web] Falha fatal ao iniciar o servidor Web MCP:", error);
-  process.exit(1);
-});
+if (isDirectExecution()) {
+  main().catch((error) => {
+    console.error("[anvisa-normas-mcp-web] Falha fatal ao iniciar o servidor Web MCP:", error);
+    process.exit(1);
+  });
+}
+
+export { SECURITY_HEADERS, createCorsMiddleware, createSecurityHeadersMiddleware, createSseApp, parseCorsAllowedOrigins };
 //# sourceMappingURL=sse.js.map
 //# sourceMappingURL=sse.js.map

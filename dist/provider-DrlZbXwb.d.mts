@@ -1,5 +1,3 @@
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-
 interface NormaRegistro {
     id: string;
     tipo: string;
@@ -77,6 +75,4 @@ interface DatabaseProvider {
     obterEstatisticas(tipo?: string): Promise<EstatisticasAcervo | EstatisticasPorTipo>;
 }
 
-declare function createAnvisaMcpServer(dbProvider: DatabaseProvider): McpServer;
-
-export { type DatabaseProvider as D, type EstatisticasAcervo as E, type FiltrosBusca as F, type NormaRegistro as N, type RelacoesInfo as R, type VigenciaInfo as V, type EstatisticasPorTipo as a, type RelacaoItemEntrada as b, type RelacaoItemSaida as c, type RelacaoRegistro as d, createAnvisaMcpServer as e };
+export type { DatabaseProvider as D, EstatisticasAcervo as E, FiltrosBusca as F, NormaRegistro as N, RelacoesInfo as R, VigenciaInfo as V, EstatisticasPorTipo as a, RelacaoItemEntrada as b, RelacaoItemSaida as c, RelacaoRegistro as d };

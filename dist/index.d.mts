@@ -1,32 +1,10 @@
-import { D as DatabaseProvider, F as FiltrosBusca, N as NormaRegistro, V as VigenciaInfo, R as RelacoesInfo, E as EstatisticasAcervo, a as EstatisticasPorTipo } from './server-AYq_-Wr7.mjs';
-export { b as RelacaoItemEntrada, c as RelacaoItemSaida, d as RelacaoRegistro, e as createAnvisaMcpServer } from './server-AYq_-Wr7.mjs';
+import { D as DatabaseProvider } from './provider-DrlZbXwb.mjs';
+export { E as EstatisticasAcervo, a as EstatisticasPorTipo, F as FiltrosBusca, N as NormaRegistro, b as RelacaoItemEntrada, c as RelacaoItemSaida, d as RelacaoRegistro, R as RelacoesInfo, V as VigenciaInfo } from './provider-DrlZbXwb.mjs';
 export { resolveDataDir, resolveDbPath, resolveEstatisticasPath, resolveGrafoPath, resolveNormasDir } from './config.mjs';
+export { S as SqlJsDatabaseProvider, n as normalizeId, u as unaccent } from './sqljs-provider-COdEewbm.mjs';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+export { createAnvisaMcpServer } from './server.mjs';
 import { z } from 'zod';
-
-/**
- * Remove acentuação e converte para minúsculas (para busca tolerante a acentos em português)
- */
-declare function unaccent(str: string): string;
-/**
- * Normaliza referências informais para o padrão canônico (ex: 'rdc nº 658/2022' -> 'RDC 658/2022')
- */
-declare function normalizeId(id: string): string;
-declare class SqlJsDatabaseProvider implements DatabaseProvider {
-    private db;
-    private dbPath;
-    private isInitialized;
-    constructor(customDbPath?: string);
-    init(): Promise<void>;
-    private checkDb;
-    close(): Promise<void>;
-    buscarNormas(filtros: FiltrosBusca): Promise<Omit<NormaRegistro, 'texto_markdown'>[]>;
-    obterNorma(id: string): Promise<Omit<NormaRegistro, 'texto_markdown'> | null>;
-    obterTextoNorma(id: string, limiteCaracteres?: number): Promise<string | null>;
-    verificarVigencia(id: string): Promise<VigenciaInfo>;
-    consultarRelacoes(id: string, direcao?: 'todas' | 'saida' | 'entrada', tipoRelacao?: string): Promise<RelacoesInfo>;
-    obterEstatisticas(tipo?: string): Promise<EstatisticasAcervo | EstatisticasPorTipo>;
-}
 
 declare const buscarNormasSchema: {
     termo: z.ZodOptional<z.ZodString>;
@@ -39,8 +17,8 @@ declare const buscarNormasSchema: {
     }>>;
     data: z.ZodOptional<z.ZodString>;
     ordenar_por: z.ZodDefault<z.ZodOptional<z.ZodEnum<{
-        recentes: "recentes";
         id: "id";
+        recentes: "recentes";
     }>>>;
     limite: z.ZodDefault<z.ZodNumber>;
 };
@@ -88,4 +66,4 @@ declare function registerResources(server: McpServer, dbProvider: DatabaseProvid
 
 declare function registerPrompts(server: McpServer): void;
 
-export { DatabaseProvider, EstatisticasAcervo, EstatisticasPorTipo, FiltrosBusca, NormaRegistro, RelacoesInfo, SqlJsDatabaseProvider, VigenciaInfo, buscarNormasSchema, consultarRelacoesSchema, normalizeId, obterEstatisticasSchema, obterNormaSchema, obterTextoNormaSchema, registerBuscarNormasTool, registerConsultarRelacoesTool, registerObterEstatisticasTool, registerObterNormaTool, registerObterTextoNormaTool, registerPrompts, registerResources, registerTools, registerVerificarVigenciaTool, unaccent, verificarVigenciaSchema };
+export { DatabaseProvider, buscarNormasSchema, consultarRelacoesSchema, obterEstatisticasSchema, obterNormaSchema, obterTextoNormaSchema, registerBuscarNormasTool, registerConsultarRelacoesTool, registerObterEstatisticasTool, registerObterNormaTool, registerObterTextoNormaTool, registerPrompts, registerResources, registerTools, registerVerificarVigenciaTool, verificarVigenciaSchema };

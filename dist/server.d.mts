@@ -1,2 +1,6 @@
-import '@modelcontextprotocol/sdk/server/mcp.js';
-export { e as createAnvisaMcpServer } from './server-AYq_-Wr7.mjs';
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { D as DatabaseProvider } from './provider-DrlZbXwb.mjs';
+
+declare function createAnvisaMcpServer(dbProvider: DatabaseProvider): McpServer;
+
+export { createAnvisaMcpServer };

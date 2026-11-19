@@ -619,9 +619,34 @@
 
   </main>
 
+  <script id="visualizer-config" type="application/json">{"relacoesUrl":"data/grafo/relacoes.json","estatisticasUrl":"data/grafo/estatisticas.json"}</script>
+
   <script>
     let graphData = { nodes: [], edges: [] };
     let statsData = {};
+
+    function escapeHtml(valor) {
+      return String(valor ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function construirUrlMarkdownSegura(arquivo) {
+      const normalizado = String(arquivo || '').replace(/\\/g, '/').replace(/^\/+/, '');
+      if (!normalizado || normalizado.split('/').some(seg => !seg || seg === '..' || seg === '.')) {
+        return null;
+      }
+      const caminhoCodificado = normalizado.split('/').map(encodeURIComponent).join('/');
+      return 'https://github.com/jadsonsanches/anvisa-normas/blob/main/' + caminhoCodificado;
+    }
+
+    function normalizarCorHex(cor) {
+      const valor = String(cor || '').trim();
+      return /^#[0-9a-fA-F]{6}$/.test(valor) ? valor : '#64748b';
+    }
 
     const CORES = {
       RDC: '#10b981',
@@ -802,11 +827,10 @@
       }
 
       if (diasList.length === 0) {
-        carouselContainer.innerHTML = `
-          <div class="w-full py-4 text-center text-xs text-slate-400">
-            Nenhuma data com publicações no período selecionado.
-          </div>
-        `;
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'w-full py-4 text-center text-xs text-slate-400';
+        emptyDiv.textContent = 'Nenhuma data com publicações no período selecionado.';
+        carouselContainer.replaceChildren(emptyDiv);
         return;
       }
       
@@ -823,7 +847,8 @@
         '09': 'Set', '10': 'Out', '11': 'Nov', '12': 'Dez'
       };
 
-      carouselContainer.innerHTML = diasList.map(item => {
+      const fragment = document.createDocumentFragment();
+      diasList.forEach(item => {
         const qtd = atosPorDiaMap[item.data] || 0;
         const isPeak = qtd >= peakThreshold && qtd > 0;
         const isSelectedDay = diaSelecionado && item.data === diaSelecionado;
@@ -843,23 +868,33 @@
           cardStyle = 'bg-[#081e15]/80 hover:bg-[#0c2a1e] border-emerald-500/25 text-slate-200 hover:border-emerald-400/50 shadow-sm';
         }
 
-        const badgeHtml = qtd > 0
-          ? `<span class="text-[10px] font-mono px-1.5 py-0.2 rounded-full font-bold ${isPeak ? 'bg-emerald-400 text-slate-950 neon-glow' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'}">${qtd} ${qtd === 1 ? 'ato' : 'atos'}</span>`
-          : `<span class="text-[10px] font-mono px-1.5 py-0.2 rounded-full text-slate-600">0 atos</span>`;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `timeline-pill flex-1 min-w-[66px] sm:min-w-[76px] p-2 sm:p-2.5 rounded-xl border flex flex-col items-center justify-between text-center transition cursor-pointer select-none ${cardStyle}`;
+        btn.title = `${item.data} (${rotuloSemana}): ${qtd} ${qtd === 1 ? 'ato' : 'atos'}${qtd === 0 ? ' (sem publicações)' : ''}`;
+        btn.addEventListener('click', () => filtrarPorDia(item.data));
 
-        return `
-          <button 
-            type="button"
-            onclick="filtrarPorDia('${item.data}')" 
-            class="timeline-pill flex-1 min-w-[66px] sm:min-w-[76px] p-2 sm:p-2.5 rounded-xl border flex flex-col items-center justify-between text-center transition cursor-pointer select-none ${cardStyle}"
-            title="${item.data} (${rotuloSemana}): ${qtd} ${qtd === 1 ? 'ato' : 'atos'}${qtd === 0 ? ' (sem publicações)' : ''}"
-          >
-            <span class="text-[9px] sm:text-[10px] uppercase font-semibold text-slate-400 whitespace-nowrap">${rotuloSemana}</span>
-            <span class="text-sm sm:text-base font-extrabold font-mono text-white my-0.5">${item.dia}</span>
-            ${badgeHtml}
-          </button>
-        `;
-      }).join('');
+        const topSpan = document.createElement('span');
+        topSpan.className = 'text-[9px] sm:text-[10px] uppercase font-semibold text-slate-400 whitespace-nowrap';
+        topSpan.textContent = rotuloSemana;
+
+        const daySpan = document.createElement('span');
+        daySpan.className = 'text-sm sm:text-base font-extrabold font-mono text-white my-0.5';
+        daySpan.textContent = item.dia;
+
+        const badgeSpan = document.createElement('span');
+        if (qtd > 0) {
+          badgeSpan.className = `text-[10px] font-mono px-1.5 py-0.2 rounded-full font-bold ${isPeak ? 'bg-emerald-400 text-slate-950 neon-glow' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'}`;
+          badgeSpan.textContent = `${qtd} ${qtd === 1 ? 'ato' : 'atos'}`;
+        } else {
+          badgeSpan.className = 'text-[10px] font-mono px-1.5 py-0.2 rounded-full text-slate-600';
+          badgeSpan.textContent = '0 atos';
+        }
+
+        btn.append(topSpan, daySpan, badgeSpan);
+        fragment.appendChild(btn);
+      });
+      carouselContainer.replaceChildren(fragment);
     }
 
     // ==========================================
@@ -999,12 +1034,15 @@
       const ultimoDiaMes = new Date(ano, mes + 1, 0).getDate();
       const ultimoDiaMesAnterior = new Date(ano, mes, 0).getDate();
 
-      let html = '';
+      const fragment = document.createDocumentFragment();
 
       // Dias do mês anterior para completar o grid inicial
       for (let i = primeiroDiaSemana - 1; i >= 0; i--) {
         const diaNum = ultimoDiaMesAnterior - i;
-        html += `<div class="h-8 flex items-center justify-center text-slate-600 text-[11px] rounded-lg cursor-not-allowed select-none opacity-40">${diaNum}</div>`;
+        const prevDiv = document.createElement('div');
+        prevDiv.className = 'h-8 flex items-center justify-center text-slate-600 text-[11px] rounded-lg cursor-not-allowed select-none opacity-40';
+        prevDiv.textContent = String(diaNum);
+        fragment.appendChild(prevDiv);
       }
 
       // Dias do mês atual
@@ -1040,22 +1078,25 @@
           diaClass += 'text-slate-200 hover:bg-emerald-500/15 hover:text-emerald-300';
         }
 
-        const dotHtml = qtdAtos > 0 
-          ? `<span class="w-1 h-1 rounded-full ${isStart || isEnd ? 'bg-slate-950' : 'bg-emerald-400'} mt-0.5"></span>` 
-          : '';
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = diaClass;
+        btn.title = `${br}: ${qtdAtos} ${qtdAtos === 1 ? 'ato' : 'atos'}`;
+        btn.addEventListener('click', () => calClickDia(iso));
+        btn.addEventListener('mouseenter', () => calHoverDia(iso));
 
-        html += `
-          <button 
-            type="button"
-            onclick="calClickDia('${iso}')"
-            onmouseenter="calHoverDia('${iso}')"
-            class="${diaClass}"
-            title="${br}: ${qtdAtos} ${qtdAtos === 1 ? 'ato' : 'atos'}"
-          >
-            <span class="leading-none text-[11px]">${dia}</span>
-            ${dotHtml}
-          </button>
-        `;
+        const numSpan = document.createElement('span');
+        numSpan.className = 'leading-none text-[11px]';
+        numSpan.textContent = String(dia);
+        btn.appendChild(numSpan);
+
+        if (qtdAtos > 0) {
+          const dotSpan = document.createElement('span');
+          dotSpan.className = `w-1 h-1 rounded-full ${isStart || isEnd ? 'bg-slate-950' : 'bg-emerald-400'} mt-0.5`;
+          btn.appendChild(dotSpan);
+        }
+
+        fragment.appendChild(btn);
       }
 
       // Dias do próximo mês para completar o grid final
@@ -1064,11 +1105,14 @@
       if (resto !== 0) {
         const diasExtras = 7 - resto;
         for (let dia = 1; dia <= diasExtras; dia++) {
-          html += `<div class="h-8 flex items-center justify-center text-slate-600 text-[11px] rounded-lg cursor-not-allowed select-none opacity-40">${dia}</div>`;
+          const nextDiv = document.createElement('div');
+          nextDiv.className = 'h-8 flex items-center justify-center text-slate-600 text-[11px] rounded-lg cursor-not-allowed select-none opacity-40';
+          nextDiv.textContent = String(dia);
+          fragment.appendChild(nextDiv);
         }
       }
 
-      calDaysGrid.innerHTML = html;
+      calDaysGrid.replaceChildren(fragment);
     }
 
     window.calHoverDia = function(iso) {
@@ -1313,8 +1357,8 @@
       timelineBaseIni = dataInicioFiltro;
       timelineBaseFim = dataFimFiltro;
 
-      const iniMatch = dataInicioFiltro.match(/^(d{4})-(d{2})/);
-      const fimMatch = dataFimFiltro.match(/^(d{4})-(d{2})/);
+      const iniMatch = dataInicioFiltro.match(/^(\d{4})-(\d{2})/);
+      const fimMatch = dataFimFiltro.match(/^(\d{4})-(\d{2})/);
 
       if (iniMatch && fimMatch && iniMatch[1] === fimMatch[1] && iniMatch[2] === fimMatch[2]) {
         mesSelecionado = `${iniMatch[2]}/${iniMatch[1]}`;
@@ -1928,49 +1972,114 @@
       const vizinhos = Array.from(adjacency.get(node.id) || []);
 
       const content = document.getElementById('inspector-content');
-      content.innerHTML = `
-        <div class="space-y-3">
-          <div>
-            <h4 class="text-base font-bold text-white tracking-wide">${node.id}</h4>
-            <div class="flex items-center gap-2 text-slate-400 text-[11px] mt-0.5">
-              <span>📅 ${node.data_ato || node.ano || 'Ano N/D'}</span>
-              ${node.data_publicacao_dou ? `<span class="text-emerald-400 font-mono">DOU: ${node.data_publicacao_dou}</span>` : ''}
-              <span class="px-1.5 py-0.2 rounded bg-slate-800 text-slate-300 font-mono">${node.tipo}</span>
-            </div>
-          </div>
+      const wrapper = document.createElement('div');
+      wrapper.className = 'space-y-3';
 
-          ${node.ementa ? `
-            <div class="bg-[#05140d] p-3 rounded-xl border border-emerald-500/20 space-y-1">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400/80">Ementa Oficial:</span>
-              <p class="text-slate-300 text-xs leading-relaxed">${node.ementa}</p>
-            </div>
-          ` : ''}
+      const headerBox = document.createElement('div');
+      const titleEl = document.createElement('h4');
+      titleEl.className = 'text-base font-bold text-white tracking-wide';
+      titleEl.textContent = node.id || '';
 
-          <!-- Conexões Diretas -->
-          <div class="space-y-1.5 pt-1">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400/80 flex items-center justify-between">
-              <span>Relações no Grafo:</span>
-              <span class="font-mono text-white">${vizinhos.length}</span>
-            </span>
-            <div class="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto pr-1">
-              ${vizinhos.length > 0 ? vizinhos.map(v => `
-                <button onclick="selecionarPorId('${v}')" class="px-2 py-1 rounded-lg bg-[#082016] hover:bg-emerald-900/60 text-emerald-300 border border-emerald-500/30 text-[11px] font-mono transition">
-                  ${v}
-                </button>
-              `).join('') : '<span class="text-slate-500 italic">Nenhuma relação direta identificada.</span>'}
-            </div>
-          </div>
+      const metaRow = document.createElement('div');
+      metaRow.className = 'flex items-center gap-2 text-slate-400 text-[11px] mt-0.5';
 
-          ${node.arquivo ? `
-            <div class="pt-2 border-t border-emerald-500/15 flex items-center justify-between gap-2">
-              <span class="text-[11px] text-slate-400 font-mono truncate max-w-[130px] sm:max-w-[200px]">${node.arquivo}</span>
-              <a href="https://github.com/jadsonsanches/anvisa-normas/blob/main/${node.arquivo.replace(/\\/g, '/')}" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-[11px] font-semibold transition shrink-0">
-                Ver Markdown ↗
-              </a>
-            </div>
-          ` : ''}
-        </div>
-      `;
+      const dateSpan = document.createElement('span');
+      dateSpan.textContent = '📅 ' + (node.data_ato || node.ano || 'Ano N/D');
+      metaRow.appendChild(dateSpan);
+
+      if (node.data_publicacao_dou) {
+        const douSpan = document.createElement('span');
+        douSpan.className = 'text-emerald-400 font-mono';
+        douSpan.textContent = 'DOU: ' + node.data_publicacao_dou;
+        metaRow.appendChild(douSpan);
+      }
+
+      const tipoSpan = document.createElement('span');
+      tipoSpan.className = 'px-1.5 py-0.2 rounded bg-slate-800 text-slate-300 font-mono';
+      tipoSpan.textContent = node.tipo || '';
+      metaRow.appendChild(tipoSpan);
+
+      headerBox.append(titleEl, metaRow);
+      wrapper.appendChild(headerBox);
+
+      if (node.ementa) {
+        const ementaBox = document.createElement('div');
+        ementaBox.className = 'bg-[#05140d] p-3 rounded-xl border border-emerald-500/20 space-y-1';
+
+        const ementaLabel = document.createElement('span');
+        ementaLabel.className = 'text-[10px] font-bold uppercase tracking-wider text-emerald-400/80';
+        ementaLabel.textContent = 'Ementa Oficial:';
+
+        const ementaText = document.createElement('p');
+        ementaText.className = 'text-slate-300 text-xs leading-relaxed';
+        ementaText.textContent = node.ementa;
+
+        ementaBox.append(ementaLabel, ementaText);
+        wrapper.appendChild(ementaBox);
+      }
+
+      // Conexões Diretas
+      const relSection = document.createElement('div');
+      relSection.className = 'space-y-1.5 pt-1';
+
+      const relHeader = document.createElement('span');
+      relHeader.className = 'text-[10px] font-bold uppercase tracking-wider text-emerald-400/80 flex items-center justify-between';
+
+      const relTitle = document.createElement('span');
+      relTitle.textContent = 'Relações no Grafo:';
+
+      const relCount = document.createElement('span');
+      relCount.className = 'font-mono text-white';
+      relCount.textContent = String(vizinhos.length);
+
+      relHeader.append(relTitle, relCount);
+
+      const relList = document.createElement('div');
+      relList.className = 'flex flex-wrap gap-1.5 max-h-36 overflow-y-auto pr-1';
+
+      if (vizinhos.length > 0) {
+        vizinhos.forEach(v => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'px-2 py-1 rounded-lg bg-[#082016] hover:bg-emerald-900/60 text-emerald-300 border border-emerald-500/30 text-[11px] font-mono transition';
+          btn.textContent = v;
+          btn.addEventListener('click', () => selecionarPorId(v));
+          relList.appendChild(btn);
+        });
+      } else {
+        const emptyRel = document.createElement('span');
+        emptyRel.className = 'text-slate-500 italic';
+        emptyRel.textContent = 'Nenhuma relação direta identificada.';
+        relList.appendChild(emptyRel);
+      }
+
+      relSection.append(relHeader, relList);
+      wrapper.appendChild(relSection);
+
+      if (node.arquivo) {
+        const footerBox = document.createElement('div');
+        footerBox.className = 'pt-2 border-t border-emerald-500/15 flex items-center justify-between gap-2';
+
+        const fileSpan = document.createElement('span');
+        fileSpan.className = 'text-[11px] text-slate-400 font-mono truncate max-w-[130px] sm:max-w-[200px]';
+        fileSpan.textContent = node.arquivo;
+        footerBox.appendChild(fileSpan);
+
+        const urlSegura = construirUrlMarkdownSegura(node.arquivo);
+        if (urlSegura) {
+          const mdLink = document.createElement('a');
+          mdLink.href = urlSegura;
+          mdLink.target = '_blank';
+          mdLink.rel = 'noopener noreferrer';
+          mdLink.className = 'px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-[11px] font-semibold transition shrink-0';
+          mdLink.textContent = 'Ver Markdown ↗';
+          footerBox.appendChild(mdLink);
+        }
+
+        wrapper.appendChild(footerBox);
+      }
+
+      content.replaceChildren(wrapper);
 
       if (window.innerWidth < 1024 && !dragNode) {
         document.getElementById('inspector-content')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1994,38 +2103,80 @@
     function renderNormsList() {
       const listItems = currentFilteredList.filter(n => n.arquivo);
       if (listItems.length === 0) {
-        normsContainer.innerHTML = `
-          <div class="text-xs text-slate-500 text-center py-8 bg-[#05140d] rounded-xl border border-emerald-500/10">
-            Nenhuma norma encontrada para os filtros selecionados.
-          </div>
-        `;
+        const emptyBox = document.createElement('div');
+        emptyBox.className = 'text-xs text-slate-500 text-center py-8 bg-[#05140d] rounded-xl border border-emerald-500/10';
+        emptyBox.textContent = 'Nenhuma norma encontrada para os filtros selecionados.';
+        normsContainer.replaceChildren(emptyBox);
         return;
       }
 
       const visibleItems = listItems.slice(0, listRenderLimit);
       const hasMore = listItems.length > listRenderLimit;
+      const fragment = document.createDocumentFragment();
 
-      normsContainer.innerHTML = visibleItems.map(n => `
-        <div onclick="selecionarPorId('${n.id}')" class="p-3 rounded-xl bg-[#061810]/90 hover:bg-[#0a261a] border border-emerald-500/20 cursor-pointer transition space-y-1.5 group">
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-xs text-white group-hover:text-emerald-300 font-mono transition">${n.id}</span>
-            <span class="text-[9px] uppercase font-bold px-2 py-0.5 rounded-full ${
-              n.situacao === 'revogada' ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-            }">${n.situacao || 'vigente'}</span>
-          </div>
-          <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono">
-            <span>📅 ${n.data_ato || n.ano || 'N/D'}</span>
-            ${n.data_publicacao_dou ? `<span class="text-emerald-400 font-bold">DOU: ${n.data_publicacao_dou}</span>` : ''}
-          </div>
-          ${n.ementa ? `<p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">${n.ementa}</p>` : ''}
-        </div>
-      `).join('') + (hasMore ? `
-        <div class="pt-2 text-center">
-          <button onclick="carregarMaisNormas()" class="w-full py-2.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 text-xs font-semibold transition active:scale-98">
-            Carregar mais 30 normas (+${listItems.length - listRenderLimit} restantes)
-          </button>
-        </div>
-      ` : '');
+      visibleItems.forEach(n => {
+        const card = document.createElement('div');
+        card.className = 'p-3 rounded-xl bg-[#061810]/90 hover:bg-[#0a261a] border border-emerald-500/20 cursor-pointer transition space-y-1.5 group';
+        card.addEventListener('click', () => selecionarPorId(n.id));
+
+        const topRow = document.createElement('div');
+        topRow.className = 'flex items-center justify-between';
+
+        const idSpan = document.createElement('span');
+        idSpan.className = 'font-bold text-xs text-white group-hover:text-emerald-300 font-mono transition';
+        idSpan.textContent = n.id || '';
+
+        const sitSpan = document.createElement('span');
+        const isRevogada = n.situacao === 'revogada';
+        sitSpan.className = 'text-[9px] uppercase font-bold px-2 py-0.5 rounded-full ' + (
+          isRevogada ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+        );
+        sitSpan.textContent = n.situacao || 'vigente';
+
+        topRow.append(idSpan, sitSpan);
+        card.appendChild(topRow);
+
+        const metaRow = document.createElement('div');
+        metaRow.className = 'flex items-center justify-between text-[10px] text-slate-400 font-mono';
+
+        const dateSpan = document.createElement('span');
+        dateSpan.textContent = '📅 ' + (n.data_ato || n.ano || 'N/D');
+        metaRow.appendChild(dateSpan);
+
+        if (n.data_publicacao_dou) {
+          const douSpan = document.createElement('span');
+          douSpan.className = 'text-emerald-400 font-bold';
+          douSpan.textContent = 'DOU: ' + n.data_publicacao_dou;
+          metaRow.appendChild(douSpan);
+        }
+
+        card.appendChild(metaRow);
+
+        if (n.ementa) {
+          const ementaP = document.createElement('p');
+          ementaP.className = 'text-[11px] text-slate-300 line-clamp-2 leading-relaxed';
+          ementaP.textContent = n.ementa;
+          card.appendChild(ementaP);
+        }
+
+        fragment.appendChild(card);
+      });
+
+      if (hasMore) {
+        const moreWrap = document.createElement('div');
+        moreWrap.className = 'pt-2 text-center';
+
+        const moreBtn = document.createElement('button');
+        moreBtn.type = 'button';
+        moreBtn.className = 'w-full py-2.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 text-xs font-semibold transition active:scale-98';
+        moreBtn.textContent = 'Carregar mais 30 normas (+' + (listItems.length - listRenderLimit) + ' restantes)';
+        moreBtn.addEventListener('click', carregarMaisNormas);
+
+        moreWrap.appendChild(moreBtn);
+        fragment.appendChild(moreWrap);
+      }
+
+      normsContainer.replaceChildren(fragment);
     }
 
     window.carregarMaisNormas = function() {
@@ -2244,6 +2395,9 @@
 
     // Construção do Donut Chart SVG dinâmico
     function buildDonutChart(filtered) {
+      const container = document.getElementById('donut-container');
+      if (!container) return;
+
       const targetNodes = filtered ? filtered.filter(n => n.arquivo) : nodes.filter(n => n.arquivo);
       const tiposCount = {};
       targetNodes.forEach(n => {
@@ -2259,42 +2413,70 @@
           const pct = count / total;
           const start = acc;
           acc += pct;
-          return { tipo, count, pct, start, end: acc, color: CORES[tipo] || '#64748b' };
+          return { tipo, count, pct, start, end: acc, color: normalizarCorHex(CORES[tipo] || '#64748b') };
         });
 
       if (slices.length === 0) {
-        document.getElementById('donut-container').innerHTML = '<div class="text-xs text-slate-500 py-4">Sem dados.</div>';
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'text-xs text-slate-500 py-4';
+        emptyDiv.textContent = 'Sem dados.';
+        container.replaceChildren(emptyDiv);
         return;
       }
 
-      const svg = `
-        <svg viewBox="0 0 100 100" class="w-20 h-20 transform -rotate-90 shrink-0">
-          ${slices.map(s => {
-            const a1 = s.start * 2 * Math.PI;
-            const a2 = s.end * 2 * Math.PI;
-            const x1 = 50 + 40 * Math.cos(a1);
-            const y1 = 50 + 40 * Math.sin(a1);
-            const x2 = 50 + 40 * Math.cos(a2);
-            const y2 = 50 + 40 * Math.sin(a2);
-            const largeArc = (s.end - s.start) > 0.5 ? 1 : 0;
-            const d = s.pct >= 0.999 ? 'M 50 10 A 40 40 0 1 1 49.99 10 Z' :
-                      `M ${x1} ${y1} A 40 40 0 ${largeArc} 1 ${x2} ${y2}`;
-            return `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="16" class="donut-segment cursor-pointer transition">
-              <title>${s.tipo}: ${Number(s.count).toLocaleString('pt-BR')} (${Math.round(s.pct * 100)}%)</title>
-            </path>`;
-          }).join('')}
-        </svg>
-        <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
-          ${slices.slice(0, 4).map(s => `
-            <div class="flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full" style="background-color: ${s.color}"></span>
-              <span class="text-slate-300 font-medium">${s.tipo}:</span>
-              <strong class="text-white font-mono">${Number(s.count).toLocaleString('pt-BR')}</strong>
-            </div>
-          `).join('')}
-        </div>
-      `;
-      document.getElementById('donut-container').innerHTML = svg;
+      const SVG_NS = 'http://www.w3.org/2000/svg';
+      const svgEl = document.createElementNS(SVG_NS, 'svg');
+      svgEl.setAttribute('viewBox', '0 0 100 100');
+      svgEl.setAttribute('class', 'w-20 h-20 transform -rotate-90 shrink-0');
+
+      slices.forEach(s => {
+        const a1 = s.start * 2 * Math.PI;
+        const a2 = s.end * 2 * Math.PI;
+        const x1 = 50 + 40 * Math.cos(a1);
+        const y1 = 50 + 40 * Math.sin(a1);
+        const x2 = 50 + 40 * Math.cos(a2);
+        const y2 = 50 + 40 * Math.sin(a2);
+        const largeArc = (s.end - s.start) > 0.5 ? 1 : 0;
+        const d = s.pct >= 0.999 ? 'M 50 10 A 40 40 0 1 1 49.99 10 Z' :
+                  `M ${x1} ${y1} A 40 40 0 ${largeArc} 1 ${x2} ${y2}`;
+
+        const pathEl = document.createElementNS(SVG_NS, 'path');
+        pathEl.setAttribute('d', d);
+        pathEl.setAttribute('fill', 'none');
+        pathEl.setAttribute('stroke', normalizarCorHex(s.color));
+        pathEl.setAttribute('stroke-width', '16');
+        pathEl.setAttribute('class', 'donut-segment cursor-pointer transition');
+
+        const titleEl = document.createElementNS(SVG_NS, 'title');
+        titleEl.textContent = String(s.tipo || '') + ': ' + Number(s.count).toLocaleString('pt-BR') + ' (' + Math.round(s.pct * 100) + '%)';
+        pathEl.appendChild(titleEl);
+        svgEl.appendChild(pathEl);
+      });
+
+      const legendEl = document.createElement('div');
+      legendEl.className = 'grid grid-cols-2 gap-x-4 gap-y-1 text-xs';
+
+      slices.slice(0, 4).forEach(s => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'flex items-center gap-1.5';
+
+        const dotSpan = document.createElement('span');
+        dotSpan.className = 'w-2 h-2 rounded-full';
+        dotSpan.style.backgroundColor = normalizarCorHex(s.color);
+
+        const labelSpan = document.createElement('span');
+        labelSpan.className = 'text-slate-300 font-medium';
+        labelSpan.textContent = String(s.tipo || '') + ':';
+
+        const countStrong = document.createElement('strong');
+        countStrong.className = 'text-white font-mono';
+        countStrong.textContent = Number(s.count).toLocaleString('pt-BR');
+
+        itemDiv.append(dotSpan, labelSpan, countStrong);
+        legendEl.appendChild(itemDiv);
+      });
+
+      container.replaceChildren(svgEl, legendEl);
     }
 
     window.scrollToSection = function(id) {
@@ -2463,6 +2645,20 @@
       const errorOverlay = document.getElementById('graph-error-overlay');
       const countEl = document.getElementById('count-filtered');
 
+      const cfgEl = document.getElementById('visualizer-config');
+      let visualizerConfig = {};
+      if (cfgEl && cfgEl.textContent) {
+        try {
+          visualizerConfig = JSON.parse(cfgEl.textContent);
+        } catch (e) {}
+      }
+      const relacoesUrl = typeof visualizerConfig.relacoesUrl === 'string' && visualizerConfig.relacoesUrl
+        ? visualizerConfig.relacoesUrl
+        : 'data/grafo/relacoes.json';
+      const estatisticasUrl = typeof visualizerConfig.estatisticasUrl === 'string' && visualizerConfig.estatisticasUrl
+        ? visualizerConfig.estatisticasUrl
+        : 'data/grafo/estatisticas.json';
+
       if (loadingOverlay) loadingOverlay.classList.remove('hidden');
       if (loadingSubtext) loadingSubtext.textContent = 'Baixando data/grafo/relacoes.json (~23 MB)...';
       if (errorOverlay) errorOverlay.classList.add('hidden');
@@ -2470,8 +2666,8 @@
 
       try {
         const [relRes, statsRes] = await Promise.all([
-          fetch('data/grafo/relacoes.json'),
-          fetch('data/grafo/estatisticas.json').catch(() => null)
+          fetch(relacoesUrl),
+          fetch(estatisticasUrl).catch(() => null)
         ]);
 
         if (!relRes.ok) {
