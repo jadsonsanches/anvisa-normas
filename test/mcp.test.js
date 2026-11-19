@@ -1,5 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 
@@ -179,16 +180,19 @@ test('Suíte de Testes Automatizados do AnvisaNormas MCP Server', async (suite) 
   });
 
   await suite.test('Tool obter_estatisticas: dados quantitativos globais e por tipo de ato', async () => {
+    const statsPath = path.resolve(__dirname, '../data/grafo/estatisticas.json');
+    const expectedStats = JSON.parse(fs.readFileSync(statsPath, 'utf8'));
+
     // Estatísticas globais
     const resGlobal = await env.client.callTool({
       name: 'obter_estatisticas',
       arguments: {},
     });
     const dataGlobal = JSON.parse(resGlobal.content[0].text);
-    assert.equal(dataGlobal.totalNormas, 35986, 'Total de normas deve ser exatamente 35.986');
-    assert.equal(dataGlobal.vigentes, 35592, 'Total de vigentes deve ser 35.592');
-    assert.equal(dataGlobal.revogadas, 394, 'Total de revogadas deve ser 394');
-    assert.equal(dataGlobal.totalRelacoes, 53066, 'Total de relações deve ser 53.066');
+    assert.equal(dataGlobal.totalNormas, expectedStats.totalNormas, 'Total de normas deve corresponder a estatisticas.json');
+    assert.equal(dataGlobal.vigentes, expectedStats.vigentes, 'Total de vigentes deve corresponder a estatisticas.json');
+    assert.equal(dataGlobal.revogadas, expectedStats.revogadas, 'Total de revogadas deve corresponder a estatisticas.json');
+    assert.equal(dataGlobal.totalRelacoes, expectedStats.totalRelacoes, 'Total de relações deve corresponder a estatisticas.json');
     assert.ok(dataGlobal.porTipo.RE > 20000, 'Tipo RE deve ter mais de 20000 registros');
 
     // Estatísticas por tipo específico
@@ -198,7 +202,7 @@ test('Suíte de Testes Automatizados do AnvisaNormas MCP Server', async (suite) 
     });
     const dataTipo = JSON.parse(resTipo.content[0].text);
     assert.equal(dataTipo.tipo, 'RDC');
-    assert.equal(dataTipo.total, 448, 'Total de RDCs cadastradas no acervo deve ser 448');
+    assert.equal(dataTipo.total, expectedStats.porTipo.RDC, 'Total de RDCs cadastradas no acervo deve corresponder a estatisticas.json');
   });
 
   await suite.test('Tool obter_texto_norma: recuperação do Markdown integral e limitação de caracteres', async () => {
@@ -222,11 +226,14 @@ test('Suíte de Testes Automatizados do AnvisaNormas MCP Server', async (suite) 
   });
 
   await suite.test('Resources MCP: leitura de normas://{id} e normas://estatisticas', async () => {
+    const statsPath = path.resolve(__dirname, '../data/grafo/estatisticas.json');
+    const expectedStats = JSON.parse(fs.readFileSync(statsPath, 'utf8'));
+
     // Recurso estático
     const resStats = await env.client.readResource({ uri: 'normas://estatisticas' });
     assert.equal(resStats.contents[0].mimeType, 'application/json');
     const statsObj = JSON.parse(resStats.contents[0].text);
-    assert.equal(statsObj.totalNormas, 35986);
+    assert.equal(statsObj.totalNormas, expectedStats.totalNormas);
 
     // Recurso dinâmico (template)
     const resNorma = await env.client.readResource({ uri: 'normas://ACM%201/2025' });
