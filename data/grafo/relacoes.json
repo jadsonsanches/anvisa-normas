@@ -64937,6 +64937,18 @@
       "arquivo": "data/normas/dep/2026/dep-138.md"
     },
     {
+      "id": "DEP 139/2026",
+      "tipo": "DEP",
+      "numero": "139",
+      "ano": "2026",
+      "data_ato": "18/11/2026",
+      "data_promulgacao": "18/11/2026",
+      "data_publicacao_dou": "19/11/2026",
+      "situacao": "vigente",
+      "ementa": "Retira o efeito suspensivo do recurso a seguir especificado, mantendo os termos da decisão recorrida até a deliberação recursal.",
+      "arquivo": "data/normas/dep/2026/dep-139.md"
+    },
+    {
       "id": "DEP 14/2026",
       "tipo": "DEP",
       "numero": "14",
@@ -64947,6 +64959,42 @@
       "situacao": "vigente",
       "ementa": "Retira o efeito suspensivo do recurso a seguir especificado, mantendo ostermos da decisão recorrida até a deliberação recursal.",
       "arquivo": "data/normas/dep/2026/dep-14.md"
+    },
+    {
+      "id": "DEP 140/2026",
+      "tipo": "DEP",
+      "numero": "140",
+      "ano": "2026",
+      "data_ato": "18/11/2026",
+      "data_promulgacao": "18/11/2026",
+      "data_publicacao_dou": "19/11/2026",
+      "situacao": "vigente",
+      "ementa": "Retira o efeito suspensivo do recurso a seguir especificado, mantendo os termos da decisão recorrida até a deliberação recursal.",
+      "arquivo": "data/normas/dep/2026/dep-140.md"
+    },
+    {
+      "id": "DEP 141/2026",
+      "tipo": "DEP",
+      "numero": "141",
+      "ano": "2026",
+      "data_ato": "18/11/2026",
+      "data_promulgacao": "18/11/2026",
+      "data_publicacao_dou": "19/11/2026",
+      "situacao": "vigente",
+      "ementa": "Retira o efeito suspensivo do recurso a seguir especificado, mantendo os termos da decisão recorrida até a deliberação recursal.",
+      "arquivo": "data/normas/dep/2026/dep-141.md"
+    },
+    {
+      "id": "DEP 142/2026",
+      "tipo": "DEP",
+      "numero": "142",
+      "ano": "2026",
+      "data_ato": "18/11/2026",
+      "data_promulgacao": "18/11/2026",
+      "data_publicacao_dou": "19/11/2026",
+      "situacao": "vigente",
+      "ementa": "Suspende os efeitos da decisão da Diretoria Colegiada disposta no Despacho nº 136, de 6 de novembro de 2026.",
+      "arquivo": "data/normas/dep/2026/dep-142.md"
     },
     {
       "id": "DEP 15/2026",
@@ -138061,6 +138109,42 @@
       "arquivo": "data/normas/portaria/2026/portaria-1295.md"
     },
     {
+      "id": "PORTARIA 1296/2026",
+      "tipo": "PORTARIA",
+      "numero": "1296",
+      "ano": "2026",
+      "data_ato": "16/11/2026",
+      "data_promulgacao": "16/11/2026",
+      "data_publicacao_dou": "19/11/2026",
+      "situacao": "vigente",
+      "ementa": "Nomeia servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para ocupar o cargo de Gerente, da Gerência de Laboratórios de Saúde Pública.",
+      "arquivo": "data/normas/portaria/2026/portaria-1296.md"
+    },
+    {
+      "id": "PORTARIA 1297/2026",
+      "tipo": "PORTARIA",
+      "numero": "1297",
+      "ano": "2026",
+      "data_ato": "16/11/2026",
+      "data_promulgacao": "16/11/2026",
+      "data_publicacao_dou": "19/11/2026",
+      "situacao": "vigente",
+      "ementa": "Exonera servidor da Agência Nacional de Vigilância Sanitária - Anvisa, do cargo de Coordenador, da Coordenação de Assessoramento em Monitoramento e Avaliação de Resultado Regulatório, da Assessoria de Melhoria da Qualidade Regulatória, do Gabinete do Diretor-Presidente.",
+      "arquivo": "data/normas/portaria/2026/portaria-1297.md"
+    },
+    {
+      "id": "PORTARIA 1298/2026",
+      "tipo": "PORTARIA",
+      "numero": "1298",
+      "ano": "2026",
+      "data_ato": "16/11/2026",
+      "data_promulgacao": "16/11/2026",
+      "data_publicacao_dou": "19/11/2026",
+      "situacao": "vigente",
+      "ementa": "Dispensa, servidor da Agência Nacional de Vigilância Sanitária - Anvisa, do encargo de substituto de Assessor-Chefe, da Assessoria de Melhoria da Qualidade Regulatória, do Gabinete do Diretor-Presidente.",
+      "arquivo": "data/normas/portaria/2026/portaria-1298.md"
+    },
+    {
       "id": "PORTARIA 14/2026",
       "tipo": "PORTARIA",
       "numero": "14",
@@ -138975,6 +139059,18 @@
       "situacao": "vigente",
       "ementa": ", que tem por objeto a contratação de serviços contínuos limpeza, asseio e conservação da unidade da Anvisa (MT).",
       "arquivo": "data/normas/prg/2026/prg-102.md"
+    },
+    {
+      "id": "PRG 103/2026",
+      "tipo": "PRG",
+      "numero": "103",
+      "ano": "2026",
+      "data_ato": "19/11/2026",
+      "data_promulgacao": "19/11/2026",
+      "data_publicacao_dou": "19/11/2026",
+      "situacao": "vigente",
+      "ementa": ", que tem por objeto a contratação de empresa especializada para o fornecimento de subscrições de software Microsoft.",
+      "arquivo": "data/normas/prg/2026/prg-103.md"
     },
     {
       "id": "PRG 2/2026",
@@ -430415,6 +430511,54 @@
       "situacao": "vigente",
       "ementa": "Cancela a Autorização de Funcionamento a empresas dos setores de comércio de alimentos, cosméticos, perfumes, produtos de higiene e saúde, e dispensação de medicamentos, conforme especificações no anexo desta Resolução.",
       "arquivo": "data/normas/re/2026/re-4510.md"
+    },
+    {
+      "id": "RE 4514/2026",
+      "tipo": "RE",
+      "numero": "4514",
+      "ano": "2026",
+      "data_ato": "18/11/2026",
+      "data_promulgacao": "18/11/2026",
+      "data_publicacao_dou": "19/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede Autorização de Funcionamento para as Empresas prestadoras de serviços em Portos, Aeroportos, Fronteiras e Recintos Alfandegados conforme anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4514.md"
+    },
+    {
+      "id": "RE 4515/2026",
+      "tipo": "RE",
+      "numero": "4515",
+      "ano": "2026",
+      "data_ato": "18/11/2026",
+      "data_promulgacao": "18/11/2026",
+      "data_publicacao_dou": "19/11/2026",
+      "situacao": "vigente",
+      "ementa": "Concede Cadastramento de filial vinculado à matriz para as Empresas prestadoras de serviços em Portos, Aeroportos, Fronteiras e Recintos Alfandegados conforme anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4515.md"
+    },
+    {
+      "id": "RE 4518/2026",
+      "tipo": "RE",
+      "numero": "4518",
+      "ano": "2026",
+      "data_ato": "18/11/2026",
+      "data_promulgacao": "18/11/2026",
+      "data_publicacao_dou": "19/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições relacionadas à Coordenação de Pesquisa Clínica em Medicamentos e Produtos Biológicos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4518.md"
+    },
+    {
+      "id": "RE 4519/2026",
+      "tipo": "RE",
+      "numero": "4519",
+      "ano": "2026",
+      "data_ato": "18/11/2026",
+      "data_promulgacao": "18/11/2026",
+      "data_publicacao_dou": "19/11/2026",
+      "situacao": "vigente",
+      "ementa": "Revoga a Resolução - RE nº 4.282, de 28 de outubro de 2026.",
+      "arquivo": "data/normas/re/2026/re-4519.md"
     },
     {
       "id": "RE 452/2026",
