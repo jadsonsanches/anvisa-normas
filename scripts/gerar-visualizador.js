@@ -1,49 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-const grafo = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/grafo/relacoes.json'), 'utf8'));
-const stats = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/grafo/estatisticas.json'), 'utf8'));
-
-// Cores temáticas no padrão Bio-Tech & AI (Emerald / Neon / Glassmorphism)
-const CORES_TIPOS = {
-  RDC: { bg: 'bg-emerald-500/20', text: 'text-emerald-300', border: 'border-emerald-500/30', hex: '#10b981', label: 'RDC' },
-  RE: { bg: 'bg-teal-500/20', text: 'text-teal-300', border: 'border-teal-500/30', hex: '#14b8a6', label: 'RE' },
-  PORTARIA: { bg: 'bg-amber-500/20', text: 'text-amber-300', border: 'border-amber-500/30', hex: '#f59e0b', label: 'Portaria' },
-  IN: { bg: 'bg-cyan-500/20', text: 'text-cyan-300', border: 'border-cyan-500/30', hex: '#06b6d4', label: 'IN' },
-  CPB: { bg: 'bg-pink-500/20', text: 'text-pink-300', border: 'border-pink-500/30', hex: '#ec4899', label: 'Consulta Pública' },
-  LEI_FEDERAL: { bg: 'bg-green-500/20', text: 'text-green-300', border: 'border-green-500/30', hex: '#22c55e', label: 'Lei Federal' },
-  DEP: { bg: 'bg-blue-500/20', text: 'text-blue-300', border: 'border-blue-500/30', hex: '#3b82f6', label: 'Despacho' },
-  TAP: { bg: 'bg-red-500/20', text: 'text-red-300', border: 'border-red-500/30', hex: '#ef4444', label: 'Termo Apreensão' },
-  OUTROS: { bg: 'bg-slate-700/50', text: 'text-slate-300', border: 'border-slate-600', hex: '#64748b', label: 'Outros' }
-};
-
-const fmtNode = n => Number(n || 0).toLocaleString('pt-BR');
-
-// Calcular pico histórico global
-const contagemDiasGlobal = {};
-grafo.nodes.forEach(n => {
-  if (n.arquivo) {
-    const d = n.data_publicacao_dou || n.data_ato;
-    if (d) contagemDiasGlobal[d] = (contagemDiasGlobal[d] || 0) + 1;
-  }
-});
-let picoHistoricoValor = 0;
-let picoHistoricoData = '-';
-Object.entries(contagemDiasGlobal).forEach(([d, q]) => {
-  if (q > picoHistoricoValor) {
-    picoHistoricoValor = q;
-    picoHistoricoData = d;
-  }
-});
-
-// Pills de distribuição por tipo no header
-const distribuicaoHtml = Object.entries(stats.porTipo || {})
-  .map(([tipo, qtd]) => {
-    const conf = CORES_TIPOS[tipo] || CORES_TIPOS.OUTROS;
-    return `<span class="px-2.5 py-1 rounded-full ${conf.bg} ${conf.text} border ${conf.border} text-xs font-semibold tracking-wide">${tipo}: ${fmtNode(qtd)}</span>`;
-  })
-  .join('\n');
-
 const htmlContent = `<!DOCTYPE html>
 <html lang="pt-BR" class="dark">
 <head>
@@ -257,7 +214,7 @@ const htmlContent = `<!DOCTYPE html>
           >
           <div class="absolute inset-y-0 right-0 pr-2 flex items-center gap-1">
             <span id="count-filtered" class="text-[9px] sm:text-[10px] font-mono font-medium px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 whitespace-nowrap">
-              ${grafo.nodes.length} nós
+              Carregando...
             </span>
           </div>
         </div>
@@ -371,7 +328,7 @@ const htmlContent = `<!DOCTYPE html>
 
       <!-- Carrossel de Dias com Contador de Atos por Dia -->
       <div id="daily-timeline-carousel" class="flex items-stretch gap-2 sm:gap-2.5 overflow-x-auto pb-2 pt-1 scroll-smooth touch-pan-x">
-        <!-- Gerado via JavaScript -->
+        <div class="w-full py-4 text-center text-xs text-emerald-300/70">Carregando linha do tempo regulatória...</div>
       </div>
     </section>
 
@@ -389,7 +346,7 @@ const htmlContent = `<!DOCTYPE html>
         </div>
         <div class="pt-0.5">
           <span class="inline-block text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-500/30 truncate max-w-full" id="stat-filtradas-badge">
-            Total no acervo: ${fmtNode(stats.totalNormas || grafo.nodes.filter(n => n.arquivo).length)}
+            Total no acervo: ...
           </span>
         </div>
         <p class="text-[10px] sm:text-[11px] text-slate-300">Atos com texto e dados desde <span class="text-emerald-300 font-semibold font-mono">01/01/2022</span></p>
@@ -411,7 +368,7 @@ const htmlContent = `<!DOCTYPE html>
         </div>
         <div class="pt-0.5">
           <span class="inline-block text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-500/30 truncate max-w-full" id="stat-vigentes-badge">
-            Total no acervo: ${fmtNode(stats.vigentes || 0)}
+            Total no acervo: ...
           </span>
         </div>
         <p class="text-[10px] sm:text-[11px] text-slate-400">Plena eficácia jurídica em vigor no Brasil</p>
@@ -430,7 +387,7 @@ const htmlContent = `<!DOCTYPE html>
         </div>
         <div class="pt-0.5">
           <span class="inline-block text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-500/30 truncate max-w-full" id="stat-relacoes-badge">
-            Total no acervo: ${fmtNode(stats.totalRelacoes || grafo.edges.length)}
+            Total no acervo: ...
           </span>
         </div>
         <p class="text-[10px] sm:text-[11px] text-slate-400">Relações (altera, revoga, cita)</p>
@@ -450,7 +407,7 @@ const htmlContent = `<!DOCTYPE html>
         </div>
         <div class="pt-0.5">
           <span class="inline-block text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-500/30 truncate max-w-full" id="stat-pico-badge">
-            Recorde histórico: ${fmtNode(picoHistoricoValor)} atos
+            Recorde histórico: ...
           </span>
         </div>
         <p class="text-[10px] sm:text-[11px] text-slate-400" id="stat-pico-sub">Maior volume diário no período</p>
@@ -483,6 +440,32 @@ const htmlContent = `<!DOCTYPE html>
           <!-- Canvas do Grafo -->
           <div class="relative w-full h-[340px] sm:h-[420px] md:h-[480px] lg:h-[520px] bg-[#030a07] rounded-xl overflow-hidden border border-emerald-500/20 shadow-[inset_0_4px_24px_rgba(0,0,0,0.65)]" style="background-image: radial-gradient(rgba(16, 185, 129, 0.12) 1px, transparent 1px); background-size: 22px 22px;">
             <canvas id="graph-canvas" class="w-full h-full block"></canvas>
+
+            <!-- Overlay de Carregamento Assíncrono -->
+            <div id="graph-loading-overlay" class="absolute inset-0 z-30 flex flex-col items-center justify-center bg-[#030a07]/90 backdrop-blur-sm p-4 text-center">
+              <div class="w-10 h-10 rounded-full border-2 border-emerald-500/25 border-t-[#00ff87] animate-spin mb-3"></div>
+              <p class="text-sm font-semibold text-white">Carregando grafo regulatório...</p>
+              <p id="graph-loading-subtext" class="text-xs text-emerald-300/80 font-mono mt-1">Baixando data/grafo/relacoes.json (~23 MB)...</p>
+            </div>
+
+            <!-- Overlay de Erro / Fallback (ex.: abertura via file:// ou erro de rede) -->
+            <div id="graph-error-overlay" class="hidden absolute inset-0 z-30 flex items-center justify-center bg-[#030a07]/95 backdrop-blur-md p-4 sm:p-6 overflow-y-auto">
+              <div class="max-w-lg w-full glass-card rounded-2xl p-4 sm:p-5 space-y-3 border-rose-500/30 text-center">
+                <div class="text-2xl">⚠️</div>
+                <h4 class="text-sm sm:text-base font-bold text-white">Não foi possível carregar os dados do grafo</h4>
+                <p id="graph-error-message" class="text-xs text-slate-300 leading-relaxed"></p>
+                <pre id="graph-error-commands" class="hidden text-left text-[11px] font-mono bg-[#04130c] border border-emerald-500/25 rounded-xl p-3 text-emerald-300 overflow-x-auto select-all"></pre>
+                <div class="flex flex-wrap items-center justify-center gap-2 pt-1">
+                  <button type="button" id="btn-retry-fetch" onclick="carregarDadosGrafo()" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs transition cursor-pointer">
+                    Tentar novamente
+                  </button>
+                  <label for="fallback-json-input" class="px-4 py-2 rounded-xl bg-[#082016] hover:bg-emerald-950 text-emerald-300 border border-emerald-500/35 font-semibold text-xs transition cursor-pointer inline-flex items-center gap-1.5">
+                    <span>📂 Carregar relacoes.json manualmente</span>
+                    <input id="fallback-json-input" type="file" accept=".json,application/json" class="hidden">
+                  </label>
+                </div>
+              </div>
+            </div>
             
             <!-- Legenda Flutuante Completa e Interativa com Botão Minimizar -->
             <div id="grafo-legenda-card" class="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 bg-[#04130c]/95 backdrop-blur-md border border-emerald-500/30 rounded-xl p-2 sm:p-2.5 text-[10px] md:text-[11px] shadow-[0_12px_36px_rgba(0,0,0,0.7)] z-20 transition-all duration-200 max-w-[calc(100%-16px)] sm:max-w-[270px] pointer-events-auto">
@@ -614,7 +597,9 @@ const htmlContent = `<!DOCTYPE html>
 
           <!-- Container Scrollável da Lista de Normas -->
           <div id="norms-list-container" class="space-y-2 max-h-[500px] overflow-y-auto pr-1">
-            <!-- Itens inseridos dinamicamente -->
+            <div class="text-xs text-emerald-300/70 text-center py-8 bg-[#05140d] rounded-xl border border-emerald-500/10">
+              Carregando lista de normas...
+            </div>
           </div>
         </div>
 
@@ -638,8 +623,8 @@ const htmlContent = `<!DOCTYPE html>
   </main>
 
   <script>
-    const graphData = ${JSON.stringify(grafo)};
-    const statsData = ${JSON.stringify(stats)};
+    let graphData = { nodes: [], edges: [] };
+    let statsData = {};
 
     const CORES = {
       RDC: '#10b981',
@@ -653,23 +638,24 @@ const htmlContent = `<!DOCTYPE html>
       OUTROS: '#64748b'
     };
 
-    // Agrupamento diário de atos
-    const atosPorDiaMap = {};
-    graphData.nodes.filter(n => n.arquivo).forEach(n => {
-      const d = n.data_publicacao_dou || n.data_ato || '';
-      if (d) {
-        atosPorDiaMap[d] = (atosPorDiaMap[d] || 0) + 1;
-      }
-    });
-
+    // Estado reativo preenchido após carregamento dinâmico via fetch()
+    let atosPorDiaMap = {};
     let globalPicoValor = 0;
     let globalPicoData = '-';
-    Object.entries(atosPorDiaMap).forEach(([d, q]) => {
-      if (q > globalPicoValor) {
-        globalPicoValor = q;
-        globalPicoData = d;
-      }
-    });
+    let statsTotalGeral = 0;
+    let nodes = [];
+    let nodeMap = new Map();
+    let edges = [];
+    let adjacency = new Map();
+    let transform = { x: 0, y: 0, scale: 1 };
+    let isDragging = false;
+    let dragNode = null;
+    let hoveredNode = null;
+    let lastMouse = { x: 0, y: 0 };
+    let selectedNode = null;
+    let focusedNodeId = null;
+    let filteredNodeIds = new Set();
+    let alpha = 1.0;
 
     const carouselContainer = document.getElementById('daily-timeline-carousel');
     const DIAS_SEMANA = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
@@ -780,7 +766,6 @@ const htmlContent = `<!DOCTYPE html>
     let filtroRapidoAtivo = '7_DIAS';
     let mesSelecionado = 'ALL';
     let diaSelecionado = null;
-    const statsTotalGeral = statsData.totalNormas || graphData.nodes.filter(n => n.arquivo).length;
 
     const inputInicio = document.getElementById('filtro-data-inicio');
     const inputFim = document.getElementById('filtro-data-fim');
@@ -879,8 +864,6 @@ const htmlContent = `<!DOCTYPE html>
         \`;
       }).join('');
     }
-
-    renderDailyTimeline();
 
     // ==========================================
     // COMPONENTE DE CALENDÁRIO MODERNO DARK EMERALD
@@ -1435,46 +1418,6 @@ const htmlContent = `<!DOCTYPE html>
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Distribuição inicial em Espiral Áurea concêntrica e estável
-    const nodes = graphData.nodes.map((n, i) => {
-      const angle = i * 2.39996;
-      const r = Math.sqrt(i) * 11;
-      return {
-        ...n,
-        x: (width || 700) / 2 + Math.cos(angle) * r,
-        y: (height || 480) / 2 + Math.sin(angle) * r,
-        vx: 0,
-        vy: 0,
-        radius: n.arquivo ? 6.5 : 4
-      };
-    });
-
-    const nodeMap = new Map(nodes.map(n => [n.id, n]));
-    const edges = graphData.edges
-      .map(e => ({
-        ...e,
-        sourceNode: nodeMap.get(e.source),
-        targetNode: nodeMap.get(e.target)
-      }))
-      .filter(e => e.sourceNode && e.targetNode);
-
-    const adjacency = new Map();
-    nodes.forEach(n => adjacency.set(n.id, new Set()));
-    edges.forEach(e => {
-      adjacency.get(e.source)?.add(e.target);
-      adjacency.get(e.target)?.add(e.source);
-    });
-
-    let transform = { x: 0, y: 0, scale: 1 };
-    let isDragging = false;
-    let dragNode = null;
-    let hoveredNode = null;
-    let lastMouse = { x: 0, y: 0 };
-    let selectedNode = nodes[0] || null;
-    let focusedNodeId = null;
-    let filteredNodeIds = new Set(nodes.map(n => n.id));
-    let alpha = 1.0;
-
     function isNodeVisible(n) {
       return filteredNodeIds.has(n.id);
     }
@@ -1783,7 +1726,6 @@ const htmlContent = `<!DOCTYPE html>
         isRenderLoopActive = false;
       }
     }
-    wakeRender();
 
     // Busca de nó sob o cursor respeitando o raio compensado pelo zoom
     function findNodeAt(mx, my) {
@@ -2357,11 +2299,222 @@ const htmlContent = `<!DOCTYPE html>
       \`;
       document.getElementById('donut-container').innerHTML = svg;
     }
-    buildDonutChart();
 
     window.scrollToSection = function(id) {
       document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     };
+
+    function exibirErroCarregamento(err) {
+      const loadingOverlay = document.getElementById('graph-loading-overlay');
+      const errorOverlay = document.getElementById('graph-error-overlay');
+      const errorMsgEl = document.getElementById('graph-error-message');
+      const errorCmdEl = document.getElementById('graph-error-commands');
+      const countEl = document.getElementById('count-filtered');
+      const listStatusEl = document.getElementById('list-status-badge');
+      const timelineEl = document.getElementById('daily-timeline-carousel');
+      const normsEl = document.getElementById('norms-list-container');
+
+      if (loadingOverlay) loadingOverlay.classList.add('hidden');
+      if (errorOverlay) errorOverlay.classList.remove('hidden');
+
+      const isFileProtocol = window.location.protocol === 'file:';
+      const detail = err && err.message ? err.message : String(err || 'Erro desconhecido');
+
+      if (errorMsgEl) {
+        if (isFileProtocol) {
+          errorMsgEl.textContent = 'Navegadores bloqueiam requisições fetch() locais quando o HTML é aberto diretamente via file:// (política CORS). Para carregar data/grafo/relacoes.json automaticamente, inicie um servidor HTTP local na raiz do repositório ou selecione o arquivo manualmente abaixo:';
+        } else {
+          errorMsgEl.textContent = 'Não foi possível carregar data/grafo/relacoes.json (' + detail + '). Verifique se o arquivo existe no servidor ou selecione-o manualmente abaixo.';
+        }
+      }
+
+      if (errorCmdEl) {
+        if (isFileProtocol) {
+          errorCmdEl.textContent = 'npx serve .\\n# ou\\npython -m http.server 8000\\n# acesse: http://localhost:8000/visualizador.html';
+          errorCmdEl.classList.remove('hidden');
+        } else {
+          errorCmdEl.textContent = '';
+          errorCmdEl.classList.add('hidden');
+        }
+      }
+
+      if (countEl) countEl.textContent = 'Erro ao carregar';
+      if (listStatusEl) listStatusEl.textContent = 'Dados indisponíveis';
+
+      if (timelineEl) {
+        timelineEl.replaceChildren();
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'w-full py-4 text-center text-xs text-rose-300/80';
+        msgDiv.textContent = isFileProtocol
+          ? 'Linha do tempo indisponível via file:// até carregar data/grafo/relacoes.json.'
+          : 'Erro ao carregar linha do tempo regulatória.';
+        timelineEl.appendChild(msgDiv);
+      }
+
+      if (normsEl) {
+        normsEl.replaceChildren();
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'text-xs text-rose-300/80 text-center py-8 bg-[#05140d] rounded-xl border border-rose-500/20';
+        msgDiv.textContent = 'Dados do grafo não carregados. Use o painel acima para tentar novamente ou selecionar data/grafo/relacoes.json.';
+        normsEl.appendChild(msgDiv);
+      }
+    }
+
+    function inicializarVisualizador(grafo, stats) {
+      if (!grafo || !Array.isArray(grafo.nodes) || !Array.isArray(grafo.edges)) {
+        throw new Error('Estrutura JSON inválida: esperado objeto com arrays nodes e edges.');
+      }
+
+      graphData = grafo;
+
+      const internalNodes = grafo.nodes.filter(n => n.arquivo);
+      if (stats && typeof stats === 'object' && typeof stats.totalNormas === 'number') {
+        statsData = stats;
+      } else {
+        const vigentesCount = internalNodes.filter(n => (n.situacao || 'vigente') === 'vigente').length;
+        const porTipoFallback = {};
+        internalNodes.forEach(n => {
+          const t = n.tipo || 'OUTROS';
+          porTipoFallback[t] = (porTipoFallback[t] || 0) + 1;
+        });
+        statsData = {
+          totalNormas: internalNodes.length,
+          vigentes: vigentesCount,
+          revogadas: internalNodes.length - vigentesCount,
+          porTipo: porTipoFallback,
+          totalRelacoes: grafo.edges.length
+        };
+      }
+
+      atosPorDiaMap = {};
+      internalNodes.forEach(n => {
+        const d = n.data_publicacao_dou || n.data_ato || '';
+        if (d) {
+          atosPorDiaMap[d] = (atosPorDiaMap[d] || 0) + 1;
+        }
+      });
+
+      globalPicoValor = 0;
+      globalPicoData = '-';
+      Object.entries(atosPorDiaMap).forEach(([d, q]) => {
+        if (q > globalPicoValor) {
+          globalPicoValor = q;
+          globalPicoData = d;
+        }
+      });
+
+      statsTotalGeral = statsData.totalNormas || internalNodes.length;
+
+      resizeCanvas();
+
+      // Distribuição inicial em Espiral Áurea concêntrica e estável
+      nodes = grafo.nodes.map((n, i) => {
+        const angle = i * 2.39996;
+        const r = Math.sqrt(i) * 11;
+        return {
+          ...n,
+          x: (width || 700) / 2 + Math.cos(angle) * r,
+          y: (height || 480) / 2 + Math.sin(angle) * r,
+          vx: 0,
+          vy: 0,
+          radius: n.arquivo ? 6.5 : 4
+        };
+      });
+
+      nodeMap = new Map(nodes.map(n => [n.id, n]));
+      edges = grafo.edges
+        .map(e => ({
+          ...e,
+          sourceNode: nodeMap.get(e.source),
+          targetNode: nodeMap.get(e.target)
+        }))
+        .filter(e => e.sourceNode && e.targetNode);
+
+      adjacency = new Map();
+      nodes.forEach(n => adjacency.set(n.id, new Set()));
+      edges.forEach(e => {
+        adjacency.get(e.source)?.add(e.target);
+        adjacency.get(e.target)?.add(e.source);
+      });
+
+      transform = { x: 0, y: 0, scale: 1 };
+      isDragging = false;
+      dragNode = null;
+      hoveredNode = null;
+      selectedNode = nodes[0] || null;
+      focusedNodeId = null;
+      document.getElementById('btn-clear-focus')?.classList.add('hidden');
+      filteredNodeIds = new Set(nodes.map(n => n.id));
+      alpha = 1.0;
+
+      const loadingOverlay = document.getElementById('graph-loading-overlay');
+      const errorOverlay = document.getElementById('graph-error-overlay');
+      if (loadingOverlay) loadingOverlay.classList.add('hidden');
+      if (errorOverlay) errorOverlay.classList.add('hidden');
+
+      buildDonutChart();
+      if (nodes.length > 0) {
+        selecionarNo(nodes[0]);
+      }
+      window.aplicarFiltroRapido('7_DIAS');
+      wakeRender();
+    }
+
+    window.carregarDadosGrafo = async function() {
+      const loadingOverlay = document.getElementById('graph-loading-overlay');
+      const loadingSubtext = document.getElementById('graph-loading-subtext');
+      const errorOverlay = document.getElementById('graph-error-overlay');
+      const countEl = document.getElementById('count-filtered');
+
+      if (loadingOverlay) loadingOverlay.classList.remove('hidden');
+      if (loadingSubtext) loadingSubtext.textContent = 'Baixando data/grafo/relacoes.json (~23 MB)...';
+      if (errorOverlay) errorOverlay.classList.add('hidden');
+      if (countEl) countEl.textContent = 'Carregando...';
+
+      try {
+        const [relRes, statsRes] = await Promise.all([
+          fetch('data/grafo/relacoes.json'),
+          fetch('data/grafo/estatisticas.json').catch(() => null)
+        ]);
+
+        if (!relRes.ok) {
+          throw new Error('HTTP ' + relRes.status + ' ao carregar data/grafo/relacoes.json');
+        }
+
+        const grafo = await relRes.json();
+        const stats = (statsRes && statsRes.ok) ? await statsRes.json().catch(() => null) : null;
+        inicializarVisualizador(grafo, stats);
+      } catch (err) {
+        console.error('Erro ao carregar dados do grafo:', err);
+        exibirErroCarregamento(err);
+      }
+    };
+
+    const fallbackFileInput = document.getElementById('fallback-json-input');
+    if (fallbackFileInput) {
+      fallbackFileInput.addEventListener('change', async (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+
+        const loadingOverlay = document.getElementById('graph-loading-overlay');
+        const loadingSubtext = document.getElementById('graph-loading-subtext');
+        const errorOverlay = document.getElementById('graph-error-overlay');
+        if (loadingOverlay) loadingOverlay.classList.remove('hidden');
+        if (loadingSubtext) loadingSubtext.textContent = 'Lendo arquivo local selecionado...';
+        if (errorOverlay) errorOverlay.classList.add('hidden');
+
+        try {
+          const text = await file.text();
+          const grafo = JSON.parse(text);
+          inicializarVisualizador(grafo, null);
+        } catch (err) {
+          console.error('Erro ao ler relacoes.json manual:', err);
+          exibirErroCarregamento(err);
+        } finally {
+          e.target.value = '';
+        }
+      });
+    }
 
     // Inicialização
     try {
@@ -2382,11 +2535,7 @@ const htmlContent = `<!DOCTYPE html>
       }
     } catch (e) {}
 
-    if (nodes.length > 0) {
-      selecionarNo(nodes[0]);
-    }
-    aplicarFiltroRapido('7_DIAS');
-    wakeRender();
+    window.carregarDadosGrafo();
   </script>
 </body>
 </html>

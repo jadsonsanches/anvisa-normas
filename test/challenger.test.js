@@ -465,8 +465,13 @@ test('Desafio Empírico 8: Integridade de Artefatos Derivados (SQLite, JSON, CSV
   // HTML Visualizador e index
   const visContent = fs.readFileSync(visPath, 'utf8');
   assert.ok(visContent.length > 50000, 'visualizador.html deve possuir conteúdo completo gerado');
-  assert.ok(visContent.includes('const graphData ='), 'visualizador.html deve embutir dados do grafo');
-  assert.ok(visContent.includes('const statsData ='), 'visualizador.html deve embutir estatísticas');
+  assert.ok(visContent.length < 1024 * 1024, `visualizador.html deve ser leve (< 1 MB), tem ${visContent.length} bytes`);
+  assert.ok(visContent.includes('fetch('), 'visualizador.html deve carregar dados dinamicamente via fetch()');
+  assert.ok(visContent.includes('data/grafo/relacoes.json'), 'visualizador.html deve referenciar data/grafo/relacoes.json');
+  assert.ok(visContent.includes('graph-loading-overlay'), 'visualizador.html deve exibir indicador de carregamento');
+  assert.ok(visContent.includes('graph-error-overlay'), 'visualizador.html deve exibir fallback de erro');
+  assert.ok(!visContent.includes('const graphData ='), 'visualizador.html não deve embutir const graphData inline');
+  assert.ok(!visContent.includes('"nodes":[{'), 'visualizador.html não deve embutir JSON de nós inline');
 
   const indexContent = fs.readFileSync(indexPath, 'utf8');
   assert.strictEqual(visContent, indexContent, 'index.html e visualizador.html devem ser idênticos');

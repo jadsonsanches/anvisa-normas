@@ -24,12 +24,15 @@ ENV NODE_ENV=production
 ENV PORT=8080
 
 # Copia apenas as dependências de produção
-COPY package*.json ./
-RUN npm ci --omit=dev
+COPY --chown=node:node package*.json ./
+RUN npm ci --omit=dev && npm cache clean --force && chown -R node:node /app
 
-# Copia os arquivos compilados e a base de dados
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/data ./data
+# Copia os arquivos compilados e a base de dados com propriedade de node:node
+COPY --chown=node:node --from=builder /app/dist ./dist
+COPY --chown=node:node --from=builder /app/data ./data
+
+# Executa como usuário não-privilegiado
+USER node
 
 EXPOSE 8080
 
