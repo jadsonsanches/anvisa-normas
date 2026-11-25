@@ -1,6 +1,6 @@
 {
-  "totalNormas": 36117,
-  "vigentes": 35723,
+  "totalNormas": 36143,
+  "vigentes": 35749,
   "revogadas": 394,
   "porTipo": {
     "AAP": 1,
@@ -25,7 +25,7 @@
     "CNC": 30,
     "CNV": 1,
     "CON": 13,
-    "CPB": 361,
+    "CPB": 362,
     "CRI": 10,
     "CTD": 15,
     "DCP": 7,
@@ -59,7 +59,7 @@
     "MAN": 8,
     "MSA": 3,
     "NDT": 3,
-    "NOF": 6,
+    "NOF": 8,
     "NOM": 370,
     "NTA": 2,
     "NTC": 13,
@@ -70,12 +70,12 @@
     "PEN": 28,
     "PIM": 1,
     "PLA": 3,
-    "PORTARIA": 2193,
+    "PORTARIA": 2205,
     "PRD": 1,
     "PRF": 2,
     "PRG": 71,
     "RDC": 448,
-    "RE": 24209,
+    "RE": 24220,
     "REC": 1,
     "REQ": 1,
     "RLT": 13,
@@ -88,5 +88,5 @@
     "VAC": 48,
     "VTO": 751
   },
-  "totalRelacoes": 53069
+  "totalRelacoes": 53072
 }

@@ -54897,6 +54897,18 @@
       "arquivo": "data/normas/cpb/2026/cpb-1437.md"
     },
     {
+      "id": "CPB 1438/2026",
+      "tipo": "CPB",
+      "numero": "1438",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Proposta de alteração da monografia C92 - Chromobacterium Subtsugae e inclui o item C92.1 - Extrato metabólito de Chromobacterium Subtsugae na Relação de Ingredientes Ativos de Agrotóxicos, Saneantes Desinfestantes e Preservativos de Madeira, publicada por meio da Instrução Normativa - IN n° 103, de 19 de outubro de 2021.",
+      "arquivo": "data/normas/cpb/2026/cpb-1438.md"
+    },
+    {
       "id": "CPB 2/2026",
       "tipo": "CPB",
       "numero": "2",
@@ -100077,6 +100089,30 @@
       "arquivo": "data/normas/nof/2026/nof-19.md"
     },
     {
+      "id": "NOF 20/2026",
+      "tipo": "NOF",
+      "numero": "20",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Notifica as pessoas físicas e jurídicas sobre a decisão administrativa proferida em Processos Administrativos Sancionadores, para que tomem ciência das respectivas decisões administrativas, que determinaram o arquivamento e o consequente encerramento dos Processos.",
+      "arquivo": "data/normas/nof/2026/nof-20.md"
+    },
+    {
+      "id": "NOF 21/2026",
+      "tipo": "NOF",
+      "numero": "21",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Notifica as pessoas físicas e jurídicas sobre a decisão administrativa proferida em Processos Administrativos Sancionadores, concedendo prazo para ciência e para apresentação de recurso, conforme os prazos estabelecidos neste edital.",
+      "arquivo": "data/normas/nof/2026/nof-21.md"
+    },
+    {
       "id": "NOF 2339/2026",
       "tipo": "NOF",
       "numero": "2339",
@@ -138215,6 +138251,150 @@
       "situacao": "vigente",
       "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para participação em evento internacional.",
       "arquivo": "data/normas/portaria/2026/portaria-1301.md"
+    },
+    {
+      "id": "PORTARIA 1302/2026",
+      "tipo": "PORTARIA",
+      "numero": "1302",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Nomeia servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para ocupar o cargo de Coordenador, da Coordenação de Assessoramento em Monitoramento e Avaliação de Resultado Regulatório.",
+      "arquivo": "data/normas/portaria/2026/portaria-1302.md"
+    },
+    {
+      "id": "PORTARIA 1303/2026",
+      "tipo": "PORTARIA",
+      "numero": "1303",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para participação em evento internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1303.md"
+    },
+    {
+      "id": "PORTARIA 1304/2026",
+      "tipo": "PORTARIA",
+      "numero": "1304",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para participação em evento internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1304.md"
+    },
+    {
+      "id": "PORTARIA 1305/2026",
+      "tipo": "PORTARIA",
+      "numero": "1305",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1305.md"
+    },
+    {
+      "id": "PORTARIA 1306/2026",
+      "tipo": "PORTARIA",
+      "numero": "1306",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1306.md"
+    },
+    {
+      "id": "PORTARIA 1307/2026",
+      "tipo": "PORTARIA",
+      "numero": "1307",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de auditoria internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1307.md"
+    },
+    {
+      "id": "PORTARIA 1308/2026",
+      "tipo": "PORTARIA",
+      "numero": "1308",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1308.md"
+    },
+    {
+      "id": "PORTARIA 1309/2026",
+      "tipo": "PORTARIA",
+      "numero": "1309",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1309.md"
+    },
+    {
+      "id": "PORTARIA 1310/2026",
+      "tipo": "PORTARIA",
+      "numero": "1310",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1310.md"
+    },
+    {
+      "id": "PORTARIA 1311/2026",
+      "tipo": "PORTARIA",
+      "numero": "1311",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1311.md"
+    },
+    {
+      "id": "PORTARIA 1312/2026",
+      "tipo": "PORTARIA",
+      "numero": "1312",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1312.md"
+    },
+    {
+      "id": "PORTARIA 1313/2026",
+      "tipo": "PORTARIA",
+      "numero": "1313",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para participação em reunião internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1313.md"
     },
     {
       "id": "PORTARIA 14/2026",
@@ -431461,6 +431641,18 @@
       "arquivo": "data/normas/re/2026/re-4577.md"
     },
     {
+      "id": "RE 4578/2026",
+      "tipo": "RE",
+      "numero": "4578",
+      "ano": "2026",
+      "data_ato": "23/11/2026",
+      "data_promulgacao": "23/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela ensaio clínico com produto de terapia avançada, conforme Anexo.",
+      "arquivo": "data/normas/re/2026/re-4578.md"
+    },
+    {
       "id": "RE 4579/2026",
       "tipo": "RE",
       "numero": "4579",
@@ -432025,6 +432217,110 @@
       "arquivo": "data/normas/re/2026/re-462.md"
     },
     {
+      "id": "RE 4620/2026",
+      "tipo": "RE",
+      "numero": "4620",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4620.md"
+    },
+    {
+      "id": "RE 4621/2026",
+      "tipo": "RE",
+      "numero": "4621",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4621.md"
+    },
+    {
+      "id": "RE 4623/2026",
+      "tipo": "RE",
+      "numero": "4623",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4623.md"
+    },
+    {
+      "id": "RE 4624/2026",
+      "tipo": "RE",
+      "numero": "4624",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Torna insubsistente, única e exclusivamente, a publicação de cancelamento de Autorização de Funcionamento para a empresa citada, publicada pela Resolução - RE nº 2.290, de 3 de junho de 2026.",
+      "arquivo": "data/normas/re/2026/re-4624.md"
+    },
+    {
+      "id": "RE 2290/2026",
+      "tipo": "RE",
+      "numero": "2290",
+      "ano": "2026",
+      "situacao": "pendente_coleta",
+      "ementa": "Norma citada oficialmente no acervo. Texto integral e metadados serão integrados em coletas complementares do ano 2026."
+    },
+    {
+      "id": "RE 4625/2026",
+      "tipo": "RE",
+      "numero": "4625",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4625.md"
+    },
+    {
+      "id": "RE 4626/2026",
+      "tipo": "RE",
+      "numero": "4626",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4626.md"
+    },
+    {
+      "id": "RE 4627/2026",
+      "tipo": "RE",
+      "numero": "4627",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela a Autorização de Funcionamento a empresas dos setores de comércio de alimentos, cosméticos, perfumes, produtos de higiene e saúde, e dispensação de medicamentos, conforme especificações no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4627.md"
+    },
+    {
+      "id": "RE 4629/2026",
+      "tipo": "RE",
+      "numero": "4629",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere petições relacionadas à Coordenação de Pesquisa Clínica em Medicamentos e Produtos Biológicos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4629.md"
+    },
+    {
       "id": "RE 463/2026",
       "tipo": "RE",
       "numero": "463",
@@ -432035,6 +432331,30 @@
       "situacao": "vigente",
       "ementa": "Cancela por caducidade o Registro de Produto Fumígeno Derivado do Tabaco da marca, conforme anexo.",
       "arquivo": "data/normas/re/2026/re-463.md"
+    },
+    {
+      "id": "RE 4630/2026",
+      "tipo": "RE",
+      "numero": "4630",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza a implementação das petições relacionadas à Coordenação de Pesquisa Clínica em Medicamentos e Produtos Biológicos, por decurso de prazo, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4630.md"
+    },
+    {
+      "id": "RE 4631/2026",
+      "tipo": "RE",
+      "numero": "4631",
+      "ano": "2026",
+      "data_ato": "24/11/2026",
+      "data_promulgacao": "24/11/2026",
+      "data_publicacao_dou": "25/11/2026",
+      "situacao": "vigente",
+      "ementa": "Publica a desistência a pedido das petições/processos relacionadas à Coordenação de Pesquisa Clínica em Medicamentos e Produtos Biológicos, conforme anexo.",
+      "arquivo": "data/normas/re/2026/re-4631.md"
     },
     {
       "id": "RE 464/2026",
@@ -480343,6 +480663,11 @@
     {
       "source": "CPB 1437/2026",
       "target": "CPB 1437/2026",
+      "relacao": "cita"
+    },
+    {
+      "source": "CPB 1438/2026",
+      "target": "CPB 1438/2026",
       "relacao": "cita"
     },
     {
@@ -703288,6 +703613,16 @@
     {
       "source": "RE 462/2026",
       "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4624/2026",
+      "target": "RDC 585/2021",
+      "relacao": "cita"
+    },
+    {
+      "source": "RE 4624/2026",
+      "target": "RE 2290/2026",
       "relacao": "cita"
     },
     {
