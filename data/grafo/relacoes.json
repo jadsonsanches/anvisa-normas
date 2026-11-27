@@ -42265,6 +42265,18 @@
       "arquivo": "data/normas/aro/2026/aro-1812.md"
     },
     {
+      "id": "ARO 1813/2026",
+      "tipo": "ARO",
+      "numero": "1813",
+      "ano": "2026",
+      "data_ato": "26/11/2026",
+      "data_promulgacao": "26/11/2026",
+      "data_publicacao_dou": "27/11/2026",
+      "situacao": "vigente",
+      "ementa": "Decide sobre recursos administrativos apresentados contra decisões de autuações e sanções aplicadas pela Agência Nacional de Vigilância Sanitária - Anvisa, conforme deliberações em Sessão de Julgamento Ordinária - SJO nº 31/2026, nos termos do Regimento Interno da Agência e demais normativos aplicáveis.",
+      "arquivo": "data/normas/aro/2026/aro-1813.md"
+    },
+    {
       "id": "ARR 1/2021",
       "tipo": "ARR",
       "numero": "1",
@@ -65043,6 +65055,18 @@
       "situacao": "vigente",
       "ementa": "Suspende os efeitos da decisão da Diretoria Colegiada disposta no Despacho nº 136, de 6 de novembro de 2026.",
       "arquivo": "data/normas/dep/2026/dep-142.md"
+    },
+    {
+      "id": "DEP 144/2026",
+      "tipo": "DEP",
+      "numero": "144",
+      "ano": "2026",
+      "data_ato": "26/11/2026",
+      "data_promulgacao": "26/11/2026",
+      "data_publicacao_dou": "27/11/2026",
+      "situacao": "vigente",
+      "ementa": "Aprova a abertura do Processo Administrativo de Regulação, em Anexo, com dispensa de Análise de Impacto Regulatório (AIR) e de Consulta Pública (CP) previstas, conforme deliberado em reunião.",
+      "arquivo": "data/normas/dep/2026/dep-144.md"
     },
     {
       "id": "DEP 15/2026",
@@ -99819,6 +99843,42 @@
       "situacao": "vigente",
       "ementa": "Altera a Instrução Normativa - IN nº 87, de 15 de março de 2021, que estabelece a lista de espécies vegetais autorizadas, as designações, a composição de ácidos graxos e os valores máximos de acidez e de índice de peróxidos para óleos e gorduras vegetais.",
       "arquivo": "data/normas/in/2026/in-477.md"
+    },
+    {
+      "id": "IN 478/2026",
+      "tipo": "IN",
+      "numero": "478",
+      "ano": "2026",
+      "data_ato": "25/11/2026",
+      "data_promulgacao": "25/11/2026",
+      "data_publicacao_dou": "27/11/2026",
+      "situacao": "vigente",
+      "ementa": "Altera o Anexo I da Instrução Normativa Anvisa nº 367, de 5 de junho de 2025.",
+      "arquivo": "data/normas/in/2026/in-478.md"
+    },
+    {
+      "id": "IN 479/2026",
+      "tipo": "IN",
+      "numero": "479",
+      "ano": "2026",
+      "data_ato": "25/11/2026",
+      "data_promulgacao": "25/11/2026",
+      "data_publicacao_dou": "27/11/2026",
+      "situacao": "vigente",
+      "ementa": "Altera a Instrução Normativa nº 28, de 26 de julho de 2018, que estabelece as listas de constituintes, de limites de uso, de alegações e de rotulagem complementar dos suplementos alimentares.",
+      "arquivo": "data/normas/in/2026/in-479.md"
+    },
+    {
+      "id": "IN 480/2026",
+      "tipo": "IN",
+      "numero": "480",
+      "ano": "2026",
+      "data_ato": "26/11/2026",
+      "data_promulgacao": "26/11/2026",
+      "data_publicacao_dou": "27/11/2026",
+      "situacao": "vigente",
+      "ementa": "Estabelece, nos termos da Resolução da Diretoria Colegiada-RDC nº 945, de 29 de novembro de 2024, a lista de Autoridades Reguladoras Estrangeiras Equivalentes (AREE) e detalha os critérios para a aplicação do procedimento otimizado de análise por reliance e por avaliação de risco de petições de Dossiê de Desenvolvimento Clínico de Medicamento (DDCM), Dossiê Específico do Ensaio Clínico (DEEC), modificações substanciais ao produto sob investigação e emendas substanciais ao protocolo clínico.",
+      "arquivo": "data/normas/in/2026/in-480.md"
     },
     {
       "id": "IXL 41/2023",
@@ -138397,6 +138457,30 @@
       "arquivo": "data/normas/portaria/2026/portaria-1313.md"
     },
     {
+      "id": "PORTARIA 1315/2026",
+      "tipo": "PORTARIA",
+      "numero": "1315",
+      "ano": "2026",
+      "data_ato": "25/11/2026",
+      "data_promulgacao": "25/11/2026",
+      "data_publicacao_dou": "27/11/2026",
+      "situacao": "vigente",
+      "ementa": "Autoriza o afastamento do país de servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para realização de inspeção sanitária internacional.",
+      "arquivo": "data/normas/portaria/2026/portaria-1315.md"
+    },
+    {
+      "id": "PORTARIA 1317/2026",
+      "tipo": "PORTARIA",
+      "numero": "1317",
+      "ano": "2026",
+      "data_ato": "26/11/2026",
+      "data_promulgacao": "26/11/2026",
+      "data_publicacao_dou": "27/11/2026",
+      "situacao": "vigente",
+      "ementa": "Nomeia servidor da Agência Nacional de Vigilância Sanitária - Anvisa, para ocupar o cargo de Assessor, da Gerência de Laboratórios de Saúde Pública.",
+      "arquivo": "data/normas/portaria/2026/portaria-1317.md"
+    },
+    {
       "id": "PORTARIA 14/2026",
       "tipo": "PORTARIA",
       "numero": "14",
@@ -146075,6 +146159,18 @@
       "situacao": "revogada",
       "ementa": "Revoga a Resolução da Diretoria Colegiada - RDC nº 184, de 17 de outubro de 2017, e estabelece regras de transição.",
       "arquivo": "data/normas/rdc/2026/rdc-1047.md"
+    },
+    {
+      "id": "RDC 1048/2026",
+      "tipo": "RDC",
+      "numero": "1048",
+      "ano": "2026",
+      "data_ato": "26/11/2026",
+      "data_promulgacao": "26/11/2026",
+      "data_publicacao_dou": "27/11/2026",
+      "situacao": "vigente",
+      "ementa": "Altera a Resolução - RDC nº 275, de 9 de abril de 2019, que dispõe sobre procedimentos para a concessão, alteração e cancelamento da Autorização de Funcionamento (AFE) e de Autorização Especial (AE) de farmácias e drogarias.",
+      "arquivo": "data/normas/rdc/2026/rdc-1048.md"
     },
     {
       "id": "RE 528/2003",
@@ -432417,6 +432513,18 @@
       "arquivo": "data/normas/re/2026/re-4634.md"
     },
     {
+      "id": "RE 4638/2026",
+      "tipo": "RE",
+      "numero": "4638",
+      "ano": "2026",
+      "data_ato": "26/11/2026",
+      "data_promulgacao": "26/11/2026",
+      "data_publicacao_dou": "27/11/2026",
+      "situacao": "vigente",
+      "ementa": "Adota as medidas preventivas estabelecidas no anexo, conforme especificado pela Agência Nacional de Vigilância Sanitária.",
+      "arquivo": "data/normas/re/2026/re-4638.md"
+    },
+    {
       "id": "RE 464/2026",
       "tipo": "RE",
       "numero": "464",
@@ -432427,6 +432535,42 @@
       "situacao": "vigente",
       "ementa": "Defere a petição relativa a produto fumígeno derivado do tabaco, conforme anexo.",
       "arquivo": "data/normas/re/2026/re-464.md"
+    },
+    {
+      "id": "RE 4640/2026",
+      "tipo": "RE",
+      "numero": "4640",
+      "ano": "2026",
+      "data_ato": "26/11/2026",
+      "data_promulgacao": "26/11/2026",
+      "data_publicacao_dou": "27/11/2026",
+      "situacao": "vigente",
+      "ementa": "Defere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4640.md"
+    },
+    {
+      "id": "RE 4641/2026",
+      "tipo": "RE",
+      "numero": "4641",
+      "ano": "2026",
+      "data_ato": "26/11/2026",
+      "data_promulgacao": "26/11/2026",
+      "data_publicacao_dou": "27/11/2026",
+      "situacao": "vigente",
+      "ementa": "Indefere o pedido de Alteração de Autorização de Funcionamento de Empresas nos setores de saneantes, produtos para saúde, medicamentos, insumos farmacêuticos, cosméticos e farmácias e drogarias, conforme os motivos especificados no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4641.md"
+    },
+    {
+      "id": "RE 4642/2026",
+      "tipo": "RE",
+      "numero": "4642",
+      "ano": "2026",
+      "data_ato": "26/11/2026",
+      "data_promulgacao": "26/11/2026",
+      "data_publicacao_dou": "27/11/2026",
+      "situacao": "vigente",
+      "ementa": "Cancela a Autorização de Funcionamento a empresas dos setores de comércio de alimentos, cosméticos, perfumes, produtos de higiene e saúde, e dispensação de medicamentos, conforme especificações no anexo desta Resolução.",
+      "arquivo": "data/normas/re/2026/re-4642.md"
     },
     {
       "id": "RE 465/2026",
